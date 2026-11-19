@@ -1,0 +1,19 @@
+{
+  "ticker": "COST",
+  "entity": "COSTCO WHOLESALE CORP /NEW",
+  "period_ends": [
+    "2017-09-03",
+    "2018-09-02",
+    "2019-09-01",
+    "2020-08-30",
+    "2021-08-29",
+    "2022-08-28",
+    "2023-09-03",
+    "2024-09-01",
+    "2025-08-31",
+    "2026-08-30"
+  ],
+  "raw_sha256": "b675ced201b27ede2b0d26ca6fd873befe96a1afa9679339a2d0b964187dcdff",
+  "hard_checks_pass": true,
+  "warnings": 1
+}

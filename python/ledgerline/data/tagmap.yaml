@@ -1,0 +1,235 @@
+# Ledgerline standard chart -> US-GAAP XBRL tag candidates (ADR 0004).
+#
+# Each line item lists candidate tags in priority order; the first tag that has an annual
+# 10-K value for a period wins. `sign: -1` flips the reported value into Ledgerline's sign
+# convention (ADR 0002: cash-flow items carry cash sign, outflows negative; expenses are
+# stored positive on the income statement). `default` is used when no tag reports a value.
+# `derive` is a formula over other line items evaluated when no tag reports a value.
+# `plug` items are residuals that make reported subtotals tie; they are always derived.
+#
+# Per-company overrides live in fixtures/<TICKER>/overrides.yaml and each needs a citation.
+
+income_statement:
+  revenue:
+    kind: flow
+    tags: [Revenues, RevenueFromContractWithCustomerExcludingAssessedTax, SalesRevenueNet,
+           RevenueFromContractWithCustomerIncludingAssessedTax, SalesRevenueGoodsNet]
+  cogs:
+    kind: flow
+    tags: [CostOfGoodsAndServicesSold, CostOfRevenue, CostOfGoodsSold,
+           CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization]
+  sga:
+    kind: flow
+    tags: [SellingGeneralAndAdministrativeExpense]
+    default: 0
+  other_opex:
+    kind: flow
+    plug: revenue - cogs - sga - operating_income
+  operating_income:
+    kind: flow
+    tags: [OperatingIncomeLoss]
+  interest_expense:
+    kind: flow
+    tags: [InterestExpense, InterestExpenseNonoperating, InterestExpenseDebt, InterestExpenseNet]
+    default: 0
+  other_nonop_income:
+    kind: flow
+    plug: pretax_income - operating_income + interest_expense
+  pretax_income:
+    kind: flow
+    tags: [IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest,
+           IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments,
+           IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic]
+  income_tax:
+    kind: flow
+    tags: [IncomeTaxExpenseBenefit]
+  other_below_tax:
+    kind: flow
+    plug: net_income_total - pretax_income + income_tax
+  net_income_total:
+    kind: flow
+    tags: [ProfitLoss]
+    derive: net_income + nci_income
+  nci_income:
+    kind: flow
+    tags: [NetIncomeLossAttributableToNoncontrollingInterest]
+    default: 0
+  net_income:
+    kind: flow
+    tags: [NetIncomeLoss, NetIncomeLossAvailableToCommonStockholdersBasic]
+  shares_diluted:
+    kind: flow
+    unit: shares
+    tags: [WeightedAverageNumberOfDilutedSharesOutstanding]
+  eps_diluted:
+    kind: flow
+    unit: USD/shares
+    tags: [EarningsPerShareDiluted]
+  da:
+    kind: flow
+    tags: [DepreciationDepletionAndAmortization, DepreciationAmortizationAndAccretionNet,
+           DepreciationAndAmortization, Depreciation]
+  sbc:
+    kind: flow
+    tags: [ShareBasedCompensation, AllocatedShareBasedCompensationExpense]
+    default: 0
+
+balance_sheet:
+  cash:
+    kind: instant
+    tags: [CashAndCashEquivalentsAtCarryingValue, CashCashEquivalentsAndShortTermInvestments,
+           CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents]
+  st_investments:
+    kind: instant
+    tags: [ShortTermInvestments, MarketableSecuritiesCurrent, AvailableForSaleSecuritiesDebtSecuritiesCurrent]
+    default: 0
+  receivables:
+    kind: instant
+    tags: [ReceivablesNetCurrent, AccountsReceivableNetCurrent]
+    default: 0
+  inventory:
+    kind: instant
+    tags: [InventoryNet, RetailRelatedInventoryMerchandise]
+    default: 0
+  other_current_assets:
+    kind: instant
+    plug: total_current_assets - cash - st_investments - receivables - inventory
+  total_current_assets:
+    kind: instant
+    tags: [AssetsCurrent]
+  ppe_net:
+    kind: instant
+    tags: [PropertyPlantAndEquipmentNet,
+           PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization]
+  op_lease_rou:
+    kind: instant
+    tags: [OperatingLeaseRightOfUseAsset]
+    default: 0
+  goodwill:
+    kind: instant
+    tags: [Goodwill]
+    default: 0
+  intangibles:
+    kind: instant
+    tags: [IntangibleAssetsNetExcludingGoodwill, FiniteLivedIntangibleAssetsNet]
+    default: 0
+  other_nc_assets:
+    kind: instant
+    plug: total_assets - total_current_assets - ppe_net - op_lease_rou - goodwill - intangibles
+  total_assets:
+    kind: instant
+    tags: [Assets]
+  accounts_payable:
+    kind: instant
+    tags: [AccountsPayableCurrent, AccountsPayableTradeCurrent]
+  short_term_debt:
+    kind: instant
+    tags: [ShortTermBorrowings, CommercialPaper]
+    default: 0
+  current_debt:
+    kind: instant
+    tags: [LongTermDebtCurrent, LongTermDebtAndCapitalLeaseObligationsCurrent, DebtCurrent]
+    default: 0
+  op_lease_liab_current:
+    kind: instant
+    tags: [OperatingLeaseLiabilityCurrent]
+    default: 0
+  accrued_liabilities:
+    kind: instant
+    tags: [AccruedLiabilitiesCurrent]
+    default: 0
+  employee_liabilities:
+    kind: instant
+    tags: [EmployeeRelatedLiabilitiesCurrent]
+    default: 0
+  deferred_revenue:
+    kind: instant
+    tags: [DeferredRevenueCurrent, ContractWithCustomerLiabilityCurrent]
+    default: 0
+  other_current_liabilities:
+    kind: instant
+    plug: total_current_liabilities - accounts_payable - accrued_liabilities - employee_liabilities - deferred_revenue - short_term_debt - current_debt - op_lease_liab_current
+  total_current_liabilities:
+    kind: instant
+    tags: [LiabilitiesCurrent]
+  lt_debt:
+    kind: instant
+    tags: [LongTermDebtNoncurrent, LongTermDebtAndCapitalLeaseObligations]
+    default: 0
+  op_lease_liab_noncurrent:
+    kind: instant
+    tags: [OperatingLeaseLiabilityNoncurrent]
+    default: 0
+  other_nc_liabilities:
+    kind: instant
+    plug: total_liabilities - total_current_liabilities - lt_debt - op_lease_liab_noncurrent
+  total_liabilities:
+    kind: instant
+    tags: [Liabilities]
+    derive: total_le - total_equity
+  parent_equity:
+    kind: instant
+    tags: [StockholdersEquity]
+  nci_equity:
+    kind: instant
+    tags: [MinorityInterest]
+    default: 0
+  total_equity:
+    kind: instant
+    tags: [StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest]
+    derive: parent_equity + nci_equity
+  total_le:
+    kind: instant
+    tags: [LiabilitiesAndStockholdersEquity]
+
+cash_flow:
+  cfo:
+    kind: flow
+    tags: [NetCashProvidedByUsedInOperatingActivities, NetCashProvidedByUsedInOperatingActivitiesContinuingOperations]
+  capex:
+    kind: flow
+    sign: -1
+    tags: [PaymentsToAcquirePropertyPlantAndEquipment, PaymentsToAcquireProductiveAssets,
+           PaymentsForCapitalImprovements, PaymentsToAcquireOtherPropertyPlantAndEquipment]
+  other_cfi:
+    kind: flow
+    plug: cfi - capex
+  cfi:
+    kind: flow
+    tags: [NetCashProvidedByUsedInInvestingActivities, NetCashProvidedByUsedInInvestingActivitiesContinuingOperations]
+  dividends:
+    kind: flow
+    sign: -1
+    tags: [PaymentsOfDividendsCommonStock, PaymentsOfDividends, DividendsCommonStockCash]
+    default: 0
+  buybacks:
+    kind: flow
+    sign: -1
+    tags: [PaymentsForRepurchaseOfCommonStock, PaymentsForRepurchaseOfEquity]
+    default: 0
+  other_cff:
+    kind: flow
+    plug: cff - dividends - buybacks
+  cff:
+    kind: flow
+    tags: [NetCashProvidedByUsedInFinancingActivities, NetCashProvidedByUsedInFinancingActivitiesContinuingOperations]
+  fx_effect:
+    kind: flow
+    tags: [EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,
+           EffectOfExchangeRateOnCashAndCashEquivalents]
+    default: 0
+  net_change_cash:
+    kind: flow
+    tags: [CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect,
+           CashAndCashEquivalentsPeriodIncreaseDecrease]
+    derive: cfo + cfi + cff + fx_effect
+  cash_cf_basis:
+    kind: instant
+    tags: [CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents, CashAndCashEquivalentsAtCarryingValue]
+
+operating_kpis:
+  stores:
+    kind: instant
+    unit: "*"
+    tags: [NumberOfStores]
+    default: 0

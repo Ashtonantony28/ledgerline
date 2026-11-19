@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install LibreOffice (headless recalculation engine)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libreoffice-calc
+      - name: Install package
+        run: pip install -e ".[dev]"
+      - name: Tests (data tie-out, workbook vs reference on two engines, audit)
+        run: pytest -q
+      - name: Rebuild workbooks and audit
+        run: |
+          python -m ledgerline.build.workbooks
+          python -m ledgerline.audit.audit workbooks/0*_*.xlsx --recalc
+      - name: Mutation test (seeded error injection)
+        run: python -m ledgerline.audit.mutation --n 20 --seed 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: workbooks
+          path: |
+            workbooks/*.xlsx
+            workbooks/*.audit.md

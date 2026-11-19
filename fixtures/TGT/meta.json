@@ -1,0 +1,14 @@
+{
+  "ticker": "TGT",
+  "entity": "Target Corporation",
+  "period_ends": [
+    "2022-01-29",
+    "2023-01-28",
+    "2024-02-03",
+    "2025-02-01",
+    "2026-01-31"
+  ],
+  "raw_sha256": "eb15a2cd524e99ff27675db78840d039ec4a68b9cc2dcb10accbcb299933a487",
+  "hard_checks_pass": true,
+  "warnings": 0
+}

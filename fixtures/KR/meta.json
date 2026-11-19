@@ -1,0 +1,14 @@
+{
+  "ticker": "KR",
+  "entity": "KROGER CO",
+  "period_ends": [
+    "2022-01-29",
+    "2023-01-28",
+    "2024-02-03",
+    "2025-02-01",
+    "2026-01-31"
+  ],
+  "raw_sha256": "f960cd5977a109fbba07f6fbb5da02280c3c4b71e4f89e01f7e46bd4610fe1a0",
+  "hard_checks_pass": true,
+  "warnings": 21
+}

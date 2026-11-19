@@ -1,0 +1,165 @@
+# Operating-model spec for Costco Wholesale (COST). Analyst judgement lives here, in one
+# reviewable file, with a rationale per driver (CLAUDE.md rule 3: every input is sourced or
+# labelled as judgement).
+#
+# Each driver fades linearly from `start` (forecast year 1) to `end` (final forecast year).
+# Values may be numbers or calibration keywords evaluated on the history fixture:
+#   last  = last actual year's ratio      avg5 = average of the last five actual years
+# Upside / downside are deltas added to the base start/end values.
+
+ticker: COST
+model_history_years: 5
+forecast_years: 10
+units: "$m"
+
+drivers:
+  store_openings:
+    unit: count
+    fmt: n
+    base: {start: 27, end: 25}
+    upside: {start: 3, end: 5}
+    downside: {start: -7, end: -10}
+    rationale: >-
+      Net warehouse openings. FY2022-26 averaged 24.8 (838 -> 939, NumberOfStores in 10-K);
+      management has guided to 25-30 openings a year. Judgement.
+  sales_per_store_growth:
+    unit: "%"
+    fmt: pct
+    base: {start: 0.050, end: 0.030}
+    upside: {start: 0.015, end: 0.010}
+    downside: {start: -0.060, end: -0.010}
+    rationale: >-
+      Growth in revenue per average warehouse (comparable sales + membership fees). FY2023-26
+      averaged ~4.5%, FY2026 7.2%. Fades to ~3% (inflation plus modest traffic). Downside year 1
+      models a recession with deflation in gasoline and big-ticket items. Judgement.
+  gross_margin:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: avg5}
+    upside: {start: 0.002, end: 0.004}
+    downside: {start: -0.004, end: -0.003}
+    rationale: Gross margin (1 - COGS/revenue) from history; fades from FY2026 to the 5-year average.
+  sga_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: avg5}
+    upside: {start: -0.001, end: -0.002}
+    downside: {start: 0.003, end: 0.002}
+    rationale: SG&A as % of revenue; wage investment pushes it up in the downside (deleverage).
+  other_opex_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: 0.0, end: 0.0}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: Residual operating items (preopening, charges) have been nil since FY2020.
+  da_pct_ppe:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: avg5}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: D&A as % of opening net PP&E.
+  capex_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: 0.019}
+    upside: {start: 0.001, end: 0.001}
+    downside: {start: -0.002, end: -0.002}
+    rationale: Capex as % of revenue; FY2026 2.1% includes depot and e-commerce build-out, normalising to ~1.9%.
+  tax_rate:
+    unit: "%"
+    fmt: pct
+    base: {start: avg5, end: 0.250}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: Effective tax rate; FY2022-26 average ~25%.
+  receivable_days:
+    unit: days
+    fmt: days
+    base: {start: last, end: avg5}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.5, end: 0.5}
+    rationale: Receivables days on revenue (365-day basis).
+  inventory_days:
+    unit: days
+    fmt: days
+    base: {start: last, end: avg5}
+    upside: {start: -0.5, end: -0.5}
+    downside: {start: 2.0, end: 1.0}
+    rationale: Inventory days on COGS; downside assumes slower turns.
+  payable_days:
+    unit: days
+    fmt: days
+    base: {start: last, end: avg5}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: -1.0, end: -0.5}
+    rationale: Payables days on COGS.
+  oca_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: avg5, end: avg5}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: Other current assets as % of revenue.
+  ocl_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: avg5, end: avg5}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: -0.001, end: -0.001}
+    rationale: >-
+      Accrued, employee, deferred-membership-fee and other current liabilities as % of revenue.
+  sbc_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: last}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: Stock-based compensation as % of revenue.
+  debt_rate:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: 0.040}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.005, end: 0.010}
+    rationale: Interest expense / debt; drifts up as low-coupon notes refinance at ~4%. Judgement.
+  cash_rate:
+    unit: "%"
+    fmt: pct
+    base: {start: last, end: 0.030}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: -0.010, end: -0.010}
+    rationale: >-
+      Interest and other income / cash. FY2026 4.1% reflects high short rates; fades to 3%.
+  payout_ratio:
+    unit: "%"
+    fmt: pct
+    base: {start: 0.27, end: 0.30}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: >-
+      Regular dividends / net income. Excludes special dividends (FY2021, FY2024), which are
+      discretionary and not forecast.
+  buyback_pct:
+    unit: "%"
+    fmt: pct
+    base: {start: 0.10, end: 0.15}
+    upside: {start: 0.05, end: 0.05}
+    downside: {start: -0.10, end: -0.10}
+    rationale: Buybacks / net income; FY2022-26 averaged ~9.6%.
+  share_price_growth:
+    unit: "%"
+    fmt: pct
+    base: {start: 0.06, end: 0.06}
+    upside: {start: 0.02, end: 0.02}
+    downside: {start: -0.15, end: -0.03}
+    rationale: Assumed price path used only to convert buyback and SBC dollars into shares.
+
+constants:
+  days_in_year: {value: 365, unit: days, rationale: "Day-count basis for working-capital days."}
+  min_cash: {value: 8000, unit: "$m", rationale: "Operating cash floor before the revolver draws (~10 days of COGS). Judgement."}
+  revolver_capacity: {value: 5000, unit: "$m", rationale: "Assumed committed facility size. Judgement."}
+  revolver_rate: {value: 0.060, unit: "%", rationale: "Assumed drawn margin over base rate. Judgement."}
+  max_cash: {value: 20000, unit: "$m", rationale: "Cash above this level is paid out as a special dividend, as Costco did in FY2021 ($10/share) and FY2024 ($15/share). Judgement."}
+  refinance_pct: {value: 1.00, unit: "%", rationale: "Share of scheduled maturities refinanced with new notes (Costco has historically refinanced)."}

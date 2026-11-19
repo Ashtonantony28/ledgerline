@@ -1,0 +1,14 @@
+{
+  "ticker": "LOW",
+  "entity": "LOWES COMPANIES INC",
+  "period_ends": [
+    "2022-01-28",
+    "2023-02-03",
+    "2024-02-02",
+    "2025-01-31",
+    "2026-01-30"
+  ],
+  "raw_sha256": "7912551d61433f5e7e863ac602ebf24ee1484699e10aa556534f0055fff2ea7d",
+  "hard_checks_pass": true,
+  "warnings": 5
+}

@@ -1,0 +1,14 @@
+{
+  "ticker": "WMT",
+  "entity": "Walmart Inc.",
+  "period_ends": [
+    "2022-01-31",
+    "2023-01-31",
+    "2024-01-31",
+    "2025-01-31",
+    "2026-01-31"
+  ],
+  "raw_sha256": "49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4",
+  "hard_checks_pass": true,
+  "warnings": 2
+}

@@ -1,0 +1,9 @@
+ticker,date,close,source,shares_out,shares_source
+BJ,2026-11-19,110.75,Yahoo Finance daily close,126314692.0,dei:EntityCommonStockSharesOutstanding@0001531152-26-000057 as of 2026-08-20
+COST,2026-11-19,1093.83,Yahoo Finance daily close,443129349.0,dei:EntityCommonStockSharesOutstanding@0000909832-26-000093 as of 2026-09-29
+DG,2026-11-19,133.51,Yahoo Finance daily close,220616790.0,dei:EntityCommonStockSharesOutstanding@0001104659-26-101932 as of 2026-08-25
+HD,2026-11-19,336.68,Yahoo Finance daily close,997689626.0,dei:EntityCommonStockSharesOutstanding@0001628280-26-058715 as of 2026-08-18
+KR,2026-11-19,67.94,Yahoo Finance daily close,590588700.0,dei:EntityCommonStockSharesOutstanding@0001104659-26-108926 as of 2026-09-15
+LOW,2026-11-19,219.14,Yahoo Finance daily close,561054019.0,dei:EntityCommonStockSharesOutstanding@0000060667-26-000117 as of 2026-08-25
+TGT,2026-11-19,167.46,Yahoo Finance daily close,454296736.0,dei:EntityCommonStockSharesOutstanding@0000027419-26-000042 as of 2026-08-21
+WMT,2026-11-19,126.04,Yahoo Finance daily close,7933746241.0,dei:EntityCommonStockSharesOutstanding@0000104169-26-000154 as of 2026-08-26

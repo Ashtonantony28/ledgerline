@@ -1,0 +1,18 @@
+[project]
+name = "ledgerline"
+version = "0.1.0"
+description = "Institutional-grade Excel financial models on SEC filings, verified by an independent Python reference"
+requires-python = ">=3.11"
+dependencies = ["openpyxl>=3.1", "pyyaml>=6", "formulas>=1.2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+excel = ["xlwings>=0.30"]
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.pytest.ini_options]
+pythonpath = ["python"]
+testpaths = ["tests"]
+filterwarnings = ["ignore::SyntaxWarning", "ignore::DeprecationWarning"]

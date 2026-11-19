@@ -1,0 +1,14 @@
+{
+  "ticker": "BJ",
+  "entity": "BJ\u2019S WHOLESALE CLUB HOLDINGS, INC.",
+  "period_ends": [
+    "2022-01-29",
+    "2023-01-28",
+    "2024-02-03",
+    "2025-02-01",
+    "2026-01-31"
+  ],
+  "raw_sha256": "183033ade8424e8c6e5b4279c73e35a2bd53d43ecc9249a3186a21bfee2466a4",
+  "hard_checks_pass": true,
+  "warnings": 4
+}

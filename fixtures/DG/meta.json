@@ -1,0 +1,14 @@
+{
+  "ticker": "DG",
+  "entity": "DOLLAR GENERAL CORP",
+  "period_ends": [
+    "2022-01-28",
+    "2023-02-03",
+    "2024-02-02",
+    "2025-01-31",
+    "2026-01-30"
+  ],
+  "raw_sha256": "16157a14c6c91f04a8b3e89ccedfc91ee0d5ea6978f8c6ed1d25d8cfe73541cf",
+  "hard_checks_pass": true,
+  "warnings": 0
+}
