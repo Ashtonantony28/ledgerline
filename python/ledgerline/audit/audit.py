@@ -79,7 +79,7 @@ def audit(path: Path, recalculated: Path | None = None, layout: dict | None = No
                 if isinstance(v, str) and v.startswith("="):
                     n_formulas += 1
                     _check_formula(ws, c, v, findings, wb)
-                    if tl and c.column >= 5:
+                    if tl and c.column >= 5 and layout["sheets"].get(ws.title):  # timeline sheets only
                         idx = c.column - 5
                         region = "fcst" if idx >= tl["n_hist"] else "hist"
                         rows[c.row][region].append((c.column, relative_form(v, c.row, c.column)))
@@ -117,7 +117,8 @@ def _check_formula(ws, c, v: str, findings: list[Finding], wb) -> None:
             findings.append(Finding("high", ws.title, c.coordinate, "volatile-function", fn))
         elif fn not in ALLOWED_FUNCS:
             findings.append(Finding("high", ws.title, c.coordinate, "function-not-allowed", fn))
-    stripped = REF_RE.sub(" ", body)
+    body_nums = re.sub(r"(QUARTILE|PERCENTILE|LARGE|SMALL)\(([^()]+),\s*\d+\)", r"\1(\2)", body)  # selector args
+    stripped = REF_RE.sub(" ", body_nums)
     stripped = re.sub(r"[A-Za-z_][A-Za-z0-9_.]*", " ", stripped)  # names and functions
     for num in NUM_RE.findall(stripped):
         if float(num) not in (0.0, 1.0):

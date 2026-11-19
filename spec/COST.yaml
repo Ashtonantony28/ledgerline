@@ -163,3 +163,14 @@ constants:
   revolver_rate: {value: 0.060, unit: "%", rationale: "Assumed drawn margin over base rate. Judgement."}
   max_cash: {value: 20000, unit: "$m", rationale: "Cash above this level is paid out as a special dividend, as Costco did in FY2021 ($10/share) and FY2024 ($15/share). Judgement."}
   refinance_pct: {value: 1.00, unit: "%", rationale: "Share of scheduled maturities refinanced with new notes (Costco has historically refinanced)."}
+
+valuation:
+  comps: [WMT, TGT, BJ, DG, KR, HD, LOW]
+  blume_weight_raw: {value: 0.67, unit: "x", rationale: "Blume adjustment: adjusted beta = 0.67 x raw + 0.33 x 1.0 (Blume 1971; Bloomberg convention)."}
+  credit_spread: {value: 0.0080, unit: "%", rationale: "Spread over the 10-year Treasury for an Aa3/A+ issuer such as Costco. Judgement; check against Costco's note yields."}
+  marginal_tax: {value: 0.25, unit: "%", rationale: "US federal 21% plus state, consistent with Costco's ~25% effective rate."}
+  terminal_growth: {value: 0.030, unit: "%", rationale: "Long-run nominal growth: about 2% inflation plus 1% real. Judgement."}
+  midyear_adj: {value: 0.5, unit: "years", rationale: "Mid-year convention: cash flows arrive on average half-way through each year. Set 0 for year-end discounting."}
+  wacc_step: {value: 0.005, unit: "%", rationale: "Step between WACC columns in the sensitivity grids."}
+  growth_step: {value: 0.005, unit: "%", rationale: "Step between terminal-growth rows in the sensitivity grid."}
+  multiple_step: {value: 2.0, unit: "x", rationale: "Step between exit-multiple rows in the sensitivity grid."}

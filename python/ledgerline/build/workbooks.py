@@ -94,7 +94,36 @@ def build_00(out: Path | None = None) -> tuple[Path, dict]:
     return _b(list(CIKS), path), {}
 
 
-BUILDERS = {"00": build_00, "01": build_01}
+VALUATION_SHEETS = THREE_STATEMENT_SHEETS[:-1] + [
+    ("WACC", "Cost of capital: CAPM with market inputs, after-tax cost of debt, market-value weights"),
+    ("Comps", "Trading comparables and statistics"),
+    ("DCF", "Unlevered DCF: perpetuity-growth and exit-multiple methods, reverse DCF"),
+    ("Sensitivity", "Implied price grids: WACC x terminal growth, WACC x exit multiple"),
+    ("Football", "Valuation summary range chart"),
+    ("Checks", "Integrity checks and master flag"),
+]
+
+
+def build_02(ticker: str = "COST", scenario: int = 1, out: Path | None = None) -> tuple[Path, dict]:
+    from ..models.three_statement import add_three_statement, timeline
+    from ..models.valuation import add_valuation, valuation_checks
+    from ..models.valuation_inputs import build_val_inputs
+    inp = build_inputs(ticker, scenario=scenario, circ=0)
+    v = build_val_inputs(inp)
+    m = Model(timeline(inp), f"{ticker} valuation")
+    add_three_statement(m, inp, extra_checks=valuation_checks())
+    add_valuation(m, inp, v)
+    add_cover(m, f"{inp.history.entity}: DCF and trading comps", inp, VALUATION_SHEETS)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/%s.yaml, fixtures/%s, fixtures/market.json (M3)." % (ticker, ticker))])
+    order = ["Cover"] + [n for n, _ in VALUATION_SHEETS]
+    _reorder(m, order)
+    path = Path(out or OUT / f"02_{ticker}_Valuation.xlsx")
+    layout = m.save(path)
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02}
 
 
 def main(argv: list[str]) -> int:

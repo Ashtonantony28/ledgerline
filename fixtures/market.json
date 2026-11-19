@@ -1,0 +1,28 @@
+{
+  "risk_free": {
+    "value": 0.0507,
+    "date": "2026-11-18",
+    "source": "FRED DGS10 (10-year Treasury constant maturity)"
+  },
+  "erp": {
+    "value": 0.0441,
+    "date": "2026-11-01",
+    "source": "Damodaran implied ERP by month, ERPbymonth.xlsx, column 'ERP (T12 m with sustainable payout)'"
+  },
+  "snapshot": "2026-11-19",
+  "tickers": {
+    "COST": {
+      "beta": {
+        "value": 0.8470308623416408,
+        "n_months": 60,
+        "window": "2021-10..2026-10",
+        "source": "OLS beta of 60 monthly adjusted-close returns of COST on ^GSPC (Yahoo Finance)"
+      },
+      "range_52w": {
+        "high": 1123.67,
+        "low": 844.06,
+        "source": "Yahoo Finance daily high/low, trailing 1 year"
+      }
+    }
+  }
+}

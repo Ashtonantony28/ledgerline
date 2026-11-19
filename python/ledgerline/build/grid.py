@@ -13,6 +13,7 @@ auditable Excel file with no hidden machinery):
     {$key}             the row's constant cell (column C), absolute: $C$n
     {Sheet.$key}       constant cell on another sheet
     {key:all} / {key:hist} / {key:fcst}   the row's whole time range (absolute row)
+    {key#k} / {Sheet.key#k}               fixed timeline column k (0-based), absolute: $J$12
     {col}              the current column letter
 
 Layout (FAST-style): column A label, B unit, C constant/total, D spacer, E.. timeline.
@@ -162,6 +163,9 @@ class Model:
             prefix = f"'{target.name}'!" if target is not sheet else ""
             if rest.startswith("$"):
                 return f"{prefix}$C${target.row(rest[1:])}"
+            if "#" in rest:  # fixed timeline column, absolute: {key#4}
+                key, k = rest.split("#")
+                return f"{prefix}${tl.col(int(k))}${target.row(key)}"
             if ":" in rest:
                 key, span = rest.split(":")
                 r = target.row(key)
@@ -229,6 +233,8 @@ class Model:
             for col, w in sheet.col_widths.items():
                 ws.column_dimensions[col].width = w
             layout["sheets"][sheet.name] = dict(sheet.row_of)
+        for name, fn in getattr(self, "charts", []):
+            fn(wb[name])
         for name, ref in self.names.items():
             from openpyxl.workbook.defined_name import DefinedName
             wb.defined_names[name] = DefinedName(name, attr_text=ref)
@@ -331,5 +337,7 @@ def _apply_free_style(c, st: dict) -> None:
         c.fill = INPUT_FILL
     if st.get("wrap"):
         c.alignment = Alignment(wrap_text=True, vertical="top")
+    if "note" in st:
+        c.comment = Comment(st["note"], "Ledgerline")
     if "fill" in st:
         c.fill = PatternFill("solid", fgColor=st["fill"])

@@ -1,0 +1,4765 @@
+=== Cover
+A1	'COSTCO WHOLESALE CORP /NEW: DCF and trading comps'
+A3	'Company'
+B3	'COSTCO WHOLESALE CORP /NEW (COST)'
+A4	'Units'
+B4	'$ millions unless stated; shares in millions'
+A5	'History'
+B5	'FY2022 to FY2026 from 10-K XBRL (SEC EDGAR)'
+A6	'Forecast'
+B6	'FY2027 to FY2036'
+A7	'Live scenario'
+B7	='Inputs'!C11
+A8	'Circularity switch'
+B8	=IF(CircSwitch=1,"ON (iterative)","OFF (opening balances)")
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-19 by the Ledgerline generator (see Log)'
+A12	'Colour code'
+A13	'Blue on yellow'
+B13	'Hard-coded input (every one carries a source note)'
+A14	'Black'
+B14	'Formula'
+A15	'Green'
+B15	'Direct link to another sheet'
+A16	'Grey shading'
+B16	'Forecast columns'
+A18	'Sheets'
+A19	'Inputs'
+B19	'Scenario selector, circularity switch, constants'
+A20	'Hist'
+B20	'Normalised 10-K history (blue, sourced per cell)'
+A21	'Scenarios'
+B21	'Base / upside / downside driver paths (analyst judgement, rationale in notes)'
+A22	'Drivers'
+B22	'Live drivers: implied history and selected-scenario forecast'
+A23	'Schedules'
+B23	'Revenue build, PP&E, working capital, debt and revolver, equity and shares'
+A24	'IS'
+B24	'Income statement'
+A25	'BS'
+B25	'Balance sheet'
+A26	'CF'
+B26	'Cash flow statement'
+A27	'Ratios'
+B27	'Margins, returns, leverage'
+A28	'WACC'
+B28	'Cost of capital: CAPM with market inputs, after-tax cost of debt, market-value weights'
+A29	'Comps'
+B29	'Trading comparables and statistics'
+A30	'DCF'
+B30	'Unlevered DCF: perpetuity-growth and exit-multiple methods, reverse DCF'
+A31	'Sensitivity'
+B31	'Implied price grids: WACC x terminal growth, WACC x exit multiple'
+A32	'Football'
+B32	'Valuation summary range chart'
+A33	'Checks'
+B33	'Integrity checks and master flag'
+A35	'Disclaimer'
+B35	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Inputs
+A1	'Inputs and switches'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Switches'
+A10	'Live scenario (1 Base, 2 Upside, 3 Downside)'
+B10	'count'
+C10	1
+A11	'Live scenario name'
+C11	=CHOOSE($C$10,"Base","Upside","Downside")
+A12	'Circularity switch (1 = interest on average balances)'
+B12	'count'
+C12	0
+A14	'Constants'
+A15	'Days in year'
+B15	'days'
+C15	365
+A16	'Minimum cash balance'
+B16	'$m'
+C16	8000
+A17	'Cash ceiling (excess paid as special dividend)'
+B17	'$m'
+C17	20000
+A18	'Revolver capacity'
+B18	'$m'
+C18	5000
+A19	'Revolver interest rate'
+B19	'%'
+C19	0.06
+A20	'Maturities refinanced'
+B20	'%'
+C20	1
+A21	'Share price at snapshot'
+B21	'$'
+C21	1093.83
+=== Hist
+A1	'Historical financials: COSTCO WHOLESALE CORP /NEW (from 10-K XBRL)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Normalised history (fixtures/COST/history.csv). Blue = as filed; plugs make subtotals tie.'
+A10	'Revenue'
+B10	'$m'
+E10	226954
+F10	242290
+G10	254453
+H10	275235
+I10	303154
+A11	'Cost of goods sold'
+B11	'$m'
+E11	199382
+F11	212586
+G11	222358
+H11	239886
+I11	264279
+A12	'SG&A'
+B12	'$m'
+E12	19779
+F12	21590
+G12	22810
+H12	24966
+I12	27190
+A13	'Other operating expense (plug)'
+B13	'$m'
+E13	0
+F13	0
+G13	0
+H13	0
+I13	0
+A14	'Operating income'
+B14	'$m'
+E14	7793
+F14	8114
+G14	9285
+H14	10383
+I14	11685
+A15	'Interest expense'
+B15	'$m'
+E15	158
+F15	160
+G15	169
+H15	154
+I15	145
+A16	'Interest and other income (plug)'
+B16	'$m'
+E16	205
+F16	533
+G16	624
+H16	589
+I16	711
+A17	'Pre-tax income'
+B17	'$m'
+E17	7840
+F17	8487
+G17	9740
+H17	10818
+I17	12251
+A18	'Income tax'
+B18	'$m'
+E18	1925
+F18	2195
+G18	2373
+H18	2719
+I18	3025
+A19	'Other below tax (plug)'
+B19	'$m'
+E19	0
+F19	0
+G19	0
+H19	0
+I19	0
+A20	'Net income incl. NCI'
+B20	'$m'
+E20	5915
+F20	6292
+G20	7367
+H20	8099
+I20	9226
+A21	'NCI share of net income'
+B21	'$m'
+E21	71
+F21	0
+G21	0
+H21	0
+I21	0
+A22	'Net income to parent'
+B22	'$m'
+E22	5844
+F22	6292
+G22	7367
+H22	8099
+I22	9226
+A23	'Diluted weighted shares'
+B23	'm'
+E23	444.757
+F23	444.452
+G23	444.759
+H23	444.803
+I23	444.427
+A24	'Diluted EPS (reported)'
+B24	'$'
+E24	13.14
+F24	14.16
+G24	16.56
+H24	18.21
+I24	20.76
+A25	'Depreciation and amortisation'
+B25	'$m'
+E25	1900
+F25	2077
+G25	2237
+H25	2426
+I25	2674
+A26	'Stock-based compensation'
+B26	'$m'
+E26	724
+F26	774
+G26	818
+H26	860
+I26	924
+A27	'Cash and equivalents'
+B27	'$m'
+E27	10203
+F27	13700
+G27	9906
+H27	14161
+I27	20207
+A28	'Short-term investments'
+B28	'$m'
+E28	846
+F28	1534
+G28	1238
+H28	1123
+I28	1094
+A29	'Receivables'
+B29	'$m'
+E29	2241
+F29	2285
+G29	2721
+H29	3203
+I29	3959
+A30	'Inventory'
+B30	'$m'
+E30	17907
+F30	16651
+G30	18647
+H30	18116
+I30	19324
+A31	'Other current assets (plug)'
+B31	'$m'
+E31	1499
+F31	1709
+G31	1734
+H31	1777
+I31	1998
+A32	'Total current assets'
+B32	'$m'
+E32	32696
+F32	35879
+G32	34246
+H32	38380
+I32	46582
+A33	'PP&E, net'
+B33	'$m'
+E33	24646
+F33	26684
+G33	29032
+H33	31909
+I33	35633
+A34	'Operating lease ROU assets'
+B34	'$m'
+E34	2774
+F34	2713
+G34	2617
+H34	2725
+I34	2697
+A35	'Goodwill'
+B35	'$m'
+E35	993
+F35	994
+G35	994
+H35	994
+I35	994
+A36	'Intangibles'
+B36	'$m'
+E36	0
+F36	0
+G36	0
+H36	0
+I36	0
+A37	'Other non-current assets (plug)'
+B37	'$m'
+E37	3057
+F37	2724
+G37	2942
+H37	3091
+I37	3139
+A38	'Total assets'
+B38	'$m'
+E38	64166
+F38	68994
+G38	69831
+H38	77099
+I38	89045
+A39	'Accounts payable'
+B39	'$m'
+E39	17848
+F39	17483
+G39	19421
+H39	19783
+I39	22591
+A40	'Accrued liabilities'
+B40	'$m'
+E40	1911
+F40	2150
+G40	2435
+H40	2677
+I40	3037
+A41	'Accrued salaries and benefits'
+B41	'$m'
+E41	4381
+F41	4278
+G41	4794
+H41	5205
+I41	5641
+A42	'Deferred revenue'
+B42	'$m'
+E42	2174
+F42	2337
+G42	2501
+H42	2854
+I42	3006
+A43	'Short-term borrowings'
+B43	'$m'
+E43	0
+F43	0
+G43	0
+H43	0
+I43	0
+A44	'Current portion of long-term debt'
+B44	'$m'
+E44	73
+F44	1081
+G44	103
+H44	75
+I44	2248
+A45	'Operating lease liabilities, current'
+B45	'$m'
+E45	0
+F45	0
+G45	179
+H45	208
+I45	192
+A46	'Other current liabilities (plug)'
+B46	'$m'
+E46	5611
+F46	6254
+G46	6031
+H46	6306
+I46	7237
+A47	'Total current liabilities'
+B47	'$m'
+E47	31998
+F47	33583
+G47	35464
+H47	37108
+I47	43952
+A48	'Long-term debt'
+B48	'$m'
+E48	6484
+F48	5377
+G48	5794
+H48	5713
+I48	3914
+A49	'Operating lease liabilities, non-current'
+B49	'$m'
+E49	2482
+F49	2426
+G49	2375
+H49	2460
+I49	2414
+A50	'Other non-current liabilities (plug)'
+B50	'$m'
+E50	2555
+F50	2550
+G50	2576
+H50	2654
+I50	2962
+A51	'Total liabilities'
+B51	'$m'
+E51	43519
+F51	43936
+G51	46209
+H51	47935
+I51	53242
+A52	"Shareholders' equity (parent)"
+B52	'$m'
+E52	20642
+F52	25058
+G52	23622
+H52	29164
+I52	35803
+A53	'Non-controlling interests'
+B53	'$m'
+E53	5
+F53	0
+G53	0
+H53	0
+I53	0
+A54	'Total equity'
+B54	'$m'
+E54	20647
+F54	25058
+G54	23622
+H54	29164
+I54	35803
+A55	'Total liabilities and equity'
+B55	'$m'
+E55	64166
+F55	68994
+G55	69831
+H55	77099
+I55	89045
+A56	'Cash from operations'
+B56	'$m'
+E56	7392
+F56	11068
+G56	11339
+H56	13335
+I56	15817
+A57	'Capital expenditure'
+B57	'$m'
+E57	-3891
+F57	-4323
+G57	-4710
+H57	-5498
+I57	-6435
+A58	'Other investing (plug)'
+B58	'$m'
+E58	-24
+F58	-649
+G58	301
+H58	187
+I58	57
+A59	'Cash from investing'
+B59	'$m'
+E59	-3915
+F59	-4972
+G59	-4409
+H59	-5311
+I59	-6378
+A60	'Dividends paid'
+B60	'$m'
+E60	-1498
+F60	-1251
+G60	-9041
+H60	-2183
+I60	-2458
+A61	'Share repurchases'
+B61	'$m'
+E61	-439
+F61	-676
+G61	-700
+H61	-903
+I61	-848
+A62	'Other financing (plug)'
+B62	'$m'
+E62	-2346
+F62	-687
+G62	-1023
+H62	-689
+I62	-49
+A63	'Cash from financing'
+B63	'$m'
+E63	-4283
+F63	-2614
+G63	-10764
+H63	-3775
+I63	-3355
+A64	'FX effect on cash'
+B64	'$m'
+E64	-249
+F64	15
+G64	40
+H64	6
+I64	-38
+A65	'Net change in cash (CF basis)'
+B65	'$m'
+E65	-1055
+F65	3497
+G65	-3794
+H65	4255
+I65	6046
+A66	'Warehouses at year end'
+B66	'count'
+E66	838
+F66	861
+G66	890
+H66	914
+I66	939
+=== Scenarios
+A1	'Scenario inputs by driver (blue = judgement, see notes)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Net warehouse openings'
+A10	'  Base'
+B10	'count'
+J10	27
+K10	26.77777777777778
+L10	26.55555555555556
+M10	26.33333333333333
+N10	26.11111111111111
+O10	25.88888888888889
+P10	25.66666666666667
+Q10	25.44444444444444
+R10	25.22222222222222
+S10	25
+A11	'  Upside'
+B11	'count'
+J11	30
+K11	30
+L11	30
+M11	30
+N11	30
+O11	30
+P11	30
+Q11	30
+R11	30
+S11	30
+A12	'  Downside'
+B12	'count'
+J12	20
+K12	19.44444444444444
+L12	18.88888888888889
+M12	18.33333333333333
+N12	17.77777777777778
+O12	17.22222222222222
+P12	16.66666666666667
+Q12	16.11111111111111
+R12	15.55555555555556
+S12	15
+A13	'Revenue per avg. warehouse growth'
+A14	'  Base'
+B14	'%'
+J14	0.05
+K14	0.04777777777777778
+L14	0.04555555555555556
+M14	0.04333333333333333
+N14	0.04111111111111111
+O14	0.03888888888888889
+P14	0.03666666666666667
+Q14	0.03444444444444444
+R14	0.03222222222222222
+S14	0.03
+A15	'  Upside'
+B15	'%'
+J15	0.065
+K15	0.06222222222222223
+L15	0.05944444444444445
+M15	0.05666666666666667
+N15	0.05388888888888889
+O15	0.05111111111111111
+P15	0.04833333333333333
+Q15	0.04555555555555556
+R15	0.04277777777777778
+S15	0.04
+A16	'  Downside'
+B16	'%'
+J16	-0.009999999999999995
+K16	-0.006666666666666663
+L16	-0.003333333333333331
+M16	1.734723475976807e-18
+N16	0.003333333333333334
+O16	0.006666666666666668
+P16	0.009999999999999998
+Q16	0.01333333333333333
+R16	0.01666666666666666
+S16	0.01999999999999999
+A17	'Gross margin'
+A18	'  Base'
+B18	'%'
+J18	0.1282351544099698
+K18	0.1279175727335943
+L18	0.1275999910572188
+M18	0.1272824093808433
+N18	0.1269648277044678
+O18	0.1266472460280923
+P18	0.1263296643517168
+Q18	0.1260120826753413
+R18	0.1256945009989658
+S18	0.1253769193225903
+A19	'  Upside'
+B19	'%'
+J19	0.1302351544099698
+K19	0.1301397949558165
+L19	0.1300444355016632
+M19	0.12994907604751
+N19	0.1298537165933567
+O19	0.1297583571392034
+P19	0.1296629976850501
+Q19	0.1295676382308968
+R19	0.1294722787767436
+S19	0.1293769193225903
+A20	'  Downside'
+B20	'%'
+J20	0.1242351544099698
+K20	0.1240286838447054
+L20	0.123822213279441
+M20	0.1236157427141766
+N20	0.1234092721489122
+O20	0.1232028015836478
+P20	0.1229963310183834
+Q20	0.122789860453119
+R20	0.1225833898878547
+S20	0.1223769193225903
+A21	'SG&A % revenue'
+A22	'  Base'
+B22	'%'
+J22	0.08969038838346187
+K22	0.08964255668278835
+L22	0.08959472498211483
+M22	0.08954689328144132
+N22	0.0894990615807678
+O22	0.08945122988009427
+P22	0.08940339817942075
+Q22	0.08935556647874723
+R22	0.08930773477807372
+S22	0.0892599030774002
+A23	'  Upside'
+B23	'%'
+J23	0.08869038838346187
+K23	0.08853144557167723
+L23	0.08837250275989261
+M23	0.08821355994810798
+N23	0.08805461713632334
+O23	0.08789567432453872
+P23	0.08773673151275409
+Q23	0.08757778870096945
+R23	0.08741884588918483
+S23	0.0872599030774002
+A24	'  Downside'
+B24	'%'
+J24	0.09269038838346187
+K24	0.09253144557167724
+L24	0.09237250275989262
+M24	0.09221355994810798
+N24	0.09205461713632335
+O24	0.09189567432453873
+P24	0.09173673151275409
+Q24	0.09157778870096946
+R24	0.09141884588918484
+S24	0.0912599030774002
+A25	'Other opex % revenue'
+A26	'  Base'
+B26	'%'
+J26	0
+K26	0
+L26	0
+M26	0
+N26	0
+O26	0
+P26	0
+Q26	0
+R26	0
+S26	0
+A27	'  Upside'
+B27	'%'
+J27	0
+K27	0
+L27	0
+M27	0
+N27	0
+O27	0
+P27	0
+Q27	0
+R27	0
+S27	0
+A28	'  Downside'
+B28	'%'
+J28	0
+K28	0
+L28	0
+M28	0
+N28	0
+O28	0
+P28	0
+Q28	0
+R28	0
+S28	0
+A29	'D&A % opening PP&E'
+A30	'  Base'
+B30	'%'
+J30	0.0838008085493121
+K30	0.08374180069133681
+L30	0.08368279283336151
+M30	0.08362378497538622
+N30	0.08356477711741092
+O30	0.08350576925943563
+P30	0.08344676140146033
+Q30	0.08338775354348504
+R30	0.08332874568550974
+S30	0.08326973782753445
+A31	'  Upside'
+B31	'%'
+J31	0.0838008085493121
+K31	0.08374180069133681
+L31	0.08368279283336151
+M31	0.08362378497538622
+N31	0.08356477711741092
+O31	0.08350576925943563
+P31	0.08344676140146033
+Q31	0.08338775354348504
+R31	0.08332874568550974
+S31	0.08326973782753445
+A32	'  Downside'
+B32	'%'
+J32	0.0838008085493121
+K32	0.08374180069133681
+L32	0.08368279283336151
+M32	0.08362378497538622
+N32	0.08356477711741092
+O32	0.08350576925943563
+P32	0.08344676140146033
+Q32	0.08338775354348504
+R32	0.08332874568550974
+S32	0.08326973782753445
+A33	'Capex % revenue'
+A34	'  Base'
+B34	'%'
+J34	0.02122683520586896
+K34	0.02097940907188352
+L34	0.02073198293789808
+M34	0.02048455680391264
+N34	0.0202371306699272
+O34	0.01998970453594176
+P34	0.01974227840195632
+Q34	0.01949485226797088
+R34	0.01924742613398544
+S34	0.019
+A35	'  Upside'
+B35	'%'
+J35	0.02222683520586896
+K35	0.02197940907188353
+L35	0.02173198293789808
+M35	0.02148455680391264
+N35	0.0212371306699272
+O35	0.02098970453594176
+P35	0.02074227840195632
+Q35	0.02049485226797088
+R35	0.02024742613398544
+S35	0.02
+A36	'  Downside'
+B36	'%'
+J36	0.01922683520586897
+K36	0.01897940907188353
+L36	0.01873198293789808
+M36	0.01848455680391264
+N36	0.0182371306699272
+O36	0.01798970453594176
+P36	0.01774227840195632
+Q36	0.01749485226797088
+R36	0.01724742613398544
+S36	0.017
+A37	'Effective tax rate'
+A38	'  Base'
+B38	'%'
+J38	0.2492120071866827
+K38	0.2492995619437179
+L38	0.2493871167007532
+M38	0.2494746714577884
+N38	0.2495622262148237
+O38	0.249649780971859
+P38	0.2497373357288942
+Q38	0.2498248904859295
+R38	0.2499124452429647
+S38	0.25
+A39	'  Upside'
+B39	'%'
+J39	0.2492120071866827
+K39	0.2492995619437179
+L39	0.2493871167007532
+M39	0.2494746714577884
+N39	0.2495622262148237
+O39	0.249649780971859
+P39	0.2497373357288942
+Q39	0.2498248904859295
+R39	0.2499124452429647
+S39	0.25
+A40	'  Downside'
+B40	'%'
+J40	0.2492120071866827
+K40	0.2492995619437179
+L40	0.2493871167007532
+M40	0.2494746714577884
+N40	0.2495622262148237
+O40	0.249649780971859
+P40	0.2497373357288942
+Q40	0.2498248904859295
+R40	0.2499124452429647
+S40	0.25
+A41	'Receivable days (revenue)'
+A42	'  Base'
+B42	'days'
+J42	4.766669745409924
+K42	4.680679584519655
+L42	4.594689423629386
+M42	4.508699262739118
+N42	4.422709101848849
+O42	4.336718940958581
+P42	4.250728780068312
+Q42	4.164738619178043
+R42	4.078748458287774
+S42	3.992758297397505
+A43	'  Upside'
+B43	'days'
+J43	4.766669745409924
+K43	4.680679584519655
+L43	4.594689423629386
+M43	4.508699262739118
+N43	4.422709101848849
+O43	4.336718940958581
+P43	4.250728780068312
+Q43	4.164738619178043
+R43	4.078748458287774
+S43	3.992758297397505
+A44	'  Downside'
+B44	'days'
+J44	5.266669745409924
+K44	5.180679584519655
+L44	5.094689423629386
+M44	5.008699262739118
+N44	4.922709101848849
+O44	4.836718940958581
+P44	4.750728780068312
+Q44	4.664738619178043
+R44	4.578748458287774
+S44	4.492758297397505
+A45	'Inventory days (COGS)'
+A46	'  Base'
+B46	'days'
+J46	26.68868884777073
+K46	26.97289531276463
+L46	27.25710177775854
+M46	27.54130824275245
+N46	27.82551470774635
+O46	28.10972117274026
+P46	28.39392763773416
+Q46	28.67813410272807
+R46	28.96234056772197
+S46	29.24654703271588
+A47	'  Upside'
+B47	'days'
+J47	26.18868884777073
+K47	26.47289531276463
+L47	26.75710177775854
+M47	27.04130824275245
+N47	27.32551470774635
+O47	27.60972117274026
+P47	27.89392763773416
+Q47	28.17813410272807
+R47	28.46234056772197
+S47	28.74654703271588
+A48	'  Downside'
+B48	'days'
+J48	28.68868884777073
+K48	28.86178420165352
+L48	29.03487955553632
+M48	29.20797490941911
+N48	29.38107026330191
+O48	29.5541656171847
+P48	29.7272609710675
+Q48	29.90035632495029
+R48	30.07345167883309
+S48	30.24654703271588
+A49	'Payable days (COGS)'
+A50	'  Base'
+B50	'days'
+J50	31.20079537155809
+K50	31.1978689937202
+L50	31.1949426158823
+M50	31.19201623804441
+N50	31.18908986020652
+O50	31.18616348236862
+P50	31.18323710453073
+Q50	31.18031072669284
+R50	31.17738434885495
+S50	31.17445797101706
+A51	'  Upside'
+B51	'days'
+J51	31.20079537155809
+K51	31.1978689937202
+L51	31.1949426158823
+M51	31.19201623804441
+N51	31.18908986020652
+O51	31.18616348236862
+P51	31.18323710453073
+Q51	31.18031072669284
+R51	31.17738434885495
+S51	31.17445797101706
+A52	'  Downside'
+B52	'days'
+J52	30.20079537155809
+K52	30.25342454927575
+L52	30.30605372699341
+M52	30.35868290471108
+N52	30.41131208242874
+O52	30.4639412601464
+P52	30.51657043786406
+Q52	30.56919961558173
+R52	30.62182879329939
+S52	30.67445797101706
+A53	'Other current assets % revenue'
+A54	'  Base'
+B54	'%'
+J54	0.006704004445472237
+K54	0.006704004445472237
+L54	0.006704004445472237
+M54	0.006704004445472237
+N54	0.006704004445472237
+O54	0.006704004445472237
+P54	0.006704004445472237
+Q54	0.006704004445472237
+R54	0.006704004445472237
+S54	0.006704004445472237
+A55	'  Upside'
+B55	'%'
+J55	0.006704004445472237
+K55	0.006704004445472237
+L55	0.006704004445472237
+M55	0.006704004445472237
+N55	0.006704004445472237
+O55	0.006704004445472237
+P55	0.006704004445472237
+Q55	0.006704004445472237
+R55	0.006704004445472237
+S55	0.006704004445472237
+A56	'  Downside'
+B56	'%'
+J56	0.006704004445472237
+K56	0.006704004445472237
+L56	0.006704004445472237
+M56	0.006704004445472237
+N56	0.006704004445472237
+O56	0.006704004445472237
+P56	0.006704004445472237
+Q56	0.006704004445472237
+R56	0.006704004445472237
+S56	0.006704004445472237
+A57	'Other current liabilities % revenue'
+A58	'  Base'
+B58	'%'
+J58	0.06205720354251666
+K58	0.06205720354251666
+L58	0.06205720354251666
+M58	0.06205720354251666
+N58	0.06205720354251666
+O58	0.06205720354251666
+P58	0.06205720354251666
+Q58	0.06205720354251666
+R58	0.06205720354251666
+S58	0.06205720354251666
+A59	'  Upside'
+B59	'%'
+J59	0.06205720354251666
+K59	0.06205720354251666
+L59	0.06205720354251666
+M59	0.06205720354251666
+N59	0.06205720354251666
+O59	0.06205720354251666
+P59	0.06205720354251666
+Q59	0.06205720354251666
+R59	0.06205720354251666
+S59	0.06205720354251666
+A60	'  Downside'
+B60	'%'
+J60	0.06105720354251666
+K60	0.06105720354251666
+L60	0.06105720354251666
+M60	0.06105720354251666
+N60	0.06105720354251666
+O60	0.06105720354251666
+P60	0.06105720354251666
+Q60	0.06105720354251666
+R60	0.06105720354251666
+S60	0.06105720354251666
+A61	'SBC % revenue'
+A62	'  Base'
+B62	'%'
+J62	0.003047955824432467
+K62	0.003047955824432467
+L62	0.003047955824432467
+M62	0.003047955824432467
+N62	0.003047955824432467
+O62	0.003047955824432467
+P62	0.003047955824432467
+Q62	0.003047955824432467
+R62	0.003047955824432467
+S62	0.003047955824432467
+A63	'  Upside'
+B63	'%'
+J63	0.003047955824432467
+K63	0.003047955824432467
+L63	0.003047955824432467
+M63	0.003047955824432467
+N63	0.003047955824432467
+O63	0.003047955824432467
+P63	0.003047955824432467
+Q63	0.003047955824432467
+R63	0.003047955824432467
+S63	0.003047955824432467
+A64	'  Downside'
+B64	'%'
+J64	0.003047955824432467
+K64	0.003047955824432467
+L64	0.003047955824432467
+M64	0.003047955824432467
+N64	0.003047955824432467
+O64	0.003047955824432467
+P64	0.003047955824432467
+Q64	0.003047955824432467
+R64	0.003047955824432467
+S64	0.003047955824432467
+A65	'Interest rate on debt'
+A66	'  Base'
+B66	'%'
+J66	0.02426778242677824
+K66	0.02601580660158066
+L66	0.02776383077638308
+M66	0.0295118549511855
+N66	0.03125987912598791
+O66	0.03300790330079033
+P66	0.03475592747559275
+Q66	0.03650395165039517
+R66	0.03825197582519758
+S66	0.04
+A67	'  Upside'
+B67	'%'
+J67	0.02426778242677824
+K67	0.02601580660158066
+L67	0.02776383077638308
+M67	0.0295118549511855
+N67	0.03125987912598791
+O67	0.03300790330079033
+P67	0.03475592747559275
+Q67	0.03650395165039517
+R67	0.03825197582519758
+S67	0.04
+A68	'  Downside'
+B68	'%'
+J68	0.02926778242677824
+K68	0.03157136215713622
+L68	0.03387494188749419
+M68	0.03617852161785216
+N68	0.03848210134821014
+O68	0.04078568107856811
+P68	0.04308926080892608
+Q68	0.04539284053928406
+R68	0.04769642026964203
+S68	0.05
+A69	'Interest rate on cash'
+A70	'  Base'
+B70	'%'
+J70	0.04137569832402235
+K70	0.04011173184357542
+L70	0.03884776536312849
+M70	0.03758379888268156
+N70	0.03631983240223464
+O70	0.03505586592178771
+P70	0.03379189944134078
+Q70	0.03252793296089385
+R70	0.03126396648044692
+S70	0.03
+A71	'  Upside'
+B71	'%'
+J71	0.04137569832402235
+K71	0.04011173184357542
+L71	0.03884776536312849
+M71	0.03758379888268156
+N71	0.03631983240223464
+O71	0.03505586592178771
+P71	0.03379189944134078
+Q71	0.03252793296089385
+R71	0.03126396648044692
+S71	0.03
+A72	'  Downside'
+B72	'%'
+J72	0.03137569832402234
+K72	0.03011173184357542
+L72	0.02884776536312849
+M72	0.02758379888268156
+N72	0.02631983240223464
+O72	0.02505586592178771
+P72	0.02379189944134078
+Q72	0.02252793296089385
+R72	0.02126396648044692
+S72	0.02
+A73	'Regular dividend payout'
+A74	'  Base'
+B74	'%'
+J74	0.27
+K74	0.2733333333333334
+L74	0.2766666666666667
+M74	0.28
+N74	0.2833333333333333
+O74	0.2866666666666667
+P74	0.29
+Q74	0.2933333333333333
+R74	0.2966666666666666
+S74	0.3
+A75	'  Upside'
+B75	'%'
+J75	0.27
+K75	0.2733333333333334
+L75	0.2766666666666667
+M75	0.28
+N75	0.2833333333333333
+O75	0.2866666666666667
+P75	0.29
+Q75	0.2933333333333333
+R75	0.2966666666666666
+S75	0.3
+A76	'  Downside'
+B76	'%'
+J76	0.27
+K76	0.2733333333333334
+L76	0.2766666666666667
+M76	0.28
+N76	0.2833333333333333
+O76	0.2866666666666667
+P76	0.29
+Q76	0.2933333333333333
+R76	0.2966666666666666
+S76	0.3
+A77	'Buybacks % net income'
+A78	'  Base'
+B78	'%'
+J78	0.1
+K78	0.1055555555555556
+L78	0.1111111111111111
+M78	0.1166666666666667
+N78	0.1222222222222222
+O78	0.1277777777777778
+P78	0.1333333333333333
+Q78	0.1388888888888889
+R78	0.1444444444444444
+S78	0.15
+A79	'  Upside'
+B79	'%'
+J79	0.15
+K79	0.1555555555555556
+L79	0.1611111111111111
+M79	0.1666666666666667
+N79	0.1722222222222222
+O79	0.1777777777777778
+P79	0.1833333333333333
+Q79	0.1888888888888889
+R79	0.1944444444444444
+S79	0.2
+A80	'  Downside'
+B80	'%'
+J80	0
+K80	0.005555555555555554
+L80	0.01111111111111111
+M80	0.01666666666666666
+N80	0.02222222222222222
+O80	0.02777777777777777
+P80	0.03333333333333333
+Q80	0.03888888888888888
+R80	0.04444444444444443
+S80	0.04999999999999999
+A81	'Share price growth (for share count)'
+A82	'  Base'
+B82	'%'
+J82	0.06
+K82	0.06
+L82	0.06
+M82	0.06
+N82	0.06
+O82	0.06
+P82	0.06
+Q82	0.06
+R82	0.06
+S82	0.06
+A83	'  Upside'
+B83	'%'
+J83	0.08
+K83	0.08
+L83	0.08
+M83	0.08
+N83	0.08
+O83	0.08
+P83	0.08
+Q83	0.08
+R83	0.08
+S83	0.08
+A84	'  Downside'
+B84	'%'
+J84	-0.09
+K84	-0.07666666666666666
+L84	-0.06333333333333332
+M84	-0.05
+N84	-0.03666666666666667
+O84	-0.02333333333333333
+P84	-0.009999999999999995
+Q84	0.003333333333333327
+R84	0.01666666666666666
+S84	0.03000000000000001
+=== Drivers
+A1	'Live drivers: history implied, forecast from the selected scenario'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Net warehouse openings'
+B9	'count'
+F9	='Hist'!F66-'Hist'!E66
+G9	='Hist'!G66-'Hist'!F66
+H9	='Hist'!H66-'Hist'!G66
+I9	='Hist'!I66-'Hist'!H66
+J9	=CHOOSE('Inputs'!$C$10,'Scenarios'!J10,'Scenarios'!J11,'Scenarios'!J12)
+K9	=CHOOSE('Inputs'!$C$10,'Scenarios'!K10,'Scenarios'!K11,'Scenarios'!K12)
+L9	=CHOOSE('Inputs'!$C$10,'Scenarios'!L10,'Scenarios'!L11,'Scenarios'!L12)
+M9	=CHOOSE('Inputs'!$C$10,'Scenarios'!M10,'Scenarios'!M11,'Scenarios'!M12)
+N9	=CHOOSE('Inputs'!$C$10,'Scenarios'!N10,'Scenarios'!N11,'Scenarios'!N12)
+O9	=CHOOSE('Inputs'!$C$10,'Scenarios'!O10,'Scenarios'!O11,'Scenarios'!O12)
+P9	=CHOOSE('Inputs'!$C$10,'Scenarios'!P10,'Scenarios'!P11,'Scenarios'!P12)
+Q9	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q10,'Scenarios'!Q11,'Scenarios'!Q12)
+R9	=CHOOSE('Inputs'!$C$10,'Scenarios'!R10,'Scenarios'!R11,'Scenarios'!R12)
+S9	=CHOOSE('Inputs'!$C$10,'Scenarios'!S10,'Scenarios'!S11,'Scenarios'!S12)
+A10	'Revenue per avg. warehouse growth'
+B10	'%'
+G10	='Schedules'!G12/'Schedules'!F12-1
+H10	='Schedules'!H12/'Schedules'!G12-1
+I10	='Schedules'!I12/'Schedules'!H12-1
+J10	=CHOOSE('Inputs'!$C$10,'Scenarios'!J14,'Scenarios'!J15,'Scenarios'!J16)
+K10	=CHOOSE('Inputs'!$C$10,'Scenarios'!K14,'Scenarios'!K15,'Scenarios'!K16)
+L10	=CHOOSE('Inputs'!$C$10,'Scenarios'!L14,'Scenarios'!L15,'Scenarios'!L16)
+M10	=CHOOSE('Inputs'!$C$10,'Scenarios'!M14,'Scenarios'!M15,'Scenarios'!M16)
+N10	=CHOOSE('Inputs'!$C$10,'Scenarios'!N14,'Scenarios'!N15,'Scenarios'!N16)
+O10	=CHOOSE('Inputs'!$C$10,'Scenarios'!O14,'Scenarios'!O15,'Scenarios'!O16)
+P10	=CHOOSE('Inputs'!$C$10,'Scenarios'!P14,'Scenarios'!P15,'Scenarios'!P16)
+Q10	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q14,'Scenarios'!Q15,'Scenarios'!Q16)
+R10	=CHOOSE('Inputs'!$C$10,'Scenarios'!R14,'Scenarios'!R15,'Scenarios'!R16)
+S10	=CHOOSE('Inputs'!$C$10,'Scenarios'!S14,'Scenarios'!S15,'Scenarios'!S16)
+A11	'Gross margin'
+B11	'%'
+E11	=1-'Hist'!E11/'Hist'!E10
+F11	=1-'Hist'!F11/'Hist'!F10
+G11	=1-'Hist'!G11/'Hist'!G10
+H11	=1-'Hist'!H11/'Hist'!H10
+I11	=1-'Hist'!I11/'Hist'!I10
+J11	=CHOOSE('Inputs'!$C$10,'Scenarios'!J18,'Scenarios'!J19,'Scenarios'!J20)
+K11	=CHOOSE('Inputs'!$C$10,'Scenarios'!K18,'Scenarios'!K19,'Scenarios'!K20)
+L11	=CHOOSE('Inputs'!$C$10,'Scenarios'!L18,'Scenarios'!L19,'Scenarios'!L20)
+M11	=CHOOSE('Inputs'!$C$10,'Scenarios'!M18,'Scenarios'!M19,'Scenarios'!M20)
+N11	=CHOOSE('Inputs'!$C$10,'Scenarios'!N18,'Scenarios'!N19,'Scenarios'!N20)
+O11	=CHOOSE('Inputs'!$C$10,'Scenarios'!O18,'Scenarios'!O19,'Scenarios'!O20)
+P11	=CHOOSE('Inputs'!$C$10,'Scenarios'!P18,'Scenarios'!P19,'Scenarios'!P20)
+Q11	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q18,'Scenarios'!Q19,'Scenarios'!Q20)
+R11	=CHOOSE('Inputs'!$C$10,'Scenarios'!R18,'Scenarios'!R19,'Scenarios'!R20)
+S11	=CHOOSE('Inputs'!$C$10,'Scenarios'!S18,'Scenarios'!S19,'Scenarios'!S20)
+A12	'SG&A % revenue'
+B12	'%'
+E12	='Hist'!E12/'Hist'!E10
+F12	='Hist'!F12/'Hist'!F10
+G12	='Hist'!G12/'Hist'!G10
+H12	='Hist'!H12/'Hist'!H10
+I12	='Hist'!I12/'Hist'!I10
+J12	=CHOOSE('Inputs'!$C$10,'Scenarios'!J22,'Scenarios'!J23,'Scenarios'!J24)
+K12	=CHOOSE('Inputs'!$C$10,'Scenarios'!K22,'Scenarios'!K23,'Scenarios'!K24)
+L12	=CHOOSE('Inputs'!$C$10,'Scenarios'!L22,'Scenarios'!L23,'Scenarios'!L24)
+M12	=CHOOSE('Inputs'!$C$10,'Scenarios'!M22,'Scenarios'!M23,'Scenarios'!M24)
+N12	=CHOOSE('Inputs'!$C$10,'Scenarios'!N22,'Scenarios'!N23,'Scenarios'!N24)
+O12	=CHOOSE('Inputs'!$C$10,'Scenarios'!O22,'Scenarios'!O23,'Scenarios'!O24)
+P12	=CHOOSE('Inputs'!$C$10,'Scenarios'!P22,'Scenarios'!P23,'Scenarios'!P24)
+Q12	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q22,'Scenarios'!Q23,'Scenarios'!Q24)
+R12	=CHOOSE('Inputs'!$C$10,'Scenarios'!R22,'Scenarios'!R23,'Scenarios'!R24)
+S12	=CHOOSE('Inputs'!$C$10,'Scenarios'!S22,'Scenarios'!S23,'Scenarios'!S24)
+A13	'Other opex % revenue'
+B13	'%'
+E13	='Hist'!E13/'Hist'!E10
+F13	='Hist'!F13/'Hist'!F10
+G13	='Hist'!G13/'Hist'!G10
+H13	='Hist'!H13/'Hist'!H10
+I13	='Hist'!I13/'Hist'!I10
+J13	=CHOOSE('Inputs'!$C$10,'Scenarios'!J26,'Scenarios'!J27,'Scenarios'!J28)
+K13	=CHOOSE('Inputs'!$C$10,'Scenarios'!K26,'Scenarios'!K27,'Scenarios'!K28)
+L13	=CHOOSE('Inputs'!$C$10,'Scenarios'!L26,'Scenarios'!L27,'Scenarios'!L28)
+M13	=CHOOSE('Inputs'!$C$10,'Scenarios'!M26,'Scenarios'!M27,'Scenarios'!M28)
+N13	=CHOOSE('Inputs'!$C$10,'Scenarios'!N26,'Scenarios'!N27,'Scenarios'!N28)
+O13	=CHOOSE('Inputs'!$C$10,'Scenarios'!O26,'Scenarios'!O27,'Scenarios'!O28)
+P13	=CHOOSE('Inputs'!$C$10,'Scenarios'!P26,'Scenarios'!P27,'Scenarios'!P28)
+Q13	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q26,'Scenarios'!Q27,'Scenarios'!Q28)
+R13	=CHOOSE('Inputs'!$C$10,'Scenarios'!R26,'Scenarios'!R27,'Scenarios'!R28)
+S13	=CHOOSE('Inputs'!$C$10,'Scenarios'!S26,'Scenarios'!S27,'Scenarios'!S28)
+A14	'D&A % opening PP&E'
+B14	'%'
+F14	='Hist'!F25/'Hist'!E33
+G14	='Hist'!G25/'Hist'!F33
+H14	='Hist'!H25/'Hist'!G33
+I14	='Hist'!I25/'Hist'!H33
+J14	=CHOOSE('Inputs'!$C$10,'Scenarios'!J30,'Scenarios'!J31,'Scenarios'!J32)
+K14	=CHOOSE('Inputs'!$C$10,'Scenarios'!K30,'Scenarios'!K31,'Scenarios'!K32)
+L14	=CHOOSE('Inputs'!$C$10,'Scenarios'!L30,'Scenarios'!L31,'Scenarios'!L32)
+M14	=CHOOSE('Inputs'!$C$10,'Scenarios'!M30,'Scenarios'!M31,'Scenarios'!M32)
+N14	=CHOOSE('Inputs'!$C$10,'Scenarios'!N30,'Scenarios'!N31,'Scenarios'!N32)
+O14	=CHOOSE('Inputs'!$C$10,'Scenarios'!O30,'Scenarios'!O31,'Scenarios'!O32)
+P14	=CHOOSE('Inputs'!$C$10,'Scenarios'!P30,'Scenarios'!P31,'Scenarios'!P32)
+Q14	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q30,'Scenarios'!Q31,'Scenarios'!Q32)
+R14	=CHOOSE('Inputs'!$C$10,'Scenarios'!R30,'Scenarios'!R31,'Scenarios'!R32)
+S14	=CHOOSE('Inputs'!$C$10,'Scenarios'!S30,'Scenarios'!S31,'Scenarios'!S32)
+A15	'Capex % revenue'
+B15	'%'
+E15	=-'Hist'!E57/'Hist'!E10
+F15	=-'Hist'!F57/'Hist'!F10
+G15	=-'Hist'!G57/'Hist'!G10
+H15	=-'Hist'!H57/'Hist'!H10
+I15	=-'Hist'!I57/'Hist'!I10
+J15	=CHOOSE('Inputs'!$C$10,'Scenarios'!J34,'Scenarios'!J35,'Scenarios'!J36)
+K15	=CHOOSE('Inputs'!$C$10,'Scenarios'!K34,'Scenarios'!K35,'Scenarios'!K36)
+L15	=CHOOSE('Inputs'!$C$10,'Scenarios'!L34,'Scenarios'!L35,'Scenarios'!L36)
+M15	=CHOOSE('Inputs'!$C$10,'Scenarios'!M34,'Scenarios'!M35,'Scenarios'!M36)
+N15	=CHOOSE('Inputs'!$C$10,'Scenarios'!N34,'Scenarios'!N35,'Scenarios'!N36)
+O15	=CHOOSE('Inputs'!$C$10,'Scenarios'!O34,'Scenarios'!O35,'Scenarios'!O36)
+P15	=CHOOSE('Inputs'!$C$10,'Scenarios'!P34,'Scenarios'!P35,'Scenarios'!P36)
+Q15	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q34,'Scenarios'!Q35,'Scenarios'!Q36)
+R15	=CHOOSE('Inputs'!$C$10,'Scenarios'!R34,'Scenarios'!R35,'Scenarios'!R36)
+S15	=CHOOSE('Inputs'!$C$10,'Scenarios'!S34,'Scenarios'!S35,'Scenarios'!S36)
+A16	'Effective tax rate'
+B16	'%'
+E16	='Hist'!E18/'Hist'!E17
+F16	='Hist'!F18/'Hist'!F17
+G16	='Hist'!G18/'Hist'!G17
+H16	='Hist'!H18/'Hist'!H17
+I16	='Hist'!I18/'Hist'!I17
+J16	=CHOOSE('Inputs'!$C$10,'Scenarios'!J38,'Scenarios'!J39,'Scenarios'!J40)
+K16	=CHOOSE('Inputs'!$C$10,'Scenarios'!K38,'Scenarios'!K39,'Scenarios'!K40)
+L16	=CHOOSE('Inputs'!$C$10,'Scenarios'!L38,'Scenarios'!L39,'Scenarios'!L40)
+M16	=CHOOSE('Inputs'!$C$10,'Scenarios'!M38,'Scenarios'!M39,'Scenarios'!M40)
+N16	=CHOOSE('Inputs'!$C$10,'Scenarios'!N38,'Scenarios'!N39,'Scenarios'!N40)
+O16	=CHOOSE('Inputs'!$C$10,'Scenarios'!O38,'Scenarios'!O39,'Scenarios'!O40)
+P16	=CHOOSE('Inputs'!$C$10,'Scenarios'!P38,'Scenarios'!P39,'Scenarios'!P40)
+Q16	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q38,'Scenarios'!Q39,'Scenarios'!Q40)
+R16	=CHOOSE('Inputs'!$C$10,'Scenarios'!R38,'Scenarios'!R39,'Scenarios'!R40)
+S16	=CHOOSE('Inputs'!$C$10,'Scenarios'!S38,'Scenarios'!S39,'Scenarios'!S40)
+A17	'Receivable days (revenue)'
+B17	'days'
+E17	='Hist'!E29/'Hist'!E10*'Inputs'!$C$15
+F17	='Hist'!F29/'Hist'!F10*'Inputs'!$C$15
+G17	='Hist'!G29/'Hist'!G10*'Inputs'!$C$15
+H17	='Hist'!H29/'Hist'!H10*'Inputs'!$C$15
+I17	='Hist'!I29/'Hist'!I10*'Inputs'!$C$15
+J17	=CHOOSE('Inputs'!$C$10,'Scenarios'!J42,'Scenarios'!J43,'Scenarios'!J44)
+K17	=CHOOSE('Inputs'!$C$10,'Scenarios'!K42,'Scenarios'!K43,'Scenarios'!K44)
+L17	=CHOOSE('Inputs'!$C$10,'Scenarios'!L42,'Scenarios'!L43,'Scenarios'!L44)
+M17	=CHOOSE('Inputs'!$C$10,'Scenarios'!M42,'Scenarios'!M43,'Scenarios'!M44)
+N17	=CHOOSE('Inputs'!$C$10,'Scenarios'!N42,'Scenarios'!N43,'Scenarios'!N44)
+O17	=CHOOSE('Inputs'!$C$10,'Scenarios'!O42,'Scenarios'!O43,'Scenarios'!O44)
+P17	=CHOOSE('Inputs'!$C$10,'Scenarios'!P42,'Scenarios'!P43,'Scenarios'!P44)
+Q17	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q42,'Scenarios'!Q43,'Scenarios'!Q44)
+R17	=CHOOSE('Inputs'!$C$10,'Scenarios'!R42,'Scenarios'!R43,'Scenarios'!R44)
+S17	=CHOOSE('Inputs'!$C$10,'Scenarios'!S42,'Scenarios'!S43,'Scenarios'!S44)
+A18	'Inventory days (COGS)'
+B18	'days'
+E18	='Hist'!E30/'Hist'!E11*'Inputs'!$C$15
+F18	='Hist'!F30/'Hist'!F11*'Inputs'!$C$15
+G18	='Hist'!G30/'Hist'!G11*'Inputs'!$C$15
+H18	='Hist'!H30/'Hist'!H11*'Inputs'!$C$15
+I18	='Hist'!I30/'Hist'!I11*'Inputs'!$C$15
+J18	=CHOOSE('Inputs'!$C$10,'Scenarios'!J46,'Scenarios'!J47,'Scenarios'!J48)
+K18	=CHOOSE('Inputs'!$C$10,'Scenarios'!K46,'Scenarios'!K47,'Scenarios'!K48)
+L18	=CHOOSE('Inputs'!$C$10,'Scenarios'!L46,'Scenarios'!L47,'Scenarios'!L48)
+M18	=CHOOSE('Inputs'!$C$10,'Scenarios'!M46,'Scenarios'!M47,'Scenarios'!M48)
+N18	=CHOOSE('Inputs'!$C$10,'Scenarios'!N46,'Scenarios'!N47,'Scenarios'!N48)
+O18	=CHOOSE('Inputs'!$C$10,'Scenarios'!O46,'Scenarios'!O47,'Scenarios'!O48)
+P18	=CHOOSE('Inputs'!$C$10,'Scenarios'!P46,'Scenarios'!P47,'Scenarios'!P48)
+Q18	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q46,'Scenarios'!Q47,'Scenarios'!Q48)
+R18	=CHOOSE('Inputs'!$C$10,'Scenarios'!R46,'Scenarios'!R47,'Scenarios'!R48)
+S18	=CHOOSE('Inputs'!$C$10,'Scenarios'!S46,'Scenarios'!S47,'Scenarios'!S48)
+A19	'Payable days (COGS)'
+B19	'days'
+E19	='Hist'!E39/'Hist'!E11*'Inputs'!$C$15
+F19	='Hist'!F39/'Hist'!F11*'Inputs'!$C$15
+G19	='Hist'!G39/'Hist'!G11*'Inputs'!$C$15
+H19	='Hist'!H39/'Hist'!H11*'Inputs'!$C$15
+I19	='Hist'!I39/'Hist'!I11*'Inputs'!$C$15
+J19	=CHOOSE('Inputs'!$C$10,'Scenarios'!J50,'Scenarios'!J51,'Scenarios'!J52)
+K19	=CHOOSE('Inputs'!$C$10,'Scenarios'!K50,'Scenarios'!K51,'Scenarios'!K52)
+L19	=CHOOSE('Inputs'!$C$10,'Scenarios'!L50,'Scenarios'!L51,'Scenarios'!L52)
+M19	=CHOOSE('Inputs'!$C$10,'Scenarios'!M50,'Scenarios'!M51,'Scenarios'!M52)
+N19	=CHOOSE('Inputs'!$C$10,'Scenarios'!N50,'Scenarios'!N51,'Scenarios'!N52)
+O19	=CHOOSE('Inputs'!$C$10,'Scenarios'!O50,'Scenarios'!O51,'Scenarios'!O52)
+P19	=CHOOSE('Inputs'!$C$10,'Scenarios'!P50,'Scenarios'!P51,'Scenarios'!P52)
+Q19	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q50,'Scenarios'!Q51,'Scenarios'!Q52)
+R19	=CHOOSE('Inputs'!$C$10,'Scenarios'!R50,'Scenarios'!R51,'Scenarios'!R52)
+S19	=CHOOSE('Inputs'!$C$10,'Scenarios'!S50,'Scenarios'!S51,'Scenarios'!S52)
+A20	'Other current assets % revenue'
+B20	'%'
+E20	='Hist'!E31/'Hist'!E10
+F20	='Hist'!F31/'Hist'!F10
+G20	='Hist'!G31/'Hist'!G10
+H20	='Hist'!H31/'Hist'!H10
+I20	='Hist'!I31/'Hist'!I10
+J20	=CHOOSE('Inputs'!$C$10,'Scenarios'!J54,'Scenarios'!J55,'Scenarios'!J56)
+K20	=CHOOSE('Inputs'!$C$10,'Scenarios'!K54,'Scenarios'!K55,'Scenarios'!K56)
+L20	=CHOOSE('Inputs'!$C$10,'Scenarios'!L54,'Scenarios'!L55,'Scenarios'!L56)
+M20	=CHOOSE('Inputs'!$C$10,'Scenarios'!M54,'Scenarios'!M55,'Scenarios'!M56)
+N20	=CHOOSE('Inputs'!$C$10,'Scenarios'!N54,'Scenarios'!N55,'Scenarios'!N56)
+O20	=CHOOSE('Inputs'!$C$10,'Scenarios'!O54,'Scenarios'!O55,'Scenarios'!O56)
+P20	=CHOOSE('Inputs'!$C$10,'Scenarios'!P54,'Scenarios'!P55,'Scenarios'!P56)
+Q20	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q54,'Scenarios'!Q55,'Scenarios'!Q56)
+R20	=CHOOSE('Inputs'!$C$10,'Scenarios'!R54,'Scenarios'!R55,'Scenarios'!R56)
+S20	=CHOOSE('Inputs'!$C$10,'Scenarios'!S54,'Scenarios'!S55,'Scenarios'!S56)
+A21	'Other current liabilities % revenue'
+B21	'%'
+E21	='BS'!E23/'Hist'!E10
+F21	='BS'!F23/'Hist'!F10
+G21	='BS'!G23/'Hist'!G10
+H21	='BS'!H23/'Hist'!H10
+I21	='BS'!I23/'Hist'!I10
+J21	=CHOOSE('Inputs'!$C$10,'Scenarios'!J58,'Scenarios'!J59,'Scenarios'!J60)
+K21	=CHOOSE('Inputs'!$C$10,'Scenarios'!K58,'Scenarios'!K59,'Scenarios'!K60)
+L21	=CHOOSE('Inputs'!$C$10,'Scenarios'!L58,'Scenarios'!L59,'Scenarios'!L60)
+M21	=CHOOSE('Inputs'!$C$10,'Scenarios'!M58,'Scenarios'!M59,'Scenarios'!M60)
+N21	=CHOOSE('Inputs'!$C$10,'Scenarios'!N58,'Scenarios'!N59,'Scenarios'!N60)
+O21	=CHOOSE('Inputs'!$C$10,'Scenarios'!O58,'Scenarios'!O59,'Scenarios'!O60)
+P21	=CHOOSE('Inputs'!$C$10,'Scenarios'!P58,'Scenarios'!P59,'Scenarios'!P60)
+Q21	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q58,'Scenarios'!Q59,'Scenarios'!Q60)
+R21	=CHOOSE('Inputs'!$C$10,'Scenarios'!R58,'Scenarios'!R59,'Scenarios'!R60)
+S21	=CHOOSE('Inputs'!$C$10,'Scenarios'!S58,'Scenarios'!S59,'Scenarios'!S60)
+A22	'SBC % revenue'
+B22	'%'
+E22	='Hist'!E26/'Hist'!E10
+F22	='Hist'!F26/'Hist'!F10
+G22	='Hist'!G26/'Hist'!G10
+H22	='Hist'!H26/'Hist'!H10
+I22	='Hist'!I26/'Hist'!I10
+J22	=CHOOSE('Inputs'!$C$10,'Scenarios'!J62,'Scenarios'!J63,'Scenarios'!J64)
+K22	=CHOOSE('Inputs'!$C$10,'Scenarios'!K62,'Scenarios'!K63,'Scenarios'!K64)
+L22	=CHOOSE('Inputs'!$C$10,'Scenarios'!L62,'Scenarios'!L63,'Scenarios'!L64)
+M22	=CHOOSE('Inputs'!$C$10,'Scenarios'!M62,'Scenarios'!M63,'Scenarios'!M64)
+N22	=CHOOSE('Inputs'!$C$10,'Scenarios'!N62,'Scenarios'!N63,'Scenarios'!N64)
+O22	=CHOOSE('Inputs'!$C$10,'Scenarios'!O62,'Scenarios'!O63,'Scenarios'!O64)
+P22	=CHOOSE('Inputs'!$C$10,'Scenarios'!P62,'Scenarios'!P63,'Scenarios'!P64)
+Q22	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q62,'Scenarios'!Q63,'Scenarios'!Q64)
+R22	=CHOOSE('Inputs'!$C$10,'Scenarios'!R62,'Scenarios'!R63,'Scenarios'!R64)
+S22	=CHOOSE('Inputs'!$C$10,'Scenarios'!S62,'Scenarios'!S63,'Scenarios'!S64)
+A23	'Interest rate on debt'
+B23	'%'
+F23	='Hist'!F15/AVERAGE('BS'!F24,'BS'!E24)
+G23	='Hist'!G15/AVERAGE('BS'!G24,'BS'!F24)
+H23	='Hist'!H15/AVERAGE('BS'!H24,'BS'!G24)
+I23	='Hist'!I15/AVERAGE('BS'!I24,'BS'!H24)
+J23	=CHOOSE('Inputs'!$C$10,'Scenarios'!J66,'Scenarios'!J67,'Scenarios'!J68)
+K23	=CHOOSE('Inputs'!$C$10,'Scenarios'!K66,'Scenarios'!K67,'Scenarios'!K68)
+L23	=CHOOSE('Inputs'!$C$10,'Scenarios'!L66,'Scenarios'!L67,'Scenarios'!L68)
+M23	=CHOOSE('Inputs'!$C$10,'Scenarios'!M66,'Scenarios'!M67,'Scenarios'!M68)
+N23	=CHOOSE('Inputs'!$C$10,'Scenarios'!N66,'Scenarios'!N67,'Scenarios'!N68)
+O23	=CHOOSE('Inputs'!$C$10,'Scenarios'!O66,'Scenarios'!O67,'Scenarios'!O68)
+P23	=CHOOSE('Inputs'!$C$10,'Scenarios'!P66,'Scenarios'!P67,'Scenarios'!P68)
+Q23	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q66,'Scenarios'!Q67,'Scenarios'!Q68)
+R23	=CHOOSE('Inputs'!$C$10,'Scenarios'!R66,'Scenarios'!R67,'Scenarios'!R68)
+S23	=CHOOSE('Inputs'!$C$10,'Scenarios'!S66,'Scenarios'!S67,'Scenarios'!S68)
+A24	'Interest rate on cash'
+B24	'%'
+F24	='Hist'!F16/AVERAGE('Hist'!F27,'Hist'!E27)
+G24	='Hist'!G16/AVERAGE('Hist'!G27,'Hist'!F27)
+H24	='Hist'!H16/AVERAGE('Hist'!H27,'Hist'!G27)
+I24	='Hist'!I16/AVERAGE('Hist'!I27,'Hist'!H27)
+J24	=CHOOSE('Inputs'!$C$10,'Scenarios'!J70,'Scenarios'!J71,'Scenarios'!J72)
+K24	=CHOOSE('Inputs'!$C$10,'Scenarios'!K70,'Scenarios'!K71,'Scenarios'!K72)
+L24	=CHOOSE('Inputs'!$C$10,'Scenarios'!L70,'Scenarios'!L71,'Scenarios'!L72)
+M24	=CHOOSE('Inputs'!$C$10,'Scenarios'!M70,'Scenarios'!M71,'Scenarios'!M72)
+N24	=CHOOSE('Inputs'!$C$10,'Scenarios'!N70,'Scenarios'!N71,'Scenarios'!N72)
+O24	=CHOOSE('Inputs'!$C$10,'Scenarios'!O70,'Scenarios'!O71,'Scenarios'!O72)
+P24	=CHOOSE('Inputs'!$C$10,'Scenarios'!P70,'Scenarios'!P71,'Scenarios'!P72)
+Q24	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q70,'Scenarios'!Q71,'Scenarios'!Q72)
+R24	=CHOOSE('Inputs'!$C$10,'Scenarios'!R70,'Scenarios'!R71,'Scenarios'!R72)
+S24	=CHOOSE('Inputs'!$C$10,'Scenarios'!S70,'Scenarios'!S71,'Scenarios'!S72)
+A25	'Regular dividend payout'
+B25	'%'
+E25	=-'Hist'!E60/'Hist'!E22
+F25	=-'Hist'!F60/'Hist'!F22
+G25	=-'Hist'!G60/'Hist'!G22
+H25	=-'Hist'!H60/'Hist'!H22
+I25	=-'Hist'!I60/'Hist'!I22
+J25	=CHOOSE('Inputs'!$C$10,'Scenarios'!J74,'Scenarios'!J75,'Scenarios'!J76)
+K25	=CHOOSE('Inputs'!$C$10,'Scenarios'!K74,'Scenarios'!K75,'Scenarios'!K76)
+L25	=CHOOSE('Inputs'!$C$10,'Scenarios'!L74,'Scenarios'!L75,'Scenarios'!L76)
+M25	=CHOOSE('Inputs'!$C$10,'Scenarios'!M74,'Scenarios'!M75,'Scenarios'!M76)
+N25	=CHOOSE('Inputs'!$C$10,'Scenarios'!N74,'Scenarios'!N75,'Scenarios'!N76)
+O25	=CHOOSE('Inputs'!$C$10,'Scenarios'!O74,'Scenarios'!O75,'Scenarios'!O76)
+P25	=CHOOSE('Inputs'!$C$10,'Scenarios'!P74,'Scenarios'!P75,'Scenarios'!P76)
+Q25	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q74,'Scenarios'!Q75,'Scenarios'!Q76)
+R25	=CHOOSE('Inputs'!$C$10,'Scenarios'!R74,'Scenarios'!R75,'Scenarios'!R76)
+S25	=CHOOSE('Inputs'!$C$10,'Scenarios'!S74,'Scenarios'!S75,'Scenarios'!S76)
+A26	'Buybacks % net income'
+B26	'%'
+E26	=-'Hist'!E61/'Hist'!E22
+F26	=-'Hist'!F61/'Hist'!F22
+G26	=-'Hist'!G61/'Hist'!G22
+H26	=-'Hist'!H61/'Hist'!H22
+I26	=-'Hist'!I61/'Hist'!I22
+J26	=CHOOSE('Inputs'!$C$10,'Scenarios'!J78,'Scenarios'!J79,'Scenarios'!J80)
+K26	=CHOOSE('Inputs'!$C$10,'Scenarios'!K78,'Scenarios'!K79,'Scenarios'!K80)
+L26	=CHOOSE('Inputs'!$C$10,'Scenarios'!L78,'Scenarios'!L79,'Scenarios'!L80)
+M26	=CHOOSE('Inputs'!$C$10,'Scenarios'!M78,'Scenarios'!M79,'Scenarios'!M80)
+N26	=CHOOSE('Inputs'!$C$10,'Scenarios'!N78,'Scenarios'!N79,'Scenarios'!N80)
+O26	=CHOOSE('Inputs'!$C$10,'Scenarios'!O78,'Scenarios'!O79,'Scenarios'!O80)
+P26	=CHOOSE('Inputs'!$C$10,'Scenarios'!P78,'Scenarios'!P79,'Scenarios'!P80)
+Q26	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q78,'Scenarios'!Q79,'Scenarios'!Q80)
+R26	=CHOOSE('Inputs'!$C$10,'Scenarios'!R78,'Scenarios'!R79,'Scenarios'!R80)
+S26	=CHOOSE('Inputs'!$C$10,'Scenarios'!S78,'Scenarios'!S79,'Scenarios'!S80)
+A27	'Share price growth (for share count)'
+B27	'%'
+J27	=CHOOSE('Inputs'!$C$10,'Scenarios'!J82,'Scenarios'!J83,'Scenarios'!J84)
+K27	=CHOOSE('Inputs'!$C$10,'Scenarios'!K82,'Scenarios'!K83,'Scenarios'!K84)
+L27	=CHOOSE('Inputs'!$C$10,'Scenarios'!L82,'Scenarios'!L83,'Scenarios'!L84)
+M27	=CHOOSE('Inputs'!$C$10,'Scenarios'!M82,'Scenarios'!M83,'Scenarios'!M84)
+N27	=CHOOSE('Inputs'!$C$10,'Scenarios'!N82,'Scenarios'!N83,'Scenarios'!N84)
+O27	=CHOOSE('Inputs'!$C$10,'Scenarios'!O82,'Scenarios'!O83,'Scenarios'!O84)
+P27	=CHOOSE('Inputs'!$C$10,'Scenarios'!P82,'Scenarios'!P83,'Scenarios'!P84)
+Q27	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q82,'Scenarios'!Q83,'Scenarios'!Q84)
+R27	=CHOOSE('Inputs'!$C$10,'Scenarios'!R82,'Scenarios'!R83,'Scenarios'!R84)
+S27	=CHOOSE('Inputs'!$C$10,'Scenarios'!S82,'Scenarios'!S83,'Scenarios'!S84)
+=== Schedules
+A1	'Supporting schedules'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Revenue build'
+A10	'Warehouses at year end'
+B10	'count'
+E10	='Hist'!E66
+F10	='Hist'!F66
+G10	='Hist'!G66
+H10	='Hist'!H66
+I10	='Hist'!I66
+J10	=I10+'Drivers'!J9
+K10	=J10+'Drivers'!K9
+L10	=K10+'Drivers'!L9
+M10	=L10+'Drivers'!M9
+N10	=M10+'Drivers'!N9
+O10	=N10+'Drivers'!O9
+P10	=O10+'Drivers'!P9
+Q10	=P10+'Drivers'!Q9
+R10	=Q10+'Drivers'!R9
+S10	=R10+'Drivers'!S9
+A11	'Average warehouses'
+B11	'count'
+F11	=AVERAGE(F10,E10)
+G11	=AVERAGE(G10,F10)
+H11	=AVERAGE(H10,G10)
+I11	=AVERAGE(I10,H10)
+J11	=AVERAGE(J10,I10)
+K11	=AVERAGE(K10,J10)
+L11	=AVERAGE(L10,K10)
+M11	=AVERAGE(M10,L10)
+N11	=AVERAGE(N10,M10)
+O11	=AVERAGE(O10,N10)
+P11	=AVERAGE(P10,O10)
+Q11	=AVERAGE(Q10,P10)
+R11	=AVERAGE(R10,Q10)
+S11	=AVERAGE(S10,R10)
+A12	'Revenue per average warehouse'
+B12	'$m'
+F12	='IS'!F9/F11
+G12	='IS'!G9/G11
+H12	='IS'!H9/H11
+I12	='IS'!I9/I11
+J12	=I12*(1+'Drivers'!J10)
+K12	=J12*(1+'Drivers'!K10)
+L12	=K12*(1+'Drivers'!L10)
+M12	=L12*(1+'Drivers'!M10)
+N12	=M12*(1+'Drivers'!N10)
+O12	=N12*(1+'Drivers'!O10)
+P12	=O12*(1+'Drivers'!P10)
+Q12	=P12*(1+'Drivers'!Q10)
+R12	=Q12*(1+'Drivers'!R10)
+S12	=R12*(1+'Drivers'!S10)
+A13	'Revenue'
+B13	'$m'
+E13	='Hist'!E10
+F13	='Hist'!F10
+G13	='Hist'!G10
+H13	='Hist'!H10
+I13	='Hist'!I10
+J13	=J11*J12
+K13	=K11*K12
+L13	=L11*L12
+M13	=M11*M12
+N13	=N11*N12
+O13	=O11*O12
+P13	=P11*P12
+Q13	=Q11*Q12
+R13	=R11*R12
+S13	=S11*S12
+A15	'PP&E'
+A16	'Opening PP&E, net'
+B16	'$m'
+J16	='BS'!I15
+K16	='BS'!J15
+L16	='BS'!K15
+M16	='BS'!L15
+N16	='BS'!M15
+O16	='BS'!N15
+P16	='BS'!O15
+Q16	='BS'!P15
+R16	='BS'!Q15
+S16	='BS'!R15
+A17	'Capital expenditure'
+B17	'$m'
+E17	=-'Hist'!E57
+F17	=-'Hist'!F57
+G17	=-'Hist'!G57
+H17	=-'Hist'!H57
+I17	=-'Hist'!I57
+J17	='IS'!J9*'Drivers'!J15
+K17	='IS'!K9*'Drivers'!K15
+L17	='IS'!L9*'Drivers'!L15
+M17	='IS'!M9*'Drivers'!M15
+N17	='IS'!N9*'Drivers'!N15
+O17	='IS'!O9*'Drivers'!O15
+P17	='IS'!P9*'Drivers'!P15
+Q17	='IS'!Q9*'Drivers'!Q15
+R17	='IS'!R9*'Drivers'!R15
+S17	='IS'!S9*'Drivers'!S15
+A18	'Depreciation and amortisation'
+B18	'$m'
+E18	='Hist'!E25
+F18	='Hist'!F25
+G18	='Hist'!G25
+H18	='Hist'!H25
+I18	='Hist'!I25
+J18	='Drivers'!J14*J16
+K18	='Drivers'!K14*K16
+L18	='Drivers'!L14*L16
+M18	='Drivers'!M14*M16
+N18	='Drivers'!N14*N16
+O18	='Drivers'!O14*O16
+P18	='Drivers'!P14*P16
+Q18	='Drivers'!Q14*Q16
+R18	='Drivers'!R14*R16
+S18	='Drivers'!S14*S16
+A19	'Closing PP&E, net'
+B19	'$m'
+E19	='Hist'!E33
+F19	='Hist'!F33
+G19	='Hist'!G33
+H19	='Hist'!H33
+I19	='Hist'!I33
+J19	=J16+J17-J18
+K19	=K16+K17-K18
+L19	=L16+L17-L18
+M19	=M16+M17-M18
+N19	=N16+N17-N18
+O19	=O16+O17-O18
+P19	=P16+P17-P18
+Q19	=Q16+Q17-Q18
+R19	=R16+R17-R18
+S19	=S16+S17-S18
+A21	'Working capital'
+A22	'Receivables'
+B22	'$m'
+E22	='Hist'!E29
+F22	='Hist'!F29
+G22	='Hist'!G29
+H22	='Hist'!H29
+I22	='Hist'!I29
+J22	='IS'!J9*'Drivers'!J17/'Inputs'!$C$15
+K22	='IS'!K9*'Drivers'!K17/'Inputs'!$C$15
+L22	='IS'!L9*'Drivers'!L17/'Inputs'!$C$15
+M22	='IS'!M9*'Drivers'!M17/'Inputs'!$C$15
+N22	='IS'!N9*'Drivers'!N17/'Inputs'!$C$15
+O22	='IS'!O9*'Drivers'!O17/'Inputs'!$C$15
+P22	='IS'!P9*'Drivers'!P17/'Inputs'!$C$15
+Q22	='IS'!Q9*'Drivers'!Q17/'Inputs'!$C$15
+R22	='IS'!R9*'Drivers'!R17/'Inputs'!$C$15
+S22	='IS'!S9*'Drivers'!S17/'Inputs'!$C$15
+A23	'Inventory'
+B23	'$m'
+E23	='Hist'!E30
+F23	='Hist'!F30
+G23	='Hist'!G30
+H23	='Hist'!H30
+I23	='Hist'!I30
+J23	='IS'!J10*'Drivers'!J18/'Inputs'!$C$15
+K23	='IS'!K10*'Drivers'!K18/'Inputs'!$C$15
+L23	='IS'!L10*'Drivers'!L18/'Inputs'!$C$15
+M23	='IS'!M10*'Drivers'!M18/'Inputs'!$C$15
+N23	='IS'!N10*'Drivers'!N18/'Inputs'!$C$15
+O23	='IS'!O10*'Drivers'!O18/'Inputs'!$C$15
+P23	='IS'!P10*'Drivers'!P18/'Inputs'!$C$15
+Q23	='IS'!Q10*'Drivers'!Q18/'Inputs'!$C$15
+R23	='IS'!R10*'Drivers'!R18/'Inputs'!$C$15
+S23	='IS'!S10*'Drivers'!S18/'Inputs'!$C$15
+A24	'Other current assets'
+B24	'$m'
+E24	='Hist'!E31
+F24	='Hist'!F31
+G24	='Hist'!G31
+H24	='Hist'!H31
+I24	='Hist'!I31
+J24	='IS'!J9*'Drivers'!J20
+K24	='IS'!K9*'Drivers'!K20
+L24	='IS'!L9*'Drivers'!L20
+M24	='IS'!M9*'Drivers'!M20
+N24	='IS'!N9*'Drivers'!N20
+O24	='IS'!O9*'Drivers'!O20
+P24	='IS'!P9*'Drivers'!P20
+Q24	='IS'!Q9*'Drivers'!Q20
+R24	='IS'!R9*'Drivers'!R20
+S24	='IS'!S9*'Drivers'!S20
+A25	'Accounts payable'
+B25	'$m'
+E25	='Hist'!E39
+F25	='Hist'!F39
+G25	='Hist'!G39
+H25	='Hist'!H39
+I25	='Hist'!I39
+J25	='IS'!J10*'Drivers'!J19/'Inputs'!$C$15
+K25	='IS'!K10*'Drivers'!K19/'Inputs'!$C$15
+L25	='IS'!L10*'Drivers'!L19/'Inputs'!$C$15
+M25	='IS'!M10*'Drivers'!M19/'Inputs'!$C$15
+N25	='IS'!N10*'Drivers'!N19/'Inputs'!$C$15
+O25	='IS'!O10*'Drivers'!O19/'Inputs'!$C$15
+P25	='IS'!P10*'Drivers'!P19/'Inputs'!$C$15
+Q25	='IS'!Q10*'Drivers'!Q19/'Inputs'!$C$15
+R25	='IS'!R10*'Drivers'!R19/'Inputs'!$C$15
+S25	='IS'!S10*'Drivers'!S19/'Inputs'!$C$15
+A26	'Other current liabilities'
+B26	'$m'
+E26	='BS'!E23
+F26	='BS'!F23
+G26	='BS'!G23
+H26	='BS'!H23
+I26	='BS'!I23
+J26	='IS'!J9*'Drivers'!J21
+K26	='IS'!K9*'Drivers'!K21
+L26	='IS'!L9*'Drivers'!L21
+M26	='IS'!M9*'Drivers'!M21
+N26	='IS'!N9*'Drivers'!N21
+O26	='IS'!O9*'Drivers'!O21
+P26	='IS'!P9*'Drivers'!P21
+Q26	='IS'!Q9*'Drivers'!Q21
+R26	='IS'!R9*'Drivers'!R21
+S26	='IS'!S9*'Drivers'!S21
+A27	'Net working capital'
+B27	'$m'
+E27	=E22+E23+E24-E25-E26
+F27	=F22+F23+F24-F25-F26
+G27	=G22+G23+G24-G25-G26
+H27	=H22+H23+H24-H25-H26
+I27	=I22+I23+I24-I25-I26
+J27	=J22+J23+J24-J25-J26
+K27	=K22+K23+K24-K25-K26
+L27	=L22+L23+L24-L25-L26
+M27	=M22+M23+M24-M25-M26
+N27	=N22+N23+N24-N25-N26
+O27	=O22+O23+O24-O25-O26
+P27	=P22+P23+P24-P25-P26
+Q27	=Q22+Q23+Q24-Q25-Q26
+R27	=R22+R23+R24-R25-R26
+S27	=S22+S23+S24-S25-S26
+A28	'Cash impact of working capital (increase = outflow)'
+B28	'$m'
+J28	=I27-J27
+K28	=J27-K27
+L28	=K27-L27
+M28	=L27-M27
+N28	=M27-N27
+O28	=N27-O27
+P28	=O27-P27
+Q28	=P27-Q27
+R28	=Q27-R27
+S28	=R27-S27
+A29	'Stock-based compensation'
+B29	'$m'
+E29	='Hist'!E26
+F29	='Hist'!F26
+G29	='Hist'!G26
+H29	='Hist'!H26
+I29	='Hist'!I26
+J29	='IS'!J9*'Drivers'!J22
+K29	='IS'!K9*'Drivers'!K22
+L29	='IS'!L9*'Drivers'!L22
+M29	='IS'!M9*'Drivers'!M22
+N29	='IS'!N9*'Drivers'!N22
+O29	='IS'!O9*'Drivers'!O22
+P29	='IS'!P9*'Drivers'!P22
+Q29	='IS'!Q9*'Drivers'!Q22
+R29	='IS'!R9*'Drivers'!R22
+S29	='IS'!S9*'Drivers'!S22
+A31	'Debt and revolver'
+A32	'Opening debt'
+B32	'$m'
+J32	='BS'!I24
+K32	='BS'!J24
+L32	='BS'!K24
+M32	='BS'!L24
+N32	='BS'!M24
+O32	='BS'!N24
+P32	='BS'!O24
+Q32	='BS'!P24
+R32	='BS'!Q24
+S32	='BS'!R24
+A33	'Scheduled maturities (10-K debt footnote)'
+B33	'$m'
+J33	2250
+K33	0
+L33	136
+M33	1750
+N33	161
+O33	375.6
+P33	375.6
+Q33	375.6
+R33	375.6
+S33	375.6
+A34	'Repayment'
+B34	'$m'
+J34	=MIN(J33,J32)
+K34	=MIN(K33,K32)
+L34	=MIN(L33,L32)
+M34	=MIN(M33,M32)
+N34	=MIN(N33,N32)
+O34	=MIN(O33,O32)
+P34	=MIN(P33,P32)
+Q34	=MIN(Q33,Q32)
+R34	=MIN(R33,R32)
+S34	=MIN(S33,S32)
+A35	'New issuance (refinancing)'
+B35	'$m'
+J35	=J33*'Inputs'!$C$20
+K35	=K33*'Inputs'!$C$20
+L35	=L33*'Inputs'!$C$20
+M35	=M33*'Inputs'!$C$20
+N35	=N33*'Inputs'!$C$20
+O35	=O33*'Inputs'!$C$20
+P35	=P33*'Inputs'!$C$20
+Q35	=Q33*'Inputs'!$C$20
+R35	=R33*'Inputs'!$C$20
+S35	=S33*'Inputs'!$C$20
+A36	'Closing debt'
+B36	'$m'
+E36	='BS'!E24
+F36	='BS'!F24
+G36	='BS'!G24
+H36	='BS'!H24
+I36	='BS'!I24
+J36	=J32-J34+J35
+K36	=K32-K34+K35
+L36	=L32-L34+L35
+M36	=M32-M34+M35
+N36	=N32-N34+N35
+O36	=O32-O34+O35
+P36	=P32-P34+P35
+Q36	=Q32-Q34+Q35
+R36	=R32-R34+R35
+S36	=S32-S34+S35
+A37	'Cash before special dividend and revolver'
+B37	'$m'
+J37	='BS'!I9+'CF'!J14+'CF'!J17+'CF'!J18+'CF'!J20+J35-J34
+K37	='BS'!J9+'CF'!K14+'CF'!K17+'CF'!K18+'CF'!K20+K35-K34
+L37	='BS'!K9+'CF'!L14+'CF'!L17+'CF'!L18+'CF'!L20+L35-L34
+M37	='BS'!L9+'CF'!M14+'CF'!M17+'CF'!M18+'CF'!M20+M35-M34
+N37	='BS'!M9+'CF'!N14+'CF'!N17+'CF'!N18+'CF'!N20+N35-N34
+O37	='BS'!N9+'CF'!O14+'CF'!O17+'CF'!O18+'CF'!O20+O35-O34
+P37	='BS'!O9+'CF'!P14+'CF'!P17+'CF'!P18+'CF'!P20+P35-P34
+Q37	='BS'!P9+'CF'!Q14+'CF'!Q17+'CF'!Q18+'CF'!Q20+Q35-Q34
+R37	='BS'!Q9+'CF'!R14+'CF'!R17+'CF'!R18+'CF'!R20+R35-R34
+S37	='BS'!R9+'CF'!S14+'CF'!S17+'CF'!S18+'CF'!S20+S35-S34
+A38	'Special dividend (cash above ceiling)'
+B38	'$m'
+J38	=-MAX(0,J37-'Inputs'!$C$17)
+K38	=-MAX(0,K37-'Inputs'!$C$17)
+L38	=-MAX(0,L37-'Inputs'!$C$17)
+M38	=-MAX(0,M37-'Inputs'!$C$17)
+N38	=-MAX(0,N37-'Inputs'!$C$17)
+O38	=-MAX(0,O37-'Inputs'!$C$17)
+P38	=-MAX(0,P37-'Inputs'!$C$17)
+Q38	=-MAX(0,Q37-'Inputs'!$C$17)
+R38	=-MAX(0,R37-'Inputs'!$C$17)
+S38	=-MAX(0,S37-'Inputs'!$C$17)
+A39	'Cash before revolver'
+B39	'$m'
+J39	=J37+J38
+K39	=K37+K38
+L39	=L37+L38
+M39	=M37+M38
+N39	=N37+N38
+O39	=O37+O38
+P39	=P37+P38
+Q39	=Q37+Q38
+R39	=R37+R38
+S39	=S37+S38
+A40	'Opening revolver'
+B40	'$m'
+J40	='BS'!I25
+K40	='BS'!J25
+L40	='BS'!K25
+M40	='BS'!L25
+N40	='BS'!M25
+O40	='BS'!N25
+P40	='BS'!O25
+Q40	='BS'!P25
+R40	='BS'!Q25
+S40	='BS'!R25
+A41	'Revolver draw / (repayment)'
+B41	'$m'
+J41	=MIN(MAX('Inputs'!$C$16-J39,-J40),'Inputs'!$C$18-J40)
+K41	=MIN(MAX('Inputs'!$C$16-K39,-K40),'Inputs'!$C$18-K40)
+L41	=MIN(MAX('Inputs'!$C$16-L39,-L40),'Inputs'!$C$18-L40)
+M41	=MIN(MAX('Inputs'!$C$16-M39,-M40),'Inputs'!$C$18-M40)
+N41	=MIN(MAX('Inputs'!$C$16-N39,-N40),'Inputs'!$C$18-N40)
+O41	=MIN(MAX('Inputs'!$C$16-O39,-O40),'Inputs'!$C$18-O40)
+P41	=MIN(MAX('Inputs'!$C$16-P39,-P40),'Inputs'!$C$18-P40)
+Q41	=MIN(MAX('Inputs'!$C$16-Q39,-Q40),'Inputs'!$C$18-Q40)
+R41	=MIN(MAX('Inputs'!$C$16-R39,-R40),'Inputs'!$C$18-R40)
+S41	=MIN(MAX('Inputs'!$C$16-S39,-S40),'Inputs'!$C$18-S40)
+A42	'Closing revolver'
+B42	'$m'
+E42	0
+F42	0
+G42	0
+H42	0
+I42	0
+J42	=J40+J41
+K42	=K40+K41
+L42	=L40+L41
+M42	=M40+M41
+N42	=N40+N41
+O42	=O40+O41
+P42	=P40+P41
+Q42	=Q40+Q41
+R42	=R40+R41
+S42	=S40+S41
+A43	'Interest on debt'
+B43	'$m'
+J43	='Drivers'!J23*IF('Inputs'!$C$12=1,AVERAGE(J32,J36),J32)
+K43	='Drivers'!K23*IF('Inputs'!$C$12=1,AVERAGE(K32,K36),K32)
+L43	='Drivers'!L23*IF('Inputs'!$C$12=1,AVERAGE(L32,L36),L32)
+M43	='Drivers'!M23*IF('Inputs'!$C$12=1,AVERAGE(M32,M36),M32)
+N43	='Drivers'!N23*IF('Inputs'!$C$12=1,AVERAGE(N32,N36),N32)
+O43	='Drivers'!O23*IF('Inputs'!$C$12=1,AVERAGE(O32,O36),O32)
+P43	='Drivers'!P23*IF('Inputs'!$C$12=1,AVERAGE(P32,P36),P32)
+Q43	='Drivers'!Q23*IF('Inputs'!$C$12=1,AVERAGE(Q32,Q36),Q32)
+R43	='Drivers'!R23*IF('Inputs'!$C$12=1,AVERAGE(R32,R36),R32)
+S43	='Drivers'!S23*IF('Inputs'!$C$12=1,AVERAGE(S32,S36),S32)
+A44	'Interest on revolver'
+B44	'$m'
+J44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(J40,J42),J40)
+K44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(K40,K42),K40)
+L44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(L40,L42),L40)
+M44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(M40,M42),M40)
+N44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(N40,N42),N40)
+O44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(O40,O42),O40)
+P44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(P40,P42),P40)
+Q44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(Q40,Q42),Q40)
+R44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(R40,R42),R40)
+S44	='Inputs'!$C$19*IF('Inputs'!$C$12=1,AVERAGE(S40,S42),S40)
+A45	'Interest income on cash'
+B45	'$m'
+J45	='Drivers'!J24*IF('Inputs'!$C$12=1,AVERAGE('BS'!I9,'BS'!J9),'BS'!I9)
+K45	='Drivers'!K24*IF('Inputs'!$C$12=1,AVERAGE('BS'!J9,'BS'!K9),'BS'!J9)
+L45	='Drivers'!L24*IF('Inputs'!$C$12=1,AVERAGE('BS'!K9,'BS'!L9),'BS'!K9)
+M45	='Drivers'!M24*IF('Inputs'!$C$12=1,AVERAGE('BS'!L9,'BS'!M9),'BS'!L9)
+N45	='Drivers'!N24*IF('Inputs'!$C$12=1,AVERAGE('BS'!M9,'BS'!N9),'BS'!M9)
+O45	='Drivers'!O24*IF('Inputs'!$C$12=1,AVERAGE('BS'!N9,'BS'!O9),'BS'!N9)
+P45	='Drivers'!P24*IF('Inputs'!$C$12=1,AVERAGE('BS'!O9,'BS'!P9),'BS'!O9)
+Q45	='Drivers'!Q24*IF('Inputs'!$C$12=1,AVERAGE('BS'!P9,'BS'!Q9),'BS'!P9)
+R45	='Drivers'!R24*IF('Inputs'!$C$12=1,AVERAGE('BS'!Q9,'BS'!R9),'BS'!Q9)
+S45	='Drivers'!S24*IF('Inputs'!$C$12=1,AVERAGE('BS'!R9,'BS'!S9),'BS'!R9)
+A47	'Equity and shares'
+A48	'Opening parent equity'
+B48	'$m'
+J48	='BS'!I29
+K48	='BS'!J29
+L48	='BS'!K29
+M48	='BS'!L29
+N48	='BS'!M29
+O48	='BS'!N29
+P48	='BS'!O29
+Q48	='BS'!P29
+R48	='BS'!Q29
+S48	='BS'!R29
+A49	'Net income to parent'
+B49	'$m'
+J49	='IS'!J22
+K49	='IS'!K22
+L49	='IS'!L22
+M49	='IS'!M22
+N49	='IS'!N22
+O49	='IS'!O22
+P49	='IS'!P22
+Q49	='IS'!Q22
+R49	='IS'!R22
+S49	='IS'!S22
+A50	'Dividends (regular + special)'
+B50	'$m'
+J50	='CF'!J18+'CF'!J19
+K50	='CF'!K18+'CF'!K19
+L50	='CF'!L18+'CF'!L19
+M50	='CF'!M18+'CF'!M19
+N50	='CF'!N18+'CF'!N19
+O50	='CF'!O18+'CF'!O19
+P50	='CF'!P18+'CF'!P19
+Q50	='CF'!Q18+'CF'!Q19
+R50	='CF'!R18+'CF'!R19
+S50	='CF'!S18+'CF'!S19
+A51	'Share repurchases'
+B51	'$m'
+J51	='CF'!J20
+K51	='CF'!K20
+L51	='CF'!L20
+M51	='CF'!M20
+N51	='CF'!N20
+O51	='CF'!O20
+P51	='CF'!P20
+Q51	='CF'!Q20
+R51	='CF'!R20
+S51	='CF'!S20
+A52	'Stock-based compensation'
+B52	'$m'
+J52	=J29
+K52	=K29
+L52	=L29
+M52	=M29
+N52	=N29
+O52	=O29
+P52	=P29
+Q52	=Q29
+R52	=R29
+S52	=S29
+A53	'Closing parent equity'
+B53	'$m'
+E53	='Hist'!E52
+F53	='Hist'!F52
+G53	='Hist'!G52
+H53	='Hist'!H52
+I53	='Hist'!I52
+J53	=J48+J49+J50+J51+J52
+K53	=K48+K49+K50+K51+K52
+L53	=L48+L49+L50+L51+L52
+M53	=M48+M49+M50+M51+M52
+N53	=N48+N49+N50+N51+N52
+O53	=O48+O49+O50+O51+O52
+P53	=P48+P49+P50+P51+P52
+Q53	=Q48+Q49+Q50+Q51+Q52
+R53	=R48+R49+R50+R51+R52
+S53	=S48+S49+S50+S51+S52
+A54	'Assumed share price'
+B54	'$'
+I54	='Inputs'!$C$21
+J54	=I54*(1+'Drivers'!J27)
+K54	=J54*(1+'Drivers'!K27)
+L54	=K54*(1+'Drivers'!L27)
+M54	=L54*(1+'Drivers'!M27)
+N54	=M54*(1+'Drivers'!N27)
+O54	=N54*(1+'Drivers'!O27)
+P54	=O54*(1+'Drivers'!P27)
+Q54	=P54*(1+'Drivers'!Q27)
+R54	=Q54*(1+'Drivers'!R27)
+S54	=R54*(1+'Drivers'!S27)
+A55	'Diluted shares'
+B55	'm'
+E55	='Hist'!E23
+F55	='Hist'!F23
+G55	='Hist'!G23
+H55	='Hist'!H23
+I55	='Hist'!I23
+J55	=I55+(J29+'CF'!J20)/J54
+K55	=J55+(K29+'CF'!K20)/K54
+L55	=K55+(L29+'CF'!L20)/L54
+M55	=L55+(M29+'CF'!M20)/M54
+N55	=M55+(N29+'CF'!N20)/N54
+O55	=N55+(O29+'CF'!O20)/O54
+P55	=O55+(P29+'CF'!P20)/P54
+Q55	=P55+(Q29+'CF'!Q20)/Q54
+R55	=Q55+(R29+'CF'!R20)/R54
+S55	=R55+(S29+'CF'!S20)/S54
+=== IS
+A1	'Income statement'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Revenue'
+B9	'$m'
+E9	='Hist'!E10
+F9	='Hist'!F10
+G9	='Hist'!G10
+H9	='Hist'!H10
+I9	='Hist'!I10
+J9	='Schedules'!J13
+K9	='Schedules'!K13
+L9	='Schedules'!L13
+M9	='Schedules'!M13
+N9	='Schedules'!N13
+O9	='Schedules'!O13
+P9	='Schedules'!P13
+Q9	='Schedules'!Q13
+R9	='Schedules'!R13
+S9	='Schedules'!S13
+A10	'Cost of goods sold'
+B10	'$m'
+E10	='Hist'!E11
+F10	='Hist'!F11
+G10	='Hist'!G11
+H10	='Hist'!H11
+I10	='Hist'!I11
+J10	=J9*(1-'Drivers'!J11)
+K10	=K9*(1-'Drivers'!K11)
+L10	=L9*(1-'Drivers'!L11)
+M10	=M9*(1-'Drivers'!M11)
+N10	=N9*(1-'Drivers'!N11)
+O10	=O9*(1-'Drivers'!O11)
+P10	=P9*(1-'Drivers'!P11)
+Q10	=Q9*(1-'Drivers'!Q11)
+R10	=R9*(1-'Drivers'!R11)
+S10	=S9*(1-'Drivers'!S11)
+A11	'Gross profit'
+B11	'$m'
+E11	=E9-E10
+F11	=F9-F10
+G11	=G9-G10
+H11	=H9-H10
+I11	=I9-I10
+J11	=J9-J10
+K11	=K9-K10
+L11	=L9-L10
+M11	=M9-M10
+N11	=N9-N10
+O11	=O9-O10
+P11	=P9-P10
+Q11	=Q9-Q10
+R11	=R9-R10
+S11	=S9-S10
+A12	'SG&A'
+B12	'$m'
+E12	='Hist'!E12
+F12	='Hist'!F12
+G12	='Hist'!G12
+H12	='Hist'!H12
+I12	='Hist'!I12
+J12	=J9*'Drivers'!J12
+K12	=K9*'Drivers'!K12
+L12	=L9*'Drivers'!L12
+M12	=M9*'Drivers'!M12
+N12	=N9*'Drivers'!N12
+O12	=O9*'Drivers'!O12
+P12	=P9*'Drivers'!P12
+Q12	=Q9*'Drivers'!Q12
+R12	=R9*'Drivers'!R12
+S12	=S9*'Drivers'!S12
+A13	'Other operating expense'
+B13	'$m'
+E13	='Hist'!E13
+F13	='Hist'!F13
+G13	='Hist'!G13
+H13	='Hist'!H13
+I13	='Hist'!I13
+J13	=J9*'Drivers'!J13
+K13	=K9*'Drivers'!K13
+L13	=L9*'Drivers'!L13
+M13	=M9*'Drivers'!M13
+N13	=N9*'Drivers'!N13
+O13	=O9*'Drivers'!O13
+P13	=P9*'Drivers'!P13
+Q13	=Q9*'Drivers'!Q13
+R13	=R9*'Drivers'!R13
+S13	=S9*'Drivers'!S13
+A14	'Operating income (EBIT)'
+B14	'$m'
+E14	=E11-E12-E13
+F14	=F11-F12-F13
+G14	=G11-G12-G13
+H14	=H11-H12-H13
+I14	=I11-I12-I13
+J14	=J11-J12-J13
+K14	=K11-K12-K13
+L14	=L11-L12-L13
+M14	=M11-M12-M13
+N14	=N11-N12-N13
+O14	=O11-O12-O13
+P14	=P11-P12-P13
+Q14	=Q11-Q12-Q13
+R14	=R11-R12-R13
+S14	=S11-S12-S13
+A15	'Interest expense'
+B15	'$m'
+E15	='Hist'!E15
+F15	='Hist'!F15
+G15	='Hist'!G15
+H15	='Hist'!H15
+I15	='Hist'!I15
+J15	='Schedules'!J43+'Schedules'!J44
+K15	='Schedules'!K43+'Schedules'!K44
+L15	='Schedules'!L43+'Schedules'!L44
+M15	='Schedules'!M43+'Schedules'!M44
+N15	='Schedules'!N43+'Schedules'!N44
+O15	='Schedules'!O43+'Schedules'!O44
+P15	='Schedules'!P43+'Schedules'!P44
+Q15	='Schedules'!Q43+'Schedules'!Q44
+R15	='Schedules'!R43+'Schedules'!R44
+S15	='Schedules'!S43+'Schedules'!S44
+A16	'Interest and other income'
+B16	'$m'
+E16	='Hist'!E16
+F16	='Hist'!F16
+G16	='Hist'!G16
+H16	='Hist'!H16
+I16	='Hist'!I16
+J16	='Schedules'!J45
+K16	='Schedules'!K45
+L16	='Schedules'!L45
+M16	='Schedules'!M45
+N16	='Schedules'!N45
+O16	='Schedules'!O45
+P16	='Schedules'!P45
+Q16	='Schedules'!Q45
+R16	='Schedules'!R45
+S16	='Schedules'!S45
+A17	'Pre-tax income'
+B17	'$m'
+E17	=E14-E15+E16
+F17	=F14-F15+F16
+G17	=G14-G15+G16
+H17	=H14-H15+H16
+I17	=I14-I15+I16
+J17	=J14-J15+J16
+K17	=K14-K15+K16
+L17	=L14-L15+L16
+M17	=M14-M15+M16
+N17	=N14-N15+N16
+O17	=O14-O15+O16
+P17	=P14-P15+P16
+Q17	=Q14-Q15+Q16
+R17	=R14-R15+R16
+S17	=S14-S15+S16
+A18	'Income tax'
+B18	'$m'
+E18	='Hist'!E18
+F18	='Hist'!F18
+G18	='Hist'!G18
+H18	='Hist'!H18
+I18	='Hist'!I18
+J18	=J17*'Drivers'!J16
+K18	=K17*'Drivers'!K16
+L18	=L17*'Drivers'!L16
+M18	=M17*'Drivers'!M16
+N18	=N17*'Drivers'!N16
+O18	=O17*'Drivers'!O16
+P18	=P17*'Drivers'!P16
+Q18	=Q17*'Drivers'!Q16
+R18	=R17*'Drivers'!R16
+S18	=S17*'Drivers'!S16
+A19	'Other below tax'
+B19	'$m'
+E19	='Hist'!E19
+F19	='Hist'!F19
+G19	='Hist'!G19
+H19	='Hist'!H19
+I19	='Hist'!I19
+J19	0
+K19	0
+L19	0
+M19	0
+N19	0
+O19	0
+P19	0
+Q19	0
+R19	0
+S19	0
+A20	'Net income incl. NCI'
+B20	'$m'
+E20	=E17-E18+E19
+F20	=F17-F18+F19
+G20	=G17-G18+G19
+H20	=H17-H18+H19
+I20	=I17-I18+I19
+J20	=J17-J18+J19
+K20	=K17-K18+K19
+L20	=L17-L18+L19
+M20	=M17-M18+M19
+N20	=N17-N18+N19
+O20	=O17-O18+O19
+P20	=P17-P18+P19
+Q20	=Q17-Q18+Q19
+R20	=R17-R18+R19
+S20	=S17-S18+S19
+A21	'NCI share'
+B21	'$m'
+E21	='Hist'!E21
+F21	='Hist'!F21
+G21	='Hist'!G21
+H21	='Hist'!H21
+I21	='Hist'!I21
+J21	0
+K21	0
+L21	0
+M21	0
+N21	0
+O21	0
+P21	0
+Q21	0
+R21	0
+S21	0
+A22	'Net income to parent'
+B22	'$m'
+E22	=E20-E21
+F22	=F20-F21
+G22	=G20-G21
+H22	=H20-H21
+I22	=I20-I21
+J22	=J20-J21
+K22	=K20-K21
+L22	=L20-L21
+M22	=M20-M21
+N22	=N20-N21
+O22	=O20-O21
+P22	=P20-P21
+Q22	=Q20-Q21
+R22	=R20-R21
+S22	=S20-S21
+A24	'Diluted shares'
+B24	'm'
+E24	='Hist'!E23
+F24	='Hist'!F23
+G24	='Hist'!G23
+H24	='Hist'!H23
+I24	='Hist'!I23
+J24	='Schedules'!J55
+K24	='Schedules'!K55
+L24	='Schedules'!L55
+M24	='Schedules'!M55
+N24	='Schedules'!N55
+O24	='Schedules'!O55
+P24	='Schedules'!P55
+Q24	='Schedules'!Q55
+R24	='Schedules'!R55
+S24	='Schedules'!S55
+A25	'Diluted EPS'
+B25	'$'
+E25	=E22/E24
+F25	=F22/F24
+G25	=G22/G24
+H25	=H22/H24
+I25	=I22/I24
+J25	=J22/J24
+K25	=K22/K24
+L25	=L22/L24
+M25	=M22/M24
+N25	=N22/N24
+O25	=O22/O24
+P25	=P22/P24
+Q25	=Q22/Q24
+R25	=R22/R24
+S25	=S22/S24
+A27	'Memo: D&A (within COGS and SG&A)'
+B27	'$m'
+E27	='Hist'!E25
+F27	='Hist'!F25
+G27	='Hist'!G25
+H27	='Hist'!H25
+I27	='Hist'!I25
+J27	='Schedules'!J18
+K27	='Schedules'!K18
+L27	='Schedules'!L18
+M27	='Schedules'!M18
+N27	='Schedules'!N18
+O27	='Schedules'!O18
+P27	='Schedules'!P18
+Q27	='Schedules'!Q18
+R27	='Schedules'!R18
+S27	='Schedules'!S18
+A28	'Memo: EBITDA'
+B28	'$m'
+E28	=E14+E27
+F28	=F14+F27
+G28	=G14+G27
+H28	=H14+H27
+I28	=I14+I27
+J28	=J14+J27
+K28	=K14+K27
+L28	=L14+L27
+M28	=M14+M27
+N28	=N14+N27
+O28	=O14+O27
+P28	=P14+P27
+Q28	=Q14+Q27
+R28	=R14+R27
+S28	=S14+S27
+=== BS
+A1	'Balance sheet'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Cash and equivalents'
+B9	'$m'
+E9	='Hist'!E27
+F9	='Hist'!F27
+G9	='Hist'!G27
+H9	='Hist'!H27
+I9	='Hist'!I27
+J9	=I9+'CF'!J27
+K9	=J9+'CF'!K27
+L9	=K9+'CF'!L27
+M9	=L9+'CF'!M27
+N9	=M9+'CF'!N27
+O9	=N9+'CF'!O27
+P9	=O9+'CF'!P27
+Q9	=P9+'CF'!Q27
+R9	=Q9+'CF'!R27
+S9	=R9+'CF'!S27
+A10	'Short-term investments'
+B10	'$m'
+E10	='Hist'!E28
+F10	='Hist'!F28
+G10	='Hist'!G28
+H10	='Hist'!H28
+I10	='Hist'!I28
+J10	=I10
+K10	=J10
+L10	=K10
+M10	=L10
+N10	=M10
+O10	=N10
+P10	=O10
+Q10	=P10
+R10	=Q10
+S10	=R10
+A11	'Receivables'
+B11	'$m'
+E11	='Hist'!E29
+F11	='Hist'!F29
+G11	='Hist'!G29
+H11	='Hist'!H29
+I11	='Hist'!I29
+J11	='Schedules'!J22
+K11	='Schedules'!K22
+L11	='Schedules'!L22
+M11	='Schedules'!M22
+N11	='Schedules'!N22
+O11	='Schedules'!O22
+P11	='Schedules'!P22
+Q11	='Schedules'!Q22
+R11	='Schedules'!R22
+S11	='Schedules'!S22
+A12	'Inventory'
+B12	'$m'
+E12	='Hist'!E30
+F12	='Hist'!F30
+G12	='Hist'!G30
+H12	='Hist'!H30
+I12	='Hist'!I30
+J12	='Schedules'!J23
+K12	='Schedules'!K23
+L12	='Schedules'!L23
+M12	='Schedules'!M23
+N12	='Schedules'!N23
+O12	='Schedules'!O23
+P12	='Schedules'!P23
+Q12	='Schedules'!Q23
+R12	='Schedules'!R23
+S12	='Schedules'!S23
+A13	'Other current assets'
+B13	'$m'
+E13	='Hist'!E31
+F13	='Hist'!F31
+G13	='Hist'!G31
+H13	='Hist'!H31
+I13	='Hist'!I31
+J13	='Schedules'!J24
+K13	='Schedules'!K24
+L13	='Schedules'!L24
+M13	='Schedules'!M24
+N13	='Schedules'!N24
+O13	='Schedules'!O24
+P13	='Schedules'!P24
+Q13	='Schedules'!Q24
+R13	='Schedules'!R24
+S13	='Schedules'!S24
+A14	'Total current assets'
+B14	'$m'
+E14	=SUM(E9:E13)
+F14	=SUM(F9:F13)
+G14	=SUM(G9:G13)
+H14	=SUM(H9:H13)
+I14	=SUM(I9:I13)
+J14	=SUM(J9:J13)
+K14	=SUM(K9:K13)
+L14	=SUM(L9:L13)
+M14	=SUM(M9:M13)
+N14	=SUM(N9:N13)
+O14	=SUM(O9:O13)
+P14	=SUM(P9:P13)
+Q14	=SUM(Q9:Q13)
+R14	=SUM(R9:R13)
+S14	=SUM(S9:S13)
+A15	'PP&E, net'
+B15	'$m'
+E15	='Hist'!E33
+F15	='Hist'!F33
+G15	='Hist'!G33
+H15	='Hist'!H33
+I15	='Hist'!I33
+J15	='Schedules'!J19
+K15	='Schedules'!K19
+L15	='Schedules'!L19
+M15	='Schedules'!M19
+N15	='Schedules'!N19
+O15	='Schedules'!O19
+P15	='Schedules'!P19
+Q15	='Schedules'!Q19
+R15	='Schedules'!R19
+S15	='Schedules'!S19
+A16	'Operating lease ROU assets'
+B16	'$m'
+E16	='Hist'!E34
+F16	='Hist'!F34
+G16	='Hist'!G34
+H16	='Hist'!H34
+I16	='Hist'!I34
+J16	=I16
+K16	=J16
+L16	=K16
+M16	=L16
+N16	=M16
+O16	=N16
+P16	=O16
+Q16	=P16
+R16	=Q16
+S16	=R16
+A17	'Goodwill'
+B17	'$m'
+E17	='Hist'!E35
+F17	='Hist'!F35
+G17	='Hist'!G35
+H17	='Hist'!H35
+I17	='Hist'!I35
+J17	=I17
+K17	=J17
+L17	=K17
+M17	=L17
+N17	=M17
+O17	=N17
+P17	=O17
+Q17	=P17
+R17	=Q17
+S17	=R17
+A18	'Intangibles'
+B18	'$m'
+E18	='Hist'!E36
+F18	='Hist'!F36
+G18	='Hist'!G36
+H18	='Hist'!H36
+I18	='Hist'!I36
+J18	=I18
+K18	=J18
+L18	=K18
+M18	=L18
+N18	=M18
+O18	=N18
+P18	=O18
+Q18	=P18
+R18	=Q18
+S18	=R18
+A19	'Other non-current assets'
+B19	'$m'
+E19	='Hist'!E37
+F19	='Hist'!F37
+G19	='Hist'!G37
+H19	='Hist'!H37
+I19	='Hist'!I37
+J19	=I19
+K19	=J19
+L19	=K19
+M19	=L19
+N19	=M19
+O19	=N19
+P19	=O19
+Q19	=P19
+R19	=Q19
+S19	=R19
+A20	'Total assets'
+B20	'$m'
+E20	=E14+SUM(E15:E19)
+F20	=F14+SUM(F15:F19)
+G20	=G14+SUM(G15:G19)
+H20	=H14+SUM(H15:H19)
+I20	=I14+SUM(I15:I19)
+J20	=J14+SUM(J15:J19)
+K20	=K14+SUM(K15:K19)
+L20	=L14+SUM(L15:L19)
+M20	=M14+SUM(M15:M19)
+N20	=N14+SUM(N15:N19)
+O20	=O14+SUM(O15:O19)
+P20	=P14+SUM(P15:P19)
+Q20	=Q14+SUM(Q15:Q19)
+R20	=R14+SUM(R15:R19)
+S20	=S14+SUM(S15:S19)
+A22	'Accounts payable'
+B22	'$m'
+E22	='Hist'!E39
+F22	='Hist'!F39
+G22	='Hist'!G39
+H22	='Hist'!H39
+I22	='Hist'!I39
+J22	='Schedules'!J25
+K22	='Schedules'!K25
+L22	='Schedules'!L25
+M22	='Schedules'!M25
+N22	='Schedules'!N25
+O22	='Schedules'!O25
+P22	='Schedules'!P25
+Q22	='Schedules'!Q25
+R22	='Schedules'!R25
+S22	='Schedules'!S25
+A23	'Accrued, deferred and other current liabilities'
+B23	'$m'
+E23	='Hist'!E40+'Hist'!E41+'Hist'!E42+'Hist'!E46
+F23	='Hist'!F40+'Hist'!F41+'Hist'!F42+'Hist'!F46
+G23	='Hist'!G40+'Hist'!G41+'Hist'!G42+'Hist'!G46
+H23	='Hist'!H40+'Hist'!H41+'Hist'!H42+'Hist'!H46
+I23	='Hist'!I40+'Hist'!I41+'Hist'!I42+'Hist'!I46
+J23	='Schedules'!J26
+K23	='Schedules'!K26
+L23	='Schedules'!L26
+M23	='Schedules'!M26
+N23	='Schedules'!N26
+O23	='Schedules'!O26
+P23	='Schedules'!P26
+Q23	='Schedules'!Q26
+R23	='Schedules'!R26
+S23	='Schedules'!S26
+A24	'Debt (current + long-term + short-term)'
+B24	'$m'
+E24	='Hist'!E44+'Hist'!E48+'Hist'!E43
+F24	='Hist'!F44+'Hist'!F48+'Hist'!F43
+G24	='Hist'!G44+'Hist'!G48+'Hist'!G43
+H24	='Hist'!H44+'Hist'!H48+'Hist'!H43
+I24	='Hist'!I44+'Hist'!I48+'Hist'!I43
+J24	='Schedules'!J36
+K24	='Schedules'!K36
+L24	='Schedules'!L36
+M24	='Schedules'!M36
+N24	='Schedules'!N36
+O24	='Schedules'!O36
+P24	='Schedules'!P36
+Q24	='Schedules'!Q36
+R24	='Schedules'!R36
+S24	='Schedules'!S36
+A25	'Revolver'
+B25	'$m'
+E25	0
+F25	0
+G25	0
+H25	0
+I25	0
+J25	='Schedules'!J42
+K25	='Schedules'!K42
+L25	='Schedules'!L42
+M25	='Schedules'!M42
+N25	='Schedules'!N42
+O25	='Schedules'!O42
+P25	='Schedules'!P42
+Q25	='Schedules'!Q42
+R25	='Schedules'!R42
+S25	='Schedules'!S42
+A26	'Operating lease liabilities'
+B26	'$m'
+E26	='Hist'!E45+'Hist'!E49
+F26	='Hist'!F45+'Hist'!F49
+G26	='Hist'!G45+'Hist'!G49
+H26	='Hist'!H45+'Hist'!H49
+I26	='Hist'!I45+'Hist'!I49
+J26	=I26
+K26	=J26
+L26	=K26
+M26	=L26
+N26	=M26
+O26	=N26
+P26	=O26
+Q26	=P26
+R26	=Q26
+S26	=R26
+A27	'Other non-current liabilities'
+B27	'$m'
+E27	='Hist'!E50
+F27	='Hist'!F50
+G27	='Hist'!G50
+H27	='Hist'!H50
+I27	='Hist'!I50
+J27	=I27
+K27	=J27
+L27	=K27
+M27	=L27
+N27	=M27
+O27	=N27
+P27	=O27
+Q27	=P27
+R27	=Q27
+S27	=R27
+A28	'Total liabilities'
+B28	'$m'
+E28	=SUM(E22:E27)
+F28	=SUM(F22:F27)
+G28	=SUM(G22:G27)
+H28	=SUM(H22:H27)
+I28	=SUM(I22:I27)
+J28	=SUM(J22:J27)
+K28	=SUM(K22:K27)
+L28	=SUM(L22:L27)
+M28	=SUM(M22:M27)
+N28	=SUM(N22:N27)
+O28	=SUM(O22:O27)
+P28	=SUM(P22:P27)
+Q28	=SUM(Q22:Q27)
+R28	=SUM(R22:R27)
+S28	=SUM(S22:S27)
+A29	"Shareholders' equity (parent)"
+B29	'$m'
+E29	='Hist'!E52
+F29	='Hist'!F52
+G29	='Hist'!G52
+H29	='Hist'!H52
+I29	='Hist'!I52
+J29	='Schedules'!J53
+K29	='Schedules'!K53
+L29	='Schedules'!L53
+M29	='Schedules'!M53
+N29	='Schedules'!N53
+O29	='Schedules'!O53
+P29	='Schedules'!P53
+Q29	='Schedules'!Q53
+R29	='Schedules'!R53
+S29	='Schedules'!S53
+A30	'Non-controlling interests'
+B30	'$m'
+E30	='Hist'!E53
+F30	='Hist'!F53
+G30	='Hist'!G53
+H30	='Hist'!H53
+I30	='Hist'!I53
+J30	=I30
+K30	=J30
+L30	=K30
+M30	=L30
+N30	=M30
+O30	=N30
+P30	=O30
+Q30	=P30
+R30	=Q30
+S30	=R30
+A31	'Total equity'
+B31	'$m'
+E31	=E29+E30
+F31	=F29+F30
+G31	=G29+G30
+H31	=H29+H30
+I31	=I29+I30
+J31	=J29+J30
+K31	=K29+K30
+L31	=L29+L30
+M31	=M29+M30
+N31	=N29+N30
+O31	=O29+O30
+P31	=P29+P30
+Q31	=Q29+Q30
+R31	=R29+R30
+S31	=S29+S30
+A32	'Total liabilities and equity'
+B32	'$m'
+E32	=E28+E31
+F32	=F28+F31
+G32	=G28+G31
+H32	=H28+H31
+I32	=I28+I31
+J32	=J28+J31
+K32	=K28+K31
+L32	=L28+L31
+M32	=M28+M31
+N32	=N28+N31
+O32	=O28+O31
+P32	=P28+P31
+Q32	=Q28+Q31
+R32	=R28+R31
+S32	=S28+S31
+A34	'Balance check (assets - liabilities - equity)'
+B34	'$m'
+E34	=E20-E32
+F34	=F20-F32
+G34	=G20-G32
+H34	=H20-H32
+I34	=I20-I32
+J34	=J20-J32
+K34	=K20-K32
+L34	=L20-L32
+M34	=M20-M32
+N34	=N20-N32
+O34	=O20-O32
+P34	=P20-P32
+Q34	=Q20-Q32
+R34	=R20-R32
+S34	=S20-S32
+=== CF
+A1	'Cash flow statement'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Net income incl. NCI'
+B9	'$m'
+E9	='IS'!E20
+F9	='IS'!F20
+G9	='IS'!G20
+H9	='IS'!H20
+I9	='IS'!I20
+J9	='IS'!J20
+K9	='IS'!K20
+L9	='IS'!L20
+M9	='IS'!M20
+N9	='IS'!N20
+O9	='IS'!O20
+P9	='IS'!P20
+Q9	='IS'!Q20
+R9	='IS'!R20
+S9	='IS'!S20
+A10	'Depreciation and amortisation'
+B10	'$m'
+E10	='IS'!E27
+F10	='IS'!F27
+G10	='IS'!G27
+H10	='IS'!H27
+I10	='IS'!I27
+J10	='IS'!J27
+K10	='IS'!K27
+L10	='IS'!L27
+M10	='IS'!M27
+N10	='IS'!N27
+O10	='IS'!O27
+P10	='IS'!P27
+Q10	='IS'!Q27
+R10	='IS'!R27
+S10	='IS'!S27
+A11	'Stock-based compensation'
+B11	'$m'
+E11	='Hist'!E26
+F11	='Hist'!F26
+G11	='Hist'!G26
+H11	='Hist'!H26
+I11	='Hist'!I26
+J11	='Schedules'!J29
+K11	='Schedules'!K29
+L11	='Schedules'!L29
+M11	='Schedules'!M29
+N11	='Schedules'!N29
+O11	='Schedules'!O29
+P11	='Schedules'!P29
+Q11	='Schedules'!Q29
+R11	='Schedules'!R29
+S11	='Schedules'!S29
+A12	'Change in working capital'
+B12	'$m'
+J12	='Schedules'!J28
+K12	='Schedules'!K28
+L12	='Schedules'!L28
+M12	='Schedules'!M28
+N12	='Schedules'!N28
+O12	='Schedules'!O28
+P12	='Schedules'!P28
+Q12	='Schedules'!Q28
+R12	='Schedules'!R28
+S12	='Schedules'!S28
+A13	'Other operating items'
+B13	'$m'
+E13	='Hist'!E56-E9-E10-E11
+F13	='Hist'!F56-F9-F10-F11
+G13	='Hist'!G56-G9-G10-G11
+H13	='Hist'!H56-H9-H10-H11
+I13	='Hist'!I56-I9-I10-I11
+J13	0
+K13	0
+L13	0
+M13	0
+N13	0
+O13	0
+P13	0
+Q13	0
+R13	0
+S13	0
+A14	'Cash from operations'
+B14	'$m'
+E14	=SUM(E9:E13)
+F14	=SUM(F9:F13)
+G14	=SUM(G9:G13)
+H14	=SUM(H9:H13)
+I14	=SUM(I9:I13)
+J14	=SUM(J9:J13)
+K14	=SUM(K9:K13)
+L14	=SUM(L9:L13)
+M14	=SUM(M9:M13)
+N14	=SUM(N9:N13)
+O14	=SUM(O9:O13)
+P14	=SUM(P9:P13)
+Q14	=SUM(Q9:Q13)
+R14	=SUM(R9:R13)
+S14	=SUM(S9:S13)
+A15	'Capital expenditure'
+B15	'$m'
+E15	='Hist'!E57
+F15	='Hist'!F57
+G15	='Hist'!G57
+H15	='Hist'!H57
+I15	='Hist'!I57
+J15	=-'Schedules'!J17
+K15	=-'Schedules'!K17
+L15	=-'Schedules'!L17
+M15	=-'Schedules'!M17
+N15	=-'Schedules'!N17
+O15	=-'Schedules'!O17
+P15	=-'Schedules'!P17
+Q15	=-'Schedules'!Q17
+R15	=-'Schedules'!R17
+S15	=-'Schedules'!S17
+A16	'Other investing'
+B16	'$m'
+E16	='Hist'!E58
+F16	='Hist'!F58
+G16	='Hist'!G58
+H16	='Hist'!H58
+I16	='Hist'!I58
+J16	0
+K16	0
+L16	0
+M16	0
+N16	0
+O16	0
+P16	0
+Q16	0
+R16	0
+S16	0
+A17	'Cash from investing'
+B17	'$m'
+E17	=SUM(E15:E16)
+F17	=SUM(F15:F16)
+G17	=SUM(G15:G16)
+H17	=SUM(H15:H16)
+I17	=SUM(I15:I16)
+J17	=SUM(J15:J16)
+K17	=SUM(K15:K16)
+L17	=SUM(L15:L16)
+M17	=SUM(M15:M16)
+N17	=SUM(N15:N16)
+O17	=SUM(O15:O16)
+P17	=SUM(P15:P16)
+Q17	=SUM(Q15:Q16)
+R17	=SUM(R15:R16)
+S17	=SUM(S15:S16)
+A18	'Regular dividends'
+B18	'$m'
+E18	='Hist'!E60
+F18	='Hist'!F60
+G18	='Hist'!G60
+H18	='Hist'!H60
+I18	='Hist'!I60
+J18	=-MAX(0,'IS'!J22)*'Drivers'!J25
+K18	=-MAX(0,'IS'!K22)*'Drivers'!K25
+L18	=-MAX(0,'IS'!L22)*'Drivers'!L25
+M18	=-MAX(0,'IS'!M22)*'Drivers'!M25
+N18	=-MAX(0,'IS'!N22)*'Drivers'!N25
+O18	=-MAX(0,'IS'!O22)*'Drivers'!O25
+P18	=-MAX(0,'IS'!P22)*'Drivers'!P25
+Q18	=-MAX(0,'IS'!Q22)*'Drivers'!Q25
+R18	=-MAX(0,'IS'!R22)*'Drivers'!R25
+S18	=-MAX(0,'IS'!S22)*'Drivers'!S25
+A19	'Special dividends'
+B19	'$m'
+E19	0
+F19	0
+G19	0
+H19	0
+I19	0
+J19	='Schedules'!J38
+K19	='Schedules'!K38
+L19	='Schedules'!L38
+M19	='Schedules'!M38
+N19	='Schedules'!N38
+O19	='Schedules'!O38
+P19	='Schedules'!P38
+Q19	='Schedules'!Q38
+R19	='Schedules'!R38
+S19	='Schedules'!S38
+A20	'Share repurchases'
+B20	'$m'
+E20	='Hist'!E61
+F20	='Hist'!F61
+G20	='Hist'!G61
+H20	='Hist'!H61
+I20	='Hist'!I61
+J20	=-MAX(0,'IS'!J22)*'Drivers'!J26
+K20	=-MAX(0,'IS'!K22)*'Drivers'!K26
+L20	=-MAX(0,'IS'!L22)*'Drivers'!L26
+M20	=-MAX(0,'IS'!M22)*'Drivers'!M26
+N20	=-MAX(0,'IS'!N22)*'Drivers'!N26
+O20	=-MAX(0,'IS'!O22)*'Drivers'!O26
+P20	=-MAX(0,'IS'!P22)*'Drivers'!P26
+Q20	=-MAX(0,'IS'!Q22)*'Drivers'!Q26
+R20	=-MAX(0,'IS'!R22)*'Drivers'!R26
+S20	=-MAX(0,'IS'!S22)*'Drivers'!S26
+A21	'Debt issued'
+B21	'$m'
+J21	='Schedules'!J35
+K21	='Schedules'!K35
+L21	='Schedules'!L35
+M21	='Schedules'!M35
+N21	='Schedules'!N35
+O21	='Schedules'!O35
+P21	='Schedules'!P35
+Q21	='Schedules'!Q35
+R21	='Schedules'!R35
+S21	='Schedules'!S35
+A22	'Debt repaid'
+B22	'$m'
+J22	=-'Schedules'!J34
+K22	=-'Schedules'!K34
+L22	=-'Schedules'!L34
+M22	=-'Schedules'!M34
+N22	=-'Schedules'!N34
+O22	=-'Schedules'!O34
+P22	=-'Schedules'!P34
+Q22	=-'Schedules'!Q34
+R22	=-'Schedules'!R34
+S22	=-'Schedules'!S34
+A23	'Revolver draw / (repayment)'
+B23	'$m'
+J23	='Schedules'!J41
+K23	='Schedules'!K41
+L23	='Schedules'!L41
+M23	='Schedules'!M41
+N23	='Schedules'!N41
+O23	='Schedules'!O41
+P23	='Schedules'!P41
+Q23	='Schedules'!Q41
+R23	='Schedules'!R41
+S23	='Schedules'!S41
+A24	'Other financing'
+B24	'$m'
+E24	='Hist'!E62
+F24	='Hist'!F62
+G24	='Hist'!G62
+H24	='Hist'!H62
+I24	='Hist'!I62
+J24	0
+K24	0
+L24	0
+M24	0
+N24	0
+O24	0
+P24	0
+Q24	0
+R24	0
+S24	0
+A25	'Cash from financing'
+B25	'$m'
+E25	=SUM(E18:E24)
+F25	=SUM(F18:F24)
+G25	=SUM(G18:G24)
+H25	=SUM(H18:H24)
+I25	=SUM(I18:I24)
+J25	=SUM(J18:J24)
+K25	=SUM(K18:K24)
+L25	=SUM(L18:L24)
+M25	=SUM(M18:M24)
+N25	=SUM(N18:N24)
+O25	=SUM(O18:O24)
+P25	=SUM(P18:P24)
+Q25	=SUM(Q18:Q24)
+R25	=SUM(R18:R24)
+S25	=SUM(S18:S24)
+A26	'FX effect on cash'
+B26	'$m'
+E26	='Hist'!E64
+F26	='Hist'!F64
+G26	='Hist'!G64
+H26	='Hist'!H64
+I26	='Hist'!I64
+J26	0
+K26	0
+L26	0
+M26	0
+N26	0
+O26	0
+P26	0
+Q26	0
+R26	0
+S26	0
+A27	'Net change in cash'
+B27	'$m'
+E27	=E14+E17+E25+E26
+F27	=F14+F17+F25+F26
+G27	=G14+G17+G25+G26
+H27	=H14+H17+H25+H26
+I27	=I14+I17+I25+I26
+J27	=J14+J17+J25+J26
+K27	=K14+K17+K25+K26
+L27	=L14+L17+L25+L26
+M27	=M14+M17+M25+M26
+N27	=N14+N17+N25+N26
+O27	=O14+O17+O25+O26
+P27	=P14+P17+P25+P26
+Q27	=Q14+Q17+Q25+Q26
+R27	=R14+R17+R25+R26
+S27	=S14+S17+S25+S26
+A29	'Memo: free cash flow (CFO + capex)'
+B29	'$m'
+E29	=E14+E15
+F29	=F14+F15
+G29	=G14+G15
+H29	=H14+H15
+I29	=I14+I15
+J29	=J14+J15
+K29	=K14+K15
+L29	=L14+L15
+M29	=M14+M15
+N29	=N14+N15
+O29	=O14+O15
+P29	=P14+P15
+Q29	=Q14+Q15
+R29	=R14+R15
+S29	=S14+S15
+=== Ratios
+A1	'Ratio analysis'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Revenue growth'
+B9	'%'
+F9	='IS'!F9/'IS'!E9-1
+G9	='IS'!G9/'IS'!F9-1
+H9	='IS'!H9/'IS'!G9-1
+I9	='IS'!I9/'IS'!H9-1
+J9	='IS'!J9/'IS'!I9-1
+K9	='IS'!K9/'IS'!J9-1
+L9	='IS'!L9/'IS'!K9-1
+M9	='IS'!M9/'IS'!L9-1
+N9	='IS'!N9/'IS'!M9-1
+O9	='IS'!O9/'IS'!N9-1
+P9	='IS'!P9/'IS'!O9-1
+Q9	='IS'!Q9/'IS'!P9-1
+R9	='IS'!R9/'IS'!Q9-1
+S9	='IS'!S9/'IS'!R9-1
+A10	'Gross margin'
+B10	'%'
+E10	='IS'!E11/'IS'!E9
+F10	='IS'!F11/'IS'!F9
+G10	='IS'!G11/'IS'!G9
+H10	='IS'!H11/'IS'!H9
+I10	='IS'!I11/'IS'!I9
+J10	='IS'!J11/'IS'!J9
+K10	='IS'!K11/'IS'!K9
+L10	='IS'!L11/'IS'!L9
+M10	='IS'!M11/'IS'!M9
+N10	='IS'!N11/'IS'!N9
+O10	='IS'!O11/'IS'!O9
+P10	='IS'!P11/'IS'!P9
+Q10	='IS'!Q11/'IS'!Q9
+R10	='IS'!R11/'IS'!R9
+S10	='IS'!S11/'IS'!S9
+A11	'EBIT margin'
+B11	'%'
+E11	='IS'!E14/'IS'!E9
+F11	='IS'!F14/'IS'!F9
+G11	='IS'!G14/'IS'!G9
+H11	='IS'!H14/'IS'!H9
+I11	='IS'!I14/'IS'!I9
+J11	='IS'!J14/'IS'!J9
+K11	='IS'!K14/'IS'!K9
+L11	='IS'!L14/'IS'!L9
+M11	='IS'!M14/'IS'!M9
+N11	='IS'!N14/'IS'!N9
+O11	='IS'!O14/'IS'!O9
+P11	='IS'!P14/'IS'!P9
+Q11	='IS'!Q14/'IS'!Q9
+R11	='IS'!R14/'IS'!R9
+S11	='IS'!S14/'IS'!S9
+A12	'EBITDA margin'
+B12	'%'
+E12	='IS'!E28/'IS'!E9
+F12	='IS'!F28/'IS'!F9
+G12	='IS'!G28/'IS'!G9
+H12	='IS'!H28/'IS'!H9
+I12	='IS'!I28/'IS'!I9
+J12	='IS'!J28/'IS'!J9
+K12	='IS'!K28/'IS'!K9
+L12	='IS'!L28/'IS'!L9
+M12	='IS'!M28/'IS'!M9
+N12	='IS'!N28/'IS'!N9
+O12	='IS'!O28/'IS'!O9
+P12	='IS'!P28/'IS'!P9
+Q12	='IS'!Q28/'IS'!Q9
+R12	='IS'!R28/'IS'!R9
+S12	='IS'!S28/'IS'!S9
+A13	'Net margin'
+B13	'%'
+E13	='IS'!E22/'IS'!E9
+F13	='IS'!F22/'IS'!F9
+G13	='IS'!G22/'IS'!G9
+H13	='IS'!H22/'IS'!H9
+I13	='IS'!I22/'IS'!I9
+J13	='IS'!J22/'IS'!J9
+K13	='IS'!K22/'IS'!K9
+L13	='IS'!L22/'IS'!L9
+M13	='IS'!M22/'IS'!M9
+N13	='IS'!N22/'IS'!N9
+O13	='IS'!O22/'IS'!O9
+P13	='IS'!P22/'IS'!P9
+Q13	='IS'!Q22/'IS'!Q9
+R13	='IS'!R22/'IS'!R9
+S13	='IS'!S22/'IS'!S9
+A14	'Diluted EPS growth'
+B14	'%'
+F14	='IS'!F25/'IS'!E25-1
+G14	='IS'!G25/'IS'!F25-1
+H14	='IS'!H25/'IS'!G25-1
+I14	='IS'!I25/'IS'!H25-1
+J14	='IS'!J25/'IS'!I25-1
+K14	='IS'!K25/'IS'!J25-1
+L14	='IS'!L25/'IS'!K25-1
+M14	='IS'!M25/'IS'!L25-1
+N14	='IS'!N25/'IS'!M25-1
+O14	='IS'!O25/'IS'!N25-1
+P14	='IS'!P25/'IS'!O25-1
+Q14	='IS'!Q25/'IS'!P25-1
+R14	='IS'!R25/'IS'!Q25-1
+S14	='IS'!S25/'IS'!R25-1
+A15	'Return on average equity'
+B15	'%'
+F15	='IS'!F22/AVERAGE('BS'!F29,'BS'!E29)
+G15	='IS'!G22/AVERAGE('BS'!G29,'BS'!F29)
+H15	='IS'!H22/AVERAGE('BS'!H29,'BS'!G29)
+I15	='IS'!I22/AVERAGE('BS'!I29,'BS'!H29)
+J15	='IS'!J22/AVERAGE('BS'!J29,'BS'!I29)
+K15	='IS'!K22/AVERAGE('BS'!K29,'BS'!J29)
+L15	='IS'!L22/AVERAGE('BS'!L29,'BS'!K29)
+M15	='IS'!M22/AVERAGE('BS'!M29,'BS'!L29)
+N15	='IS'!N22/AVERAGE('BS'!N29,'BS'!M29)
+O15	='IS'!O22/AVERAGE('BS'!O29,'BS'!N29)
+P15	='IS'!P22/AVERAGE('BS'!P29,'BS'!O29)
+Q15	='IS'!Q22/AVERAGE('BS'!Q29,'BS'!P29)
+R15	='IS'!R22/AVERAGE('BS'!R29,'BS'!Q29)
+S15	='IS'!S22/AVERAGE('BS'!S29,'BS'!R29)
+A16	'Net debt / (net cash)'
+B16	'$m'
+E16	='BS'!E24+'BS'!E25-'BS'!E9-'BS'!E10
+F16	='BS'!F24+'BS'!F25-'BS'!F9-'BS'!F10
+G16	='BS'!G24+'BS'!G25-'BS'!G9-'BS'!G10
+H16	='BS'!H24+'BS'!H25-'BS'!H9-'BS'!H10
+I16	='BS'!I24+'BS'!I25-'BS'!I9-'BS'!I10
+J16	='BS'!J24+'BS'!J25-'BS'!J9-'BS'!J10
+K16	='BS'!K24+'BS'!K25-'BS'!K9-'BS'!K10
+L16	='BS'!L24+'BS'!L25-'BS'!L9-'BS'!L10
+M16	='BS'!M24+'BS'!M25-'BS'!M9-'BS'!M10
+N16	='BS'!N24+'BS'!N25-'BS'!N9-'BS'!N10
+O16	='BS'!O24+'BS'!O25-'BS'!O9-'BS'!O10
+P16	='BS'!P24+'BS'!P25-'BS'!P9-'BS'!P10
+Q16	='BS'!Q24+'BS'!Q25-'BS'!Q9-'BS'!Q10
+R16	='BS'!R24+'BS'!R25-'BS'!R9-'BS'!R10
+S16	='BS'!S24+'BS'!S25-'BS'!S9-'BS'!S10
+A17	'Net debt / EBITDA'
+B17	'x'
+E17	=E16/'IS'!E28
+F17	=F16/'IS'!F28
+G17	=G16/'IS'!G28
+H17	=H16/'IS'!H28
+I17	=I16/'IS'!I28
+J17	=J16/'IS'!J28
+K17	=K16/'IS'!K28
+L17	=L16/'IS'!L28
+M17	=M16/'IS'!M28
+N17	=N16/'IS'!N28
+O17	=O16/'IS'!O28
+P17	=P16/'IS'!P28
+Q17	=Q16/'IS'!Q28
+R17	=R16/'IS'!R28
+S17	=S16/'IS'!S28
+A18	'EBIT / interest expense'
+B18	'x'
+E18	='IS'!E14/'IS'!E15
+F18	='IS'!F14/'IS'!F15
+G18	='IS'!G14/'IS'!G15
+H18	='IS'!H14/'IS'!H15
+I18	='IS'!I14/'IS'!I15
+J18	='IS'!J14/'IS'!J15
+K18	='IS'!K14/'IS'!K15
+L18	='IS'!L14/'IS'!L15
+M18	='IS'!M14/'IS'!M15
+N18	='IS'!N14/'IS'!N15
+O18	='IS'!O14/'IS'!O15
+P18	='IS'!P14/'IS'!P15
+Q18	='IS'!Q14/'IS'!Q15
+R18	='IS'!R14/'IS'!R15
+S18	='IS'!S14/'IS'!S15
+A19	'FCF / net income'
+B19	'%'
+E19	='CF'!E29/'IS'!E22
+F19	='CF'!F29/'IS'!F22
+G19	='CF'!G29/'IS'!G22
+H19	='CF'!H29/'IS'!H22
+I19	='CF'!I29/'IS'!I22
+J19	='CF'!J29/'IS'!J22
+K19	='CF'!K29/'IS'!K22
+L19	='CF'!L29/'IS'!L22
+M19	='CF'!M29/'IS'!M22
+N19	='CF'!N29/'IS'!N22
+O19	='CF'!O29/'IS'!O22
+P19	='CF'!P29/'IS'!P22
+Q19	='CF'!Q29/'IS'!Q22
+R19	='CF'!R29/'IS'!R22
+S19	='CF'!S29/'IS'!S22
+=== WACC
+A1	'Cost of capital'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Cost of equity (CAPM)'
+A10	'Risk-free rate (10-year Treasury)'
+B10	'%'
+C10	0.0507
+A11	'Equity risk premium (implied)'
+B11	'%'
+C11	0.0441
+A12	'Raw beta (5y monthly vs S&P 500)'
+B12	'x'
+C12	0.8470308623416408
+A13	'Blume weight on raw beta'
+B13	'x'
+C13	0.67
+A14	'Adjusted beta'
+B14	'x'
+C14	=$C$13*$C$12+(1-$C$13)
+A15	'Cost of equity'
+B15	'%'
+C15	=$C$10+$C$14*$C$11
+A17	'Cost of debt'
+A18	'Credit spread over Treasury'
+B18	'%'
+C18	0.008
+A19	'Pre-tax cost of debt'
+B19	'%'
+C19	=$C$10+$C$18
+A20	'Marginal tax rate'
+B20	'%'
+C20	0.25
+A21	'After-tax cost of debt'
+B21	'%'
+C21	=$C$19*(1-$C$20)
+A23	'Capital structure (market values)'
+A24	'Share price'
+B24	'$'
+C24	='Inputs'!$C$21
+A25	'Shares outstanding (10-K cover)'
+B25	'm'
+C25	443.129349
+A26	'Market capitalisation'
+B26	'$m'
+C26	=$C$24*$C$25
+A27	'Debt (book, last balance sheet)'
+B27	'$m'
+C27	='BS'!$I$24+'BS'!$I$25
+A28	'Debt / (debt + equity)'
+B28	'%'
+C28	=$C$27/($C$27+$C$26)
+A29	'WACC'
+B29	'%'
+C29	=$C$15*(1-$C$28)+$C$21*$C$28
+A31	'DCF settings'
+A32	'Terminal growth (Gordon)'
+B32	'%'
+C32	0.03
+A33	'Mid-year adjustment'
+B33	'years'
+C33	0.5
+A34	'Years from fiscal year end to price date'
+B34	'years'
+C34	0.2219178082191781
+A35	'Sensitivity step: WACC'
+B35	'%'
+C35	0.005
+A36	'Sensitivity step: terminal growth'
+B36	'%'
+C36	0.005
+A37	'Sensitivity step: exit multiple'
+B37	'x'
+C37	2
+=== Comps
+A1	'Trading comparables (latest fiscal year, not calendarised)'
+A2	"$m unless stated. EV = market cap + debt - cash and short-term investments + NCI; lease liabilities excluded consistently with the DCF. Kroger's SG&A is an extension tag, so its EBITDA comes from EBIT + D&A (ADR 0004)."
+A5	'Ticker'
+B5	'Company'
+C5	'FY'
+D5	'Period end'
+E5	'Price ($)'
+F5	'Shares (m)'
+G5	'Market cap'
+H5	'Debt'
+I5	'Cash + ST inv.'
+J5	'NCI'
+K5	'EV'
+L5	'Revenue'
+M5	'EBITDA'
+N5	'Net income'
+O5	'Diluted EPS ($)'
+P5	'EV / Revenue'
+Q5	'EV / EBITDA'
+R5	'P / E'
+A6	'WMT'
+B6	'Walmart Inc.'
+C6	'FY2026'
+D6	'2026-01-31'
+E6	126.04
+F6	7933.746241
+G6	=E6*F6
+H6	44762
+I6	10727
+J6	6270
+K6	=G6+H6-I6+J6
+L6	713163
+M6	44028
+N6	21893
+O6	2.73
+P6	=K6/L6
+Q6	=K6/M6
+R6	=E6/O6
+A7	'TGT'
+B7	'Target Corporation'
+C7	'FY2026'
+D7	'2026-01-31'
+E7	167.46
+F7	454.296736
+G7	=E7*F7
+H7	16456
+I7	10099
+J7	0
+K7	=G7+H7-I7+J7
+L7	104780
+M7	8251
+N7	3705
+O7	8.13
+P7	=K7/L7
+Q7	=K7/M7
+R7	=E7/O7
+A8	'BJ'
+B8	'BJ’S WHOLESALE CLUB HOLDINGS, INC.'
+C8	'FY2026'
+D8	'2026-01-31'
+E8	110.75
+F8	126.314692
+G8	=E8*F8
+H8	519.0989999999999
+I8	46.245
+J8	0
+K8	=G8+H8-I8+J8
+L8	21457.274
+M8	1105.198
+N8	578.377
+O8	4.38
+P8	=K8/L8
+Q8	=K8/M8
+R8	=E8/O8
+A9	'DG'
+B9	'DOLLAR GENERAL CORP'
+C9	'FY2026'
+D9	'2026-01-30'
+E9	133.51
+F9	220.61679
+G9	=E9*F9
+H9	4580.282
+I9	1138.501
+J9	0
+K9	=G9+H9-I9+J9
+L9	42724.369
+M9	3249.986
+N9	1512.311
+O9	6.85
+P9	=K9/L9
+Q9	=K9/M9
+R9	=E9/O9
+A10	'KR'
+B10	'KROGER CO'
+C10	'FY2026'
+D10	'2026-01-31'
+E10	67.94
+F10	590.5887
+G10	=E10*F10
+H10	15875
+I10	3334
+J10	9
+K10	=G10+H10-I10+J10
+L10	147642
+M10	5222
+N10	1016
+O10	1.54
+P10	=K10/L10
+Q10	=K10/M10
+R10	=E10/O10
+A11	'HD'
+B11	'The Home Depot, Inc.'
+C11	'FY2026'
+D11	'2026-02-01'
+E11	336.68
+F11	997.689626
+G11	=E11*F11
+H11	55772
+I11	1389
+J11	0
+K11	=G11+H11-I11+J11
+L11	164683
+M11	24404
+N11	14156
+O11	14.23
+P11	=K11/L11
+Q11	=K11/M11
+R11	=E11/O11
+A12	'LOW'
+B12	'LOWES COMPANIES INC'
+C12	'FY2026'
+D12	'2026-01-30'
+E12	219.14
+F12	561.054019
+G12	=E12*F12
+H12	39921
+I12	1352
+J12	0
+K12	=G12+H12-I12+J12
+L12	86286
+M12	12347
+N12	6654
+O12	11.85
+P12	=K12/L12
+Q12	=K12/M12
+R12	=E12/O12
+B14	'Median'
+P14	=MEDIAN(P$6:P$12)
+Q14	=MEDIAN(Q$6:Q$12)
+R14	=MEDIAN(R$6:R$12)
+B15	'Mean'
+P15	=AVERAGE(P$6:P$12)
+Q15	=AVERAGE(Q$6:Q$12)
+R15	=AVERAGE(R$6:R$12)
+B16	'High'
+P16	=MAX(P$6:P$12)
+Q16	=MAX(Q$6:Q$12)
+R16	=MAX(R$6:R$12)
+B17	'Low'
+P17	=MIN(P$6:P$12)
+Q17	=MIN(Q$6:Q$12)
+R17	=MIN(R$6:R$12)
+B18	'25th percentile'
+P18	=QUARTILE(P$6:P$12,1)
+Q18	=QUARTILE(Q$6:Q$12,1)
+R18	=QUARTILE(R$6:R$12,1)
+B19	'75th percentile'
+P19	=QUARTILE(P$6:P$12,3)
+Q19	=QUARTILE(Q$6:Q$12,3)
+R19	=QUARTILE(R$6:R$12,3)
+A21	'COST'
+B21	'Target at market (for reference, not in statistics)'
+E21	='WACC'!$C$24
+F21	='WACC'!$C$25
+G21	=E21*F21
+H21	='WACC'!$C$27
+I21	='BS'!$I$9+'BS'!$I$10
+J21	='BS'!$I$30
+K21	=G21+H21-I21+J21
+L21	='IS'!$I$9
+M21	='IS'!$I$28
+N21	='IS'!$I$22
+O21	=N21/'IS'!$I$24
+P21	=K21/L21
+Q21	=K21/M21
+R21	=E21/O21
+=== DCF
+A1	'Discounted cash flow (unlevered, mid-year convention)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Unlevered free cash flow (SBC treated as a real expense: not added back)'
+A10	'EBIT'
+B10	'$m'
+J10	='IS'!J14
+K10	='IS'!K14
+L10	='IS'!L14
+M10	='IS'!M14
+N10	='IS'!N14
+O10	='IS'!O14
+P10	='IS'!P14
+Q10	='IS'!Q14
+R10	='IS'!R14
+S10	='IS'!S14
+A11	'Tax rate on EBIT'
+B11	'%'
+J11	='Drivers'!J16
+K11	='Drivers'!K16
+L11	='Drivers'!L16
+M11	='Drivers'!M16
+N11	='Drivers'!N16
+O11	='Drivers'!O16
+P11	='Drivers'!P16
+Q11	='Drivers'!Q16
+R11	='Drivers'!R16
+S11	='Drivers'!S16
+A12	'Taxes on EBIT'
+B12	'$m'
+J12	=-J10*J11
+K12	=-K10*K11
+L12	=-L10*L11
+M12	=-M10*M11
+N12	=-N10*N11
+O12	=-O10*O11
+P12	=-P10*P11
+Q12	=-Q10*Q11
+R12	=-R10*R11
+S12	=-S10*S11
+A13	'NOPAT'
+B13	'$m'
+J13	=J10+J12
+K13	=K10+K12
+L13	=L10+L12
+M13	=M10+M12
+N13	=N10+N12
+O13	=O10+O12
+P13	=P10+P12
+Q13	=Q10+Q12
+R13	=R10+R12
+S13	=S10+S12
+A14	'Plus: D&A'
+B14	'$m'
+J14	='Schedules'!J18
+K14	='Schedules'!K18
+L14	='Schedules'!L18
+M14	='Schedules'!M18
+N14	='Schedules'!N18
+O14	='Schedules'!O18
+P14	='Schedules'!P18
+Q14	='Schedules'!Q18
+R14	='Schedules'!R18
+S14	='Schedules'!S18
+A15	'Less: capex'
+B15	'$m'
+J15	=-'Schedules'!J17
+K15	=-'Schedules'!K17
+L15	=-'Schedules'!L17
+M15	=-'Schedules'!M17
+N15	=-'Schedules'!N17
+O15	=-'Schedules'!O17
+P15	=-'Schedules'!P17
+Q15	=-'Schedules'!Q17
+R15	=-'Schedules'!R17
+S15	=-'Schedules'!S17
+A16	'Plus: working-capital cash impact'
+B16	'$m'
+J16	='Schedules'!J28
+K16	='Schedules'!K28
+L16	='Schedules'!L28
+M16	='Schedules'!M28
+N16	='Schedules'!N28
+O16	='Schedules'!O28
+P16	='Schedules'!P28
+Q16	='Schedules'!Q28
+R16	='Schedules'!R28
+S16	='Schedules'!S28
+A17	'Unlevered free cash flow'
+B17	'$m'
+J17	=J13+J14+J15+J16
+K17	=K13+K14+K15+K16
+L17	=L13+L14+L15+L16
+M17	=M13+M14+M15+M16
+N17	=N13+N14+N15+N16
+O17	=O13+O14+O15+O16
+P17	=P13+P14+P15+P16
+Q17	=Q13+Q14+Q15+Q16
+R17	=R13+R14+R15+R16
+S17	=S13+S14+S15+S16
+A18	'Discount period (years)'
+B18	'years'
+J18	=J7-'WACC'!$C$33
+K18	=K7-'WACC'!$C$33
+L18	=L7-'WACC'!$C$33
+M18	=M7-'WACC'!$C$33
+N18	=N7-'WACC'!$C$33
+O18	=O7-'WACC'!$C$33
+P18	=P7-'WACC'!$C$33
+Q18	=Q7-'WACC'!$C$33
+R18	=R7-'WACC'!$C$33
+S18	=S7-'WACC'!$C$33
+A19	'Discount factor'
+B19	'x'
+J19	=1/(1+'WACC'!$C$29)^J18
+K19	=1/(1+'WACC'!$C$29)^K18
+L19	=1/(1+'WACC'!$C$29)^L18
+M19	=1/(1+'WACC'!$C$29)^M18
+N19	=1/(1+'WACC'!$C$29)^N18
+O19	=1/(1+'WACC'!$C$29)^O18
+P19	=1/(1+'WACC'!$C$29)^P18
+Q19	=1/(1+'WACC'!$C$29)^Q18
+R19	=1/(1+'WACC'!$C$29)^R18
+S19	=1/(1+'WACC'!$C$29)^S18
+A20	'Present value of UFCF'
+B20	'$m'
+J20	=J17*J19
+K20	=K17*K19
+L20	=L17*L19
+M20	=M17*M19
+N20	=N17*N19
+O20	=O17*O19
+P20	=P17*P19
+Q20	=Q17*Q19
+R20	=R17*R19
+S20	=S17*S19
+A22	'Enterprise to equity value (column C)'
+A23	'Sum of PV of UFCF'
+B23	'$m'
+C23	=SUM($J$20:$S$20)
+A24	'Net debt / (net cash) incl. NCI, last balance sheet'
+B24	'$m'
+C24	='BS'!$I$24+'BS'!$I$25-'BS'!$I$9-'BS'!$I$10+'BS'!$I$30
+A25	'Roll-forward to price date (at cost of equity)'
+B25	'x'
+C25	=(1+'WACC'!$C$15)^'WACC'!$C$34
+A27	'Perpetuity-growth method'
+A28	'Terminal value'
+B28	'$m'
+C28	=$S$17*(1+'WACC'!$C$32)/('WACC'!$C$29-'WACC'!$C$32)
+A29	'PV of terminal value'
+B29	'$m'
+C29	=$C$28*$S$19
+A30	'Enterprise value'
+B30	'$m'
+C30	=$C$23+$C$29
+A31	'Terminal value share of EV'
+B31	'%'
+C31	=$C$29/$C$30
+A32	'Implied share price'
+B32	'$'
+C32	=($C$30-$C$24)/'WACC'!$C$25*$C$25
+A33	'Upside / (downside) vs market'
+B33	'%'
+C33	=$C$32/'WACC'!$C$24-1
+A34	'Implied exit EV/EBITDA'
+B34	'x'
+C34	=$C$28/'IS'!$S$28
+A36	'Exit-multiple method'
+A37	'Exit EV/EBITDA (comps median)'
+B37	'x'
+C37	='Comps'!$Q$14
+A38	'Terminal value'
+B38	'$m'
+C38	='IS'!$S$28*$C$37
+A39	'PV of terminal value (end of final year)'
+B39	'$m'
+C39	=$C$38/(1+'WACC'!$C$29)^$S$7
+A40	'Enterprise value'
+B40	'$m'
+C40	=$C$23+$C$39
+A41	'Terminal value share of EV'
+B41	'%'
+C41	=$C$39/$C$40
+A42	'Implied share price'
+B42	'$'
+C42	=($C$40-$C$24)/'WACC'!$C$25*$C$25
+A43	'Upside / (downside) vs market'
+B43	'%'
+C43	=$C$42/'WACC'!$C$24-1
+A44	'Implied perpetual growth'
+B44	'%'
+C44	=($C$38*'WACC'!$C$29-$S$17)/($C$38+$S$17)
+A46	'Reverse DCF: what the market price implies'
+A47	'Market enterprise value (price deflated to FYE)'
+B47	'$m'
+C47	='WACC'!$C$24/$C$25*'WACC'!$C$25+$C$24
+A48	'Terminal value needed'
+B48	'$m'
+C48	=($C$47-$C$23)/$S$19
+A49	'Perpetual growth implied by the market price'
+B49	'%'
+C49	=($C$48*'WACC'!$C$29-$S$17)/($C$48+$S$17)
+=== Sensitivity
+A1	'Implied share price sensitivities ($/share)'
+B4	'Perpetuity-growth method'
+B5	'Terminal growth (down) / WACC (across)'
+C6	=D6-'WACC'!$C$35
+D6	=E6-'WACC'!$C$35
+E6	='WACC'!$C$29
+F6	=E6+'WACC'!$C$35
+G6	=F6+'WACC'!$C$35
+B7	=B8-'WACC'!$C$36
+C7	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B7)/(C$6-$B7)/(1+C$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D7	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B7)/(D$6-$B7)/(1+D$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E7	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B7)/(E$6-$B7)/(1+E$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F7	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B7)/(F$6-$B7)/(1+F$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G7	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B7)/(G$6-$B7)/(1+G$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B8	=B9-'WACC'!$C$36
+C8	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B8)/(C$6-$B8)/(1+C$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D8	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B8)/(D$6-$B8)/(1+D$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E8	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B8)/(E$6-$B8)/(1+E$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F8	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B8)/(F$6-$B8)/(1+F$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G8	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B8)/(G$6-$B8)/(1+G$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B9	='WACC'!$C$32
+C9	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B9)/(C$6-$B9)/(1+C$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D9	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B9)/(D$6-$B9)/(1+D$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E9	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B9)/(E$6-$B9)/(1+E$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F9	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B9)/(F$6-$B9)/(1+F$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G9	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B9)/(G$6-$B9)/(1+G$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B10	=B9+'WACC'!$C$36
+C10	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B10)/(C$6-$B10)/(1+C$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D10	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B10)/(D$6-$B10)/(1+D$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E10	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B10)/(E$6-$B10)/(1+E$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F10	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B10)/(F$6-$B10)/(1+F$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G10	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B10)/(G$6-$B10)/(1+G$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B11	=B10+'WACC'!$C$36
+C11	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B11)/(C$6-$B11)/(1+C$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D11	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B11)/(D$6-$B11)/(1+D$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E11	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B11)/(E$6-$B11)/(1+E$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F11	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B11)/(F$6-$B11)/(1+F$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G11	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$6)^'DCF'!$J$18:$S$18)+'DCF'!$S$17*(1+$B11)/(G$6-$B11)/(1+G$6)^'DCF'!$S$18-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B14	'Exit-multiple method'
+B15	'Exit EV/EBITDA (down) / WACC (across)'
+C16	=D16-'WACC'!$C$35
+D16	=E16-'WACC'!$C$35
+E16	='WACC'!$C$29
+F16	=E16+'WACC'!$C$35
+G16	=F16+'WACC'!$C$35
+B17	=B18-'WACC'!$C$37
+C17	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B17/(1+C$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D17	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B17/(1+D$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E17	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B17/(1+E$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F17	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B17/(1+F$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G17	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B17/(1+G$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B18	=B19-'WACC'!$C$37
+C18	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B18/(1+C$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D18	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B18/(1+D$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E18	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B18/(1+E$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F18	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B18/(1+F$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G18	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B18/(1+G$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B19	='DCF'!$C$37
+C19	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B19/(1+C$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D19	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B19/(1+D$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E19	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B19/(1+E$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F19	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B19/(1+F$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G19	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B19/(1+G$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B20	=B19+'WACC'!$C$37
+C20	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B20/(1+C$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D20	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B20/(1+D$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E20	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B20/(1+E$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F20	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B20/(1+F$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G20	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B20/(1+G$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+B21	=B20+'WACC'!$C$37
+C21	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+C$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B21/(1+C$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+D21	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+D$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B21/(1+D$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+E21	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+E$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B21/(1+E$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+F21	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+F$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B21/(1+F$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+G21	=(SUMPRODUCT('DCF'!$J$17:$S$17,1/(1+G$16)^'DCF'!$J$18:$S$18)+'IS'!$S$28*$B21/(1+G$16)^'DCF'!$S$7-'DCF'!$C$24)/'WACC'!$C$25*'DCF'!$C$25
+=== Football
+A1	'Valuation summary: football field ($/share)'
+A4	'Method'
+B4	'Low'
+C4	'High'
+D4	'Range'
+A5	'DCF, perpetuity growth (WACC +/-1 step, g +/-1 step)'
+B5	=MIN('Sensitivity'!$D$8:$F$10)
+C5	=MAX('Sensitivity'!$D$8:$F$10)
+D5	=C5-B5
+A6	'DCF, exit multiple (WACC +/-1 step, multiple +/-1 step)'
+B6	=MIN('Sensitivity'!$D$18:$F$20)
+C6	=MAX('Sensitivity'!$D$18:$F$20)
+D6	=C6-B6
+A7	'Trading comps, EV/EBITDA (25th-75th percentile)'
+B7	=('Comps'!$Q$18*'Comps'!$M$21-'DCF'!$C$24)/'WACC'!$C$25
+C7	=('Comps'!$Q$19*'Comps'!$M$21-'DCF'!$C$24)/'WACC'!$C$25
+D7	=C7-B7
+A8	'Trading comps, P/E (25th-75th percentile)'
+B8	='Comps'!$R$18*'Comps'!$O$21
+C8	='Comps'!$R$19*'Comps'!$O$21
+D8	=C8-B8
+A9	'52-week trading range'
+B9	844.06
+C9	1123.67
+D9	=C9-B9
+A11	'Current share price'
+B11	='WACC'!$C$24
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2022-08-28'
+F4	'2023-09-03'
+G4	'2024-09-01'
+H4	'2025-08-31'
+I4	'2026-08-30'
+J4	'2027-08-29'
+K4	'2028-08-27'
+L4	'2029-08-26'
+M4	'2030-08-25'
+N4	'2031-08-24'
+O4	'2032-08-22'
+P4	'2033-08-21'
+Q4	'2034-08-20'
+R4	'2035-08-19'
+S4	'2036-08-17'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+M5	'FY2030'
+N5	'FY2031'
+O5	'FY2032'
+P5	'FY2033'
+Q5	'FY2034'
+R5	'FY2035'
+S5	'FY2036'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	1
+K6	1
+L6	1
+M6	1
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	1
+K7	2
+L7	3
+M7	4
+N7	5
+O7	6
+P7	7
+Q7	8
+R7	9
+S7	10
+A9	'Balance sheet balances'
+B9	'$m'
+C9	=SUMPRODUCT(ABS($E$9:$S$9))
+E9	='BS'!E34
+F9	='BS'!F34
+G9	='BS'!G34
+H9	='BS'!H34
+I9	='BS'!I34
+J9	='BS'!J34
+K9	='BS'!K34
+L9	='BS'!L34
+M9	='BS'!M34
+N9	='BS'!N34
+O9	='BS'!O34
+P9	='BS'!P34
+Q9	='BS'!Q34
+R9	='BS'!R34
+S9	='BS'!S34
+A10	'BS cash change = CF net change (forecast)'
+B10	'$m'
+C10	=SUMPRODUCT(ABS($E$10:$S$10))
+J10	='BS'!J9-'BS'!I9-'CF'!J27
+K10	='BS'!K9-'BS'!J9-'CF'!K27
+L10	='BS'!L9-'BS'!K9-'CF'!L27
+M10	='BS'!M9-'BS'!L9-'CF'!M27
+N10	='BS'!N9-'BS'!M9-'CF'!N27
+O10	='BS'!O9-'BS'!N9-'CF'!O27
+P10	='BS'!P9-'BS'!O9-'CF'!P27
+Q10	='BS'!Q9-'BS'!P9-'CF'!Q27
+R10	='BS'!R9-'BS'!Q9-'CF'!R27
+S10	='BS'!S9-'BS'!R9-'CF'!S27
+A11	'Historical CF components sum to reported change in cash'
+B11	'$m'
+C11	=SUMPRODUCT(ABS($E$11:$S$11))
+E11	='CF'!E27-'Hist'!E65
+F11	='CF'!F27-'Hist'!F65
+G11	='CF'!G27-'Hist'!G65
+H11	='CF'!H27-'Hist'!H65
+I11	='CF'!I27-'Hist'!I65
+A12	'Historical net income = as filed'
+B12	'$m'
+C12	=SUMPRODUCT(ABS($E$12:$S$12))
+E12	='IS'!E22-'Hist'!E22
+F12	='IS'!F22-'Hist'!F22
+G12	='IS'!G22-'Hist'!G22
+H12	='IS'!H22-'Hist'!H22
+I12	='IS'!I22-'Hist'!I22
+A13	'Historical EBIT = as filed'
+B13	'$m'
+C13	=SUMPRODUCT(ABS($E$13:$S$13))
+E13	='IS'!E14-'Hist'!E14
+F13	='IS'!F14-'Hist'!F14
+G13	='IS'!G14-'Hist'!G14
+H13	='IS'!H14-'Hist'!H14
+I13	='IS'!I14-'Hist'!I14
+A14	'Historical total assets = as filed'
+B14	'$m'
+C14	=SUMPRODUCT(ABS($E$14:$S$14))
+E14	='BS'!E20-'Hist'!E38
+F14	='BS'!F20-'Hist'!F38
+G14	='BS'!G20-'Hist'!G38
+H14	='BS'!H20-'Hist'!H38
+I14	='BS'!I20-'Hist'!I38
+A15	'Historical total liabilities = as filed'
+B15	'$m'
+C15	=SUMPRODUCT(ABS($E$15:$S$15))
+E15	='BS'!E28-'Hist'!E51
+F15	='BS'!F28-'Hist'!F51
+G15	='BS'!G28-'Hist'!G51
+H15	='BS'!H28-'Hist'!H51
+I15	='BS'!I28-'Hist'!I51
+A16	'Revolver within capacity'
+B16	'$m'
+C16	=SUMPRODUCT(ABS($E$16:$S$16))
+J16	=MAX(0,'BS'!J25-'Inputs'!$C$18)
+K16	=MAX(0,'BS'!K25-'Inputs'!$C$18)
+L16	=MAX(0,'BS'!L25-'Inputs'!$C$18)
+M16	=MAX(0,'BS'!M25-'Inputs'!$C$18)
+N16	=MAX(0,'BS'!N25-'Inputs'!$C$18)
+O16	=MAX(0,'BS'!O25-'Inputs'!$C$18)
+P16	=MAX(0,'BS'!P25-'Inputs'!$C$18)
+Q16	=MAX(0,'BS'!Q25-'Inputs'!$C$18)
+R16	=MAX(0,'BS'!R25-'Inputs'!$C$18)
+S16	=MAX(0,'BS'!S25-'Inputs'!$C$18)
+A17	'Revolver not negative'
+B17	'$m'
+C17	=SUMPRODUCT(ABS($E$17:$S$17))
+J17	=MIN(0,'BS'!J25)
+K17	=MIN(0,'BS'!K25)
+L17	=MIN(0,'BS'!L25)
+M17	=MIN(0,'BS'!M25)
+N17	=MIN(0,'BS'!N25)
+O17	=MIN(0,'BS'!O25)
+P17	=MIN(0,'BS'!P25)
+Q17	=MIN(0,'BS'!Q25)
+R17	=MIN(0,'BS'!R25)
+S17	=MIN(0,'BS'!S25)
+A18	'Debt not negative'
+B18	'$m'
+C18	=SUMPRODUCT(ABS($E$18:$S$18))
+J18	=MIN(0,'BS'!J24)
+K18	=MIN(0,'BS'!K24)
+L18	=MIN(0,'BS'!L24)
+M18	=MIN(0,'BS'!M24)
+N18	=MIN(0,'BS'!N24)
+O18	=MIN(0,'BS'!O24)
+P18	=MIN(0,'BS'!P24)
+Q18	=MIN(0,'BS'!Q24)
+R18	=MIN(0,'BS'!R24)
+S18	=MIN(0,'BS'!S24)
+A19	'WACC exceeds terminal growth (Gordon model defined)'
+C19	=IF('WACC'!$C$29>'WACC'!$C$32,0,1)
+A20	'Football-field ranges ordered (low <= high)'
+C20	=IF(SUMPRODUCT(('Football'!$B$5:$B$9>'Football'!$C$5:$C$9)*1)=0,0,1)
+A22	'Tolerance'
+B22	'$m'
+C22	0.001
+A23	'MASTER CHECK (0 = all pass)'
+B23	'count'
+C23	=IF(SUM($C$9:$C$20)<$C$22,0,1)
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-19'
+B4	'Generated from spec/COST.yaml, fixtures/COST, fixtures/market.json (M3).'

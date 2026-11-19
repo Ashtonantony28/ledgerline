@@ -89,7 +89,7 @@ def _hist_only(tmpl, first: int = 0):
     return lambda i: tmpl if i is not None and i >= first else None
 
 
-def add_three_statement(m: Model, inp: Inputs) -> None:
+def add_three_statement(m: Model, inp: Inputs, extra_checks: list | None = None) -> None:
     n_h = inp.n_hist
     m.iterate = True  # allows the circularity switch to be turned on in Excel
 
@@ -324,8 +324,12 @@ def add_three_statement(m: Model, inp: Inputs) -> None:
         ("revolver_nonneg", "Revolver not negative", dict(fcst="=MIN(0,{BS.revolver})")),
         ("debt_nonneg", "Debt not negative", dict(fcst="=MIN(0,{BS.debt})")),
     ]
+    checks += extra_checks or []
     for key, label, kw in checks:
-        ck.add(key, label, "$m", const="=SUMPRODUCT(ABS({%s:all}))" % key, style="check", **kw)
+        if "const" in kw:  # single-value check
+            ck.add(key, label, "", style="check", **kw)
+        else:
+            ck.add(key, label, "$m", const="=SUMPRODUCT(ABS({%s:all}))" % key, style="check", **kw)
     ck.blank()
     ck.add("tolerance", "Tolerance", "$m", const=0.001, fmt="0.000")
     first, last = checks[0][0], checks[-1][0]
