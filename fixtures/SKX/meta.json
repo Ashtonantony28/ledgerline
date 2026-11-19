@@ -1,0 +1,13 @@
+{
+  "ticker": "SKX",
+  "entity": "SKECHERS USA INC",
+  "period_ends": [
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31"
+  ],
+  "raw_sha256": "3f9b307d6ec2da724945dc1341190a44620997b790d799fc7fe5dab59b8eae9e",
+  "hard_checks_pass": true,
+  "warnings": 1
+}

@@ -23,7 +23,7 @@ from .normalise import History, normalise
 from .tieout import report, tieout
 
 FIXTURES = edgar.REPO / "fixtures"
-YEARS = {"COST": 10}  # the modelled company keeps 10 years; comps keep 5
+YEARS = {"COST": 10, "SKX": 4}  # the modelled company keeps 10 years; comps keep 5
 DEFAULT_YEARS = 5
 
 

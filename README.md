@@ -13,8 +13,8 @@ and a mutation test proves the checks catch injected errors.
 |---|---|---|
 | 00 | `00_Data.xlsx`: normalised 10-K history for Costco + 7 comps, live tie-out formulas | done (M1) |
 | 01 | `01_COST_ThreeStatement.xlsx`: Costco three-statement model, 3 scenarios, revolver, circuit breaker | done (M2) |
-| 02 | DCF + trading comps + football field | M3 |
-| 03 | LBO (back-test: Skechers / 3G Capital 2025) | M4 |
+| 02 | `02_COST_Valuation.xlsx`: WACC (FRED, Damodaran, regression beta), DCF both ways, reverse DCF, comps, sensitivity grids, football field | done (M3) |
+| 03 | `03_SKX_LBO.xlsx`: Skechers / 3G Capital LBO with the real financing package, sweep, PIK toggle, covenants, IRR bridge; back-test memo | done (M4) |
 | 04-09 | M&A, close + consolidation, FP&A, scenario lab, dashboard, credit | M5-M10 |
 
 ## Verify

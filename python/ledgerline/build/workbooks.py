@@ -31,7 +31,8 @@ def add_cover(m: Model, title: str, inp: Inputs, sheets_desc: list[tuple[str, st
     c.cell("A5", "History"); c.cell("B5", f"{inp.labels()[0]} to {inp.labels()[inp.n_hist - 1]} from 10-K XBRL (SEC EDGAR)")
     c.cell("A6", "Forecast"); c.cell("B6", f"{inp.labels()[inp.n_hist]} to {inp.labels()[-1]}")
     c.cell("A7", "Live scenario"); c.cell("B7", "='Inputs'!C%d" % m.sheets["Inputs"].row("scenario_name"), bold=True)
-    c.cell("A8", "Circularity switch"); c.cell("B8", "=IF(CircSwitch=1,\"ON (iterative)\",\"OFF (opening balances)\")")
+    if "CircSwitch" in m.names:
+        c.cell("A8", "Circularity switch"); c.cell("B8", "=IF(CircSwitch=1,\"ON (iterative)\",\"OFF (opening balances)\")")
     if has_checks:
         c.cell("A9", "Model integrity")
         c.cell("B9", "=IF(MasterCheck=0,\"ALL CHECKS PASS\",\"CHECK FAILURE - see Checks sheet\")", bold=True)
@@ -123,7 +124,35 @@ def build_02(ticker: str = "COST", scenario: int = 1, out: Path | None = None) -
     return path, layout
 
 
-BUILDERS = {"00": build_00, "01": build_01, "02": build_02}
+LBO_SHEETS = [
+    ("Inputs", "Transaction terms from the merger information statement (sourced), judgement, rate paths"),
+    ("Hist", "Skechers 10-K history (blue, sourced per cell)"),
+    ("Scenarios", "Base / upside / downside operating paths"), ("Drivers", "Live operating drivers"),
+    ("Transaction", "Sources and uses, entry multiple, leverage at close"),
+    ("Operating", "Operating model to levered free cash flow"),
+    ("Debt", "Tranches, revolver, cash sweep, PIK accrual, interest, covenants"),
+    ("Returns", "Exit value, IRR, MOIC, value-creation bridge"),
+    ("Sensitivity", "IRR grids: offer price x exit multiple, exit year x exit multiple"),
+    ("Checks", "Integrity checks and master flag"),
+]
+
+
+def build_03(scenario: int = 1, out: Path | None = None) -> tuple[Path, dict]:
+    from ..models.lbo import add_lbo, timeline
+    from ..models.lbo_inputs import build_lbo_inputs
+    inp = build_lbo_inputs(scenario)
+    m = Model(timeline(inp), "SKX LBO")
+    add_lbo(m, inp)
+    add_cover(m, "Skechers U.S.A.: LBO back-test (3G Capital take-private, 2025)", inp, LBO_SHEETS)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/SKX_LBO.yaml and fixtures/SKX (M4).")])
+    _reorder(m, ["Cover"] + [n for n, _ in LBO_SHEETS])
+    path = Path(out or OUT / "03_SKX_LBO.xlsx")
+    layout = m.save(path)
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03}
 
 
 def main(argv: list[str]) -> int:

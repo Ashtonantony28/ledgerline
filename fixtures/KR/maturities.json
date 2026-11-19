@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-01-31",
+  "maturities": [
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths",
+      "value": 1366000000.0,
+      "accn": "0001104659-26-037723"
+    },
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo",
+      "value": 606000000.0,
+      "accn": "0001104659-26-037723"
+    },
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree",
+      "value": 665000000.0,
+      "accn": "0001104659-26-037723"
+    },
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour",
+      "value": 557000000.0,
+      "accn": "0001104659-26-037723"
+    },
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive",
+      "value": 1035000000.0,
+      "accn": "0001104659-26-037723"
+    },
+    {
+      "tag": "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive",
+      "value": 11646000000.0,
+      "accn": "0001104659-26-037723"
+    }
+  ]
+}

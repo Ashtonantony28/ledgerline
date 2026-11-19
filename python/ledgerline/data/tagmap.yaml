@@ -18,10 +18,18 @@ income_statement:
     kind: flow
     tags: [CostOfGoodsAndServicesSold, CostOfRevenue, CostOfGoodsSold,
            CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization]
+  selling_expense:
+    kind: flow
+    tags: [SellingAndMarketingExpense, SellingExpense]
+    default: 0
+  ga_expense:
+    kind: flow
+    tags: [GeneralAndAdministrativeExpense]
+    default: 0
   sga:
     kind: flow
     tags: [SellingGeneralAndAdministrativeExpense]
-    default: 0
+    derive: selling_expense + ga_expense
   other_opex:
     kind: flow
     plug: revenue - cogs - sga - operating_income
@@ -163,21 +171,29 @@ balance_sheet:
   other_nc_liabilities:
     kind: instant
     plug: total_liabilities - total_current_liabilities - lt_debt - op_lease_liab_noncurrent
+  temp_equity:
+    kind: instant
+    tags: [RedeemableNoncontrollingInterestEquityCarryingAmount, TemporaryEquityCarryingAmountAttributableToParent]
+    default: 0
   total_liabilities:
     kind: instant
     tags: [Liabilities]
-    derive: total_le - total_equity
+    derive: total_le - total_equity - temp_equity
   parent_equity:
     kind: instant
     tags: [StockholdersEquity]
-  nci_equity:
+  minority_interest_tag:
     kind: instant
     tags: [MinorityInterest]
     default: 0
   total_equity:
     kind: instant
     tags: [StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest]
-    derive: parent_equity + nci_equity
+    derive: parent_equity + minority_interest_tag
+  nci_equity:
+    kind: instant
+    # Derived, not tagged: some filers' MinorityInterest includes redeemable (temporary-equity) NCI.
+    derive: total_equity - parent_equity
   total_le:
     kind: instant
     tags: [LiabilitiesAndStockholdersEquity]
@@ -216,6 +232,7 @@ cash_flow:
   fx_effect:
     kind: flow
     tags: [EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents,
+           EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsIncludingDisposalGroupAndDiscontinuedOperations,
            EffectOfExchangeRateOnCashAndCashEquivalents]
     default: 0
   net_change_cash:

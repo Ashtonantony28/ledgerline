@@ -35,8 +35,8 @@ def tieout(h: History) -> list[Check]:
     labels = h.fy_labels()
     for i, fy in enumerate(labels):
         out.append(Check("assets = liabilities + equity (reported L&E)", fy, v["total_assets"][i], v["total_le"][i], TOL_USD))
-        out.append(Check("L&E = total liabilities + total equity", fy, v["total_le"][i],
-                         v["total_liabilities"][i] + v["total_equity"][i], TOL_USD))
+        out.append(Check("L&E = total liabilities + temporary equity + total equity", fy, v["total_le"][i],
+                         v["total_liabilities"][i] + v["temp_equity"][i] + v["total_equity"][i], TOL_USD))
         out.append(Check("total equity = parent + NCI", fy, v["total_equity"][i],
                          v["parent_equity"][i] + v["nci_equity"][i], TOL_USD))
         out.append(Check("net income = total - NCI share", fy, v["net_income"][i],

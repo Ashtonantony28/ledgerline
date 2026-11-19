@@ -1,0 +1,7 @@
+# Skechers tagged balance-sheet inventory as us-gaap:FIFOInventoryAmount (not InventoryNet) in its
+# FY2021-FY2022 10-Ks. Skechers values inventory at the lower of FIFO cost or net realisable value,
+# so the FIFO amount is the carrying amount. Not mapped generally because LIFO filers (e.g. Kroger)
+# use the same tag for the pre-LIFO-reserve amount.
+inventory:
+  FY2021: {value: 1470994000, citation: "FIFOInventoryAmount@0001564590-22-007170 (FY2021 10-K balance sheet, Inventories)"}
+  FY2022: {value: 1818016000, citation: "FIFOInventoryAmount@0001564590-23-002740 (FY2022 10-K balance sheet, Inventories)"}

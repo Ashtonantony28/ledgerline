@@ -1,0 +1,84 @@
+# LBO back-test spec: Skechers U.S.A. (SKX) take-private by 3G Capital (Fund VI), closed 12 Sep 2025.
+#
+# Transaction terms are SOURCED from the information statement/prospectus (DEFM14C, filed 2025-08-05,
+# accession 0001104659-25-074187): "Financing of the Merger" (p.114) and the unaudited pro forma
+# notes (Note 2(a) merger consideration, Note 3(g)/(i) sources). Operating drivers and market rates are
+# JUDGEMENT (rationale per item). Modelled as if the deal closed at FY2024 year end, which is also how
+# the pro forma presents the income statement; the pro forma balance sheet uses 31 March 2025.
+
+ticker: SKX
+accession: "0001104659-25-074187"
+history_years: 3
+forecast_years: 7
+
+transaction:
+  price_per_share: {value: 63.00, unit: "$", src: "Merger consideration: $63.00 cash per share (Cash Election); DEFM14C Note 2(a)(i)"}
+  shares_common: {value: 149.603, unit: "m", src: "Class A 130,289k + Class B 19,314k shares outstanding at 2 May 2025; DEFM14C Note 2(a)(i)"}
+  shares_awards: {value: 3.634, unit: "m", src: "RSAs 981k + RSUs 2,653k, cashed out; DEFM14C Note 2(a)(i)"}
+  cash_consideration: {value: 9500.421, unit: "$m", src: "Total estimated cash consideration (common 9,271,479k + awards 228,942k); DEFM14C Note 2(a)"}
+  rollover_equity: {value: 741.965, unit: "$m", src: "Estimated rollover equity, 25,585k Common Units (Mixed Election ~17%); DEFM14C Note 2(a)(ii)"}
+  debt_repaid: {value: 130.001, unit: "$m", src: "Estimated repayment of Skechers' debt; DEFM14C Note 2(a)(iii)"}
+  financing_fees: {value: 202.425, unit: "$m", src: "Capitalised debt issuance costs and OID on term loans and notes; DEFM14C Note 3(i)"}
+  rcf_fees: {value: 31.8, unit: "$m", src: "Deferred financing fees on the first lien revolving facility; DEFM14C Note 3(j)"}
+  transaction_costs: {value: 71.5, unit: "$m", src: "Estimated transaction costs (legal, advisory, consulting); DEFM14C Note 3(g)"}
+  tl_usd: {value: 1600.0, unit: "$m", src: "Approximately $1.6bn dollar-denominated first lien term loans, SOFR + 325bps; DEFM14C p.114"}
+  tl_total: {value: 3026.375, unit: "$m", src: "Gross proceeds from first lien term loan facility (USD equivalent); DEFM14C Note 3(i)"}
+  ssn: {value: 1170.028, unit: "$m", src: "EUR 1.0bn 5.250% Senior Secured Notes due 2032, gross proceeds USD equivalent; DEFM14C Note 3(i)"}
+  pik_notes: {value: 2200.0, unit: "$m", src: "$2.2bn 10.000% / 10.750% Senior PIK Toggle Notes due 2033; DEFM14C p.114 and Note 3(i)"}
+  sponsor_equity: {value: 3507.898, unit: "$m", src: "Cash proceeds from issuance of Common Units for equity financing (Fund VI); DEFM14C Note 3(i)"}
+  spread_usd: {value: 0.0325, unit: "%", src: "USD term loans priced at SOFR + 325bps (step-downs ignored); DEFM14C p.114"}
+  spread_eur: {value: 0.0350, unit: "%", src: "EUR 1.25bn term loans priced at Euribor + 350bps; DEFM14C p.114"}
+  ssn_rate: {value: 0.0525, unit: "%", src: "5.250% Senior Secured Notes coupon; DEFM14C p.114"}
+  pik_cash_rate: {value: 0.1000, unit: "%", src: "Senior PIK Toggle Notes cash interest 10.000%; DEFM14C p.114"}
+  pik_pik_rate: {value: 0.1075, unit: "%", src: "Senior PIK Toggle Notes PIK interest 10.750%; DEFM14C p.114"}
+  rcf_capacity: {value: 1600.0, unit: "$m", src: "Approximately $1.6bn first lien revolving facility, assumed undrawn at close; DEFM14C p.114, Note 3(j)"}
+
+judgement:
+  rcf_spread: {value: 0.0325, unit: "%", src: "Judgement: RCF margin assumed equal to the USD term loan margin."}
+  commitment_fee: {value: 0.0035, unit: "%", src: "Judgement: typical undrawn fee for a BB/B revolver."}
+  tl_amort: {value: 0.01, unit: "%", src: "Judgement: 1% per year amortisation, market standard for a term loan B."}
+  sweep_pct: {value: 0.50, unit: "%", src: "Judgement: 50% excess-cash-flow sweep, market standard opening level."}
+  min_cash: {value: 600.0, unit: "$m", src: "Judgement: operating cash floor (~3 weeks of costs); Skechers held ~$1.1bn pre-deal."}
+  existing_debt_rate: {value: 0.06, unit: "%", src: "Judgement: approximate historical cost of Skechers' remaining facilities (interest / average debt ~5.8% in FY2024)."}
+  tax_rate: {value: 0.22, unit: "%", src: "Judgement: cash tax rate on EBIT less interest (FY2024 effective rate 16.9% before interest deductibility limits)."}
+  nci_pct: {value: 0.12, unit: "%", src: "Judgement: NCI share of net income distributed to JV partners (FY2022-24 NCI share of net income averaged ~13%)."}
+  covenant_max_1l: {value: 7.00, unit: "x", src: "Judgement: springing first-lien net leverage covenant level (credit agreement not public)."}
+  exit_year: {value: 5, unit: "years", src: "Judgement: five-year hold, typical for a large-cap buyout."}
+  mip_pct: {value: 0.05, unit: "%", src: "Judgement: management incentive pool of 5% of exit equity."}
+
+rates:  # per forecast year FY2025..FY2031
+  sofr: {values: [0.0430, 0.0370, 0.0345, 0.0340, 0.0340, 0.0340, 0.0340], src: "Judgement: approximate path of 3-month Term SOFR; refresh from a forward curve."}
+  euribor: {values: [0.0225, 0.0200, 0.0210, 0.0225, 0.0240, 0.0250, 0.0250], src: "Judgement: approximate path of 3-month Euribor; refresh from a forward curve."}
+  pik_toggle: {values: [1, 1, 0, 0, 0, 0, 0], src: "Judgement: PIK elected for the first two years to preserve cash, then cash pay."}
+
+drivers:
+  revenue_growth:
+    fmt: pct
+    base: {start: 0.060, end: 0.050}
+    upside: {start: 0.030, end: 0.020}
+    downside: {start: -0.080, end: -0.020}
+    rationale: "Revenue growth. FY2022-24 CAGR ~9.7%; 2025 guidance was withdrawn over tariffs, so year 1 is lower. Downside models a tariff-led demand shock."
+  ebitda_margin:
+    fmt: pct
+    base: {start: 0.115, end: 0.135}
+    upside: {start: 0.005, end: 0.015}
+    downside: {start: -0.020, end: -0.015}
+    rationale: "EBITDA margin (EBIT + D&A). FY2024 12.4%; tariffs compress year 1; 3G's cost programme lifts margins over the hold. Judgement."
+  da_pct:
+    fmt: pct
+    base: {start: 0.024, end: 0.024}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: "D&A % revenue, FY2024 2.4%."
+  capex_pct:
+    fmt: pct
+    base: {start: 0.040, end: 0.030}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: -0.005, end: -0.005}
+    rationale: "Capex % revenue. FY2024 4.6% during a distribution-centre build; sponsor ownership normalises to ~3%."
+  nwc_pct:
+    fmt: pct
+    base: {start: 0.200, end: 0.190}
+    upside: {start: -0.005, end: -0.005}
+    downside: {start: 0.010, end: 0.010}
+    rationale: "Trade working capital (receivables + inventory + other current assets - payables - accrued and other current liabilities) % revenue; FY2024 ~19.6%."

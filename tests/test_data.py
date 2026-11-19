@@ -5,7 +5,7 @@ from ledgerline.data.history import load, load_maturities
 from ledgerline.data.normalise import eval_linear
 from ledgerline.data.tieout import tieout
 
-TICKERS = ["COST", "WMT", "TGT", "BJ", "DG", "KR", "HD", "LOW"]
+TICKERS = ["COST", "WMT", "TGT", "BJ", "DG", "KR", "HD", "LOW", "SKX"]
 
 
 @pytest.mark.parametrize("ticker", TICKERS)
