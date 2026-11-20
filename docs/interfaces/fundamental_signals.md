@@ -1,9 +1,10 @@
 # Interface: fundamental_signals.csv (Ledgerline -> Tickforge)
 
-Schema version 1.0. Producer: `python -m ledgerline.exports`. One row per company and fiscal year (first year dropped: growth and averages need a prior year).
+Schema version 1.1. Producer: `python -m ledgerline.exports`. One row per company and fiscal year (the first year is
+dropped: growth and averages need a prior year).
 
-**Point-in-time caveat.** `available_from` is fiscal year end + 90 days, a conservative filing lag. The *values* are as last reported in
-the fixtures, which can be a later filing than the original (see `source_accession`: COST FY2018 comes from a 2020 10-K). A strict
+**Point-in-time caveat.** `available_from` is fiscal year end + 90 days, a conservative filing lag. The *values* are as last reported
+in the fixtures, which can be a later filing than the original (see `source_accession`: COST FY2018 comes from a 2020 10-K). A strict
 point-in-time test must either accept that restatement look-ahead or rebuild the panel from each original filing; Tickforge's
 "backtests do not lie" rule means the caveat travels with any result.
 

@@ -23,5 +23,8 @@ stress:                     # severe-but-plausible downturn (judgement)
   ebitda_shock: 0.30        # EBITDA falls 30%
   rate_shock: 0.02          # +200bp on the floating share of debt
   floating_share: 0.30
+maturity:                   # weighted-average maturity from the 10-K maturity table (exports only)
+  bucket_mid_years: [0.5, 1.5, 2.5, 3.5, 4.5]   # years 1-5 at mid-year
+  after_year5_years: 10.0   # judgement: the "thereafter" bucket placed at 10 years
 signals:                    # Tickforge export
   availability_lag_days: 90 # conservative: a 10-K is filed within 60-90 days of year end

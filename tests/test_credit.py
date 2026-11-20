@@ -68,8 +68,11 @@ def _read(name):
         return list(csv.DictReader(f))
 
 
-@pytest.mark.parametrize("name,cols", [("borrower_spreads.csv", [c[0] for c in exports.SPREAD_COLUMNS]),
-                                       ("fundamental_signals.csv", [c[0] for c in exports.SIGNAL_COLUMNS])])
+@pytest.mark.parametrize("name,cols", [
+    ("borrower_spreads.csv", [c[0] for c in exports.SPREAD_COLUMNS]),
+    ("borrower_spreads_history.csv", [c[0] for c in exports.SPREAD_COLUMNS if c[0] not in exports.HISTORY_DROP]),
+    ("pd_table.csv", [c[0] for c in exports.PD_COLUMNS]),
+    ("fundamental_signals.csv", [c[0] for c in exports.SIGNAL_COLUMNS])])
 def test_export_contract(name, cols):
     rows = _read(name)
     assert rows and list(rows[0]) == cols
@@ -92,3 +95,18 @@ def test_borrower_spreads_tie_to_reference():
 def test_signals_are_point_in_time_dated():
     for r in _read("fundamental_signals.csv"):
         assert r["available_from"] > r["fy_end"]
+
+
+def test_history_latest_rows_equal_snapshot():
+    """The long file's latest year per borrower is the snapshot row (same ratios, same rating)."""
+    snap = {r["ticker"]: r for r in _read("borrower_spreads.csv")}
+    last = {}
+    for r in _read("borrower_spreads_history.csv"):
+        last[r["ticker"]] = r
+    for t, r in last.items():
+        assert r["fy_end"] == snap[t]["fy_end"] and r["leverage"] == snap[t]["leverage"] and r["rating"] == snap[t]["rating"]
+
+
+def test_pd_table_matches_spec_and_rises():
+    pds = [float(r["pd_1y"]) for r in _read("pd_table.csv")]
+    assert pds == credit.spec()["scorecard"]["pd_1y"] and pds == sorted(pds)

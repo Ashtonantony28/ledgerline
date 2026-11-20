@@ -1,0 +1,57 @@
+{
+ "COST": {
+  "sic": "5331",
+  "sic_description": "Retail-Variety Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000909832.json"
+ },
+ "WMT": {
+  "sic": "5331",
+  "sic_description": "Retail-Variety Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000104169.json"
+ },
+ "TGT": {
+  "sic": "5331",
+  "sic_description": "Retail-Variety Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000027419.json"
+ },
+ "BJ": {
+  "sic": "5331",
+  "sic_description": "Retail-Variety Stores",
+  "source": "https://data.sec.gov/submissions/CIK0001531152.json"
+ },
+ "DG": {
+  "sic": "5331",
+  "sic_description": "Retail-Variety Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000029534.json"
+ },
+ "KR": {
+  "sic": "5411",
+  "sic_description": "Retail-Grocery Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000056873.json"
+ },
+ "HD": {
+  "sic": "5211",
+  "sic_description": "Retail-Lumber & Other Building Materials Dealers",
+  "source": "https://data.sec.gov/submissions/CIK0000354950.json"
+ },
+ "LOW": {
+  "sic": "5211",
+  "sic_description": "Retail-Lumber & Other Building Materials Dealers",
+  "source": "https://data.sec.gov/submissions/CIK0000060667.json"
+ },
+ "SKX": {
+  "sic": "3140",
+  "sic_description": "Footwear, (No Rubber)",
+  "source": "https://data.sec.gov/submissions/CIK0001065837.json"
+ },
+ "DKS": {
+  "sic": "5940",
+  "sic_description": "Retail-Miscellaneous Shopping Goods Stores",
+  "source": "https://data.sec.gov/submissions/CIK0001089063.json"
+ },
+ "FL": {
+  "sic": "5661",
+  "sic_description": "Retail-Shoe Stores",
+  "source": "https://data.sec.gov/submissions/CIK0000850209.json"
+ }
+}

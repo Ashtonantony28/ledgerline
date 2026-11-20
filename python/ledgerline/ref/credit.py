@@ -40,16 +40,26 @@ def spec() -> dict:
     return yaml.safe_load((REPO / "spec" / "CREDIT.yaml").read_text())
 
 
+def _borrower(h, i: int) -> Borrower:
+    v = {k: sum(h.values[x][i] for x in keys) / M for k, keys in ITEMS.items()}
+    src = {k: "; ".join(f"{x}: {h.source[x][i]}" for x in keys) for k, keys in ITEMS.items()}
+    return Borrower(h.ticker, h.entity, h.period_ends[i], v, src)
+
+
 def borrowers(sp: dict | None = None) -> list[Borrower]:
+    """Latest fiscal year of each borrower (workbook 09)."""
     sp = sp or spec()
     out = []
     for t in sp["borrowers"]:
         h = load(t)
-        i = len(h.period_ends) - 1
-        v = {k: sum(h.values[x][i] for x in keys) / M for k, keys in ITEMS.items()}
-        src = {k: "; ".join(f"{x}: {h.source[x][i]}" for x in keys) for k, keys in ITEMS.items()}
-        out.append(Borrower(t, h.entity, h.period_ends[i], v, src))
+        out.append(_borrower(h, len(h.period_ends) - 1))
     return out
+
+
+def borrower_years(sp: dict | None = None) -> list[Borrower]:
+    """Every fiscal year in each borrower's fixture (long-format export)."""
+    sp = sp or spec()
+    return [_borrower(h, i) for t in sp["borrowers"] for h in [load(t)] for i in range(len(h.period_ends))]
 
 
 def round_half_up(x: float) -> int:
@@ -86,10 +96,11 @@ def analyse(b: Borrower, sp: dict) -> dict:
     r["interest"] = v["interest_expense"] if v["interest_expense"] > 0 else v["interest_nonop_net"]
     r["adj_debt"] = v["debt"] + v["leases"]
     r["net_debt"] = r["adj_debt"] - v["cash"] - v["st_investments"]
-    r["leverage"] = r["adj_debt"] / r["ebitda"]
-    r["net_leverage"] = r["net_debt"] / r["ebitda"]
-    r["coverage"] = r["ebitda"] / r["interest"]
-    r["ebit_coverage"] = v["operating_income"] / r["interest"]
+    inf = float("inf")  # long-format years can lack interest or have negative EBITDA; latest years never do
+    r["leverage"] = r["adj_debt"] / r["ebitda"] if r["ebitda"] > 0 else inf
+    r["net_leverage"] = r["net_debt"] / r["ebitda"] if r["ebitda"] > 0 else inf
+    r["coverage"] = r["ebitda"] / r["interest"] if r["interest"] > 0 else inf
+    r["ebit_coverage"] = v["operating_income"] / r["interest"] if r["interest"] > 0 else inf
     r["fcf"] = v["cfo"] + v["capex"]
     r["fcf_debt"] = r["fcf"] / r["adj_debt"]
     r["cfo_debt"] = v["cfo"] / r["adj_debt"]
@@ -99,8 +110,8 @@ def analyse(b: Borrower, sp: dict) -> dict:
     r["cov_band"] = band_coverage(r["coverage"], sc["coverage_bounds"])
     r["idx"] = score(r["leverage"], r["coverage"], r["z"], sp)
     r["rating"], r["pd"] = sc["ratings"][r["idx"] - 1], sc["pd_1y"][r["idx"] - 1]
-    r["lev_cushion"] = 1 - r["adj_debt"] / (cv["max_leverage"] * r["ebitda"])
-    r["cov_cushion"] = 1 - cv["min_coverage"] * r["interest"] / r["ebitda"]
+    r["lev_cushion"] = 1 - r["adj_debt"] / (cv["max_leverage"] * r["ebitda"]) if r["ebitda"] > 0 else -inf
+    r["cov_cushion"] = 1 - cv["min_coverage"] * r["interest"] / r["ebitda"] if r["ebitda"] > 0 else -inf
     r["cushion"] = min(r["lev_cushion"], r["cov_cushion"])
     r["cap_leverage"] = cap["target_leverage"] * r["ebitda"] - r["adj_debt"]
     r["cap_coverage"] = (r["ebitda"] / cap["min_coverage"] - r["interest"]) / cap["marginal_rate"]
@@ -108,8 +119,8 @@ def analyse(b: Borrower, sp: dict) -> dict:
     # stress
     r["s_ebitda"] = r["ebitda"] * (1 - st["ebitda_shock"])
     r["s_interest"] = r["interest"] + st["rate_shock"] * st["floating_share"] * v["debt"]
-    r["s_leverage"] = r["adj_debt"] / r["s_ebitda"]
-    r["s_coverage"] = r["s_ebitda"] / r["s_interest"]
+    r["s_leverage"] = r["adj_debt"] / r["s_ebitda"] if r["s_ebitda"] > 0 else inf
+    r["s_coverage"] = r["s_ebitda"] / r["s_interest"] if r["s_interest"] > 0 else inf
     r["s_z"] = zscore(v, v["operating_income"] - st["ebitda_shock"] * r["ebitda"], sp)
     r["s_idx"] = score(r["s_leverage"], r["s_coverage"], r["s_z"], sp)
     r["s_rating"], r["s_pd"] = sc["ratings"][r["s_idx"] - 1], sc["pd_1y"][r["s_idx"] - 1]
