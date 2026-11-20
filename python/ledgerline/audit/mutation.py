@@ -3,6 +3,7 @@
     python -m ledgerline.audit.mutation 01 --n 40 --seed 7     # workbook 01 (three-statement)
     python -m ledgerline.audit.mutation 04 --n 40 --seed 7     # workbook 04 (M&A)
     python -m ledgerline.audit.mutation 05 --n 40 --seed 7     # workbook 05 (group close, free-form sheets)
+    python -m ledgerline.audit.mutation 06 --n 40 --seed 7     # workbook 06 (FP&A)
 
 Each mutant breaks one thing in a built workbook, the way people break spreadsheets:
   hardcode   overwrite one forecast formula with its current value (a "paste values")
@@ -46,6 +47,17 @@ def _target(workbook: str) -> dict:
         from ..ref.mna import run as ref_run
         return dict(build=lambda p: build_04(1, 3, out=p), calc=("Standalone", "ProForma", "Drivers"),
                     outputs=MNA_OUTPUTS, ref=lambda: ref_run(build_mna_inputs(1, 3)))
+    if workbook == "06":
+        from ..build.workbooks import build_06
+        from ..data.fpa import load
+        from ..ref.fpa import run as ref_run
+        from ..verify import FPA_OUTPUTS
+
+        def ref():
+            g = load()
+            r, nh = ref_run(g), g["spec"]["calendar"]["n_actual"]
+            return {k: v[nh:] for k, v in r.items() if isinstance(v, list)}
+        return dict(build=lambda p: build_06(1, out=p), calc=("Drivers", "PnL", "Budget"), outputs=FPA_OUTPUTS, ref=ref)
     raise ValueError(f"no mutation target for workbook {workbook}")
 
 

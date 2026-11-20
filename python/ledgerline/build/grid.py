@@ -14,6 +14,7 @@ auditable Excel file with no hidden machinery):
     {Sheet.$key}       constant cell on another sheet
     {key:all} / {key:hist} / {key:fcst}   the row's whole time range (absolute row)
     {key#k} / {Sheet.key#k}               fixed timeline column k (0-based), absolute: $J$12
+    {key#a:b} / {Sheet.key#a:b}           fixed range of timeline columns a..b, absolute: $E$12:$P$12
     {col}              the current column letter
 
 Layout (FAST-style): column A label, B unit, C constant/total, D spacer, E.. timeline.
@@ -163,8 +164,11 @@ class Model:
             prefix = f"'{target.name}'!" if target is not sheet else ""
             if rest.startswith("$"):
                 return f"{prefix}$C${target.row(rest[1:])}"
-            if "#" in rest:  # fixed timeline column, absolute: {key#4}
+            if "#" in rest:  # fixed timeline column, absolute: {key#4}; fixed range: {key#0:11}
                 key, k = rest.split("#")
+                if ":" in k:
+                    a, b = k.split(":")
+                    return f"{prefix}${tl.col(int(a))}${target.row(key)}:${tl.col(int(b))}${target.row(key)}"
                 return f"{prefix}${tl.col(int(k))}${target.row(key)}"
             if ":" in rest:
                 key, span = rest.split(":")

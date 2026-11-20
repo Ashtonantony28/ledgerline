@@ -1,0 +1,4575 @@
+=== Cover
+A1	'Ledgerline Group: FY2026 budget, 9+3 rolling forecast and variance analysis (synthetic)'
+A3	'Company'
+B3	'Ledgerline Group (synthetic; the consolidated group of workbook 05)'
+A4	'Units'
+B4	'$ millions; volumes in millions of units; headcount in people'
+A5	'Actuals'
+B5	'Jan-26 to Sep-26 (GL export)'
+A6	'Rolling forecast'
+B6	'Oct-26 to Sep-27'
+A7	'Live forecast case'
+B7	='Inputs'!C11
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-20 by the Ledgerline generator (see Log)'
+A12	'Colour code'
+A13	'Blue on yellow'
+B13	'Hard-coded input (every one carries a source note)'
+A14	'Black'
+B14	'Formula'
+A15	'Green'
+B15	'Direct link to another sheet'
+A16	'Grey shading'
+B16	'Forecast months'
+A18	'Sheets'
+A19	'Inputs'
+B19	'Forecast case switch, FY2025 anchors from workbook 05, budget and forecast assumptions, hiring plan'
+A20	'Actuals'
+B20	'Monthly GL export Jan-Sep 2026 (seeded synthetic ledger) with GL control-total ties'
+A21	'Scenarios'
+B21	'Rolling-forecast cases: volume growth, price change, net hires'
+A22	'Drivers'
+B22	'Live drivers: actual months from the GL, forecast months from run-rates and the live case'
+A23	'Budget'
+B23	'FY2026 driver-based budget by product and department'
+A24	'PnL'
+B24	'Outlook P&L, free cash flow and cash, lowest forecast cash and headroom'
+A25	'Variance'
+B25	'Budget vs actual and outlook; price / volume / mix / cost / headcount bridges'
+A26	'Accuracy'
+B26	'June forecast against actuals: MAPE, bias, change in outlook'
+A27	'Dashboard'
+B27	'Headline numbers and charts'
+A28	'Checks'
+B28	'Integrity checks and master flag'
+A30	'Disclaimer'
+B30	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Inputs
+A1	'Inputs: switches, prior-year anchors (workbook 05), budget and forecast assumptions'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Switches'
+A10	'Forecast case (1 Base, 2 Upside, 3 Downside)'
+B10	'count'
+C10	1
+A11	'Forecast case name'
+C11	=CHOOSE($C$10,"Base","Upside","Downside")
+A13	'Calendar'
+A14	'Months in a year'
+B14	'count'
+C14	12
+A15	'Budget year length from the first timeline month'
+B15	'count'
+C15	12
+A17	'Prior year, FY2025 (workbook 05)'
+A18	'Consolidated revenue'
+B18	'$m'
+C18	1931.936
+A19	'Consolidated depreciation'
+B19	'$m'
+C19	111.516
+A20	'Net working capital (receivables + inventory - payables)'
+B20	'$m'
+C20	306.315
+A21	'Cash at 31 Dec 2025'
+B21	'$m'
+C21	323.84
+A22	'Net working capital % of annual revenue'
+B22	'%'
+C22	=$C$20/$C$18
+A24	'Products (FY2025 split: judgement, the split is not in workbook 05)'
+A25	'Core: share of FY2025 revenue'
+B25	'%'
+C25	0.55
+A26	'Core: FY2025 price'
+B26	'$/unit'
+C26	40
+A27	'Core: FY2025 unit cost'
+B27	'$/unit'
+C27	26
+A28	'Core: FY2025 volume'
+B28	'm units'
+C28	=$C$25*$C$18/$C$26
+A29	'Premium: share of FY2025 revenue'
+B29	'%'
+C29	0.3
+A30	'Premium: FY2025 price'
+B30	'$/unit'
+C30	120
+A31	'Premium: FY2025 unit cost'
+B31	'$/unit'
+C31	66
+A32	'Premium: FY2025 volume'
+B32	'm units'
+C32	=$C$29*$C$18/$C$30
+A33	'Services: share of FY2025 revenue'
+B33	'%'
+C33	0.15
+A34	'Services: FY2025 price'
+B34	'$/unit'
+C34	250
+A35	'Services: FY2025 unit cost'
+B35	'$/unit'
+C35	110
+A36	'Services: FY2025 volume'
+B36	'm units'
+C36	=$C$33*$C$18/$C$34
+A37	'Shares sum'
+B37	'%'
+C37	=$C$25+$C$29+$C$33
+A39	'FY2026 budget (judgement)'
+A40	'Core: volume growth'
+B40	'%'
+C40	0.03
+A41	'Core: price increase'
+B41	'%'
+C41	0.03
+A42	'Core: unit cost inflation'
+B42	'%'
+C42	0.04
+A43	'Premium: volume growth'
+B43	'%'
+C43	0.08
+A44	'Premium: price increase'
+B44	'%'
+C44	0.04
+A45	'Premium: unit cost inflation'
+B45	'%'
+C45	0.03
+A46	'Services: volume growth'
+B46	'%'
+C46	0.12
+A47	'Services: price increase'
+B47	'%'
+C47	0.05
+A48	'Services: unit cost inflation'
+B48	'%'
+C48	0.02
+A49	'Seasonality: Jan'
+B49	'% of year'
+C49	0.07
+A50	'Seasonality: Feb'
+B50	'% of year'
+C50	0.07
+A51	'Seasonality: Mar'
+B51	'% of year'
+C51	0.08
+A52	'Seasonality: Apr'
+B52	'% of year'
+C52	0.08
+A53	'Seasonality: May'
+B53	'% of year'
+C53	0.08
+A54	'Seasonality: Jun'
+B54	'% of year'
+C54	0.08
+A55	'Seasonality: Jul'
+B55	'% of year'
+C55	0.08
+A56	'Seasonality: Aug'
+B56	'% of year'
+C56	0.085
+A57	'Seasonality: Sep'
+B57	'% of year'
+C57	0.08
+A58	'Seasonality: Oct'
+B58	'% of year'
+C58	0.085
+A59	'Seasonality: Nov'
+B59	'% of year'
+C59	0.095
+A60	'Seasonality: Dec'
+B60	'% of year'
+C60	0.115
+A61	'Sales and marketing: heads at 31 Dec 2025'
+B61	'people'
+C61	700
+A62	'Sales and marketing: FY2025 cost per head'
+B62	'$m/yr'
+C62	0.12
+A63	'Operations: heads at 31 Dec 2025'
+B63	'people'
+C63	1000
+A64	'Operations: FY2025 cost per head'
+B64	'$m/yr'
+C64	0.09
+A65	'General and administrative: heads at 31 Dec 2025'
+B65	'people'
+C65	350
+A66	'General and administrative: FY2025 cost per head'
+B66	'$m/yr'
+C66	0.15
+A67	'Pay rise from January'
+B67	'%'
+C67	0.04
+A68	'Sales and marketing programme spend, % of revenue'
+B68	'%'
+C68	0.06
+A69	'Operations non-people cost'
+B69	'$m/yr'
+C69	26
+A70	'G&A non-people cost'
+B70	'$m/yr'
+C70	14.5
+A71	'Capex per month'
+B71	'$m'
+C71	10
+A73	'Rolling forecast (judgement)'
+A74	'Core: unit cost inflation per month'
+B74	'%'
+C74	0.004
+A75	'Premium: unit cost inflation per month'
+B75	'%'
+C75	0.002
+A76	'Services: unit cost inflation per month'
+B76	'%'
+C76	0.0015
+A77	'Wage inflation per month'
+B77	'%'
+C77	0.003
+A78	'Capex per month'
+B78	'$m'
+C78	11
+A79	'Run-rate window (last actual months)'
+B79	'count'
+C79	3
+A81	'Finance'
+A82	'Tax rate'
+B82	'%'
+C82	0.25
+A83	'Life of new capex'
+B83	'months'
+C83	60
+A84	'Minimum cash (treasury policy)'
+B84	'$m'
+C84	150
+A86	'Budget headcount plan: net hires per month (judgement)'
+A87	'  Sales and marketing'
+B87	'people'
+E87	5
+F87	5
+G87	8
+H87	8
+I87	8
+J87	6
+K87	6
+L87	6
+M87	4
+N87	4
+O87	2
+P87	0
+A88	'  Operations'
+B88	'people'
+E88	0
+F88	0
+G88	5
+H88	5
+I88	5
+J88	5
+K88	10
+L88	10
+M88	15
+N88	15
+O88	10
+P88	0
+A89	'  General and administrative'
+B89	'people'
+E89	2
+F89	0
+G89	0
+H89	2
+I89	0
+J89	0
+K89	2
+L89	0
+M89	0
+N89	2
+O89	0
+P89	0
+=== Actuals
+A1	'Actuals: monthly GL export (seeded synthetic ledger), ingested by Power Query in Excel'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Core'
+A10	'  Volume'
+B10	'm units'
+E10	1.929
+F10	1.9178
+G10	2.157
+H10	2.1895
+I10	2.0725
+J10	2.0084
+K10	2.0194
+L10	2.1704
+M10	2.1252
+A11	'  Revenue'
+B11	'$m'
+E11	78.996
+F11	77.99
+G11	87.574
+H11	89.97
+I11	84.058
+J11	82.564
+K11	82.605
+L11	88.482
+M11	87.243
+A12	'  Cost of goods sold'
+B12	'$m'
+E12	51.644
+F12	51.498
+G12	58.066
+H12	59.344
+I12	55.463
+J12	56.726
+K12	57.341
+L12	61.459
+M12	60.603
+A13	'Premium'
+A14	'  Volume'
+B14	'm units'
+E14	0.3641
+F14	0.3665
+G14	0.4213
+H14	0.4202
+I14	0.4196
+J14	0.4097
+K14	0.4173
+L14	0.4454
+M14	0.4197
+A15	'  Revenue'
+B15	'$m'
+E15	46.708
+F15	47.056
+G15	53.621
+H15	53.67
+I15	53.471
+J15	52.943
+K15	52.84
+L15	57.349
+M15	53.41
+A16	'  Cost of goods sold'
+B16	'$m'
+E16	24.804
+F16	25.199
+G16	28.554
+H16	28.449
+I16	28.573
+J16	28.025
+K16	28.208
+L16	30.577
+M16	28.726
+A17	'Services'
+A18	'  Volume'
+B18	'm units'
+E18	0.0908
+F18	0.0922
+G18	0.1131
+H18	0.1094
+I18	0.1111
+J18	0.1131
+K18	0.1146
+L18	0.1168
+M18	0.1138
+A19	'  Revenue'
+B19	'$m'
+E19	23.745
+F19	24.367
+G19	29.807
+H19	28.615
+I19	29.201
+J19	29.728
+K19	30.216
+L19	30.596
+M19	29.901
+A20	'  Cost of goods sold'
+B20	'$m'
+E20	10.099
+F20	10.049
+G20	12.563
+H20	12.157
+I20	12.294
+J20	12.489
+K20	12.731
+L20	12.973
+M20	12.615
+A21	'Sales and marketing'
+A22	'  Headcount'
+B22	'people'
+E22	698
+F22	699
+G22	702
+H22	712
+I22	716
+J22	721
+K22	737
+L22	738
+M22	748
+A23	'  People cost'
+B23	'$m'
+E23	7.253
+F23	7.269
+G23	7.236
+H23	7.377
+I23	7.411
+J23	7.521
+K23	7.666
+L23	7.613
+M23	7.772
+A24	'  Non-people cost'
+B24	'$m'
+E24	9.078
+F24	9.365
+G24	10.985
+H24	10.666
+I24	10.772
+J24	11.172
+K24	9.806
+L24	11.448
+M24	11.063
+A25	'Operations'
+A26	'  Headcount'
+B26	'people'
+E26	1000
+F26	1002
+G26	1005
+H26	1011
+I26	1010
+J26	1019
+K26	1029
+L26	1036
+M26	1057
+A27	'  People cost'
+B27	'$m'
+E27	7.759
+F27	7.807
+G27	7.872
+H27	7.97
+I27	7.883
+J27	7.937
+K27	7.986
+L27	8.069
+M27	8.231
+A28	'  Non-people cost'
+B28	'$m'
+E28	2.172
+F28	2.236
+G28	2.233
+H28	2.084
+I28	2.162
+J28	2.17
+K28	2.198
+L28	2.23
+M28	2.179
+A29	'General and administrative'
+A30	'  Headcount'
+B30	'people'
+E30	355
+F30	354
+G30	351
+H30	352
+I30	356
+J30	354
+K30	357
+L30	357
+M30	355
+A31	'  People cost'
+B31	'$m'
+E31	4.641
+F31	4.582
+G31	4.559
+H31	4.569
+I31	4.593
+J31	4.624
+K31	4.613
+L31	4.62
+M31	4.595
+A32	'  Non-people cost'
+B32	'$m'
+E32	1.251
+F32	1.201
+G32	1.207
+H32	1.289
+I32	1.3
+J32	1.358
+K32	1.272
+L32	1.307
+M32	1.3
+A33	'Group'
+A34	'  Capex'
+B34	'$m'
+E34	7.382
+F34	9.843
+G34	10.126
+H34	8.874
+I34	10.683
+J34	11.42
+K34	11.66
+L34	10.239
+M34	8.953
+A35	'  GL control total: revenue'
+B35	'$m'
+E35	149.449
+F35	149.413
+G35	171.002
+H35	172.255
+I35	166.73
+J35	165.235
+K35	165.661
+L35	176.427
+M35	170.554
+A36	'  GL control total: operating expenses'
+B36	'$m'
+E36	32.154
+F36	32.46
+G36	34.092
+H36	33.955
+I36	34.121
+J36	34.782
+K36	33.541
+L36	35.287
+M36	35.14
+A37	'Product revenue less GL control'
+B37	'$m'
+E37	=E11+E15+E19-E35
+F37	=F11+F15+F19-F35
+G37	=G11+G15+G19-G35
+H37	=H11+H15+H19-H35
+I37	=I11+I15+I19-I35
+J37	=J11+J15+J19-J35
+K37	=K11+K15+K19-K35
+L37	=L11+L15+L19-L35
+M37	=M11+M15+M19-M35
+A38	'Department opex less GL control'
+B38	'$m'
+E38	=E23+E24+E27+E28+E31+E32-E36
+F38	=F23+F24+F27+F28+F31+F32-F36
+G38	=G23+G24+G27+G28+G31+G32-G36
+H38	=H23+H24+H27+H28+H31+H32-H36
+I38	=I23+I24+I27+I28+I31+I32-I36
+J38	=J23+J24+J27+J28+J31+J32-J36
+K38	=K23+K24+K27+K28+K31+K32-K36
+L38	=L23+L24+L27+L28+L31+L32-L36
+M38	=M23+M24+M27+M28+M31+M32-M36
+=== Scenarios
+A1	'Rolling-forecast cases: volume growth on the run-rate, price change, net hires'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Core: volume growth per month'
+A10	'  Base'
+B10	'%'
+N10	0
+O10	0
+P10	0
+Q10	0
+R10	0
+S10	0
+T10	0
+U10	0
+V10	0
+W10	0
+X10	0
+Y10	0
+A11	'  Upside'
+B11	'%'
+N11	0.003
+O11	0.003
+P11	0.003
+Q11	0.003
+R11	0.003
+S11	0.003
+T11	0.003
+U11	0.003
+V11	0.003
+W11	0.003
+X11	0.003
+Y11	0.003
+A12	'  Downside'
+B12	'%'
+N12	-0.005
+O12	-0.005
+P12	-0.005
+Q12	-0.005
+R12	-0.005
+S12	-0.005
+T12	-0.005
+U12	-0.005
+V12	-0.005
+W12	-0.005
+X12	-0.005
+Y12	-0.005
+A13	'Core: price change per month'
+A14	'  Base'
+B14	'%'
+N14	0
+O14	0
+P14	0
+Q14	0
+R14	0
+S14	0
+T14	0
+U14	0
+V14	0
+W14	0
+X14	0
+Y14	0
+A15	'  Upside'
+B15	'%'
+N15	0.002
+O15	0.002
+P15	0.002
+Q15	0.002
+R15	0.002
+S15	0.002
+T15	0.002
+U15	0.002
+V15	0.002
+W15	0.002
+X15	0.002
+Y15	0.002
+A16	'  Downside'
+B16	'%'
+N16	-0.002
+O16	-0.002
+P16	-0.002
+Q16	-0.002
+R16	-0.002
+S16	-0.002
+T16	-0.002
+U16	-0.002
+V16	-0.002
+W16	-0.002
+X16	-0.002
+Y16	-0.002
+A17	'Premium: volume growth per month'
+A18	'  Base'
+B18	'%'
+N18	0.004
+O18	0.004
+P18	0.004
+Q18	0.004
+R18	0.004
+S18	0.004
+T18	0.004
+U18	0.004
+V18	0.004
+W18	0.004
+X18	0.004
+Y18	0.004
+A19	'  Upside'
+B19	'%'
+N19	0.007
+O19	0.007
+P19	0.007
+Q19	0.007
+R19	0.007
+S19	0.007
+T19	0.007
+U19	0.007
+V19	0.007
+W19	0.007
+X19	0.007
+Y19	0.007
+A20	'  Downside'
+B20	'%'
+N20	0
+O20	0
+P20	0
+Q20	0
+R20	0
+S20	0
+T20	0
+U20	0
+V20	0
+W20	0
+X20	0
+Y20	0
+A21	'Premium: price change per month'
+A22	'  Base'
+B22	'%'
+N22	0.002
+O22	0.002
+P22	0.002
+Q22	0.002
+R22	0.002
+S22	0.002
+T22	0.002
+U22	0.002
+V22	0.002
+W22	0.002
+X22	0.002
+Y22	0.002
+A23	'  Upside'
+B23	'%'
+N23	0.003
+O23	0.003
+P23	0.003
+Q23	0.003
+R23	0.003
+S23	0.003
+T23	0.003
+U23	0.003
+V23	0.003
+W23	0.003
+X23	0.003
+Y23	0.003
+A24	'  Downside'
+B24	'%'
+N24	0
+O24	0
+P24	0
+Q24	0
+R24	0
+S24	0
+T24	0
+U24	0
+V24	0
+W24	0
+X24	0
+Y24	0
+A25	'Services: volume growth per month'
+A26	'  Base'
+B26	'%'
+N26	0.008
+O26	0.008
+P26	0.008
+Q26	0.008
+R26	0.008
+S26	0.008
+T26	0.008
+U26	0.008
+V26	0.008
+W26	0.008
+X26	0.008
+Y26	0.008
+A27	'  Upside'
+B27	'%'
+N27	0.012
+O27	0.012
+P27	0.012
+Q27	0.012
+R27	0.012
+S27	0.012
+T27	0.012
+U27	0.012
+V27	0.012
+W27	0.012
+X27	0.012
+Y27	0.012
+A28	'  Downside'
+B28	'%'
+N28	0.004
+O28	0.004
+P28	0.004
+Q28	0.004
+R28	0.004
+S28	0.004
+T28	0.004
+U28	0.004
+V28	0.004
+W28	0.004
+X28	0.004
+Y28	0.004
+A29	'Services: price change per month'
+A30	'  Base'
+B30	'%'
+N30	0.003
+O30	0.003
+P30	0.003
+Q30	0.003
+R30	0.003
+S30	0.003
+T30	0.003
+U30	0.003
+V30	0.003
+W30	0.003
+X30	0.003
+Y30	0.003
+A31	'  Upside'
+B31	'%'
+N31	0.004
+O31	0.004
+P31	0.004
+Q31	0.004
+R31	0.004
+S31	0.004
+T31	0.004
+U31	0.004
+V31	0.004
+W31	0.004
+X31	0.004
+Y31	0.004
+A32	'  Downside'
+B32	'%'
+N32	0.001
+O32	0.001
+P32	0.001
+Q32	0.001
+R32	0.001
+S32	0.001
+T32	0.001
+U32	0.001
+V32	0.001
+W32	0.001
+X32	0.001
+Y32	0.001
+A33	'Sales and marketing: net hires per month'
+A34	'  Base'
+B34	'people'
+N34	3
+O34	3
+P34	3
+Q34	3
+R34	3
+S34	3
+T34	3
+U34	3
+V34	3
+W34	3
+X34	3
+Y34	3
+A35	'  Upside'
+B35	'people'
+N35	5
+O35	5
+P35	5
+Q35	5
+R35	5
+S35	5
+T35	5
+U35	5
+V35	5
+W35	5
+X35	5
+Y35	5
+A36	'  Downside'
+B36	'people'
+N36	0
+O36	0
+P36	0
+Q36	0
+R36	0
+S36	0
+T36	0
+U36	0
+V36	0
+W36	0
+X36	0
+Y36	0
+A37	'Operations: net hires per month'
+A38	'  Base'
+B38	'people'
+N38	6
+O38	6
+P38	6
+Q38	6
+R38	6
+S38	6
+T38	6
+U38	6
+V38	6
+W38	6
+X38	6
+Y38	6
+A39	'  Upside'
+B39	'people'
+N39	9
+O39	9
+P39	9
+Q39	9
+R39	9
+S39	9
+T39	9
+U39	9
+V39	9
+W39	9
+X39	9
+Y39	9
+A40	'  Downside'
+B40	'people'
+N40	2
+O40	2
+P40	2
+Q40	2
+R40	2
+S40	2
+T40	2
+U40	2
+V40	2
+W40	2
+X40	2
+Y40	2
+A41	'General and administrative: net hires per month'
+A42	'  Base'
+B42	'people'
+N42	1
+O42	1
+P42	1
+Q42	1
+R42	1
+S42	1
+T42	1
+U42	1
+V42	1
+W42	1
+X42	1
+Y42	1
+A43	'  Upside'
+B43	'people'
+N43	1
+O43	1
+P43	1
+Q43	1
+R43	1
+S43	1
+T43	1
+U43	1
+V43	1
+W43	1
+X43	1
+Y43	1
+A44	'  Downside'
+B44	'people'
+N44	0
+O44	0
+P44	0
+Q44	0
+R44	0
+S44	0
+T44	0
+U44	0
+V44	0
+W44	0
+X44	0
+Y44	0
+=== Drivers
+A1	'Live drivers: actual months from the GL, forecast months from run-rates and the selected case'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Calendar'
+A10	'Month number on the timeline'
+B10	'count'
+E10	1
+F10	=E10+1
+G10	=F10+1
+H10	=G10+1
+I10	=H10+1
+J10	=I10+1
+K10	=J10+1
+L10	=K10+1
+M10	=L10+1
+N10	=M10+1
+O10	=N10+1
+P10	=O10+1
+Q10	=P10+1
+R10	=Q10+1
+S10	=R10+1
+T10	=S10+1
+U10	=T10+1
+V10	=U10+1
+W10	=V10+1
+X10	=W10+1
+Y10	=X10+1
+A11	'Month of year'
+B11	'count'
+E11	1
+F11	=MOD(E11,'Inputs'!$C$14)+1
+G11	=MOD(F11,'Inputs'!$C$14)+1
+H11	=MOD(G11,'Inputs'!$C$14)+1
+I11	=MOD(H11,'Inputs'!$C$14)+1
+J11	=MOD(I11,'Inputs'!$C$14)+1
+K11	=MOD(J11,'Inputs'!$C$14)+1
+L11	=MOD(K11,'Inputs'!$C$14)+1
+M11	=MOD(L11,'Inputs'!$C$14)+1
+N11	=MOD(M11,'Inputs'!$C$14)+1
+O11	=MOD(N11,'Inputs'!$C$14)+1
+P11	=MOD(O11,'Inputs'!$C$14)+1
+Q11	=MOD(P11,'Inputs'!$C$14)+1
+R11	=MOD(Q11,'Inputs'!$C$14)+1
+S11	=MOD(R11,'Inputs'!$C$14)+1
+T11	=MOD(S11,'Inputs'!$C$14)+1
+U11	=MOD(T11,'Inputs'!$C$14)+1
+V11	=MOD(U11,'Inputs'!$C$14)+1
+W11	=MOD(V11,'Inputs'!$C$14)+1
+X11	=MOD(W11,'Inputs'!$C$14)+1
+Y11	=MOD(X11,'Inputs'!$C$14)+1
+A12	'In budget year (1 = yes)'
+B12	'flag'
+E12	=IF(E10<='Inputs'!$C$15,1,0)
+F12	=IF(F10<='Inputs'!$C$15,1,0)
+G12	=IF(G10<='Inputs'!$C$15,1,0)
+H12	=IF(H10<='Inputs'!$C$15,1,0)
+I12	=IF(I10<='Inputs'!$C$15,1,0)
+J12	=IF(J10<='Inputs'!$C$15,1,0)
+K12	=IF(K10<='Inputs'!$C$15,1,0)
+L12	=IF(L10<='Inputs'!$C$15,1,0)
+M12	=IF(M10<='Inputs'!$C$15,1,0)
+N12	=IF(N10<='Inputs'!$C$15,1,0)
+O12	=IF(O10<='Inputs'!$C$15,1,0)
+P12	=IF(P10<='Inputs'!$C$15,1,0)
+Q12	=IF(Q10<='Inputs'!$C$15,1,0)
+R12	=IF(R10<='Inputs'!$C$15,1,0)
+S12	=IF(S10<='Inputs'!$C$15,1,0)
+T12	=IF(T10<='Inputs'!$C$15,1,0)
+U12	=IF(U10<='Inputs'!$C$15,1,0)
+V12	=IF(V10<='Inputs'!$C$15,1,0)
+W12	=IF(W10<='Inputs'!$C$15,1,0)
+X12	=IF(X10<='Inputs'!$C$15,1,0)
+Y12	=IF(Y10<='Inputs'!$C$15,1,0)
+A13	'Seasonality weight'
+B13	'%'
+E13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,E11)
+F13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,F11)
+G13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,G11)
+H13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,H11)
+I13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,I11)
+J13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,J11)
+K13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,K11)
+L13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,L11)
+M13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,M11)
+N13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,N11)
+O13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,O11)
+P13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,P11)
+Q13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,Q11)
+R13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,R11)
+S13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,S11)
+T13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,T11)
+U13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,U11)
+V13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,V11)
+W13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,W11)
+X13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,X11)
+Y13	=INDEX('Inputs'!$C$49:'Inputs'!$C$60,Y11)
+A14	'Core'
+A15	'  Deseasonalised run-rate volume (last actual months)'
+B15	'm units/yr'
+C15	=SUM($K$18:$M$18)/SUM($K$13:$M$13)
+A16	'  Volume growth per month (live case)'
+B16	'%'
+N16	=CHOOSE('Inputs'!$C$10,'Scenarios'!N10,'Scenarios'!N11,'Scenarios'!N12)
+O16	=CHOOSE('Inputs'!$C$10,'Scenarios'!O10,'Scenarios'!O11,'Scenarios'!O12)
+P16	=CHOOSE('Inputs'!$C$10,'Scenarios'!P10,'Scenarios'!P11,'Scenarios'!P12)
+Q16	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q10,'Scenarios'!Q11,'Scenarios'!Q12)
+R16	=CHOOSE('Inputs'!$C$10,'Scenarios'!R10,'Scenarios'!R11,'Scenarios'!R12)
+S16	=CHOOSE('Inputs'!$C$10,'Scenarios'!S10,'Scenarios'!S11,'Scenarios'!S12)
+T16	=CHOOSE('Inputs'!$C$10,'Scenarios'!T10,'Scenarios'!T11,'Scenarios'!T12)
+U16	=CHOOSE('Inputs'!$C$10,'Scenarios'!U10,'Scenarios'!U11,'Scenarios'!U12)
+V16	=CHOOSE('Inputs'!$C$10,'Scenarios'!V10,'Scenarios'!V11,'Scenarios'!V12)
+W16	=CHOOSE('Inputs'!$C$10,'Scenarios'!W10,'Scenarios'!W11,'Scenarios'!W12)
+X16	=CHOOSE('Inputs'!$C$10,'Scenarios'!X10,'Scenarios'!X11,'Scenarios'!X12)
+Y16	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y10,'Scenarios'!Y11,'Scenarios'!Y12)
+A17	'  Growth index (actual months = 1)'
+B17	'x'
+E17	1
+F17	1
+G17	1
+H17	1
+I17	1
+J17	1
+K17	1
+L17	1
+M17	1
+N17	=M17*(1+N16)
+O17	=N17*(1+O16)
+P17	=O17*(1+P16)
+Q17	=P17*(1+Q16)
+R17	=Q17*(1+R16)
+S17	=R17*(1+S16)
+T17	=S17*(1+T16)
+U17	=T17*(1+U16)
+V17	=U17*(1+V16)
+W17	=V17*(1+W16)
+X17	=W17*(1+X16)
+Y17	=X17*(1+Y16)
+A18	'  Volume'
+B18	'm units'
+E18	='Actuals'!E10
+F18	='Actuals'!F10
+G18	='Actuals'!G10
+H18	='Actuals'!H10
+I18	='Actuals'!I10
+J18	='Actuals'!J10
+K18	='Actuals'!K10
+L18	='Actuals'!L10
+M18	='Actuals'!M10
+N18	=$C$15*N13*N17
+O18	=$C$15*O13*O17
+P18	=$C$15*P13*P17
+Q18	=$C$15*Q13*Q17
+R18	=$C$15*R13*R17
+S18	=$C$15*S13*S17
+T18	=$C$15*T13*T17
+U18	=$C$15*U13*U17
+V18	=$C$15*V13*V17
+W18	=$C$15*W13*W17
+X18	=$C$15*X13*X17
+Y18	=$C$15*Y13*Y17
+A19	'  Price change per month (live case)'
+B19	'%'
+N19	=CHOOSE('Inputs'!$C$10,'Scenarios'!N14,'Scenarios'!N15,'Scenarios'!N16)
+O19	=CHOOSE('Inputs'!$C$10,'Scenarios'!O14,'Scenarios'!O15,'Scenarios'!O16)
+P19	=CHOOSE('Inputs'!$C$10,'Scenarios'!P14,'Scenarios'!P15,'Scenarios'!P16)
+Q19	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q14,'Scenarios'!Q15,'Scenarios'!Q16)
+R19	=CHOOSE('Inputs'!$C$10,'Scenarios'!R14,'Scenarios'!R15,'Scenarios'!R16)
+S19	=CHOOSE('Inputs'!$C$10,'Scenarios'!S14,'Scenarios'!S15,'Scenarios'!S16)
+T19	=CHOOSE('Inputs'!$C$10,'Scenarios'!T14,'Scenarios'!T15,'Scenarios'!T16)
+U19	=CHOOSE('Inputs'!$C$10,'Scenarios'!U14,'Scenarios'!U15,'Scenarios'!U16)
+V19	=CHOOSE('Inputs'!$C$10,'Scenarios'!V14,'Scenarios'!V15,'Scenarios'!V16)
+W19	=CHOOSE('Inputs'!$C$10,'Scenarios'!W14,'Scenarios'!W15,'Scenarios'!W16)
+X19	=CHOOSE('Inputs'!$C$10,'Scenarios'!X14,'Scenarios'!X15,'Scenarios'!X16)
+Y19	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y14,'Scenarios'!Y15,'Scenarios'!Y16)
+A20	'  Price (actual = realised)'
+B20	'$/unit'
+E20	='Actuals'!E11/'Actuals'!E10
+F20	='Actuals'!F11/'Actuals'!F10
+G20	='Actuals'!G11/'Actuals'!G10
+H20	='Actuals'!H11/'Actuals'!H10
+I20	='Actuals'!I11/'Actuals'!I10
+J20	='Actuals'!J11/'Actuals'!J10
+K20	='Actuals'!K11/'Actuals'!K10
+L20	='Actuals'!L11/'Actuals'!L10
+M20	='Actuals'!M11/'Actuals'!M10
+N20	=M20*(1+N19)
+O20	=N20*(1+O19)
+P20	=O20*(1+P19)
+Q20	=P20*(1+Q19)
+R20	=Q20*(1+R19)
+S20	=R20*(1+S19)
+T20	=S20*(1+T19)
+U20	=T20*(1+U19)
+V20	=U20*(1+V19)
+W20	=V20*(1+W19)
+X20	=W20*(1+X19)
+Y20	=X20*(1+Y19)
+A21	'  Unit cost (actual = realised)'
+B21	'$/unit'
+E21	='Actuals'!E12/'Actuals'!E10
+F21	='Actuals'!F12/'Actuals'!F10
+G21	='Actuals'!G12/'Actuals'!G10
+H21	='Actuals'!H12/'Actuals'!H10
+I21	='Actuals'!I12/'Actuals'!I10
+J21	='Actuals'!J12/'Actuals'!J10
+K21	='Actuals'!K12/'Actuals'!K10
+L21	='Actuals'!L12/'Actuals'!L10
+M21	='Actuals'!M12/'Actuals'!M10
+N21	=M21*(1+'Inputs'!$C$74)
+O21	=N21*(1+'Inputs'!$C$74)
+P21	=O21*(1+'Inputs'!$C$74)
+Q21	=P21*(1+'Inputs'!$C$74)
+R21	=Q21*(1+'Inputs'!$C$74)
+S21	=R21*(1+'Inputs'!$C$74)
+T21	=S21*(1+'Inputs'!$C$74)
+U21	=T21*(1+'Inputs'!$C$74)
+V21	=U21*(1+'Inputs'!$C$74)
+W21	=V21*(1+'Inputs'!$C$74)
+X21	=W21*(1+'Inputs'!$C$74)
+Y21	=X21*(1+'Inputs'!$C$74)
+A22	'Premium'
+A23	'  Deseasonalised run-rate volume (last actual months)'
+B23	'm units/yr'
+C23	=SUM($K$26:$M$26)/SUM($K$13:$M$13)
+A24	'  Volume growth per month (live case)'
+B24	'%'
+N24	=CHOOSE('Inputs'!$C$10,'Scenarios'!N18,'Scenarios'!N19,'Scenarios'!N20)
+O24	=CHOOSE('Inputs'!$C$10,'Scenarios'!O18,'Scenarios'!O19,'Scenarios'!O20)
+P24	=CHOOSE('Inputs'!$C$10,'Scenarios'!P18,'Scenarios'!P19,'Scenarios'!P20)
+Q24	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q18,'Scenarios'!Q19,'Scenarios'!Q20)
+R24	=CHOOSE('Inputs'!$C$10,'Scenarios'!R18,'Scenarios'!R19,'Scenarios'!R20)
+S24	=CHOOSE('Inputs'!$C$10,'Scenarios'!S18,'Scenarios'!S19,'Scenarios'!S20)
+T24	=CHOOSE('Inputs'!$C$10,'Scenarios'!T18,'Scenarios'!T19,'Scenarios'!T20)
+U24	=CHOOSE('Inputs'!$C$10,'Scenarios'!U18,'Scenarios'!U19,'Scenarios'!U20)
+V24	=CHOOSE('Inputs'!$C$10,'Scenarios'!V18,'Scenarios'!V19,'Scenarios'!V20)
+W24	=CHOOSE('Inputs'!$C$10,'Scenarios'!W18,'Scenarios'!W19,'Scenarios'!W20)
+X24	=CHOOSE('Inputs'!$C$10,'Scenarios'!X18,'Scenarios'!X19,'Scenarios'!X20)
+Y24	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y18,'Scenarios'!Y19,'Scenarios'!Y20)
+A25	'  Growth index (actual months = 1)'
+B25	'x'
+E25	1
+F25	1
+G25	1
+H25	1
+I25	1
+J25	1
+K25	1
+L25	1
+M25	1
+N25	=M25*(1+N24)
+O25	=N25*(1+O24)
+P25	=O25*(1+P24)
+Q25	=P25*(1+Q24)
+R25	=Q25*(1+R24)
+S25	=R25*(1+S24)
+T25	=S25*(1+T24)
+U25	=T25*(1+U24)
+V25	=U25*(1+V24)
+W25	=V25*(1+W24)
+X25	=W25*(1+X24)
+Y25	=X25*(1+Y24)
+A26	'  Volume'
+B26	'm units'
+E26	='Actuals'!E14
+F26	='Actuals'!F14
+G26	='Actuals'!G14
+H26	='Actuals'!H14
+I26	='Actuals'!I14
+J26	='Actuals'!J14
+K26	='Actuals'!K14
+L26	='Actuals'!L14
+M26	='Actuals'!M14
+N26	=$C$23*N13*N25
+O26	=$C$23*O13*O25
+P26	=$C$23*P13*P25
+Q26	=$C$23*Q13*Q25
+R26	=$C$23*R13*R25
+S26	=$C$23*S13*S25
+T26	=$C$23*T13*T25
+U26	=$C$23*U13*U25
+V26	=$C$23*V13*V25
+W26	=$C$23*W13*W25
+X26	=$C$23*X13*X25
+Y26	=$C$23*Y13*Y25
+A27	'  Price change per month (live case)'
+B27	'%'
+N27	=CHOOSE('Inputs'!$C$10,'Scenarios'!N22,'Scenarios'!N23,'Scenarios'!N24)
+O27	=CHOOSE('Inputs'!$C$10,'Scenarios'!O22,'Scenarios'!O23,'Scenarios'!O24)
+P27	=CHOOSE('Inputs'!$C$10,'Scenarios'!P22,'Scenarios'!P23,'Scenarios'!P24)
+Q27	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q22,'Scenarios'!Q23,'Scenarios'!Q24)
+R27	=CHOOSE('Inputs'!$C$10,'Scenarios'!R22,'Scenarios'!R23,'Scenarios'!R24)
+S27	=CHOOSE('Inputs'!$C$10,'Scenarios'!S22,'Scenarios'!S23,'Scenarios'!S24)
+T27	=CHOOSE('Inputs'!$C$10,'Scenarios'!T22,'Scenarios'!T23,'Scenarios'!T24)
+U27	=CHOOSE('Inputs'!$C$10,'Scenarios'!U22,'Scenarios'!U23,'Scenarios'!U24)
+V27	=CHOOSE('Inputs'!$C$10,'Scenarios'!V22,'Scenarios'!V23,'Scenarios'!V24)
+W27	=CHOOSE('Inputs'!$C$10,'Scenarios'!W22,'Scenarios'!W23,'Scenarios'!W24)
+X27	=CHOOSE('Inputs'!$C$10,'Scenarios'!X22,'Scenarios'!X23,'Scenarios'!X24)
+Y27	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y22,'Scenarios'!Y23,'Scenarios'!Y24)
+A28	'  Price (actual = realised)'
+B28	'$/unit'
+E28	='Actuals'!E15/'Actuals'!E14
+F28	='Actuals'!F15/'Actuals'!F14
+G28	='Actuals'!G15/'Actuals'!G14
+H28	='Actuals'!H15/'Actuals'!H14
+I28	='Actuals'!I15/'Actuals'!I14
+J28	='Actuals'!J15/'Actuals'!J14
+K28	='Actuals'!K15/'Actuals'!K14
+L28	='Actuals'!L15/'Actuals'!L14
+M28	='Actuals'!M15/'Actuals'!M14
+N28	=M28*(1+N27)
+O28	=N28*(1+O27)
+P28	=O28*(1+P27)
+Q28	=P28*(1+Q27)
+R28	=Q28*(1+R27)
+S28	=R28*(1+S27)
+T28	=S28*(1+T27)
+U28	=T28*(1+U27)
+V28	=U28*(1+V27)
+W28	=V28*(1+W27)
+X28	=W28*(1+X27)
+Y28	=X28*(1+Y27)
+A29	'  Unit cost (actual = realised)'
+B29	'$/unit'
+E29	='Actuals'!E16/'Actuals'!E14
+F29	='Actuals'!F16/'Actuals'!F14
+G29	='Actuals'!G16/'Actuals'!G14
+H29	='Actuals'!H16/'Actuals'!H14
+I29	='Actuals'!I16/'Actuals'!I14
+J29	='Actuals'!J16/'Actuals'!J14
+K29	='Actuals'!K16/'Actuals'!K14
+L29	='Actuals'!L16/'Actuals'!L14
+M29	='Actuals'!M16/'Actuals'!M14
+N29	=M29*(1+'Inputs'!$C$75)
+O29	=N29*(1+'Inputs'!$C$75)
+P29	=O29*(1+'Inputs'!$C$75)
+Q29	=P29*(1+'Inputs'!$C$75)
+R29	=Q29*(1+'Inputs'!$C$75)
+S29	=R29*(1+'Inputs'!$C$75)
+T29	=S29*(1+'Inputs'!$C$75)
+U29	=T29*(1+'Inputs'!$C$75)
+V29	=U29*(1+'Inputs'!$C$75)
+W29	=V29*(1+'Inputs'!$C$75)
+X29	=W29*(1+'Inputs'!$C$75)
+Y29	=X29*(1+'Inputs'!$C$75)
+A30	'Services'
+A31	'  Deseasonalised run-rate volume (last actual months)'
+B31	'm units/yr'
+C31	=SUM($K$34:$M$34)/SUM($K$13:$M$13)
+A32	'  Volume growth per month (live case)'
+B32	'%'
+N32	=CHOOSE('Inputs'!$C$10,'Scenarios'!N26,'Scenarios'!N27,'Scenarios'!N28)
+O32	=CHOOSE('Inputs'!$C$10,'Scenarios'!O26,'Scenarios'!O27,'Scenarios'!O28)
+P32	=CHOOSE('Inputs'!$C$10,'Scenarios'!P26,'Scenarios'!P27,'Scenarios'!P28)
+Q32	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q26,'Scenarios'!Q27,'Scenarios'!Q28)
+R32	=CHOOSE('Inputs'!$C$10,'Scenarios'!R26,'Scenarios'!R27,'Scenarios'!R28)
+S32	=CHOOSE('Inputs'!$C$10,'Scenarios'!S26,'Scenarios'!S27,'Scenarios'!S28)
+T32	=CHOOSE('Inputs'!$C$10,'Scenarios'!T26,'Scenarios'!T27,'Scenarios'!T28)
+U32	=CHOOSE('Inputs'!$C$10,'Scenarios'!U26,'Scenarios'!U27,'Scenarios'!U28)
+V32	=CHOOSE('Inputs'!$C$10,'Scenarios'!V26,'Scenarios'!V27,'Scenarios'!V28)
+W32	=CHOOSE('Inputs'!$C$10,'Scenarios'!W26,'Scenarios'!W27,'Scenarios'!W28)
+X32	=CHOOSE('Inputs'!$C$10,'Scenarios'!X26,'Scenarios'!X27,'Scenarios'!X28)
+Y32	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y26,'Scenarios'!Y27,'Scenarios'!Y28)
+A33	'  Growth index (actual months = 1)'
+B33	'x'
+E33	1
+F33	1
+G33	1
+H33	1
+I33	1
+J33	1
+K33	1
+L33	1
+M33	1
+N33	=M33*(1+N32)
+O33	=N33*(1+O32)
+P33	=O33*(1+P32)
+Q33	=P33*(1+Q32)
+R33	=Q33*(1+R32)
+S33	=R33*(1+S32)
+T33	=S33*(1+T32)
+U33	=T33*(1+U32)
+V33	=U33*(1+V32)
+W33	=V33*(1+W32)
+X33	=W33*(1+X32)
+Y33	=X33*(1+Y32)
+A34	'  Volume'
+B34	'm units'
+E34	='Actuals'!E18
+F34	='Actuals'!F18
+G34	='Actuals'!G18
+H34	='Actuals'!H18
+I34	='Actuals'!I18
+J34	='Actuals'!J18
+K34	='Actuals'!K18
+L34	='Actuals'!L18
+M34	='Actuals'!M18
+N34	=$C$31*N13*N33
+O34	=$C$31*O13*O33
+P34	=$C$31*P13*P33
+Q34	=$C$31*Q13*Q33
+R34	=$C$31*R13*R33
+S34	=$C$31*S13*S33
+T34	=$C$31*T13*T33
+U34	=$C$31*U13*U33
+V34	=$C$31*V13*V33
+W34	=$C$31*W13*W33
+X34	=$C$31*X13*X33
+Y34	=$C$31*Y13*Y33
+A35	'  Price change per month (live case)'
+B35	'%'
+N35	=CHOOSE('Inputs'!$C$10,'Scenarios'!N30,'Scenarios'!N31,'Scenarios'!N32)
+O35	=CHOOSE('Inputs'!$C$10,'Scenarios'!O30,'Scenarios'!O31,'Scenarios'!O32)
+P35	=CHOOSE('Inputs'!$C$10,'Scenarios'!P30,'Scenarios'!P31,'Scenarios'!P32)
+Q35	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q30,'Scenarios'!Q31,'Scenarios'!Q32)
+R35	=CHOOSE('Inputs'!$C$10,'Scenarios'!R30,'Scenarios'!R31,'Scenarios'!R32)
+S35	=CHOOSE('Inputs'!$C$10,'Scenarios'!S30,'Scenarios'!S31,'Scenarios'!S32)
+T35	=CHOOSE('Inputs'!$C$10,'Scenarios'!T30,'Scenarios'!T31,'Scenarios'!T32)
+U35	=CHOOSE('Inputs'!$C$10,'Scenarios'!U30,'Scenarios'!U31,'Scenarios'!U32)
+V35	=CHOOSE('Inputs'!$C$10,'Scenarios'!V30,'Scenarios'!V31,'Scenarios'!V32)
+W35	=CHOOSE('Inputs'!$C$10,'Scenarios'!W30,'Scenarios'!W31,'Scenarios'!W32)
+X35	=CHOOSE('Inputs'!$C$10,'Scenarios'!X30,'Scenarios'!X31,'Scenarios'!X32)
+Y35	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y30,'Scenarios'!Y31,'Scenarios'!Y32)
+A36	'  Price (actual = realised)'
+B36	'$/unit'
+E36	='Actuals'!E19/'Actuals'!E18
+F36	='Actuals'!F19/'Actuals'!F18
+G36	='Actuals'!G19/'Actuals'!G18
+H36	='Actuals'!H19/'Actuals'!H18
+I36	='Actuals'!I19/'Actuals'!I18
+J36	='Actuals'!J19/'Actuals'!J18
+K36	='Actuals'!K19/'Actuals'!K18
+L36	='Actuals'!L19/'Actuals'!L18
+M36	='Actuals'!M19/'Actuals'!M18
+N36	=M36*(1+N35)
+O36	=N36*(1+O35)
+P36	=O36*(1+P35)
+Q36	=P36*(1+Q35)
+R36	=Q36*(1+R35)
+S36	=R36*(1+S35)
+T36	=S36*(1+T35)
+U36	=T36*(1+U35)
+V36	=U36*(1+V35)
+W36	=V36*(1+W35)
+X36	=W36*(1+X35)
+Y36	=X36*(1+Y35)
+A37	'  Unit cost (actual = realised)'
+B37	'$/unit'
+E37	='Actuals'!E20/'Actuals'!E18
+F37	='Actuals'!F20/'Actuals'!F18
+G37	='Actuals'!G20/'Actuals'!G18
+H37	='Actuals'!H20/'Actuals'!H18
+I37	='Actuals'!I20/'Actuals'!I18
+J37	='Actuals'!J20/'Actuals'!J18
+K37	='Actuals'!K20/'Actuals'!K18
+L37	='Actuals'!L20/'Actuals'!L18
+M37	='Actuals'!M20/'Actuals'!M18
+N37	=M37*(1+'Inputs'!$C$76)
+O37	=N37*(1+'Inputs'!$C$76)
+P37	=O37*(1+'Inputs'!$C$76)
+Q37	=P37*(1+'Inputs'!$C$76)
+R37	=Q37*(1+'Inputs'!$C$76)
+S37	=R37*(1+'Inputs'!$C$76)
+T37	=S37*(1+'Inputs'!$C$76)
+U37	=T37*(1+'Inputs'!$C$76)
+V37	=U37*(1+'Inputs'!$C$76)
+W37	=V37*(1+'Inputs'!$C$76)
+X37	=W37*(1+'Inputs'!$C$76)
+Y37	=X37*(1+'Inputs'!$C$76)
+A38	'Revenue (from PnL, for the run-rate window)'
+B38	'$m'
+E38	='PnL'!E12
+F38	='PnL'!F12
+G38	='PnL'!G12
+H38	='PnL'!H12
+I38	='PnL'!I12
+J38	='PnL'!J12
+K38	='PnL'!K12
+L38	='PnL'!L12
+M38	='PnL'!M12
+N38	='PnL'!N12
+O38	='PnL'!O12
+P38	='PnL'!P12
+Q38	='PnL'!Q12
+R38	='PnL'!R12
+S38	='PnL'!S12
+T38	='PnL'!T12
+U38	='PnL'!U12
+V38	='PnL'!V12
+W38	='PnL'!W12
+X38	='PnL'!X12
+Y38	='PnL'!Y12
+A39	'Sales and marketing'
+A40	'  Net hires per month (live case)'
+B40	'people'
+N40	=CHOOSE('Inputs'!$C$10,'Scenarios'!N34,'Scenarios'!N35,'Scenarios'!N36)
+O40	=CHOOSE('Inputs'!$C$10,'Scenarios'!O34,'Scenarios'!O35,'Scenarios'!O36)
+P40	=CHOOSE('Inputs'!$C$10,'Scenarios'!P34,'Scenarios'!P35,'Scenarios'!P36)
+Q40	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q34,'Scenarios'!Q35,'Scenarios'!Q36)
+R40	=CHOOSE('Inputs'!$C$10,'Scenarios'!R34,'Scenarios'!R35,'Scenarios'!R36)
+S40	=CHOOSE('Inputs'!$C$10,'Scenarios'!S34,'Scenarios'!S35,'Scenarios'!S36)
+T40	=CHOOSE('Inputs'!$C$10,'Scenarios'!T34,'Scenarios'!T35,'Scenarios'!T36)
+U40	=CHOOSE('Inputs'!$C$10,'Scenarios'!U34,'Scenarios'!U35,'Scenarios'!U36)
+V40	=CHOOSE('Inputs'!$C$10,'Scenarios'!V34,'Scenarios'!V35,'Scenarios'!V36)
+W40	=CHOOSE('Inputs'!$C$10,'Scenarios'!W34,'Scenarios'!W35,'Scenarios'!W36)
+X40	=CHOOSE('Inputs'!$C$10,'Scenarios'!X34,'Scenarios'!X35,'Scenarios'!X36)
+Y40	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y34,'Scenarios'!Y35,'Scenarios'!Y36)
+A41	'  Headcount'
+B41	'people'
+E41	='Actuals'!E22
+F41	='Actuals'!F22
+G41	='Actuals'!G22
+H41	='Actuals'!H22
+I41	='Actuals'!I22
+J41	='Actuals'!J22
+K41	='Actuals'!K22
+L41	='Actuals'!L22
+M41	='Actuals'!M22
+N41	=M41+N40
+O41	=N41+O40
+P41	=O41+P40
+Q41	=P41+Q40
+R41	=Q41+R40
+S41	=R41+S40
+T41	=S41+T40
+U41	=T41+U40
+V41	=U41+V40
+W41	=V41+W40
+X41	=W41+X40
+Y41	=X41+Y40
+A42	'  Cost per head per month'
+B42	'$m'
+E42	='Actuals'!E23/'Actuals'!E22
+F42	='Actuals'!F23/'Actuals'!F22
+G42	='Actuals'!G23/'Actuals'!G22
+H42	='Actuals'!H23/'Actuals'!H22
+I42	='Actuals'!I23/'Actuals'!I22
+J42	='Actuals'!J23/'Actuals'!J22
+K42	='Actuals'!K23/'Actuals'!K22
+L42	='Actuals'!L23/'Actuals'!L22
+M42	='Actuals'!M23/'Actuals'!M22
+N42	=M42*(1+'Inputs'!$C$77)
+O42	=N42*(1+'Inputs'!$C$77)
+P42	=O42*(1+'Inputs'!$C$77)
+Q42	=P42*(1+'Inputs'!$C$77)
+R42	=Q42*(1+'Inputs'!$C$77)
+S42	=R42*(1+'Inputs'!$C$77)
+T42	=S42*(1+'Inputs'!$C$77)
+U42	=T42*(1+'Inputs'!$C$77)
+V42	=U42*(1+'Inputs'!$C$77)
+W42	=V42*(1+'Inputs'!$C$77)
+X42	=W42*(1+'Inputs'!$C$77)
+Y42	=X42*(1+'Inputs'!$C$77)
+A43	'  Programme spend % of revenue (run-rate)'
+B43	'%'
+C43	=SUM($K$44:$M$44)/SUM($K$38:$M$38)
+A44	'  Non-people cost'
+B44	'$m'
+E44	='Actuals'!E24
+F44	='Actuals'!F24
+G44	='Actuals'!G24
+H44	='Actuals'!H24
+I44	='Actuals'!I24
+J44	='Actuals'!J24
+K44	='Actuals'!K24
+L44	='Actuals'!L24
+M44	='Actuals'!M24
+N44	=$C$43*N38
+O44	=$C$43*O38
+P44	=$C$43*P38
+Q44	=$C$43*Q38
+R44	=$C$43*R38
+S44	=$C$43*S38
+T44	=$C$43*T38
+U44	=$C$43*U38
+V44	=$C$43*V38
+W44	=$C$43*W38
+X44	=$C$43*X38
+Y44	=$C$43*Y38
+A45	'Operations'
+A46	'  Net hires per month (live case)'
+B46	'people'
+N46	=CHOOSE('Inputs'!$C$10,'Scenarios'!N38,'Scenarios'!N39,'Scenarios'!N40)
+O46	=CHOOSE('Inputs'!$C$10,'Scenarios'!O38,'Scenarios'!O39,'Scenarios'!O40)
+P46	=CHOOSE('Inputs'!$C$10,'Scenarios'!P38,'Scenarios'!P39,'Scenarios'!P40)
+Q46	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q38,'Scenarios'!Q39,'Scenarios'!Q40)
+R46	=CHOOSE('Inputs'!$C$10,'Scenarios'!R38,'Scenarios'!R39,'Scenarios'!R40)
+S46	=CHOOSE('Inputs'!$C$10,'Scenarios'!S38,'Scenarios'!S39,'Scenarios'!S40)
+T46	=CHOOSE('Inputs'!$C$10,'Scenarios'!T38,'Scenarios'!T39,'Scenarios'!T40)
+U46	=CHOOSE('Inputs'!$C$10,'Scenarios'!U38,'Scenarios'!U39,'Scenarios'!U40)
+V46	=CHOOSE('Inputs'!$C$10,'Scenarios'!V38,'Scenarios'!V39,'Scenarios'!V40)
+W46	=CHOOSE('Inputs'!$C$10,'Scenarios'!W38,'Scenarios'!W39,'Scenarios'!W40)
+X46	=CHOOSE('Inputs'!$C$10,'Scenarios'!X38,'Scenarios'!X39,'Scenarios'!X40)
+Y46	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y38,'Scenarios'!Y39,'Scenarios'!Y40)
+A47	'  Headcount'
+B47	'people'
+E47	='Actuals'!E26
+F47	='Actuals'!F26
+G47	='Actuals'!G26
+H47	='Actuals'!H26
+I47	='Actuals'!I26
+J47	='Actuals'!J26
+K47	='Actuals'!K26
+L47	='Actuals'!L26
+M47	='Actuals'!M26
+N47	=M47+N46
+O47	=N47+O46
+P47	=O47+P46
+Q47	=P47+Q46
+R47	=Q47+R46
+S47	=R47+S46
+T47	=S47+T46
+U47	=T47+U46
+V47	=U47+V46
+W47	=V47+W46
+X47	=W47+X46
+Y47	=X47+Y46
+A48	'  Cost per head per month'
+B48	'$m'
+E48	='Actuals'!E27/'Actuals'!E26
+F48	='Actuals'!F27/'Actuals'!F26
+G48	='Actuals'!G27/'Actuals'!G26
+H48	='Actuals'!H27/'Actuals'!H26
+I48	='Actuals'!I27/'Actuals'!I26
+J48	='Actuals'!J27/'Actuals'!J26
+K48	='Actuals'!K27/'Actuals'!K26
+L48	='Actuals'!L27/'Actuals'!L26
+M48	='Actuals'!M27/'Actuals'!M26
+N48	=M48*(1+'Inputs'!$C$77)
+O48	=N48*(1+'Inputs'!$C$77)
+P48	=O48*(1+'Inputs'!$C$77)
+Q48	=P48*(1+'Inputs'!$C$77)
+R48	=Q48*(1+'Inputs'!$C$77)
+S48	=R48*(1+'Inputs'!$C$77)
+T48	=S48*(1+'Inputs'!$C$77)
+U48	=T48*(1+'Inputs'!$C$77)
+V48	=U48*(1+'Inputs'!$C$77)
+W48	=V48*(1+'Inputs'!$C$77)
+X48	=W48*(1+'Inputs'!$C$77)
+Y48	=X48*(1+'Inputs'!$C$77)
+A49	'  Non-people run-rate per month'
+B49	'$m'
+C49	=AVERAGE($K$50:$M$50)
+A50	'  Non-people cost'
+B50	'$m'
+E50	='Actuals'!E28
+F50	='Actuals'!F28
+G50	='Actuals'!G28
+H50	='Actuals'!H28
+I50	='Actuals'!I28
+J50	='Actuals'!J28
+K50	='Actuals'!K28
+L50	='Actuals'!L28
+M50	='Actuals'!M28
+N50	=$C$49
+O50	=$C$49
+P50	=$C$49
+Q50	=$C$49
+R50	=$C$49
+S50	=$C$49
+T50	=$C$49
+U50	=$C$49
+V50	=$C$49
+W50	=$C$49
+X50	=$C$49
+Y50	=$C$49
+A51	'General and administrative'
+A52	'  Net hires per month (live case)'
+B52	'people'
+N52	=CHOOSE('Inputs'!$C$10,'Scenarios'!N42,'Scenarios'!N43,'Scenarios'!N44)
+O52	=CHOOSE('Inputs'!$C$10,'Scenarios'!O42,'Scenarios'!O43,'Scenarios'!O44)
+P52	=CHOOSE('Inputs'!$C$10,'Scenarios'!P42,'Scenarios'!P43,'Scenarios'!P44)
+Q52	=CHOOSE('Inputs'!$C$10,'Scenarios'!Q42,'Scenarios'!Q43,'Scenarios'!Q44)
+R52	=CHOOSE('Inputs'!$C$10,'Scenarios'!R42,'Scenarios'!R43,'Scenarios'!R44)
+S52	=CHOOSE('Inputs'!$C$10,'Scenarios'!S42,'Scenarios'!S43,'Scenarios'!S44)
+T52	=CHOOSE('Inputs'!$C$10,'Scenarios'!T42,'Scenarios'!T43,'Scenarios'!T44)
+U52	=CHOOSE('Inputs'!$C$10,'Scenarios'!U42,'Scenarios'!U43,'Scenarios'!U44)
+V52	=CHOOSE('Inputs'!$C$10,'Scenarios'!V42,'Scenarios'!V43,'Scenarios'!V44)
+W52	=CHOOSE('Inputs'!$C$10,'Scenarios'!W42,'Scenarios'!W43,'Scenarios'!W44)
+X52	=CHOOSE('Inputs'!$C$10,'Scenarios'!X42,'Scenarios'!X43,'Scenarios'!X44)
+Y52	=CHOOSE('Inputs'!$C$10,'Scenarios'!Y42,'Scenarios'!Y43,'Scenarios'!Y44)
+A53	'  Headcount'
+B53	'people'
+E53	='Actuals'!E30
+F53	='Actuals'!F30
+G53	='Actuals'!G30
+H53	='Actuals'!H30
+I53	='Actuals'!I30
+J53	='Actuals'!J30
+K53	='Actuals'!K30
+L53	='Actuals'!L30
+M53	='Actuals'!M30
+N53	=M53+N52
+O53	=N53+O52
+P53	=O53+P52
+Q53	=P53+Q52
+R53	=Q53+R52
+S53	=R53+S52
+T53	=S53+T52
+U53	=T53+U52
+V53	=U53+V52
+W53	=V53+W52
+X53	=W53+X52
+Y53	=X53+Y52
+A54	'  Cost per head per month'
+B54	'$m'
+E54	='Actuals'!E31/'Actuals'!E30
+F54	='Actuals'!F31/'Actuals'!F30
+G54	='Actuals'!G31/'Actuals'!G30
+H54	='Actuals'!H31/'Actuals'!H30
+I54	='Actuals'!I31/'Actuals'!I30
+J54	='Actuals'!J31/'Actuals'!J30
+K54	='Actuals'!K31/'Actuals'!K30
+L54	='Actuals'!L31/'Actuals'!L30
+M54	='Actuals'!M31/'Actuals'!M30
+N54	=M54*(1+'Inputs'!$C$77)
+O54	=N54*(1+'Inputs'!$C$77)
+P54	=O54*(1+'Inputs'!$C$77)
+Q54	=P54*(1+'Inputs'!$C$77)
+R54	=Q54*(1+'Inputs'!$C$77)
+S54	=R54*(1+'Inputs'!$C$77)
+T54	=S54*(1+'Inputs'!$C$77)
+U54	=T54*(1+'Inputs'!$C$77)
+V54	=U54*(1+'Inputs'!$C$77)
+W54	=V54*(1+'Inputs'!$C$77)
+X54	=W54*(1+'Inputs'!$C$77)
+Y54	=X54*(1+'Inputs'!$C$77)
+A55	'  Non-people run-rate per month'
+B55	'$m'
+C55	=AVERAGE($K$56:$M$56)
+A56	'  Non-people cost'
+B56	'$m'
+E56	='Actuals'!E32
+F56	='Actuals'!F32
+G56	='Actuals'!G32
+H56	='Actuals'!H32
+I56	='Actuals'!I32
+J56	='Actuals'!J32
+K56	='Actuals'!K32
+L56	='Actuals'!L32
+M56	='Actuals'!M32
+N56	=$C$55
+O56	=$C$55
+P56	=$C$55
+Q56	=$C$55
+R56	=$C$55
+S56	=$C$55
+T56	=$C$55
+U56	=$C$55
+V56	=$C$55
+W56	=$C$55
+X56	=$C$55
+Y56	=$C$55
+A57	'Capex'
+A58	'Capex'
+B58	'$m'
+E58	='Actuals'!E34
+F58	='Actuals'!F34
+G58	='Actuals'!G34
+H58	='Actuals'!H34
+I58	='Actuals'!I34
+J58	='Actuals'!J34
+K58	='Actuals'!K34
+L58	='Actuals'!L34
+M58	='Actuals'!M34
+N58	='Inputs'!$C$78
+O58	='Inputs'!$C$78
+P58	='Inputs'!$C$78
+Q58	='Inputs'!$C$78
+R58	='Inputs'!$C$78
+S58	='Inputs'!$C$78
+T58	='Inputs'!$C$78
+U58	='Inputs'!$C$78
+V58	='Inputs'!$C$78
+W58	='Inputs'!$C$78
+X58	='Inputs'!$C$78
+Y58	='Inputs'!$C$78
+=== Budget
+A1	'FY2026 budget: prior-year anchors x drivers x seasonality (zero outside the budget year)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Core'
+A10	'  Volume'
+B10	'm units'
+E10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!E13*'Drivers'!E12
+F10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!F13*'Drivers'!F12
+G10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!G13*'Drivers'!G12
+H10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!H13*'Drivers'!H12
+I10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!I13*'Drivers'!I12
+J10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!J13*'Drivers'!J12
+K10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!K13*'Drivers'!K12
+L10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!L13*'Drivers'!L12
+M10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!M13*'Drivers'!M12
+N10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!N13*'Drivers'!N12
+O10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!O13*'Drivers'!O12
+P10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!P13*'Drivers'!P12
+Q10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!Q13*'Drivers'!Q12
+R10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!R13*'Drivers'!R12
+S10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!S13*'Drivers'!S12
+T10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!T13*'Drivers'!T12
+U10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!U13*'Drivers'!U12
+V10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!V13*'Drivers'!V12
+W10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!W13*'Drivers'!W12
+X10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!X13*'Drivers'!X12
+Y10	='Inputs'!$C$28*(1+'Inputs'!$C$40)*'Drivers'!Y13*'Drivers'!Y12
+A11	'  Price'
+B11	'$/unit'
+E11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!E12
+F11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!F12
+G11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!G12
+H11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!H12
+I11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!I12
+J11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!J12
+K11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!K12
+L11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!L12
+M11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!M12
+N11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!N12
+O11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!O12
+P11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!P12
+Q11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!Q12
+R11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!R12
+S11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!S12
+T11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!T12
+U11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!U12
+V11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!V12
+W11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!W12
+X11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!X12
+Y11	='Inputs'!$C$26*(1+'Inputs'!$C$41)*'Drivers'!Y12
+A12	'  Unit cost'
+B12	'$/unit'
+E12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!E12
+F12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!F12
+G12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!G12
+H12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!H12
+I12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!I12
+J12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!J12
+K12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!K12
+L12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!L12
+M12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!M12
+N12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!N12
+O12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!O12
+P12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!P12
+Q12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!Q12
+R12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!R12
+S12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!S12
+T12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!T12
+U12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!U12
+V12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!V12
+W12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!W12
+X12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!X12
+Y12	='Inputs'!$C$27*(1+'Inputs'!$C$42)*'Drivers'!Y12
+A13	'  Revenue'
+B13	'$m'
+E13	=E10*E11
+F13	=F10*F11
+G13	=G10*G11
+H13	=H10*H11
+I13	=I10*I11
+J13	=J10*J11
+K13	=K10*K11
+L13	=L10*L11
+M13	=M10*M11
+N13	=N10*N11
+O13	=O10*O11
+P13	=P10*P11
+Q13	=Q10*Q11
+R13	=R10*R11
+S13	=S10*S11
+T13	=T10*T11
+U13	=U10*U11
+V13	=V10*V11
+W13	=W10*W11
+X13	=X10*X11
+Y13	=Y10*Y11
+A14	'  Cost of goods sold'
+B14	'$m'
+E14	=E10*E12
+F14	=F10*F12
+G14	=G10*G12
+H14	=H10*H12
+I14	=I10*I12
+J14	=J10*J12
+K14	=K10*K12
+L14	=L10*L12
+M14	=M10*M12
+N14	=N10*N12
+O14	=O10*O12
+P14	=P10*P12
+Q14	=Q10*Q12
+R14	=R10*R12
+S14	=S10*S12
+T14	=T10*T12
+U14	=U10*U12
+V14	=V10*V12
+W14	=W10*W12
+X14	=X10*X12
+Y14	=Y10*Y12
+A15	'Premium'
+A16	'  Volume'
+B16	'm units'
+E16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!E13*'Drivers'!E12
+F16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!F13*'Drivers'!F12
+G16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!G13*'Drivers'!G12
+H16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!H13*'Drivers'!H12
+I16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!I13*'Drivers'!I12
+J16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!J13*'Drivers'!J12
+K16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!K13*'Drivers'!K12
+L16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!L13*'Drivers'!L12
+M16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!M13*'Drivers'!M12
+N16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!N13*'Drivers'!N12
+O16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!O13*'Drivers'!O12
+P16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!P13*'Drivers'!P12
+Q16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!Q13*'Drivers'!Q12
+R16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!R13*'Drivers'!R12
+S16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!S13*'Drivers'!S12
+T16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!T13*'Drivers'!T12
+U16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!U13*'Drivers'!U12
+V16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!V13*'Drivers'!V12
+W16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!W13*'Drivers'!W12
+X16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!X13*'Drivers'!X12
+Y16	='Inputs'!$C$32*(1+'Inputs'!$C$43)*'Drivers'!Y13*'Drivers'!Y12
+A17	'  Price'
+B17	'$/unit'
+E17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!E12
+F17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!F12
+G17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!G12
+H17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!H12
+I17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!I12
+J17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!J12
+K17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!K12
+L17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!L12
+M17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!M12
+N17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!N12
+O17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!O12
+P17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!P12
+Q17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!Q12
+R17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!R12
+S17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!S12
+T17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!T12
+U17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!U12
+V17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!V12
+W17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!W12
+X17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!X12
+Y17	='Inputs'!$C$30*(1+'Inputs'!$C$44)*'Drivers'!Y12
+A18	'  Unit cost'
+B18	'$/unit'
+E18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!E12
+F18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!F12
+G18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!G12
+H18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!H12
+I18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!I12
+J18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!J12
+K18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!K12
+L18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!L12
+M18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!M12
+N18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!N12
+O18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!O12
+P18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!P12
+Q18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!Q12
+R18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!R12
+S18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!S12
+T18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!T12
+U18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!U12
+V18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!V12
+W18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!W12
+X18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!X12
+Y18	='Inputs'!$C$31*(1+'Inputs'!$C$45)*'Drivers'!Y12
+A19	'  Revenue'
+B19	'$m'
+E19	=E16*E17
+F19	=F16*F17
+G19	=G16*G17
+H19	=H16*H17
+I19	=I16*I17
+J19	=J16*J17
+K19	=K16*K17
+L19	=L16*L17
+M19	=M16*M17
+N19	=N16*N17
+O19	=O16*O17
+P19	=P16*P17
+Q19	=Q16*Q17
+R19	=R16*R17
+S19	=S16*S17
+T19	=T16*T17
+U19	=U16*U17
+V19	=V16*V17
+W19	=W16*W17
+X19	=X16*X17
+Y19	=Y16*Y17
+A20	'  Cost of goods sold'
+B20	'$m'
+E20	=E16*E18
+F20	=F16*F18
+G20	=G16*G18
+H20	=H16*H18
+I20	=I16*I18
+J20	=J16*J18
+K20	=K16*K18
+L20	=L16*L18
+M20	=M16*M18
+N20	=N16*N18
+O20	=O16*O18
+P20	=P16*P18
+Q20	=Q16*Q18
+R20	=R16*R18
+S20	=S16*S18
+T20	=T16*T18
+U20	=U16*U18
+V20	=V16*V18
+W20	=W16*W18
+X20	=X16*X18
+Y20	=Y16*Y18
+A21	'Services'
+A22	'  Volume'
+B22	'm units'
+E22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!E13*'Drivers'!E12
+F22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!F13*'Drivers'!F12
+G22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!G13*'Drivers'!G12
+H22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!H13*'Drivers'!H12
+I22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!I13*'Drivers'!I12
+J22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!J13*'Drivers'!J12
+K22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!K13*'Drivers'!K12
+L22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!L13*'Drivers'!L12
+M22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!M13*'Drivers'!M12
+N22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!N13*'Drivers'!N12
+O22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!O13*'Drivers'!O12
+P22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!P13*'Drivers'!P12
+Q22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!Q13*'Drivers'!Q12
+R22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!R13*'Drivers'!R12
+S22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!S13*'Drivers'!S12
+T22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!T13*'Drivers'!T12
+U22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!U13*'Drivers'!U12
+V22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!V13*'Drivers'!V12
+W22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!W13*'Drivers'!W12
+X22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!X13*'Drivers'!X12
+Y22	='Inputs'!$C$36*(1+'Inputs'!$C$46)*'Drivers'!Y13*'Drivers'!Y12
+A23	'  Price'
+B23	'$/unit'
+E23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!E12
+F23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!F12
+G23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!G12
+H23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!H12
+I23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!I12
+J23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!J12
+K23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!K12
+L23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!L12
+M23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!M12
+N23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!N12
+O23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!O12
+P23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!P12
+Q23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!Q12
+R23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!R12
+S23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!S12
+T23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!T12
+U23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!U12
+V23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!V12
+W23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!W12
+X23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!X12
+Y23	='Inputs'!$C$34*(1+'Inputs'!$C$47)*'Drivers'!Y12
+A24	'  Unit cost'
+B24	'$/unit'
+E24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!E12
+F24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!F12
+G24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!G12
+H24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!H12
+I24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!I12
+J24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!J12
+K24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!K12
+L24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!L12
+M24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!M12
+N24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!N12
+O24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!O12
+P24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!P12
+Q24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!Q12
+R24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!R12
+S24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!S12
+T24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!T12
+U24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!U12
+V24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!V12
+W24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!W12
+X24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!X12
+Y24	='Inputs'!$C$35*(1+'Inputs'!$C$48)*'Drivers'!Y12
+A25	'  Revenue'
+B25	'$m'
+E25	=E22*E23
+F25	=F22*F23
+G25	=G22*G23
+H25	=H22*H23
+I25	=I22*I23
+J25	=J22*J23
+K25	=K22*K23
+L25	=L22*L23
+M25	=M22*M23
+N25	=N22*N23
+O25	=O22*O23
+P25	=P22*P23
+Q25	=Q22*Q23
+R25	=R22*R23
+S25	=S22*S23
+T25	=T22*T23
+U25	=U22*U23
+V25	=V22*V23
+W25	=W22*W23
+X25	=X22*X23
+Y25	=Y22*Y23
+A26	'  Cost of goods sold'
+B26	'$m'
+E26	=E22*E24
+F26	=F22*F24
+G26	=G22*G24
+H26	=H22*H24
+I26	=I22*I24
+J26	=J22*J24
+K26	=K22*K24
+L26	=L22*L24
+M26	=M22*M24
+N26	=N22*N24
+O26	=O22*O24
+P26	=P22*P24
+Q26	=Q22*Q24
+R26	=R22*R24
+S26	=S22*S24
+T26	=T22*T24
+U26	=U22*U24
+V26	=V22*V24
+W26	=W22*W24
+X26	=X22*X24
+Y26	=Y22*Y24
+A27	'Budget P&L'
+A28	'Revenue'
+B28	'$m'
+E28	=E13+E19+E25
+F28	=F13+F19+F25
+G28	=G13+G19+G25
+H28	=H13+H19+H25
+I28	=I13+I19+I25
+J28	=J13+J19+J25
+K28	=K13+K19+K25
+L28	=L13+L19+L25
+M28	=M13+M19+M25
+N28	=N13+N19+N25
+O28	=O13+O19+O25
+P28	=P13+P19+P25
+Q28	=Q13+Q19+Q25
+R28	=R13+R19+R25
+S28	=S13+S19+S25
+T28	=T13+T19+T25
+U28	=U13+U19+U25
+V28	=V13+V19+V25
+W28	=W13+W19+W25
+X28	=X13+X19+X25
+Y28	=Y13+Y19+Y25
+A29	'Cost of goods sold'
+B29	'$m'
+E29	=E14+E20+E26
+F29	=F14+F20+F26
+G29	=G14+G20+G26
+H29	=H14+H20+H26
+I29	=I14+I20+I26
+J29	=J14+J20+J26
+K29	=K14+K20+K26
+L29	=L14+L20+L26
+M29	=M14+M20+M26
+N29	=N14+N20+N26
+O29	=O14+O20+O26
+P29	=P14+P20+P26
+Q29	=Q14+Q20+Q26
+R29	=R14+R20+R26
+S29	=S14+S20+S26
+T29	=T14+T20+T26
+U29	=U14+U20+U26
+V29	=V14+V20+V26
+W29	=W14+W20+W26
+X29	=X14+X20+X26
+Y29	=Y14+Y20+Y26
+A30	'Gross profit'
+B30	'$m'
+E30	=E28-E29
+F30	=F28-F29
+G30	=G28-G29
+H30	=H28-H29
+I30	=I28-I29
+J30	=J28-J29
+K30	=K28-K29
+L30	=L28-L29
+M30	=M28-M29
+N30	=N28-N29
+O30	=O28-O29
+P30	=P28-P29
+Q30	=Q28-Q29
+R30	=R28-R29
+S30	=S28-S29
+T30	=T28-T29
+U30	=U28-U29
+V30	=V28-V29
+W30	=W28-W29
+X30	=X28-X29
+Y30	=Y28-Y29
+A31	'Sales and marketing: headcount'
+B31	'people'
+E31	='Inputs'!$C$61+SUM('Inputs'!$E$87:E87)
+F31	='Inputs'!$C$61+SUM('Inputs'!$E$87:F87)
+G31	='Inputs'!$C$61+SUM('Inputs'!$E$87:G87)
+H31	='Inputs'!$C$61+SUM('Inputs'!$E$87:H87)
+I31	='Inputs'!$C$61+SUM('Inputs'!$E$87:I87)
+J31	='Inputs'!$C$61+SUM('Inputs'!$E$87:J87)
+K31	='Inputs'!$C$61+SUM('Inputs'!$E$87:K87)
+L31	='Inputs'!$C$61+SUM('Inputs'!$E$87:L87)
+M31	='Inputs'!$C$61+SUM('Inputs'!$E$87:M87)
+N31	='Inputs'!$C$61+SUM('Inputs'!$E$87:N87)
+O31	='Inputs'!$C$61+SUM('Inputs'!$E$87:O87)
+P31	='Inputs'!$C$61+SUM('Inputs'!$E$87:P87)
+Q31	='Inputs'!$C$61+SUM('Inputs'!$E$87:Q87)
+R31	='Inputs'!$C$61+SUM('Inputs'!$E$87:R87)
+S31	='Inputs'!$C$61+SUM('Inputs'!$E$87:S87)
+T31	='Inputs'!$C$61+SUM('Inputs'!$E$87:T87)
+U31	='Inputs'!$C$61+SUM('Inputs'!$E$87:U87)
+V31	='Inputs'!$C$61+SUM('Inputs'!$E$87:V87)
+W31	='Inputs'!$C$61+SUM('Inputs'!$E$87:W87)
+X31	='Inputs'!$C$61+SUM('Inputs'!$E$87:X87)
+Y31	='Inputs'!$C$61+SUM('Inputs'!$E$87:Y87)
+A32	'Operations: headcount'
+B32	'people'
+E32	='Inputs'!$C$63+SUM('Inputs'!$E$88:E88)
+F32	='Inputs'!$C$63+SUM('Inputs'!$E$88:F88)
+G32	='Inputs'!$C$63+SUM('Inputs'!$E$88:G88)
+H32	='Inputs'!$C$63+SUM('Inputs'!$E$88:H88)
+I32	='Inputs'!$C$63+SUM('Inputs'!$E$88:I88)
+J32	='Inputs'!$C$63+SUM('Inputs'!$E$88:J88)
+K32	='Inputs'!$C$63+SUM('Inputs'!$E$88:K88)
+L32	='Inputs'!$C$63+SUM('Inputs'!$E$88:L88)
+M32	='Inputs'!$C$63+SUM('Inputs'!$E$88:M88)
+N32	='Inputs'!$C$63+SUM('Inputs'!$E$88:N88)
+O32	='Inputs'!$C$63+SUM('Inputs'!$E$88:O88)
+P32	='Inputs'!$C$63+SUM('Inputs'!$E$88:P88)
+Q32	='Inputs'!$C$63+SUM('Inputs'!$E$88:Q88)
+R32	='Inputs'!$C$63+SUM('Inputs'!$E$88:R88)
+S32	='Inputs'!$C$63+SUM('Inputs'!$E$88:S88)
+T32	='Inputs'!$C$63+SUM('Inputs'!$E$88:T88)
+U32	='Inputs'!$C$63+SUM('Inputs'!$E$88:U88)
+V32	='Inputs'!$C$63+SUM('Inputs'!$E$88:V88)
+W32	='Inputs'!$C$63+SUM('Inputs'!$E$88:W88)
+X32	='Inputs'!$C$63+SUM('Inputs'!$E$88:X88)
+Y32	='Inputs'!$C$63+SUM('Inputs'!$E$88:Y88)
+A33	'General and administrative: headcount'
+B33	'people'
+E33	='Inputs'!$C$65+SUM('Inputs'!$E$89:E89)
+F33	='Inputs'!$C$65+SUM('Inputs'!$E$89:F89)
+G33	='Inputs'!$C$65+SUM('Inputs'!$E$89:G89)
+H33	='Inputs'!$C$65+SUM('Inputs'!$E$89:H89)
+I33	='Inputs'!$C$65+SUM('Inputs'!$E$89:I89)
+J33	='Inputs'!$C$65+SUM('Inputs'!$E$89:J89)
+K33	='Inputs'!$C$65+SUM('Inputs'!$E$89:K89)
+L33	='Inputs'!$C$65+SUM('Inputs'!$E$89:L89)
+M33	='Inputs'!$C$65+SUM('Inputs'!$E$89:M89)
+N33	='Inputs'!$C$65+SUM('Inputs'!$E$89:N89)
+O33	='Inputs'!$C$65+SUM('Inputs'!$E$89:O89)
+P33	='Inputs'!$C$65+SUM('Inputs'!$E$89:P89)
+Q33	='Inputs'!$C$65+SUM('Inputs'!$E$89:Q89)
+R33	='Inputs'!$C$65+SUM('Inputs'!$E$89:R89)
+S33	='Inputs'!$C$65+SUM('Inputs'!$E$89:S89)
+T33	='Inputs'!$C$65+SUM('Inputs'!$E$89:T89)
+U33	='Inputs'!$C$65+SUM('Inputs'!$E$89:U89)
+V33	='Inputs'!$C$65+SUM('Inputs'!$E$89:V89)
+W33	='Inputs'!$C$65+SUM('Inputs'!$E$89:W89)
+X33	='Inputs'!$C$65+SUM('Inputs'!$E$89:X89)
+Y33	='Inputs'!$C$65+SUM('Inputs'!$E$89:Y89)
+A34	'Sales and marketing: people cost'
+B34	'$m'
+E34	=E31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!E12
+F34	=F31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!F12
+G34	=G31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!G12
+H34	=H31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!H12
+I34	=I31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!I12
+J34	=J31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!J12
+K34	=K31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!K12
+L34	=L31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!L12
+M34	=M31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!M12
+N34	=N31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!N12
+O34	=O31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!O12
+P34	=P31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!P12
+Q34	=Q31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Q12
+R34	=R31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!R12
+S34	=S31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!S12
+T34	=T31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!T12
+U34	=U31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!U12
+V34	=V31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!V12
+W34	=W31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!W12
+X34	=X31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!X12
+Y34	=Y31*'Inputs'!$C$62*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Y12
+A35	'Operations: people cost'
+B35	'$m'
+E35	=E32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!E12
+F35	=F32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!F12
+G35	=G32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!G12
+H35	=H32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!H12
+I35	=I32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!I12
+J35	=J32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!J12
+K35	=K32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!K12
+L35	=L32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!L12
+M35	=M32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!M12
+N35	=N32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!N12
+O35	=O32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!O12
+P35	=P32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!P12
+Q35	=Q32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Q12
+R35	=R32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!R12
+S35	=S32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!S12
+T35	=T32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!T12
+U35	=U32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!U12
+V35	=V32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!V12
+W35	=W32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!W12
+X35	=X32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!X12
+Y35	=Y32*'Inputs'!$C$64*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Y12
+A36	'General and administrative: people cost'
+B36	'$m'
+E36	=E33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!E12
+F36	=F33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!F12
+G36	=G33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!G12
+H36	=H33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!H12
+I36	=I33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!I12
+J36	=J33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!J12
+K36	=K33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!K12
+L36	=L33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!L12
+M36	=M33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!M12
+N36	=N33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!N12
+O36	=O33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!O12
+P36	=P33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!P12
+Q36	=Q33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Q12
+R36	=R33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!R12
+S36	=S33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!S12
+T36	=T33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!T12
+U36	=U33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!U12
+V36	=V33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!V12
+W36	=W33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!W12
+X36	=X33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!X12
+Y36	=Y33*'Inputs'!$C$66*(1+'Inputs'!$C$67)/'Inputs'!$C$14*'Drivers'!Y12
+A37	'Sales and marketing: non-people cost'
+B37	'$m'
+E37	='Inputs'!$C$68*E28
+F37	='Inputs'!$C$68*F28
+G37	='Inputs'!$C$68*G28
+H37	='Inputs'!$C$68*H28
+I37	='Inputs'!$C$68*I28
+J37	='Inputs'!$C$68*J28
+K37	='Inputs'!$C$68*K28
+L37	='Inputs'!$C$68*L28
+M37	='Inputs'!$C$68*M28
+N37	='Inputs'!$C$68*N28
+O37	='Inputs'!$C$68*O28
+P37	='Inputs'!$C$68*P28
+Q37	='Inputs'!$C$68*Q28
+R37	='Inputs'!$C$68*R28
+S37	='Inputs'!$C$68*S28
+T37	='Inputs'!$C$68*T28
+U37	='Inputs'!$C$68*U28
+V37	='Inputs'!$C$68*V28
+W37	='Inputs'!$C$68*W28
+X37	='Inputs'!$C$68*X28
+Y37	='Inputs'!$C$68*Y28
+A38	'Operations: non-people cost'
+B38	'$m'
+E38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!E12
+F38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!F12
+G38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!G12
+H38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!H12
+I38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!I12
+J38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!J12
+K38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!K12
+L38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!L12
+M38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!M12
+N38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!N12
+O38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!O12
+P38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!P12
+Q38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!Q12
+R38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!R12
+S38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!S12
+T38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!T12
+U38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!U12
+V38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!V12
+W38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!W12
+X38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!X12
+Y38	='Inputs'!$C$69/'Inputs'!$C$14*'Drivers'!Y12
+A39	'G&A: non-people cost'
+B39	'$m'
+E39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!E12
+F39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!F12
+G39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!G12
+H39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!H12
+I39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!I12
+J39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!J12
+K39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!K12
+L39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!L12
+M39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!M12
+N39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!N12
+O39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!O12
+P39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!P12
+Q39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!Q12
+R39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!R12
+S39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!S12
+T39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!T12
+U39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!U12
+V39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!V12
+W39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!W12
+X39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!X12
+Y39	='Inputs'!$C$70/'Inputs'!$C$14*'Drivers'!Y12
+A40	'Sales and marketing: operating expenses'
+B40	'$m'
+E40	=E34+E37
+F40	=F34+F37
+G40	=G34+G37
+H40	=H34+H37
+I40	=I34+I37
+J40	=J34+J37
+K40	=K34+K37
+L40	=L34+L37
+M40	=M34+M37
+N40	=N34+N37
+O40	=O34+O37
+P40	=P34+P37
+Q40	=Q34+Q37
+R40	=R34+R37
+S40	=S34+S37
+T40	=T34+T37
+U40	=U34+U37
+V40	=V34+V37
+W40	=W34+W37
+X40	=X34+X37
+Y40	=Y34+Y37
+A41	'Operations: operating expenses'
+B41	'$m'
+E41	=E35+E38
+F41	=F35+F38
+G41	=G35+G38
+H41	=H35+H38
+I41	=I35+I38
+J41	=J35+J38
+K41	=K35+K38
+L41	=L35+L38
+M41	=M35+M38
+N41	=N35+N38
+O41	=O35+O38
+P41	=P35+P38
+Q41	=Q35+Q38
+R41	=R35+R38
+S41	=S35+S38
+T41	=T35+T38
+U41	=U35+U38
+V41	=V35+V38
+W41	=W35+W38
+X41	=X35+X38
+Y41	=Y35+Y38
+A42	'General and administrative: operating expenses'
+B42	'$m'
+E42	=E36+E39
+F42	=F36+F39
+G42	=G36+G39
+H42	=H36+H39
+I42	=I36+I39
+J42	=J36+J39
+K42	=K36+K39
+L42	=L36+L39
+M42	=M36+M39
+N42	=N36+N39
+O42	=O36+O39
+P42	=P36+P39
+Q42	=Q36+Q39
+R42	=R36+R39
+S42	=S36+S39
+T42	=T36+T39
+U42	=U36+U39
+V42	=V36+V39
+W42	=W36+W39
+X42	=X36+X39
+Y42	=Y36+Y39
+A43	'Operating expenses'
+B43	'$m'
+E43	=E40+E41+E42
+F43	=F40+F41+F42
+G43	=G40+G41+G42
+H43	=H40+H41+H42
+I43	=I40+I41+I42
+J43	=J40+J41+J42
+K43	=K40+K41+K42
+L43	=L40+L41+L42
+M43	=M40+M41+M42
+N43	=N40+N41+N42
+O43	=O40+O41+O42
+P43	=P40+P41+P42
+Q43	=Q40+Q41+Q42
+R43	=R40+R41+R42
+S43	=S40+S41+S42
+T43	=T40+T41+T42
+U43	=U40+U41+U42
+V43	=V40+V41+V42
+W43	=W40+W41+W42
+X43	=X40+X41+X42
+Y43	=Y40+Y41+Y42
+A44	'EBITDA'
+B44	'$m'
+E44	=E30-E43
+F44	=F30-F43
+G44	=G30-G43
+H44	=H30-H43
+I44	=I30-I43
+J44	=J30-J43
+K44	=K30-K43
+L44	=L30-L43
+M44	=M30-M43
+N44	=N30-N43
+O44	=O30-O43
+P44	=P30-P43
+Q44	=Q30-Q43
+R44	=R30-R43
+S44	=S30-S43
+T44	=T30-T43
+U44	=U30-U43
+V44	=V30-V43
+W44	=W30-W43
+X44	=X30-X43
+Y44	=Y30-Y43
+A45	'Capex'
+B45	'$m'
+E45	='Inputs'!$C$71*'Drivers'!E12
+F45	='Inputs'!$C$71*'Drivers'!F12
+G45	='Inputs'!$C$71*'Drivers'!G12
+H45	='Inputs'!$C$71*'Drivers'!H12
+I45	='Inputs'!$C$71*'Drivers'!I12
+J45	='Inputs'!$C$71*'Drivers'!J12
+K45	='Inputs'!$C$71*'Drivers'!K12
+L45	='Inputs'!$C$71*'Drivers'!L12
+M45	='Inputs'!$C$71*'Drivers'!M12
+N45	='Inputs'!$C$71*'Drivers'!N12
+O45	='Inputs'!$C$71*'Drivers'!O12
+P45	='Inputs'!$C$71*'Drivers'!P12
+Q45	='Inputs'!$C$71*'Drivers'!Q12
+R45	='Inputs'!$C$71*'Drivers'!R12
+S45	='Inputs'!$C$71*'Drivers'!S12
+T45	='Inputs'!$C$71*'Drivers'!T12
+U45	='Inputs'!$C$71*'Drivers'!U12
+V45	='Inputs'!$C$71*'Drivers'!V12
+W45	='Inputs'!$C$71*'Drivers'!W12
+X45	='Inputs'!$C$71*'Drivers'!X12
+Y45	='Inputs'!$C$71*'Drivers'!Y12
+A46	'Budget-year volume check: sum of months less FY2025 x (1 + growth)'
+B46	'm units'
+C46	=ABS(SUM($E$10:$P$10)-'Inputs'!$C$28*(1+'Inputs'!$C$40))+ABS(SUM($E$16:$P$16)-'Inputs'!$C$32*(1+'Inputs'!$C$43))+ABS(SUM($E$22:$P$22)-'Inputs'!$C$36*(1+'Inputs'!$C$46))
+=== PnL
+A1	'Outlook: actual months then rolling forecast; P&L, cash flow and cash'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Revenue: Core'
+B9	'$m'
+E9	='Drivers'!E18*'Drivers'!E20
+F9	='Drivers'!F18*'Drivers'!F20
+G9	='Drivers'!G18*'Drivers'!G20
+H9	='Drivers'!H18*'Drivers'!H20
+I9	='Drivers'!I18*'Drivers'!I20
+J9	='Drivers'!J18*'Drivers'!J20
+K9	='Drivers'!K18*'Drivers'!K20
+L9	='Drivers'!L18*'Drivers'!L20
+M9	='Drivers'!M18*'Drivers'!M20
+N9	='Drivers'!N18*'Drivers'!N20
+O9	='Drivers'!O18*'Drivers'!O20
+P9	='Drivers'!P18*'Drivers'!P20
+Q9	='Drivers'!Q18*'Drivers'!Q20
+R9	='Drivers'!R18*'Drivers'!R20
+S9	='Drivers'!S18*'Drivers'!S20
+T9	='Drivers'!T18*'Drivers'!T20
+U9	='Drivers'!U18*'Drivers'!U20
+V9	='Drivers'!V18*'Drivers'!V20
+W9	='Drivers'!W18*'Drivers'!W20
+X9	='Drivers'!X18*'Drivers'!X20
+Y9	='Drivers'!Y18*'Drivers'!Y20
+A10	'Revenue: Premium'
+B10	'$m'
+E10	='Drivers'!E26*'Drivers'!E28
+F10	='Drivers'!F26*'Drivers'!F28
+G10	='Drivers'!G26*'Drivers'!G28
+H10	='Drivers'!H26*'Drivers'!H28
+I10	='Drivers'!I26*'Drivers'!I28
+J10	='Drivers'!J26*'Drivers'!J28
+K10	='Drivers'!K26*'Drivers'!K28
+L10	='Drivers'!L26*'Drivers'!L28
+M10	='Drivers'!M26*'Drivers'!M28
+N10	='Drivers'!N26*'Drivers'!N28
+O10	='Drivers'!O26*'Drivers'!O28
+P10	='Drivers'!P26*'Drivers'!P28
+Q10	='Drivers'!Q26*'Drivers'!Q28
+R10	='Drivers'!R26*'Drivers'!R28
+S10	='Drivers'!S26*'Drivers'!S28
+T10	='Drivers'!T26*'Drivers'!T28
+U10	='Drivers'!U26*'Drivers'!U28
+V10	='Drivers'!V26*'Drivers'!V28
+W10	='Drivers'!W26*'Drivers'!W28
+X10	='Drivers'!X26*'Drivers'!X28
+Y10	='Drivers'!Y26*'Drivers'!Y28
+A11	'Revenue: Services'
+B11	'$m'
+E11	='Drivers'!E34*'Drivers'!E36
+F11	='Drivers'!F34*'Drivers'!F36
+G11	='Drivers'!G34*'Drivers'!G36
+H11	='Drivers'!H34*'Drivers'!H36
+I11	='Drivers'!I34*'Drivers'!I36
+J11	='Drivers'!J34*'Drivers'!J36
+K11	='Drivers'!K34*'Drivers'!K36
+L11	='Drivers'!L34*'Drivers'!L36
+M11	='Drivers'!M34*'Drivers'!M36
+N11	='Drivers'!N34*'Drivers'!N36
+O11	='Drivers'!O34*'Drivers'!O36
+P11	='Drivers'!P34*'Drivers'!P36
+Q11	='Drivers'!Q34*'Drivers'!Q36
+R11	='Drivers'!R34*'Drivers'!R36
+S11	='Drivers'!S34*'Drivers'!S36
+T11	='Drivers'!T34*'Drivers'!T36
+U11	='Drivers'!U34*'Drivers'!U36
+V11	='Drivers'!V34*'Drivers'!V36
+W11	='Drivers'!W34*'Drivers'!W36
+X11	='Drivers'!X34*'Drivers'!X36
+Y11	='Drivers'!Y34*'Drivers'!Y36
+A12	'Revenue'
+B12	'$m'
+E12	=E9+E10+E11
+F12	=F9+F10+F11
+G12	=G9+G10+G11
+H12	=H9+H10+H11
+I12	=I9+I10+I11
+J12	=J9+J10+J11
+K12	=K9+K10+K11
+L12	=L9+L10+L11
+M12	=M9+M10+M11
+N12	=N9+N10+N11
+O12	=O9+O10+O11
+P12	=P9+P10+P11
+Q12	=Q9+Q10+Q11
+R12	=R9+R10+R11
+S12	=S9+S10+S11
+T12	=T9+T10+T11
+U12	=U9+U10+U11
+V12	=V9+V10+V11
+W12	=W9+W10+W11
+X12	=X9+X10+X11
+Y12	=Y9+Y10+Y11
+A13	'Cost of goods sold: Core'
+B13	'$m'
+E13	='Drivers'!E18*'Drivers'!E21
+F13	='Drivers'!F18*'Drivers'!F21
+G13	='Drivers'!G18*'Drivers'!G21
+H13	='Drivers'!H18*'Drivers'!H21
+I13	='Drivers'!I18*'Drivers'!I21
+J13	='Drivers'!J18*'Drivers'!J21
+K13	='Drivers'!K18*'Drivers'!K21
+L13	='Drivers'!L18*'Drivers'!L21
+M13	='Drivers'!M18*'Drivers'!M21
+N13	='Drivers'!N18*'Drivers'!N21
+O13	='Drivers'!O18*'Drivers'!O21
+P13	='Drivers'!P18*'Drivers'!P21
+Q13	='Drivers'!Q18*'Drivers'!Q21
+R13	='Drivers'!R18*'Drivers'!R21
+S13	='Drivers'!S18*'Drivers'!S21
+T13	='Drivers'!T18*'Drivers'!T21
+U13	='Drivers'!U18*'Drivers'!U21
+V13	='Drivers'!V18*'Drivers'!V21
+W13	='Drivers'!W18*'Drivers'!W21
+X13	='Drivers'!X18*'Drivers'!X21
+Y13	='Drivers'!Y18*'Drivers'!Y21
+A14	'Cost of goods sold: Premium'
+B14	'$m'
+E14	='Drivers'!E26*'Drivers'!E29
+F14	='Drivers'!F26*'Drivers'!F29
+G14	='Drivers'!G26*'Drivers'!G29
+H14	='Drivers'!H26*'Drivers'!H29
+I14	='Drivers'!I26*'Drivers'!I29
+J14	='Drivers'!J26*'Drivers'!J29
+K14	='Drivers'!K26*'Drivers'!K29
+L14	='Drivers'!L26*'Drivers'!L29
+M14	='Drivers'!M26*'Drivers'!M29
+N14	='Drivers'!N26*'Drivers'!N29
+O14	='Drivers'!O26*'Drivers'!O29
+P14	='Drivers'!P26*'Drivers'!P29
+Q14	='Drivers'!Q26*'Drivers'!Q29
+R14	='Drivers'!R26*'Drivers'!R29
+S14	='Drivers'!S26*'Drivers'!S29
+T14	='Drivers'!T26*'Drivers'!T29
+U14	='Drivers'!U26*'Drivers'!U29
+V14	='Drivers'!V26*'Drivers'!V29
+W14	='Drivers'!W26*'Drivers'!W29
+X14	='Drivers'!X26*'Drivers'!X29
+Y14	='Drivers'!Y26*'Drivers'!Y29
+A15	'Cost of goods sold: Services'
+B15	'$m'
+E15	='Drivers'!E34*'Drivers'!E37
+F15	='Drivers'!F34*'Drivers'!F37
+G15	='Drivers'!G34*'Drivers'!G37
+H15	='Drivers'!H34*'Drivers'!H37
+I15	='Drivers'!I34*'Drivers'!I37
+J15	='Drivers'!J34*'Drivers'!J37
+K15	='Drivers'!K34*'Drivers'!K37
+L15	='Drivers'!L34*'Drivers'!L37
+M15	='Drivers'!M34*'Drivers'!M37
+N15	='Drivers'!N34*'Drivers'!N37
+O15	='Drivers'!O34*'Drivers'!O37
+P15	='Drivers'!P34*'Drivers'!P37
+Q15	='Drivers'!Q34*'Drivers'!Q37
+R15	='Drivers'!R34*'Drivers'!R37
+S15	='Drivers'!S34*'Drivers'!S37
+T15	='Drivers'!T34*'Drivers'!T37
+U15	='Drivers'!U34*'Drivers'!U37
+V15	='Drivers'!V34*'Drivers'!V37
+W15	='Drivers'!W34*'Drivers'!W37
+X15	='Drivers'!X34*'Drivers'!X37
+Y15	='Drivers'!Y34*'Drivers'!Y37
+A16	'Cost of goods sold'
+B16	'$m'
+E16	=E13+E14+E15
+F16	=F13+F14+F15
+G16	=G13+G14+G15
+H16	=H13+H14+H15
+I16	=I13+I14+I15
+J16	=J13+J14+J15
+K16	=K13+K14+K15
+L16	=L13+L14+L15
+M16	=M13+M14+M15
+N16	=N13+N14+N15
+O16	=O13+O14+O15
+P16	=P13+P14+P15
+Q16	=Q13+Q14+Q15
+R16	=R13+R14+R15
+S16	=S13+S14+S15
+T16	=T13+T14+T15
+U16	=U13+U14+U15
+V16	=V13+V14+V15
+W16	=W13+W14+W15
+X16	=X13+X14+X15
+Y16	=Y13+Y14+Y15
+A17	'Gross profit'
+B17	'$m'
+E17	=E12-E16
+F17	=F12-F16
+G17	=G12-G16
+H17	=H12-H16
+I17	=I12-I16
+J17	=J12-J16
+K17	=K12-K16
+L17	=L12-L16
+M17	=M12-M16
+N17	=N12-N16
+O17	=O12-O16
+P17	=P12-P16
+Q17	=Q12-Q16
+R17	=R12-R16
+S17	=S12-S16
+T17	=T12-T16
+U17	=U12-U16
+V17	=V12-V16
+W17	=W12-W16
+X17	=X12-X16
+Y17	=Y12-Y16
+A18	'Gross margin'
+B18	'%'
+E18	=E17/E12
+F18	=F17/F12
+G18	=G17/G12
+H18	=H17/H12
+I18	=I17/I12
+J18	=J17/J12
+K18	=K17/K12
+L18	=L17/L12
+M18	=M17/M12
+N18	=N17/N12
+O18	=O17/O12
+P18	=P17/P12
+Q18	=Q17/Q12
+R18	=R17/R12
+S18	=S17/S12
+T18	=T17/T12
+U18	=U17/U12
+V18	=V17/V12
+W18	=W17/W12
+X18	=X17/X12
+Y18	=Y17/Y12
+A19	'Sales and marketing: people cost'
+B19	'$m'
+E19	='Drivers'!E41*'Drivers'!E42
+F19	='Drivers'!F41*'Drivers'!F42
+G19	='Drivers'!G41*'Drivers'!G42
+H19	='Drivers'!H41*'Drivers'!H42
+I19	='Drivers'!I41*'Drivers'!I42
+J19	='Drivers'!J41*'Drivers'!J42
+K19	='Drivers'!K41*'Drivers'!K42
+L19	='Drivers'!L41*'Drivers'!L42
+M19	='Drivers'!M41*'Drivers'!M42
+N19	='Drivers'!N41*'Drivers'!N42
+O19	='Drivers'!O41*'Drivers'!O42
+P19	='Drivers'!P41*'Drivers'!P42
+Q19	='Drivers'!Q41*'Drivers'!Q42
+R19	='Drivers'!R41*'Drivers'!R42
+S19	='Drivers'!S41*'Drivers'!S42
+T19	='Drivers'!T41*'Drivers'!T42
+U19	='Drivers'!U41*'Drivers'!U42
+V19	='Drivers'!V41*'Drivers'!V42
+W19	='Drivers'!W41*'Drivers'!W42
+X19	='Drivers'!X41*'Drivers'!X42
+Y19	='Drivers'!Y41*'Drivers'!Y42
+A20	'Sales and marketing: non-people cost'
+B20	'$m'
+E20	='Drivers'!E44
+F20	='Drivers'!F44
+G20	='Drivers'!G44
+H20	='Drivers'!H44
+I20	='Drivers'!I44
+J20	='Drivers'!J44
+K20	='Drivers'!K44
+L20	='Drivers'!L44
+M20	='Drivers'!M44
+N20	='Drivers'!N44
+O20	='Drivers'!O44
+P20	='Drivers'!P44
+Q20	='Drivers'!Q44
+R20	='Drivers'!R44
+S20	='Drivers'!S44
+T20	='Drivers'!T44
+U20	='Drivers'!U44
+V20	='Drivers'!V44
+W20	='Drivers'!W44
+X20	='Drivers'!X44
+Y20	='Drivers'!Y44
+A21	'Sales and marketing: operating expenses'
+B21	'$m'
+E21	=E19+E20
+F21	=F19+F20
+G21	=G19+G20
+H21	=H19+H20
+I21	=I19+I20
+J21	=J19+J20
+K21	=K19+K20
+L21	=L19+L20
+M21	=M19+M20
+N21	=N19+N20
+O21	=O19+O20
+P21	=P19+P20
+Q21	=Q19+Q20
+R21	=R19+R20
+S21	=S19+S20
+T21	=T19+T20
+U21	=U19+U20
+V21	=V19+V20
+W21	=W19+W20
+X21	=X19+X20
+Y21	=Y19+Y20
+A22	'Operations: people cost'
+B22	'$m'
+E22	='Drivers'!E47*'Drivers'!E48
+F22	='Drivers'!F47*'Drivers'!F48
+G22	='Drivers'!G47*'Drivers'!G48
+H22	='Drivers'!H47*'Drivers'!H48
+I22	='Drivers'!I47*'Drivers'!I48
+J22	='Drivers'!J47*'Drivers'!J48
+K22	='Drivers'!K47*'Drivers'!K48
+L22	='Drivers'!L47*'Drivers'!L48
+M22	='Drivers'!M47*'Drivers'!M48
+N22	='Drivers'!N47*'Drivers'!N48
+O22	='Drivers'!O47*'Drivers'!O48
+P22	='Drivers'!P47*'Drivers'!P48
+Q22	='Drivers'!Q47*'Drivers'!Q48
+R22	='Drivers'!R47*'Drivers'!R48
+S22	='Drivers'!S47*'Drivers'!S48
+T22	='Drivers'!T47*'Drivers'!T48
+U22	='Drivers'!U47*'Drivers'!U48
+V22	='Drivers'!V47*'Drivers'!V48
+W22	='Drivers'!W47*'Drivers'!W48
+X22	='Drivers'!X47*'Drivers'!X48
+Y22	='Drivers'!Y47*'Drivers'!Y48
+A23	'Operations: non-people cost'
+B23	'$m'
+E23	='Drivers'!E50
+F23	='Drivers'!F50
+G23	='Drivers'!G50
+H23	='Drivers'!H50
+I23	='Drivers'!I50
+J23	='Drivers'!J50
+K23	='Drivers'!K50
+L23	='Drivers'!L50
+M23	='Drivers'!M50
+N23	='Drivers'!N50
+O23	='Drivers'!O50
+P23	='Drivers'!P50
+Q23	='Drivers'!Q50
+R23	='Drivers'!R50
+S23	='Drivers'!S50
+T23	='Drivers'!T50
+U23	='Drivers'!U50
+V23	='Drivers'!V50
+W23	='Drivers'!W50
+X23	='Drivers'!X50
+Y23	='Drivers'!Y50
+A24	'Operations: operating expenses'
+B24	'$m'
+E24	=E22+E23
+F24	=F22+F23
+G24	=G22+G23
+H24	=H22+H23
+I24	=I22+I23
+J24	=J22+J23
+K24	=K22+K23
+L24	=L22+L23
+M24	=M22+M23
+N24	=N22+N23
+O24	=O22+O23
+P24	=P22+P23
+Q24	=Q22+Q23
+R24	=R22+R23
+S24	=S22+S23
+T24	=T22+T23
+U24	=U22+U23
+V24	=V22+V23
+W24	=W22+W23
+X24	=X22+X23
+Y24	=Y22+Y23
+A25	'General and administrative: people cost'
+B25	'$m'
+E25	='Drivers'!E53*'Drivers'!E54
+F25	='Drivers'!F53*'Drivers'!F54
+G25	='Drivers'!G53*'Drivers'!G54
+H25	='Drivers'!H53*'Drivers'!H54
+I25	='Drivers'!I53*'Drivers'!I54
+J25	='Drivers'!J53*'Drivers'!J54
+K25	='Drivers'!K53*'Drivers'!K54
+L25	='Drivers'!L53*'Drivers'!L54
+M25	='Drivers'!M53*'Drivers'!M54
+N25	='Drivers'!N53*'Drivers'!N54
+O25	='Drivers'!O53*'Drivers'!O54
+P25	='Drivers'!P53*'Drivers'!P54
+Q25	='Drivers'!Q53*'Drivers'!Q54
+R25	='Drivers'!R53*'Drivers'!R54
+S25	='Drivers'!S53*'Drivers'!S54
+T25	='Drivers'!T53*'Drivers'!T54
+U25	='Drivers'!U53*'Drivers'!U54
+V25	='Drivers'!V53*'Drivers'!V54
+W25	='Drivers'!W53*'Drivers'!W54
+X25	='Drivers'!X53*'Drivers'!X54
+Y25	='Drivers'!Y53*'Drivers'!Y54
+A26	'General and administrative: non-people cost'
+B26	'$m'
+E26	='Drivers'!E56
+F26	='Drivers'!F56
+G26	='Drivers'!G56
+H26	='Drivers'!H56
+I26	='Drivers'!I56
+J26	='Drivers'!J56
+K26	='Drivers'!K56
+L26	='Drivers'!L56
+M26	='Drivers'!M56
+N26	='Drivers'!N56
+O26	='Drivers'!O56
+P26	='Drivers'!P56
+Q26	='Drivers'!Q56
+R26	='Drivers'!R56
+S26	='Drivers'!S56
+T26	='Drivers'!T56
+U26	='Drivers'!U56
+V26	='Drivers'!V56
+W26	='Drivers'!W56
+X26	='Drivers'!X56
+Y26	='Drivers'!Y56
+A27	'General and administrative: operating expenses'
+B27	'$m'
+E27	=E25+E26
+F27	=F25+F26
+G27	=G25+G26
+H27	=H25+H26
+I27	=I25+I26
+J27	=J25+J26
+K27	=K25+K26
+L27	=L25+L26
+M27	=M25+M26
+N27	=N25+N26
+O27	=O25+O26
+P27	=P25+P26
+Q27	=Q25+Q26
+R27	=R25+R26
+S27	=S25+S26
+T27	=T25+T26
+U27	=U25+U26
+V27	=V25+V26
+W27	=W25+W26
+X27	=X25+X26
+Y27	=Y25+Y26
+A28	'Operating expenses'
+B28	'$m'
+E28	=E21+E24+E27
+F28	=F21+F24+F27
+G28	=G21+G24+G27
+H28	=H21+H24+H27
+I28	=I21+I24+I27
+J28	=J21+J24+J27
+K28	=K21+K24+K27
+L28	=L21+L24+L27
+M28	=M21+M24+M27
+N28	=N21+N24+N27
+O28	=O21+O24+O27
+P28	=P21+P24+P27
+Q28	=Q21+Q24+Q27
+R28	=R21+R24+R27
+S28	=S21+S24+S27
+T28	=T21+T24+T27
+U28	=U21+U24+U27
+V28	=V21+V24+V27
+W28	=W21+W24+W27
+X28	=X21+X24+X27
+Y28	=Y21+Y24+Y27
+A29	'EBITDA'
+B29	'$m'
+E29	=E17-E28
+F29	=F17-F28
+G29	=G17-G28
+H29	=H17-H28
+I29	=I17-I28
+J29	=J17-J28
+K29	=K17-K28
+L29	=L17-L28
+M29	=M17-M28
+N29	=N17-N28
+O29	=O17-O28
+P29	=P17-P28
+Q29	=Q17-Q28
+R29	=R17-R28
+S29	=S17-S28
+T29	=T17-T28
+U29	=U17-U28
+V29	=V17-V28
+W29	=W17-W28
+X29	=X17-X28
+Y29	=Y17-Y28
+A30	'Capex'
+B30	'$m'
+E30	='Drivers'!E58
+F30	='Drivers'!F58
+G30	='Drivers'!G58
+H30	='Drivers'!H58
+I30	='Drivers'!I58
+J30	='Drivers'!J58
+K30	='Drivers'!K58
+L30	='Drivers'!L58
+M30	='Drivers'!M58
+N30	='Drivers'!N58
+O30	='Drivers'!O58
+P30	='Drivers'!P58
+Q30	='Drivers'!Q58
+R30	='Drivers'!R58
+S30	='Drivers'!S58
+T30	='Drivers'!T58
+U30	='Drivers'!U58
+V30	='Drivers'!V58
+W30	='Drivers'!W58
+X30	='Drivers'!X58
+Y30	='Drivers'!Y58
+A31	'Depreciation: FY2025 run-rate + new capex straight line'
+B31	'$m'
+E31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:E30)/'Inputs'!$C$83
+F31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:F30)/'Inputs'!$C$83
+G31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:G30)/'Inputs'!$C$83
+H31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:H30)/'Inputs'!$C$83
+I31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:I30)/'Inputs'!$C$83
+J31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:J30)/'Inputs'!$C$83
+K31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:K30)/'Inputs'!$C$83
+L31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:L30)/'Inputs'!$C$83
+M31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:M30)/'Inputs'!$C$83
+N31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:N30)/'Inputs'!$C$83
+O31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:O30)/'Inputs'!$C$83
+P31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:P30)/'Inputs'!$C$83
+Q31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:Q30)/'Inputs'!$C$83
+R31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:R30)/'Inputs'!$C$83
+S31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:S30)/'Inputs'!$C$83
+T31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:T30)/'Inputs'!$C$83
+U31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:U30)/'Inputs'!$C$83
+V31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:V30)/'Inputs'!$C$83
+W31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:W30)/'Inputs'!$C$83
+X31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:X30)/'Inputs'!$C$83
+Y31	='Inputs'!$C$19/'Inputs'!$C$14+SUM($E$30:Y30)/'Inputs'!$C$83
+A32	'Operating profit'
+B32	'$m'
+E32	=E29-E31
+F32	=F29-F31
+G32	=G29-G31
+H32	=H29-H31
+I32	=I29-I31
+J32	=J29-J31
+K32	=K29-K31
+L32	=L29-L31
+M32	=M29-M31
+N32	=N29-N31
+O32	=O29-O31
+P32	=P29-P31
+Q32	=Q29-Q31
+R32	=R29-R31
+S32	=S29-S31
+T32	=T29-T31
+U32	=U29-U31
+V32	=V29-V31
+W32	=W29-W31
+X32	=X29-X31
+Y32	=Y29-Y31
+A33	'Cash tax'
+B33	'$m'
+E33	='Inputs'!$C$82*MAX(0,E32)
+F33	='Inputs'!$C$82*MAX(0,F32)
+G33	='Inputs'!$C$82*MAX(0,G32)
+H33	='Inputs'!$C$82*MAX(0,H32)
+I33	='Inputs'!$C$82*MAX(0,I32)
+J33	='Inputs'!$C$82*MAX(0,J32)
+K33	='Inputs'!$C$82*MAX(0,K32)
+L33	='Inputs'!$C$82*MAX(0,L32)
+M33	='Inputs'!$C$82*MAX(0,M32)
+N33	='Inputs'!$C$82*MAX(0,N32)
+O33	='Inputs'!$C$82*MAX(0,O32)
+P33	='Inputs'!$C$82*MAX(0,P32)
+Q33	='Inputs'!$C$82*MAX(0,Q32)
+R33	='Inputs'!$C$82*MAX(0,R32)
+S33	='Inputs'!$C$82*MAX(0,S32)
+T33	='Inputs'!$C$82*MAX(0,T32)
+U33	='Inputs'!$C$82*MAX(0,U32)
+V33	='Inputs'!$C$82*MAX(0,V32)
+W33	='Inputs'!$C$82*MAX(0,W32)
+X33	='Inputs'!$C$82*MAX(0,X32)
+Y33	='Inputs'!$C$82*MAX(0,Y32)
+A34	'Net working capital (% of annualised revenue)'
+B34	'$m'
+E34	='Inputs'!$C$22*E12*'Inputs'!$C$14
+F34	='Inputs'!$C$22*F12*'Inputs'!$C$14
+G34	='Inputs'!$C$22*G12*'Inputs'!$C$14
+H34	='Inputs'!$C$22*H12*'Inputs'!$C$14
+I34	='Inputs'!$C$22*I12*'Inputs'!$C$14
+J34	='Inputs'!$C$22*J12*'Inputs'!$C$14
+K34	='Inputs'!$C$22*K12*'Inputs'!$C$14
+L34	='Inputs'!$C$22*L12*'Inputs'!$C$14
+M34	='Inputs'!$C$22*M12*'Inputs'!$C$14
+N34	='Inputs'!$C$22*N12*'Inputs'!$C$14
+O34	='Inputs'!$C$22*O12*'Inputs'!$C$14
+P34	='Inputs'!$C$22*P12*'Inputs'!$C$14
+Q34	='Inputs'!$C$22*Q12*'Inputs'!$C$14
+R34	='Inputs'!$C$22*R12*'Inputs'!$C$14
+S34	='Inputs'!$C$22*S12*'Inputs'!$C$14
+T34	='Inputs'!$C$22*T12*'Inputs'!$C$14
+U34	='Inputs'!$C$22*U12*'Inputs'!$C$14
+V34	='Inputs'!$C$22*V12*'Inputs'!$C$14
+W34	='Inputs'!$C$22*W12*'Inputs'!$C$14
+X34	='Inputs'!$C$22*X12*'Inputs'!$C$14
+Y34	='Inputs'!$C$22*Y12*'Inputs'!$C$14
+A35	'Net working capital, previous month'
+B35	'$m'
+E35	306.315
+F35	=E34
+G35	=F34
+H35	=G34
+I35	=H34
+J35	=I34
+K35	=J34
+L35	=K34
+M35	=L34
+N35	=M34
+O35	=N34
+P35	=O34
+Q35	=P34
+R35	=Q34
+S35	=R34
+T35	=S34
+U35	=T34
+V35	=U34
+W35	=V34
+X35	=W34
+Y35	=X34
+A36	'Increase in net working capital'
+B36	'$m'
+E36	=E34-E35
+F36	=F34-F35
+G36	=G34-G35
+H36	=H34-H35
+I36	=I34-I35
+J36	=J34-J35
+K36	=K34-K35
+L36	=L34-L35
+M36	=M34-M35
+N36	=N34-N35
+O36	=O34-O35
+P36	=P34-P35
+Q36	=Q34-Q35
+R36	=R34-R35
+S36	=S34-S35
+T36	=T34-T35
+U36	=U34-U35
+V36	=V34-V35
+W36	=W34-W35
+X36	=X34-X35
+Y36	=Y34-Y35
+A37	'Free cash flow'
+B37	'$m'
+E37	=E29-E33-E36-E30
+F37	=F29-F33-F36-F30
+G37	=G29-G33-G36-G30
+H37	=H29-H33-H36-H30
+I37	=I29-I33-I36-I30
+J37	=J29-J33-J36-J30
+K37	=K29-K33-K36-K30
+L37	=L29-L33-L36-L30
+M37	=M29-M33-M36-M30
+N37	=N29-N33-N36-N30
+O37	=O29-O33-O36-O30
+P37	=P29-P33-P36-P30
+Q37	=Q29-Q33-Q36-Q30
+R37	=R29-R33-R36-R30
+S37	=S29-S33-S36-S30
+T37	=T29-T33-T36-T30
+U37	=U29-U33-U36-U30
+V37	=V29-V33-V36-V30
+W37	=W29-W33-W36-W30
+X37	=X29-X33-X36-X30
+Y37	=Y29-Y33-Y36-Y30
+A38	'Cash, opening'
+B38	'$m'
+E38	323.84
+F38	=E39
+G38	=F39
+H38	=G39
+I38	=H39
+J38	=I39
+K38	=J39
+L38	=K39
+M38	=L39
+N38	=M39
+O38	=N39
+P38	=O39
+Q38	=P39
+R38	=Q39
+S38	=R39
+T38	=S39
+U38	=T39
+V38	=U39
+W38	=V39
+X38	=W39
+Y38	=X39
+A39	'Cash, closing'
+B39	'$m'
+E39	=E38+E37
+F39	=F38+F37
+G39	=G38+G37
+H39	=H38+H37
+I39	=I38+I37
+J39	=J38+J37
+K39	=K38+K37
+L39	=L38+L37
+M39	=M38+M37
+N39	=N38+N37
+O39	=O38+O37
+P39	=P38+P37
+Q39	=Q38+Q37
+R39	=R38+R37
+S39	=S38+S37
+T39	=T38+T37
+U39	=U38+U37
+V39	=V38+V37
+W39	=W38+W37
+X39	=X38+X37
+Y39	=Y38+Y37
+A41	'Lowest forecast cash'
+B41	'$m'
+C41	=MIN($N$39:$Y$39)
+A42	'Month of lowest forecast cash'
+C42	=INDEX($N$5:$Y$5,MATCH($C$41,$N$39:$Y$39,0))
+A43	'Headroom over minimum cash'
+B43	'$m'
+C43	=$C$41-'Inputs'!$C$84
+A44	'FY2026 outlook: revenue (actual + forecast)'
+B44	'$m'
+C44	=SUM($E$12:$P$12)
+A45	'FY2026 outlook: EBITDA'
+B45	'$m'
+C45	=SUM($E$29:$P$29)
+=== Variance
+A1	'Budget vs actual and outlook: monthly variances and price / volume / mix bridges'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Revenue variance (outlook - budget, budget year)'
+B9	'$m'
+E9	=('PnL'!E12-'Budget'!E28)*'Drivers'!E12
+F9	=('PnL'!F12-'Budget'!F28)*'Drivers'!F12
+G9	=('PnL'!G12-'Budget'!G28)*'Drivers'!G12
+H9	=('PnL'!H12-'Budget'!H28)*'Drivers'!H12
+I9	=('PnL'!I12-'Budget'!I28)*'Drivers'!I12
+J9	=('PnL'!J12-'Budget'!J28)*'Drivers'!J12
+K9	=('PnL'!K12-'Budget'!K28)*'Drivers'!K12
+L9	=('PnL'!L12-'Budget'!L28)*'Drivers'!L12
+M9	=('PnL'!M12-'Budget'!M28)*'Drivers'!M12
+N9	=('PnL'!N12-'Budget'!N28)*'Drivers'!N12
+O9	=('PnL'!O12-'Budget'!O28)*'Drivers'!O12
+P9	=('PnL'!P12-'Budget'!P28)*'Drivers'!P12
+Q9	=('PnL'!Q12-'Budget'!Q28)*'Drivers'!Q12
+R9	=('PnL'!R12-'Budget'!R28)*'Drivers'!R12
+S9	=('PnL'!S12-'Budget'!S28)*'Drivers'!S12
+T9	=('PnL'!T12-'Budget'!T28)*'Drivers'!T12
+U9	=('PnL'!U12-'Budget'!U28)*'Drivers'!U12
+V9	=('PnL'!V12-'Budget'!V28)*'Drivers'!V12
+W9	=('PnL'!W12-'Budget'!W28)*'Drivers'!W12
+X9	=('PnL'!X12-'Budget'!X28)*'Drivers'!X12
+Y9	=('PnL'!Y12-'Budget'!Y28)*'Drivers'!Y12
+A10	'Gross profit variance'
+B10	'$m'
+E10	=('PnL'!E17-'Budget'!E30)*'Drivers'!E12
+F10	=('PnL'!F17-'Budget'!F30)*'Drivers'!F12
+G10	=('PnL'!G17-'Budget'!G30)*'Drivers'!G12
+H10	=('PnL'!H17-'Budget'!H30)*'Drivers'!H12
+I10	=('PnL'!I17-'Budget'!I30)*'Drivers'!I12
+J10	=('PnL'!J17-'Budget'!J30)*'Drivers'!J12
+K10	=('PnL'!K17-'Budget'!K30)*'Drivers'!K12
+L10	=('PnL'!L17-'Budget'!L30)*'Drivers'!L12
+M10	=('PnL'!M17-'Budget'!M30)*'Drivers'!M12
+N10	=('PnL'!N17-'Budget'!N30)*'Drivers'!N12
+O10	=('PnL'!O17-'Budget'!O30)*'Drivers'!O12
+P10	=('PnL'!P17-'Budget'!P30)*'Drivers'!P12
+Q10	=('PnL'!Q17-'Budget'!Q30)*'Drivers'!Q12
+R10	=('PnL'!R17-'Budget'!R30)*'Drivers'!R12
+S10	=('PnL'!S17-'Budget'!S30)*'Drivers'!S12
+T10	=('PnL'!T17-'Budget'!T30)*'Drivers'!T12
+U10	=('PnL'!U17-'Budget'!U30)*'Drivers'!U12
+V10	=('PnL'!V17-'Budget'!V30)*'Drivers'!V12
+W10	=('PnL'!W17-'Budget'!W30)*'Drivers'!W12
+X10	=('PnL'!X17-'Budget'!X30)*'Drivers'!X12
+Y10	=('PnL'!Y17-'Budget'!Y30)*'Drivers'!Y12
+A11	'Operating expense variance (+ = overspend)'
+B11	'$m'
+E11	=('PnL'!E28-'Budget'!E43)*'Drivers'!E12
+F11	=('PnL'!F28-'Budget'!F43)*'Drivers'!F12
+G11	=('PnL'!G28-'Budget'!G43)*'Drivers'!G12
+H11	=('PnL'!H28-'Budget'!H43)*'Drivers'!H12
+I11	=('PnL'!I28-'Budget'!I43)*'Drivers'!I12
+J11	=('PnL'!J28-'Budget'!J43)*'Drivers'!J12
+K11	=('PnL'!K28-'Budget'!K43)*'Drivers'!K12
+L11	=('PnL'!L28-'Budget'!L43)*'Drivers'!L12
+M11	=('PnL'!M28-'Budget'!M43)*'Drivers'!M12
+N11	=('PnL'!N28-'Budget'!N43)*'Drivers'!N12
+O11	=('PnL'!O28-'Budget'!O43)*'Drivers'!O12
+P11	=('PnL'!P28-'Budget'!P43)*'Drivers'!P12
+Q11	=('PnL'!Q28-'Budget'!Q43)*'Drivers'!Q12
+R11	=('PnL'!R28-'Budget'!R43)*'Drivers'!R12
+S11	=('PnL'!S28-'Budget'!S43)*'Drivers'!S12
+T11	=('PnL'!T28-'Budget'!T43)*'Drivers'!T12
+U11	=('PnL'!U28-'Budget'!U43)*'Drivers'!U12
+V11	=('PnL'!V28-'Budget'!V43)*'Drivers'!V12
+W11	=('PnL'!W28-'Budget'!W43)*'Drivers'!W12
+X11	=('PnL'!X28-'Budget'!X43)*'Drivers'!X12
+Y11	=('PnL'!Y28-'Budget'!Y43)*'Drivers'!Y12
+A12	'EBITDA variance'
+B12	'$m'
+E12	=('PnL'!E29-'Budget'!E44)*'Drivers'!E12
+F12	=('PnL'!F29-'Budget'!F44)*'Drivers'!F12
+G12	=('PnL'!G29-'Budget'!G44)*'Drivers'!G12
+H12	=('PnL'!H29-'Budget'!H44)*'Drivers'!H12
+I12	=('PnL'!I29-'Budget'!I44)*'Drivers'!I12
+J12	=('PnL'!J29-'Budget'!J44)*'Drivers'!J12
+K12	=('PnL'!K29-'Budget'!K44)*'Drivers'!K12
+L12	=('PnL'!L29-'Budget'!L44)*'Drivers'!L12
+M12	=('PnL'!M29-'Budget'!M44)*'Drivers'!M12
+N12	=('PnL'!N29-'Budget'!N44)*'Drivers'!N12
+O12	=('PnL'!O29-'Budget'!O44)*'Drivers'!O12
+P12	=('PnL'!P29-'Budget'!P44)*'Drivers'!P12
+Q12	=('PnL'!Q29-'Budget'!Q44)*'Drivers'!Q12
+R12	=('PnL'!R29-'Budget'!R44)*'Drivers'!R12
+S12	=('PnL'!S29-'Budget'!S44)*'Drivers'!S12
+T12	=('PnL'!T29-'Budget'!T44)*'Drivers'!T12
+U12	=('PnL'!U29-'Budget'!U44)*'Drivers'!U12
+V12	=('PnL'!V29-'Budget'!V44)*'Drivers'!V12
+W12	=('PnL'!W29-'Budget'!W44)*'Drivers'!W12
+X12	=('PnL'!X29-'Budget'!X44)*'Drivers'!X12
+Y12	=('PnL'!Y29-'Budget'!Y44)*'Drivers'!Y12
+A14	'Year to date (actual months)'
+A15	'Core: actual volume'
+B15	'm units'
+C15	=SUM('Drivers'!$E$18:$M$18)
+A16	'Core: actual revenue'
+B16	'$m'
+C16	=SUM('PnL'!$E$9:$M$9)
+A17	'Core: actual COGS'
+B17	'$m'
+C17	=SUM('PnL'!$E$13:$M$13)
+A18	'Core: budget volume'
+B18	'm units'
+C18	=SUM('Budget'!$E$10:$M$10)
+A19	'Core: budget revenue'
+B19	'$m'
+C19	=SUM('Budget'!$E$13:$M$13)
+A20	'Core: budget COGS'
+B20	'$m'
+C20	=SUM('Budget'!$E$14:$M$14)
+A21	'Premium: actual volume'
+B21	'm units'
+C21	=SUM('Drivers'!$E$26:$M$26)
+A22	'Premium: actual revenue'
+B22	'$m'
+C22	=SUM('PnL'!$E$10:$M$10)
+A23	'Premium: actual COGS'
+B23	'$m'
+C23	=SUM('PnL'!$E$14:$M$14)
+A24	'Premium: budget volume'
+B24	'm units'
+C24	=SUM('Budget'!$E$16:$M$16)
+A25	'Premium: budget revenue'
+B25	'$m'
+C25	=SUM('Budget'!$E$19:$M$19)
+A26	'Premium: budget COGS'
+B26	'$m'
+C26	=SUM('Budget'!$E$20:$M$20)
+A27	'Services: actual volume'
+B27	'm units'
+C27	=SUM('Drivers'!$E$34:$M$34)
+A28	'Services: actual revenue'
+B28	'$m'
+C28	=SUM('PnL'!$E$11:$M$11)
+A29	'Services: actual COGS'
+B29	'$m'
+C29	=SUM('PnL'!$E$15:$M$15)
+A30	'Services: budget volume'
+B30	'm units'
+C30	=SUM('Budget'!$E$22:$M$22)
+A31	'Services: budget revenue'
+B31	'$m'
+C31	=SUM('Budget'!$E$25:$M$25)
+A32	'Services: budget COGS'
+B32	'$m'
+C32	=SUM('Budget'!$E$26:$M$26)
+A33	'Total actual volume'
+B33	'm units'
+C33	=$C$15+$C$21+$C$27
+A34	'Total budget volume'
+B34	'm units'
+C34	=$C$18+$C$24+$C$30
+A35	'Actual revenue'
+B35	'$m'
+C35	=$C$16+$C$22+$C$28
+A36	'Budget revenue'
+B36	'$m'
+C36	=$C$19+$C$25+$C$31
+A37	'Budget gross profit'
+B37	'$m'
+C37	=$C$36-($C$20+$C$26+$C$32)
+A38	'Price variance: sum of actual volume x (actual - budget price)'
+B38	'$m'
+C38	=($C$16-$C$15*$C$19/$C$18)+($C$22-$C$21*$C$25/$C$24)+($C$28-$C$27*$C$31/$C$30)
+A39	'Volume variance at budget mix and price'
+B39	'$m'
+C39	=($C$33-$C$34)*$C$36/$C$34
+A40	'Mix variance at budget price'
+B40	'$m'
+C40	=$C$15*$C$19/$C$18+$C$21*$C$25/$C$24+$C$27*$C$31/$C$30-$C$33*$C$36/$C$34
+A41	'Unit cost variance (+ = favourable)'
+B41	'$m'
+C41	=-(($C$17-$C$15*$C$20/$C$18)+($C$23-$C$21*$C$26/$C$24)+($C$29-$C$27*$C$32/$C$30))
+A42	'Volume variance at budget unit margin'
+B42	'$m'
+C42	=($C$33-$C$34)*$C$37/$C$34
+A43	'Mix variance at budget unit margin'
+B43	'$m'
+C43	=$C$15*($C$19-$C$20)/$C$18+$C$21*($C$25-$C$26)/$C$24+$C$27*($C$31-$C$32)/$C$30-$C$33*$C$37/$C$34
+A44	'Sales and marketing: actual head-months'
+B44	'people'
+C44	=SUM('Drivers'!$E$41:$M$41)
+A45	'Sales and marketing: budget head-months'
+B45	'people'
+C45	=SUMPRODUCT('Budget'!$E$31:$M$31,'Drivers'!$E$12:$M$12)
+A46	'Sales and marketing: budget cost per head-month'
+B46	'$m'
+C46	=SUM('Budget'!$E$34:$M$34)/$C$45
+A47	'Sales and marketing: headcount variance (+ = overspend)'
+B47	'$m'
+C47	=($C$44-$C$45)*$C$46
+A48	'Sales and marketing: pay-rate variance'
+B48	'$m'
+C48	=SUM('PnL'!$E$19:$M$19)-$C$44*$C$46
+A49	'Sales and marketing: non-people variance'
+B49	'$m'
+C49	=SUM('PnL'!$E$20:$M$20)-SUM('Budget'!$E$37:$M$37)
+A50	'Operations: actual head-months'
+B50	'people'
+C50	=SUM('Drivers'!$E$47:$M$47)
+A51	'Operations: budget head-months'
+B51	'people'
+C51	=SUMPRODUCT('Budget'!$E$32:$M$32,'Drivers'!$E$12:$M$12)
+A52	'Operations: budget cost per head-month'
+B52	'$m'
+C52	=SUM('Budget'!$E$35:$M$35)/$C$51
+A53	'Operations: headcount variance (+ = overspend)'
+B53	'$m'
+C53	=($C$50-$C$51)*$C$52
+A54	'Operations: pay-rate variance'
+B54	'$m'
+C54	=SUM('PnL'!$E$22:$M$22)-$C$50*$C$52
+A55	'Operations: non-people variance'
+B55	'$m'
+C55	=SUM('PnL'!$E$23:$M$23)-SUM('Budget'!$E$38:$M$38)
+A56	'General and administrative: actual head-months'
+B56	'people'
+C56	=SUM('Drivers'!$E$53:$M$53)
+A57	'General and administrative: budget head-months'
+B57	'people'
+C57	=SUMPRODUCT('Budget'!$E$33:$M$33,'Drivers'!$E$12:$M$12)
+A58	'General and administrative: budget cost per head-month'
+B58	'$m'
+C58	=SUM('Budget'!$E$36:$M$36)/$C$57
+A59	'General and administrative: headcount variance (+ = overspend)'
+B59	'$m'
+C59	=($C$56-$C$57)*$C$58
+A60	'General and administrative: pay-rate variance'
+B60	'$m'
+C60	=SUM('PnL'!$E$25:$M$25)-$C$56*$C$58
+A61	'General and administrative: non-people variance'
+B61	'$m'
+C61	=SUM('PnL'!$E$26:$M$26)-SUM('Budget'!$E$39:$M$39)
+A62	'Headcount variance'
+B62	'$m'
+C62	=$C$47+$C$53+$C$59
+A63	'Pay-rate variance'
+B63	'$m'
+C63	=$C$48+$C$54+$C$60
+A64	'Non-people variance'
+B64	'$m'
+C64	=$C$49+$C$55+$C$61
+A65	'Operating expense variance'
+B65	'$m'
+C65	=SUM('PnL'!$E$28:$M$28)-SUM('Budget'!$E$43:$M$43)
+A66	'EBITDA bridge: budget'
+B66	'$m'
+C66	=SUM('Budget'!$E$44:$M$44)
+A67	'EBITDA bridge: budget + price + cost + volume + mix - headcount - pay rate - non-people'
+B67	'$m'
+C67	=$C$66+$C$38+$C$41+$C$42+$C$43-$C$62-$C$63-$C$64
+A68	'EBITDA bridge: actual / outlook'
+B68	'$m'
+C68	=SUM('PnL'!$E$29:$M$29)
+A70	'Full year FY2026 (actual + forecast)'
+A71	'Core: actual volume'
+B71	'm units'
+C71	=SUM('Drivers'!$E$18:$P$18)
+A72	'Core: actual revenue'
+B72	'$m'
+C72	=SUM('PnL'!$E$9:$P$9)
+A73	'Core: actual COGS'
+B73	'$m'
+C73	=SUM('PnL'!$E$13:$P$13)
+A74	'Core: budget volume'
+B74	'm units'
+C74	=SUM('Budget'!$E$10:$P$10)
+A75	'Core: budget revenue'
+B75	'$m'
+C75	=SUM('Budget'!$E$13:$P$13)
+A76	'Core: budget COGS'
+B76	'$m'
+C76	=SUM('Budget'!$E$14:$P$14)
+A77	'Premium: actual volume'
+B77	'm units'
+C77	=SUM('Drivers'!$E$26:$P$26)
+A78	'Premium: actual revenue'
+B78	'$m'
+C78	=SUM('PnL'!$E$10:$P$10)
+A79	'Premium: actual COGS'
+B79	'$m'
+C79	=SUM('PnL'!$E$14:$P$14)
+A80	'Premium: budget volume'
+B80	'm units'
+C80	=SUM('Budget'!$E$16:$P$16)
+A81	'Premium: budget revenue'
+B81	'$m'
+C81	=SUM('Budget'!$E$19:$P$19)
+A82	'Premium: budget COGS'
+B82	'$m'
+C82	=SUM('Budget'!$E$20:$P$20)
+A83	'Services: actual volume'
+B83	'm units'
+C83	=SUM('Drivers'!$E$34:$P$34)
+A84	'Services: actual revenue'
+B84	'$m'
+C84	=SUM('PnL'!$E$11:$P$11)
+A85	'Services: actual COGS'
+B85	'$m'
+C85	=SUM('PnL'!$E$15:$P$15)
+A86	'Services: budget volume'
+B86	'm units'
+C86	=SUM('Budget'!$E$22:$P$22)
+A87	'Services: budget revenue'
+B87	'$m'
+C87	=SUM('Budget'!$E$25:$P$25)
+A88	'Services: budget COGS'
+B88	'$m'
+C88	=SUM('Budget'!$E$26:$P$26)
+A89	'Total actual volume'
+B89	'm units'
+C89	=$C$71+$C$77+$C$83
+A90	'Total budget volume'
+B90	'm units'
+C90	=$C$74+$C$80+$C$86
+A91	'Actual revenue'
+B91	'$m'
+C91	=$C$72+$C$78+$C$84
+A92	'Budget revenue'
+B92	'$m'
+C92	=$C$75+$C$81+$C$87
+A93	'Budget gross profit'
+B93	'$m'
+C93	=$C$92-($C$76+$C$82+$C$88)
+A94	'Price variance: sum of actual volume x (actual - budget price)'
+B94	'$m'
+C94	=($C$72-$C$71*$C$75/$C$74)+($C$78-$C$77*$C$81/$C$80)+($C$84-$C$83*$C$87/$C$86)
+A95	'Volume variance at budget mix and price'
+B95	'$m'
+C95	=($C$89-$C$90)*$C$92/$C$90
+A96	'Mix variance at budget price'
+B96	'$m'
+C96	=$C$71*$C$75/$C$74+$C$77*$C$81/$C$80+$C$83*$C$87/$C$86-$C$89*$C$92/$C$90
+A97	'Unit cost variance (+ = favourable)'
+B97	'$m'
+C97	=-(($C$73-$C$71*$C$76/$C$74)+($C$79-$C$77*$C$82/$C$80)+($C$85-$C$83*$C$88/$C$86))
+A98	'Volume variance at budget unit margin'
+B98	'$m'
+C98	=($C$89-$C$90)*$C$93/$C$90
+A99	'Mix variance at budget unit margin'
+B99	'$m'
+C99	=$C$71*($C$75-$C$76)/$C$74+$C$77*($C$81-$C$82)/$C$80+$C$83*($C$87-$C$88)/$C$86-$C$89*$C$93/$C$90
+A100	'Sales and marketing: actual head-months'
+B100	'people'
+C100	=SUM('Drivers'!$E$41:$P$41)
+A101	'Sales and marketing: budget head-months'
+B101	'people'
+C101	=SUMPRODUCT('Budget'!$E$31:$P$31,'Drivers'!$E$12:$P$12)
+A102	'Sales and marketing: budget cost per head-month'
+B102	'$m'
+C102	=SUM('Budget'!$E$34:$P$34)/$C$101
+A103	'Sales and marketing: headcount variance (+ = overspend)'
+B103	'$m'
+C103	=($C$100-$C$101)*$C$102
+A104	'Sales and marketing: pay-rate variance'
+B104	'$m'
+C104	=SUM('PnL'!$E$19:$P$19)-$C$100*$C$102
+A105	'Sales and marketing: non-people variance'
+B105	'$m'
+C105	=SUM('PnL'!$E$20:$P$20)-SUM('Budget'!$E$37:$P$37)
+A106	'Operations: actual head-months'
+B106	'people'
+C106	=SUM('Drivers'!$E$47:$P$47)
+A107	'Operations: budget head-months'
+B107	'people'
+C107	=SUMPRODUCT('Budget'!$E$32:$P$32,'Drivers'!$E$12:$P$12)
+A108	'Operations: budget cost per head-month'
+B108	'$m'
+C108	=SUM('Budget'!$E$35:$P$35)/$C$107
+A109	'Operations: headcount variance (+ = overspend)'
+B109	'$m'
+C109	=($C$106-$C$107)*$C$108
+A110	'Operations: pay-rate variance'
+B110	'$m'
+C110	=SUM('PnL'!$E$22:$P$22)-$C$106*$C$108
+A111	'Operations: non-people variance'
+B111	'$m'
+C111	=SUM('PnL'!$E$23:$P$23)-SUM('Budget'!$E$38:$P$38)
+A112	'General and administrative: actual head-months'
+B112	'people'
+C112	=SUM('Drivers'!$E$53:$P$53)
+A113	'General and administrative: budget head-months'
+B113	'people'
+C113	=SUMPRODUCT('Budget'!$E$33:$P$33,'Drivers'!$E$12:$P$12)
+A114	'General and administrative: budget cost per head-month'
+B114	'$m'
+C114	=SUM('Budget'!$E$36:$P$36)/$C$113
+A115	'General and administrative: headcount variance (+ = overspend)'
+B115	'$m'
+C115	=($C$112-$C$113)*$C$114
+A116	'General and administrative: pay-rate variance'
+B116	'$m'
+C116	=SUM('PnL'!$E$25:$P$25)-$C$112*$C$114
+A117	'General and administrative: non-people variance'
+B117	'$m'
+C117	=SUM('PnL'!$E$26:$P$26)-SUM('Budget'!$E$39:$P$39)
+A118	'Headcount variance'
+B118	'$m'
+C118	=$C$103+$C$109+$C$115
+A119	'Pay-rate variance'
+B119	'$m'
+C119	=$C$104+$C$110+$C$116
+A120	'Non-people variance'
+B120	'$m'
+C120	=$C$105+$C$111+$C$117
+A121	'Operating expense variance'
+B121	'$m'
+C121	=SUM('PnL'!$E$28:$P$28)-SUM('Budget'!$E$43:$P$43)
+A122	'EBITDA bridge: budget'
+B122	'$m'
+C122	=SUM('Budget'!$E$44:$P$44)
+A123	'EBITDA bridge: budget + price + cost + volume + mix - headcount - pay rate - non-people'
+B123	'$m'
+C123	=$C$122+$C$94+$C$97+$C$98+$C$99-$C$118-$C$119-$C$120
+A124	'EBITDA bridge: actual / outlook'
+B124	'$m'
+C124	=SUM('PnL'!$E$29:$P$29)
+=== Accuracy
+A1	'Forecast accuracy: the forecast made at the June close against what happened'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Revenue forecast at the June close'
+B9	'$m'
+K9	168.974
+L9	179.535
+M9	168.974
+N9	179.535
+O9	200.657
+P9	242.901
+A10	'Revenue: actual / current outlook'
+B10	'$m'
+E10	='PnL'!E12
+F10	='PnL'!F12
+G10	='PnL'!G12
+H10	='PnL'!H12
+I10	='PnL'!I12
+J10	='PnL'!J12
+K10	='PnL'!K12
+L10	='PnL'!L12
+M10	='PnL'!M12
+N10	='PnL'!N12
+O10	='PnL'!O12
+P10	='PnL'!P12
+Q10	='PnL'!Q12
+R10	='PnL'!R12
+S10	='PnL'!S12
+T10	='PnL'!T12
+U10	='PnL'!U12
+V10	='PnL'!V12
+W10	='PnL'!W12
+X10	='PnL'!X12
+Y10	='PnL'!Y12
+A11	'Forecast error (forecast - actual)'
+B11	'$m'
+K11	=K9-K10
+L11	=L9-L10
+M11	=M9-M10
+A12	'Absolute percentage error'
+B12	'%'
+K12	=ABS(K11)/K10
+L12	=ABS(L11)/L10
+M12	=ABS(M11)/M10
+A13	'Mean absolute percentage error, months with actuals'
+B13	'%'
+C13	=AVERAGE($K$12:$M$12)
+A14	'Bias: total error / total actual (+ = forecast too high)'
+B14	'%'
+C14	=SUM($K$11:$M$11)/SUM($K$10:$M$10)
+A15	'Change in the forecast for the remaining months since June'
+B15	'$m'
+C15	=SUM($N$10:$P$10)-SUM($N$9:$P$9)
+=== Dashboard
+A1	'Dashboard: FY2026 outlook against budget'
+A4	'FY2026'
+B4	'Budget'
+C4	'Outlook'
+D4	'Variance'
+A5	'Revenue'
+B5	='Variance'!$C$92
+C5	='Variance'!$C$91
+D5	=C5-B5
+A6	'EBITDA'
+B6	='Variance'!$C$122
+C6	='Variance'!$C$124
+D6	=C6-B6
+A8	'Year-to-date revenue variance'
+B8	='Variance'!$C$35-'Variance'!$C$36
+A9	'Year-to-date EBITDA variance'
+B9	='Variance'!$C$68-'Variance'!$C$66
+A10	'Lowest forecast cash'
+B10	='PnL'!$C$41
+A11	'Month of lowest forecast cash'
+B11	='PnL'!$C$42
+A12	'Headroom over minimum cash'
+B12	='PnL'!$C$43
+A13	'June forecast: MAPE on Jul-Sep revenue'
+B13	='Accuracy'!$C$13
+A14	'June forecast: bias'
+B14	='Accuracy'!$C$14
+A15	'Live forecast case'
+B15	='Inputs'!$C$11
+A18	'FY2026 EBITDA bridge'
+B18	'$m'
+A19	'Budget EBITDA'
+B19	='Variance'!$C$122
+A20	'Price'
+B20	='Variance'!$C$94
+A21	'Unit cost'
+B21	='Variance'!$C$97
+A22	'Volume'
+B22	='Variance'!$C$98
+A23	'Mix'
+B23	='Variance'!$C$99
+A24	'Headcount'
+B24	=-'Variance'!$C$118
+A25	'Pay rate'
+B25	=-'Variance'!$C$119
+A26	'Non-people'
+B26	=-'Variance'!$C$120
+A27	'Outlook EBITDA'
+B27	='Variance'!$C$124
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-01-31'
+F4	'2026-02-28'
+G4	'2026-03-31'
+H4	'2026-04-30'
+I4	'2026-05-31'
+J4	'2026-06-30'
+K4	'2026-07-31'
+L4	'2026-08-31'
+M4	'2026-09-30'
+N4	'2026-10-31'
+O4	'2026-11-30'
+P4	'2026-12-31'
+Q4	'2027-01-31'
+R4	'2027-02-28'
+S4	'2027-03-31'
+T4	'2027-04-30'
+U4	'2027-05-31'
+V4	'2027-06-30'
+W4	'2027-07-31'
+X4	'2027-08-31'
+Y4	'2027-09-30'
+A5	'Fiscal year'
+E5	'Jan-26'
+F5	'Feb-26'
+G5	'Mar-26'
+H5	'Apr-26'
+I5	'May-26'
+J5	'Jun-26'
+K5	'Jul-26'
+L5	'Aug-26'
+M5	'Sep-26'
+N5	'Oct-26'
+O5	'Nov-26'
+P5	'Dec-26'
+Q5	'Jan-27'
+R5	'Feb-27'
+S5	'Mar-27'
+T5	'Apr-27'
+U5	'May-27'
+V5	'Jun-27'
+W5	'Jul-27'
+X5	'Aug-27'
+Y5	'Sep-27'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	1
+O6	1
+P6	1
+Q6	1
+R6	1
+S6	1
+T6	1
+U6	1
+V6	1
+W6	1
+X6	1
+Y6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	1
+O7	2
+P7	3
+Q7	4
+R7	5
+S7	6
+T7	7
+U7	8
+V7	9
+W7	10
+X7	11
+Y7	12
+A9	'Seasonality sums to 100%'
+C9	=ROUND(SUM('Inputs'!$C$49:'Inputs'!$C$60)-1,$C$22)
+A10	'Product shares sum to 100%'
+C10	=ROUND('Inputs'!$C$37-1,$C$22)
+A11	'Product revenue ties to the GL control total'
+C11	=SUMPRODUCT(ABS('Actuals'!$E$37:$M$37))
+A12	'Department opex ties to the GL control total'
+C12	=SUMPRODUCT(ABS('Actuals'!$E$38:$M$38))
+A13	'Budget volumes phase to the annual plan'
+C13	='Budget'!$C$46
+A14	'Revenue bridge sums to the variance (YTD)'
+C14	='Variance'!$C$36+'Variance'!$C$38+'Variance'!$C$39+'Variance'!$C$40-'Variance'!$C$35
+A15	'Opex bridge sums to the variance (YTD)'
+C15	='Variance'!$C$62+'Variance'!$C$63+'Variance'!$C$64-'Variance'!$C$65
+A16	'EBITDA bridge sums to the outlook (YTD)'
+C16	='Variance'!$C$67-'Variance'!$C$68
+A17	'Revenue bridge sums to the variance (FY)'
+C17	='Variance'!$C$92+'Variance'!$C$94+'Variance'!$C$95+'Variance'!$C$96-'Variance'!$C$91
+A18	'Opex bridge sums to the variance (FY)'
+C18	='Variance'!$C$118+'Variance'!$C$119+'Variance'!$C$120-'Variance'!$C$121
+A19	'EBITDA bridge sums to the outlook (FY)'
+C19	='Variance'!$C$123-'Variance'!$C$124
+A20	'Closing cash = opening cash + cumulative free cash flow'
+C20	='PnL'!$Y$39-'Inputs'!$C$21-SUM('PnL'!$E$37:$Y$37)
+A22	'Rounding precision for ratio checks (decimal places)'
+B22	'count'
+C22	9
+A23	'Tolerance'
+B23	'$m'
+C23	0.001
+A24	'MASTER CHECK (0 = all pass)'
+B24	'count'
+C24	=IF(SUMPRODUCT(ABS($C$9:$C$20))<$C$23,0,1)
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-20'
+B4	'Generated from spec/FPA.yaml and fixtures/fpa (seeded synthetic GL) (M7).'

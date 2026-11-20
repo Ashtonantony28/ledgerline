@@ -234,7 +234,57 @@ def build_05(out: Path | None = None) -> tuple[Path, dict]:
     return path, layout
 
 
-BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05}
+FPA_SHEETS = [
+    ("Inputs", "Forecast case switch, FY2025 anchors from workbook 05, budget and forecast assumptions, hiring plan"),
+    ("Actuals", "Monthly GL export Jan-Sep 2026 (seeded synthetic ledger) with GL control-total ties"),
+    ("Scenarios", "Rolling-forecast cases: volume growth, price change, net hires"),
+    ("Drivers", "Live drivers: actual months from the GL, forecast months from run-rates and the live case"),
+    ("Budget", "FY2026 driver-based budget by product and department"),
+    ("PnL", "Outlook P&L, free cash flow and cash, lowest forecast cash and headroom"),
+    ("Variance", "Budget vs actual and outlook; price / volume / mix / cost / headcount bridges"),
+    ("Accuracy", "June forecast against actuals: MAPE, bias, change in outlook"),
+    ("Dashboard", "Headline numbers and charts"),
+    ("Checks", "Integrity checks and master flag"),
+]
+
+
+def build_06(scenario: int = 1, out: Path | None = None) -> tuple[Path, dict]:
+    from ..data.fpa import load
+    from ..models.fpa import add_fpa, add_dashboard, add_charts, timeline
+    g = load()
+    m = Model(timeline(g), "FP&A")
+    add_fpa(m, g, scenario)
+    add_dashboard(m)
+    c = m.sheet("Cover", "Ledgerline Group: FY2026 budget, 9+3 rolling forecast and variance analysis (synthetic)", timeline=False)
+    c.col_widths = {"A": 34, "B": 80}
+    c.cell("A3", "Company"); c.cell("B3", "Ledgerline Group (synthetic; the consolidated group of workbook 05)", bold=True)
+    c.cell("A4", "Units"); c.cell("B4", "$ millions; volumes in millions of units; headcount in people")
+    c.cell("A5", "Actuals"); c.cell("B5", f"{m.timeline.labels[0]} to {m.timeline.labels[m.timeline.n_hist - 1]} (GL export)")
+    c.cell("A6", "Rolling forecast"); c.cell("B6", f"{m.timeline.labels[m.timeline.n_hist]} to {m.timeline.labels[-1]}")
+    c.cell("A7", "Live forecast case"); c.cell("B7", "='Inputs'!C%d" % m.sheets["Inputs"].row("scenario_name"), bold=True)
+    c.cell("A9", "Model integrity")
+    c.cell("B9", "=IF(MasterCheck=0,\"ALL CHECKS PASS\",\"CHECK FAILURE - see Checks sheet\")", bold=True)
+    c.cell("A10", "Built"); c.cell("B10", f"{date.today().isoformat()} by the Ledgerline generator (see Log)")
+    c.cell("A12", "Colour code", bold=True)
+    c.cell("A13", "Blue on yellow", input=True); c.cell("B13", "Hard-coded input (every one carries a source note)")
+    c.cell("A14", "Black", color="000000"); c.cell("B14", "Formula")
+    c.cell("A15", "Green", color="008000"); c.cell("B15", "Direct link to another sheet")
+    c.cell("A16", "Grey shading"); c.cell("B16", "Forecast months")
+    c.cell("A18", "Sheets", bold=True)
+    for k, (name, desc) in enumerate(FPA_SHEETS):
+        c.cell(f"A{19 + k}", name, bold=True); c.cell(f"B{19 + k}", desc)
+    r = 20 + len(FPA_SHEETS)
+    c.cell(f"A{r}", "Disclaimer", bold=True); c.cell(f"B{r}", DISCLAIMER, wrap=True)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/FPA.yaml and fixtures/fpa (seeded synthetic GL) (M7).")])
+    _reorder(m, ["Cover"] + [n for n, _ in FPA_SHEETS])
+    path = Path(out or OUT / "06_FPA_Forecast.xlsx")
+    layout = m.save(path)
+    add_charts(path, m, g["spec"]["calendar"]["budget_months"])
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05, "06": build_06}
 
 
 def main(argv: list[str]) -> int:

@@ -1,0 +1,54 @@
+# Workbook 06: FP&A budget and rolling forecast for the synthetic Ledgerline Group (FY2026, calendar year).
+# Prior-year anchors come from workbook 05 (FY2025 consolidated results, ref/group.py); everything else is
+# judgement (the group is synthetic) and the rationale sits next to each value. Units: $m, volumes in millions
+# of units, prices and unit costs in $ per unit, headcount in people, cost per head in $m per year.
+
+calendar:
+  start: 2026-01           # first month of the timeline and of the budget year
+  n_actual: 9              # actuals through Sep 2026 (the "9+3" forecast)
+  n_forecast: 12           # rolling 12 months: Oct 2026 to Sep 2027
+  budget_months: 12
+  lookback: 3              # run-rate window: last three actual months
+
+prior_year:                # FY2025, workbook 05 (05_Group_Close.xlsx, Statements)
+  revenue: 1931.936        # consolidated external revenue
+  dep_annual: 111.516      # consolidated depreciation
+  cash: 323.840            # consolidated cash at 31 Dec 2025
+  nwc: 306.315             # receivables 202.073 + inventory 204.321 - payables 100.079
+
+products:                  # share of FY2025 revenue, FY2025 price and unit cost (judgement: product split not in 05)
+  Core:     {share: 0.55, price: 40.0,  unit_cost: 26.0}
+  Premium:  {share: 0.30, price: 120.0, unit_cost: 66.0}
+  Services: {share: 0.15, price: 250.0, unit_cost: 110.0}
+
+budget:                    # FY2026 operating plan (judgement)
+  volume_growth: {Core: 0.03, Premium: 0.08, Services: 0.12}   # Core is mature; Services is the growth line
+  price_increase: {Core: 0.03, Premium: 0.04, Services: 0.05}  # list-price rounds in January
+  cost_inflation: {Core: 0.04, Premium: 0.03, Services: 0.02}  # supplier contracts; Core most exposed to freight
+  seasonality: [0.070, 0.070, 0.080, 0.080, 0.080, 0.080, 0.080, 0.085, 0.080, 0.085, 0.095, 0.115]  # holiday peak
+  departments:
+    SalesMarketing: {heads_open: 700,  cost_per_head: 0.120, hires: [5, 5, 8, 8, 8, 6, 6, 6, 4, 4, 2, 0]}
+    Operations:     {heads_open: 1000, cost_per_head: 0.090, hires: [0, 0, 5, 5, 5, 5, 10, 10, 15, 15, 10, 0]}
+    GA:             {heads_open: 350,  cost_per_head: 0.150, hires: [2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0]}
+  pay_raise: 0.04          # January merit round, applied to every department
+  sm_nonpeople_pct: 0.060  # sales and marketing programme spend, % of revenue
+  ops_nonpeople: 26.0      # $m per year, facilities and systems
+  ga_nonpeople: 14.5       # $m per year, audit, legal, insurance
+  capex_month: 10.0        # $m per month
+
+forecast:                  # rolling-forecast assumptions (judgement)
+  cost_inflation_month: {Core: 0.004, Premium: 0.002, Services: 0.0015}
+  wage_inflation_month: 0.003
+  capex_month: 11.0
+  scenarios:               # monthly volume growth on the run-rate, monthly price change, net hires per month
+    base:     {growth: {Core: 0.000,  Premium: 0.004, Services: 0.008}, price: {Core: 0.000, Premium: 0.002, Services: 0.003},
+               hires: {SalesMarketing: 3, Operations: 6, GA: 1}}
+    upside:   {growth: {Core: 0.003,  Premium: 0.007, Services: 0.012}, price: {Core: 0.002, Premium: 0.003, Services: 0.004},
+               hires: {SalesMarketing: 5, Operations: 9, GA: 1}}
+    downside: {growth: {Core: -0.005, Premium: 0.000, Services: 0.004}, price: {Core: -0.002, Premium: 0.000, Services: 0.001},
+               hires: {SalesMarketing: 0, Operations: 2, GA: 0}}
+
+finance:
+  tax_rate: 0.25           # blended statutory rate (judgement)
+  life_new_months: 60      # straight-line life of new capex
+  min_cash: 150.0          # treasury policy floor

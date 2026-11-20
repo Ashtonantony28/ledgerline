@@ -106,3 +106,41 @@ def group_compare(get, addr: dict, exp: dict) -> list[str]:
             if a is None or abs(float(a) - v) > GROUP_TOL:
                 bad.append(f"{k} {addr[k]}: workbook {a} vs ref {v}")
     return bad + [f"no cell for {k}" for k in missing]
+
+
+FPA_PRODUCTS = ["Core", "Premium", "Services"]
+FPA_DEPTS = ["SalesMarketing", "Operations", "GA"]
+FPA_OUTPUTS = (  # full-timeline series: (sheet, row key, reference key, kind)
+    [("PnL", k, k, "usd") for k in ("rev", "cogs", "gp", "opex", "ebitda", "capex", "dep", "ebit", "tax", "nwc", "dnwc", "fcf", "cash")]
+    + [("PnL", f"{x}_{p}", f"{x}_{p}", "usd") for p in FPA_PRODUCTS for x in ("rev", "cogs")]
+    + [("PnL", f"{x}_{d}", f"{x}_{d}", "usd") for d in FPA_DEPTS for x in ("people", "np", "opex")]
+    + [("Drivers", f"{x}_{p}", f"{x}_{p}", "ratio") for p in FPA_PRODUCTS for x in ("vol", "price", "uc")]
+    + [("Drivers", f"{x}_{d}", f"{x}_{d}", "ratio") for d in FPA_DEPTS for x in ("heads", "cph")]
+    + [("Budget", k, k, "usd") for k in ("brev", "bcogs", "bgp", "bopex", "bebitda")]
+    + [("Budget", f"{x}_{p}", f"{x}_{p}", "usd") for p in FPA_PRODUCTS for x in ("brev", "bcogs")]
+    + [("Budget", f"bvol_{p}", f"bvol_{p}", "ratio") for p in FPA_PRODUCTS]
+    + [("Budget", f"{x}_{d}", f"{x}_{d}", "usd") for d in FPA_DEPTS for x in ("bpeople", "bnp", "bopex")]
+    + [("Budget", f"bheads_{d}", f"bheads_{d}", "ratio") for d in FPA_DEPTS]
+)
+FPA_BRIDGE = (["rev_actual", "rev_budget", "price", "rev_volume", "rev_mix", "cost", "gp_volume", "gp_mix", "heads", "rate", "np",
+               "opex_var", "ebitda_budget", "ebitda_bridge", "ebitda_actual"]
+              + [f"{x}_{d}" for d in FPA_DEPTS for x in ("heads", "rate", "np")])
+FPA_CONSTS = ([("Variance", f"{s}_{k}", (s, k), "usd") for s in ("ytd", "fy") for k in FPA_BRIDGE]
+              + [("PnL", k, k, "usd") for k in ("min_cash_fc", "headroom")]
+              + [("Drivers", f"rr_{p}", f"rr_{p}", "ratio") for p in FPA_PRODUCTS]
+              + [("Drivers", "np_sm_pct", "np_sm_pct", "ratio")]
+              + [("Accuracy", k, k, "ratio") for k in ("mape", "bias")] + [("Accuracy", "q4_change", "q4_change", "usd")])
+
+
+def fpa_compare(values, ref: dict) -> list[str]:
+    """Every FP&A output, history and forecast columns, plus the bridge and summary constants."""
+    bad = []
+    for sheet, key, rkey, kind in FPA_OUTPUTS:
+        for t, (a, b) in enumerate(zip(values.series(sheet, key), ref[rkey])):
+            if not close(a, b, kind):
+                bad.append(f"{sheet}.{key}[{t}] {a} vs {b}")
+    for sheet, key, rkey, kind in FPA_CONSTS:
+        b = ref[rkey[0]][rkey[1]] if isinstance(rkey, tuple) else ref[rkey]
+        if not close(values.const(sheet, key), b, kind):
+            bad.append(f"{sheet}.{key} {values.const(sheet, key)} vs {b}")
+    return bad
