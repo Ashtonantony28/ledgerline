@@ -1,0 +1,27 @@
+# Workbook 09: credit analysis of the covered retailers (latest 10-K each). Judgement unless a source is given.
+borrowers: [COST, WMT, TGT, BJ, DG, KR, HD, LOW, SKX, DKS, FL]
+altman:                     # Altman Z' (private-firm form: book equity, so it works for borrowers without a share price)
+  source: "Altman, E. (1983), Corporate Financial Distress, Wiley; Z' re-estimated with book value of equity."
+  coef: {wc_ta: 0.717, re_ta: 0.847, ebit_ta: 3.107, eq_tl: 0.420, sales_ta: 0.998}
+  distress: 1.23
+  safe: 2.90
+scorecard:                  # simplified agency-style grid (judgement, not any agency's published methodology)
+  ratings: [AAA, AA, A, BBB, BB, B, CCC]
+  leverage_bounds: [1.0, 1.5, 2.5, 3.5, 4.5, 5.5]     # lease-adjusted debt / EBITDA upper bound of each band
+  coverage_bounds: [20.0, 12.0, 8.0, 5.0, 3.0, 1.5]   # EBITDA / interest lower bound of each band
+  leverage_weight: 0.5
+  distress_notches: 1       # notch down when Altman Z is in the distress zone
+  pd_1y: [0.0001, 0.0002, 0.0005, 0.0015, 0.0060, 0.0300, 0.2500]   # illustrative one-year PD by band (judgement)
+covenants:                  # a typical investment-grade/crossover revolver package (judgement)
+  max_leverage: 3.5
+  min_coverage: 3.0
+capacity:
+  target_leverage: 3.0      # debt capacity: lease-adjusted debt at this multiple of EBITDA ...
+  min_coverage: 4.0         # ... or at this EBITDA / interest, whichever is lower
+  marginal_rate: 0.06       # cost of incremental debt
+stress:                     # severe-but-plausible downturn (judgement)
+  ebitda_shock: 0.30        # EBITDA falls 30%
+  rate_shock: 0.02          # +200bp on the floating share of debt
+  floating_share: 0.30
+signals:                    # Tickforge export
+  availability_lag_days: 90 # conservative: a 10-K is filed within 60-90 days of year end

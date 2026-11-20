@@ -1,0 +1,1171 @@
+=== Cover
+A1	"Credit analysis: 11 US retailers, latest 10-K (spreads, Altman Z', scorecard, stress, capacity)"
+A3	'Borrowers'
+B3	'COST (FY to 2026-08-30), WMT (FY to 2026-01-31), TGT (FY to 2026-01-31), BJ (FY to 2026-01-31), DG (FY to 2026-01-30), KR (FY to 2026-01-31), HD (FY to 2026-02-01), LOW (FY to 2026-01-30), SKX (FY to 2024-12-31), DKS (FY to 2025-02-01), FL (FY to 2025-02-01)'
+A4	'Units'
+B4	'$ millions; columns are borrowers, not periods'
+A5	'Data'
+B5	'10-K XBRL via SEC EDGAR (fixtures/<TICKER>); assumptions in spec/CREDIT.yaml'
+A6	'Feeds'
+B6	'exports/borrower_spreads.csv for the banking-risk project (docs/interfaces/borrower_spreads.md)'
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-20 by the Ledgerline generator (see Log)'
+A12	'Colour code'
+A13	'Blue on yellow'
+B13	'Hard-coded input (every one carries a source note)'
+A14	'Black'
+B14	'Formula'
+A15	'Green'
+B15	'Direct link to another sheet'
+A18	'Sheets'
+A19	'Inputs'
+B19	"Altman Z' coefficients, scorecard grid, covenant package, capacity and stress assumptions"
+A20	'Spreads'
+B20	"Borrower spreads from each company's latest 10-K (XBRL, sourced per cell)"
+A21	'Credit'
+B21	"Leverage, coverage, cash-flow ratios, Altman Z', scorecard rating and PD, covenant headroom, debt capacity"
+A22	'Stress'
+B22	'EBITDA and rate stress: rating migration and covenant breaches'
+A23	'Checks'
+B23	'Integrity checks and master flag'
+A25	'Disclaimer'
+B25	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Inputs
+A1	"Inputs: Altman Z' coefficients, scorecard grid, covenants, capacity and stress assumptions"
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-08-30'
+F4	'2026-01-31'
+G4	'2026-01-31'
+H4	'2026-01-31'
+I4	'2026-01-30'
+J4	'2026-01-31'
+K4	'2026-02-01'
+L4	'2026-01-30'
+M4	'2024-12-31'
+N4	'2025-02-01'
+O4	'2025-02-01'
+A5	'Fiscal year'
+E5	'COST'
+F5	'WMT'
+G5	'TGT'
+H5	'BJ'
+I5	'DG'
+J5	'KR'
+K5	'HD'
+L5	'LOW'
+M5	'SKX'
+N5	'DKS'
+O5	'FL'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	0
+O6	0
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	0
+O7	0
+A9	"Altman Z' (book-equity form)"
+A10	'  Coefficient: Working capital / total assets'
+B10	'x'
+C10	0.717
+A11	'  Coefficient: Retained earnings / total assets'
+B11	'x'
+C11	0.847
+A12	'  Coefficient: EBIT / total assets'
+B12	'x'
+C12	3.107
+A13	'  Coefficient: Book equity / total liabilities'
+B13	'x'
+C13	0.42
+A14	'  Coefficient: Sales / total assets'
+B14	'x'
+C14	0.998
+A15	'  Distress zone below'
+B15	'x'
+C15	1.23
+A16	'  Safe zone above'
+B16	'x'
+C16	2.9
+A18	'Scorecard grid (simplified, judgement)'
+A19	'  Band 1: rating'
+C19	'AAA'
+A20	'  Band 2: rating'
+C20	'AA'
+A21	'  Band 3: rating'
+C21	'A'
+A22	'  Band 4: rating'
+C22	'BBB'
+A23	'  Band 5: rating'
+C23	'BB'
+A24	'  Band 6: rating'
+C24	'B'
+A25	'  Band 7: rating'
+C25	'CCC'
+A26	'  Leverage: upper bound of band 1'
+B26	'x'
+C26	1
+A27	'  Leverage: upper bound of band 2'
+B27	'x'
+C27	1.5
+A28	'  Leverage: upper bound of band 3'
+B28	'x'
+C28	2.5
+A29	'  Leverage: upper bound of band 4'
+B29	'x'
+C29	3.5
+A30	'  Leverage: upper bound of band 5'
+B30	'x'
+C30	4.5
+A31	'  Leverage: upper bound of band 6'
+B31	'x'
+C31	5.5
+A32	'  Coverage: lower bound of band 1'
+B32	'x'
+C32	20
+A33	'  Coverage: lower bound of band 2'
+B33	'x'
+C33	12
+A34	'  Coverage: lower bound of band 3'
+B34	'x'
+C34	8
+A35	'  Coverage: lower bound of band 4'
+B35	'x'
+C35	5
+A36	'  Coverage: lower bound of band 5'
+B36	'x'
+C36	3
+A37	'  Coverage: lower bound of band 6'
+B37	'x'
+C37	1.5
+A38	'  Band 1: one-year PD (illustrative)'
+B38	'%'
+C38	0.0001
+A39	'  Band 2: one-year PD (illustrative)'
+B39	'%'
+C39	0.0002
+A40	'  Band 3: one-year PD (illustrative)'
+B40	'%'
+C40	0.0005
+A41	'  Band 4: one-year PD (illustrative)'
+B41	'%'
+C41	0.0015
+A42	'  Band 5: one-year PD (illustrative)'
+B42	'%'
+C42	0.006
+A43	'  Band 6: one-year PD (illustrative)'
+B43	'%'
+C43	0.03
+A44	'  Band 7: one-year PD (illustrative)'
+B44	'%'
+C44	0.25
+A45	'  Weight on the leverage band'
+B45	'%'
+C45	0.5
+A46	'  Notches down in the Altman distress zone'
+B46	'count'
+C46	1
+A47	'  Number of bands'
+B47	'count'
+C47	7
+A49	'Covenants, capacity, stress (judgement)'
+A50	'Covenant: maximum lease-adjusted leverage'
+B50	'x'
+C50	3.5
+A51	'Covenant: minimum EBITDA / interest'
+B51	'x'
+C51	3
+A52	'Capacity: target leverage'
+B52	'x'
+C52	3
+A53	'Capacity: minimum coverage'
+B53	'x'
+C53	4
+A54	'Capacity: cost of incremental debt'
+B54	'%'
+C54	0.06
+A55	'Stress: EBITDA decline'
+B55	'%'
+C55	0.3
+A56	'Stress: rate rise on floating debt'
+B56	'%'
+C56	0.02
+A57	'Stress: floating share of debt'
+B57	'%'
+C57	0.3
+=== Spreads
+A1	'Borrower spreads: latest 10-K per company, $m (XBRL, per-cell sources in the notes)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-08-30'
+F4	'2026-01-31'
+G4	'2026-01-31'
+H4	'2026-01-31'
+I4	'2026-01-30'
+J4	'2026-01-31'
+K4	'2026-02-01'
+L4	'2026-01-30'
+M4	'2024-12-31'
+N4	'2025-02-01'
+O4	'2025-02-01'
+A5	'Borrower'
+E5	'COST'
+F5	'WMT'
+G5	'TGT'
+H5	'BJ'
+I5	'DG'
+J5	'KR'
+K5	'HD'
+L5	'LOW'
+M5	'SKX'
+N5	'DKS'
+O5	'FL'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	0
+O6	0
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	0
+O7	0
+A9	'Revenue'
+B9	'$m'
+E9	303154
+F9	713163
+G9	104780
+H9	21457.274
+I9	42724.369
+J9	147642
+K9	164683
+L9	86286
+M9	8969.351
+N9	13442.849
+O9	7988
+A10	'Operating income (EBIT)'
+B10	'$m'
+E10	11685
+F10	29825
+G10	5117
+H10	816.604
+I10	2203.668
+J10	1890
+K10	20890
+L10	10153
+M10	904.257
+N10	1473.932
+O10	103
+A11	'Depreciation and amortisation'
+B11	'$m'
+E11	2674
+F11	14203
+G11	3134
+H11	288.594
+I11	1046.318
+J11	3332
+K11	3514
+L11	2194
+M11	211.499
+N11	400.409
+O11	202
+A12	'Interest expense (gross, as tagged)'
+B12	'$m'
+E12	145
+F12	2318
+G12	445
+H12	31.934
+I12	0
+J12	0
+K12	2412
+L12	0
+M12	21.9
+N12	52.987
+O12	17
+A13	'Net non-operating interest (memo)'
+B13	'$m'
+E13	0
+F13	2431
+G13	0
+H13	0
+I13	230.567
+J13	639
+K13	0
+L13	1406
+M13	0
+N13	0
+O13	8
+A14	'Debt (current + long-term + short-term borrowings)'
+B14	'$m'
+E14	6162
+F14	44762
+G14	16456
+H14	519.099
+I14	4580.282
+J14	15875
+K14	55772
+L14	39921
+M14	454.919
+N14	1484.217
+O14	401
+A15	'Operating lease liabilities'
+B15	'$m'
+E15	2606
+F15	15572
+G15	3834
+H15	2089.632
+I15	11138.374
+J15	7126
+K15	9578
+L15	4756
+M15	1474.216
+N15	3003.543
+O15	2338
+A16	'Cash'
+B16	'$m'
+E16	20207
+F16	10727
+G16	5488
+H16	46.245
+I16	1138.501
+J16	3334
+K16	1389
+L16	982
+M16	1116.516
+N16	1689.94
+O16	401
+A17	'Short-term investments'
+B17	'$m'
+E17	1094
+F17	0
+G17	4611
+H17	0
+I17	0
+J17	0
+K17	0
+L17	370
+M17	118.47
+N17	0
+O17	0
+A18	'Total assets'
+B18	'$m'
+E18	89045
+F18	284668
+G18	59490
+H18	7510.475
+I18	30963.73
+J18	49953
+K18	105095
+L18	54144
+M18	8455.758
+N18	10458.694
+O18	6748
+A19	'Total liabilities'
+B19	'$m'
+E19	53242
+F19	178488
+G19	43325
+H19	5312.816
+I19	22451.768
+J19	44017
+K19	92282
+L19	64061
+M19	3635.494
+N19	7260.43
+O19	3839
+A20	'Current assets'
+B20	'$m'
+E20	46582
+F20	84874
+G20	20005
+H20	1990.089
+I20	7897.803
+J20	14505
+K20	34391
+L20	20955
+M20	4449.423
+N20	5417.707
+O20	2259
+A21	'Current liabilities'
+B21	'$m'
+E21	43952
+F21	107469
+G21	21230
+H21	2670.233
+I21	6961.135
+J21	18108
+K21	32424
+L21	19463
+M21	2256.484
+N21	3080.062
+O21	1330
+A22	'Retained earnings'
+B22	'$m'
+E22	28591
+F22	104774
+G22	9297
+H22	1201.207
+I22	4398.466
+J22	28850
+K22	94537
+L22	-10839
+M22	4436.201
+N22	6392.513
+O22	2494
+A23	'Total equity'
+B23	'$m'
+E23	35803
+F23	105887
+G23	16165
+H23	2197.659
+I23	8511.962
+J23	5936
+K23	12813
+L23	-9917
+M23	4730.165
+N23	3198.264
+O23	2909
+A24	'Temporary equity'
+B24	'$m'
+E24	0
+F24	293
+G24	0
+H24	0
+I24	0
+J24	0
+K24	0
+L24	0
+M24	90.099
+N24	0
+O24	0
+A25	'Cash from operations'
+B25	'$m'
+E25	15817
+F25	41565
+G25	6562
+H25	1030.056
+I25	3634.5
+J25	7311
+K25	16325
+L25	9864
+M25	687.39
+N25	1311.835
+O25	345
+A26	'Capital expenditure (cash sign)'
+B26	'$m'
+E26	-6435
+F26	-26642
+G26	-3727
+H26	-702.048
+I26	-1241.162
+J26	-3855
+K26	-3679
+L26	-2213
+M26	-416.794
+N26	-802.565
+O26	-240
+A27	'Net income'
+B27	'$m'
+E27	9226
+F27	21893
+G27	3705
+H27	578.377
+I27	1512.311
+J27	1016
+K27	14156
+L27	6654
+M27	639.471
+N27	1165.308
+O27	12
+A28	'Assets - liabilities - equity - temporary equity'
+B28	'$m'
+E28	=E18-E19-E23-E24
+F28	=F18-F19-F23-F24
+G28	=G18-G19-G23-G24
+H28	=H18-H19-H23-H24
+I28	=I18-I19-I23-I24
+J28	=J18-J19-J23-J24
+K28	=K18-K19-K23-K24
+L28	=L18-L19-L23-L24
+M28	=M18-M19-M23-M24
+N28	=N18-N19-N23-N24
+O28	=O18-O19-O23-O24
+=== Credit
+A1	"Credit metrics, Altman Z', scorecard rating, covenant headroom and debt capacity"
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-08-30'
+F4	'2026-01-31'
+G4	'2026-01-31'
+H4	'2026-01-31'
+I4	'2026-01-30'
+J4	'2026-01-31'
+K4	'2026-02-01'
+L4	'2026-01-30'
+M4	'2024-12-31'
+N4	'2025-02-01'
+O4	'2025-02-01'
+A5	'Borrower'
+E5	'COST'
+F5	'WMT'
+G5	'TGT'
+H5	'BJ'
+I5	'DG'
+J5	'KR'
+K5	'HD'
+L5	'LOW'
+M5	'SKX'
+N5	'DKS'
+O5	'FL'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	0
+O6	0
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	0
+O7	0
+A9	'Earnings and debt'
+A10	'EBITDA'
+B10	'$m'
+E10	='Spreads'!E10+'Spreads'!E11
+F10	='Spreads'!F10+'Spreads'!F11
+G10	='Spreads'!G10+'Spreads'!G11
+H10	='Spreads'!H10+'Spreads'!H11
+I10	='Spreads'!I10+'Spreads'!I11
+J10	='Spreads'!J10+'Spreads'!J11
+K10	='Spreads'!K10+'Spreads'!K11
+L10	='Spreads'!L10+'Spreads'!L11
+M10	='Spreads'!M10+'Spreads'!M11
+N10	='Spreads'!N10+'Spreads'!N11
+O10	='Spreads'!O10+'Spreads'!O11
+A11	'Interest for coverage (gross; net non-operating where gross is not tagged)'
+B11	'$m'
+E11	=IF('Spreads'!E12>0,'Spreads'!E12,'Spreads'!E13)
+F11	=IF('Spreads'!F12>0,'Spreads'!F12,'Spreads'!F13)
+G11	=IF('Spreads'!G12>0,'Spreads'!G12,'Spreads'!G13)
+H11	=IF('Spreads'!H12>0,'Spreads'!H12,'Spreads'!H13)
+I11	=IF('Spreads'!I12>0,'Spreads'!I12,'Spreads'!I13)
+J11	=IF('Spreads'!J12>0,'Spreads'!J12,'Spreads'!J13)
+K11	=IF('Spreads'!K12>0,'Spreads'!K12,'Spreads'!K13)
+L11	=IF('Spreads'!L12>0,'Spreads'!L12,'Spreads'!L13)
+M11	=IF('Spreads'!M12>0,'Spreads'!M12,'Spreads'!M13)
+N11	=IF('Spreads'!N12>0,'Spreads'!N12,'Spreads'!N13)
+O11	=IF('Spreads'!O12>0,'Spreads'!O12,'Spreads'!O13)
+A12	'Lease-adjusted debt'
+B12	'$m'
+E12	='Spreads'!E14+'Spreads'!E15
+F12	='Spreads'!F14+'Spreads'!F15
+G12	='Spreads'!G14+'Spreads'!G15
+H12	='Spreads'!H14+'Spreads'!H15
+I12	='Spreads'!I14+'Spreads'!I15
+J12	='Spreads'!J14+'Spreads'!J15
+K12	='Spreads'!K14+'Spreads'!K15
+L12	='Spreads'!L14+'Spreads'!L15
+M12	='Spreads'!M14+'Spreads'!M15
+N12	='Spreads'!N14+'Spreads'!N15
+O12	='Spreads'!O14+'Spreads'!O15
+A13	'Lease-adjusted net debt'
+B13	'$m'
+E13	=E12-'Spreads'!E16-'Spreads'!E17
+F13	=F12-'Spreads'!F16-'Spreads'!F17
+G13	=G12-'Spreads'!G16-'Spreads'!G17
+H13	=H12-'Spreads'!H16-'Spreads'!H17
+I13	=I12-'Spreads'!I16-'Spreads'!I17
+J13	=J12-'Spreads'!J16-'Spreads'!J17
+K13	=K12-'Spreads'!K16-'Spreads'!K17
+L13	=L12-'Spreads'!L16-'Spreads'!L17
+M13	=M12-'Spreads'!M16-'Spreads'!M17
+N13	=N12-'Spreads'!N16-'Spreads'!N17
+O13	=O12-'Spreads'!O16-'Spreads'!O17
+A14	'Free cash flow'
+B14	'$m'
+E14	='Spreads'!E25+'Spreads'!E26
+F14	='Spreads'!F25+'Spreads'!F26
+G14	='Spreads'!G25+'Spreads'!G26
+H14	='Spreads'!H25+'Spreads'!H26
+I14	='Spreads'!I25+'Spreads'!I26
+J14	='Spreads'!J25+'Spreads'!J26
+K14	='Spreads'!K25+'Spreads'!K26
+L14	='Spreads'!L25+'Spreads'!L26
+M14	='Spreads'!M25+'Spreads'!M26
+N14	='Spreads'!N25+'Spreads'!N26
+O14	='Spreads'!O25+'Spreads'!O26
+A15	'Ratios'
+A16	'Lease-adjusted debt / EBITDA'
+B16	'x'
+E16	=E12/E10
+F16	=F12/F10
+G16	=G12/G10
+H16	=H12/H10
+I16	=I12/I10
+J16	=J12/J10
+K16	=K12/K10
+L16	=L12/L10
+M16	=M12/M10
+N16	=N12/N10
+O16	=O12/O10
+A17	'Lease-adjusted net debt / EBITDA'
+B17	'x'
+E17	=E13/E10
+F17	=F13/F10
+G17	=G13/G10
+H17	=H13/H10
+I17	=I13/I10
+J17	=J13/J10
+K17	=K13/K10
+L17	=L13/L10
+M17	=M13/M10
+N17	=N13/N10
+O17	=O13/O10
+A18	'EBITDA / interest'
+B18	'x'
+E18	=E10/E11
+F18	=F10/F11
+G18	=G10/G11
+H18	=H10/H11
+I18	=I10/I11
+J18	=J10/J11
+K18	=K10/K11
+L18	=L10/L11
+M18	=M10/M11
+N18	=N10/N11
+O18	=O10/O11
+A19	'EBIT / interest'
+B19	'x'
+E19	='Spreads'!E10/E11
+F19	='Spreads'!F10/F11
+G19	='Spreads'!G10/G11
+H19	='Spreads'!H10/H11
+I19	='Spreads'!I10/I11
+J19	='Spreads'!J10/J11
+K19	='Spreads'!K10/K11
+L19	='Spreads'!L10/L11
+M19	='Spreads'!M10/M11
+N19	='Spreads'!N10/N11
+O19	='Spreads'!O10/O11
+A20	'Free cash flow / lease-adjusted debt'
+B20	'%'
+E20	=E14/E12
+F20	=F14/F12
+G20	=G14/G12
+H20	=H14/H12
+I20	=I14/I12
+J20	=J14/J12
+K20	=K14/K12
+L20	=L14/L12
+M20	=M14/M12
+N20	=N14/N12
+O20	=O14/O12
+A21	'Cash from operations / lease-adjusted debt'
+B21	'%'
+E21	='Spreads'!E25/E12
+F21	='Spreads'!F25/F12
+G21	='Spreads'!G25/G12
+H21	='Spreads'!H25/H12
+I21	='Spreads'!I25/I12
+J21	='Spreads'!J25/J12
+K21	='Spreads'!K25/K12
+L21	='Spreads'!L25/L12
+M21	='Spreads'!M25/M12
+N21	='Spreads'!N25/N12
+O21	='Spreads'!O25/O12
+A22	"Altman Z'"
+A23	"Z' score"
+B23	'x'
+E23	='Inputs'!$C$10*('Spreads'!E20-'Spreads'!E21)/'Spreads'!E18+'Inputs'!$C$11*'Spreads'!E22/'Spreads'!E18+'Inputs'!$C$12*'Spreads'!E10/'Spreads'!E18+'Inputs'!$C$13*'Spreads'!E23/'Spreads'!E19+'Inputs'!$C$14*'Spreads'!E9/'Spreads'!E18
+F23	='Inputs'!$C$10*('Spreads'!F20-'Spreads'!F21)/'Spreads'!F18+'Inputs'!$C$11*'Spreads'!F22/'Spreads'!F18+'Inputs'!$C$12*'Spreads'!F10/'Spreads'!F18+'Inputs'!$C$13*'Spreads'!F23/'Spreads'!F19+'Inputs'!$C$14*'Spreads'!F9/'Spreads'!F18
+G23	='Inputs'!$C$10*('Spreads'!G20-'Spreads'!G21)/'Spreads'!G18+'Inputs'!$C$11*'Spreads'!G22/'Spreads'!G18+'Inputs'!$C$12*'Spreads'!G10/'Spreads'!G18+'Inputs'!$C$13*'Spreads'!G23/'Spreads'!G19+'Inputs'!$C$14*'Spreads'!G9/'Spreads'!G18
+H23	='Inputs'!$C$10*('Spreads'!H20-'Spreads'!H21)/'Spreads'!H18+'Inputs'!$C$11*'Spreads'!H22/'Spreads'!H18+'Inputs'!$C$12*'Spreads'!H10/'Spreads'!H18+'Inputs'!$C$13*'Spreads'!H23/'Spreads'!H19+'Inputs'!$C$14*'Spreads'!H9/'Spreads'!H18
+I23	='Inputs'!$C$10*('Spreads'!I20-'Spreads'!I21)/'Spreads'!I18+'Inputs'!$C$11*'Spreads'!I22/'Spreads'!I18+'Inputs'!$C$12*'Spreads'!I10/'Spreads'!I18+'Inputs'!$C$13*'Spreads'!I23/'Spreads'!I19+'Inputs'!$C$14*'Spreads'!I9/'Spreads'!I18
+J23	='Inputs'!$C$10*('Spreads'!J20-'Spreads'!J21)/'Spreads'!J18+'Inputs'!$C$11*'Spreads'!J22/'Spreads'!J18+'Inputs'!$C$12*'Spreads'!J10/'Spreads'!J18+'Inputs'!$C$13*'Spreads'!J23/'Spreads'!J19+'Inputs'!$C$14*'Spreads'!J9/'Spreads'!J18
+K23	='Inputs'!$C$10*('Spreads'!K20-'Spreads'!K21)/'Spreads'!K18+'Inputs'!$C$11*'Spreads'!K22/'Spreads'!K18+'Inputs'!$C$12*'Spreads'!K10/'Spreads'!K18+'Inputs'!$C$13*'Spreads'!K23/'Spreads'!K19+'Inputs'!$C$14*'Spreads'!K9/'Spreads'!K18
+L23	='Inputs'!$C$10*('Spreads'!L20-'Spreads'!L21)/'Spreads'!L18+'Inputs'!$C$11*'Spreads'!L22/'Spreads'!L18+'Inputs'!$C$12*'Spreads'!L10/'Spreads'!L18+'Inputs'!$C$13*'Spreads'!L23/'Spreads'!L19+'Inputs'!$C$14*'Spreads'!L9/'Spreads'!L18
+M23	='Inputs'!$C$10*('Spreads'!M20-'Spreads'!M21)/'Spreads'!M18+'Inputs'!$C$11*'Spreads'!M22/'Spreads'!M18+'Inputs'!$C$12*'Spreads'!M10/'Spreads'!M18+'Inputs'!$C$13*'Spreads'!M23/'Spreads'!M19+'Inputs'!$C$14*'Spreads'!M9/'Spreads'!M18
+N23	='Inputs'!$C$10*('Spreads'!N20-'Spreads'!N21)/'Spreads'!N18+'Inputs'!$C$11*'Spreads'!N22/'Spreads'!N18+'Inputs'!$C$12*'Spreads'!N10/'Spreads'!N18+'Inputs'!$C$13*'Spreads'!N23/'Spreads'!N19+'Inputs'!$C$14*'Spreads'!N9/'Spreads'!N18
+O23	='Inputs'!$C$10*('Spreads'!O20-'Spreads'!O21)/'Spreads'!O18+'Inputs'!$C$11*'Spreads'!O22/'Spreads'!O18+'Inputs'!$C$12*'Spreads'!O10/'Spreads'!O18+'Inputs'!$C$13*'Spreads'!O23/'Spreads'!O19+'Inputs'!$C$14*'Spreads'!O9/'Spreads'!O18
+A24	'Zone'
+E24	=IF(E23<'Inputs'!$C$15,"Distress",IF(E23<'Inputs'!$C$16,"Grey","Safe"))
+F24	=IF(F23<'Inputs'!$C$15,"Distress",IF(F23<'Inputs'!$C$16,"Grey","Safe"))
+G24	=IF(G23<'Inputs'!$C$15,"Distress",IF(G23<'Inputs'!$C$16,"Grey","Safe"))
+H24	=IF(H23<'Inputs'!$C$15,"Distress",IF(H23<'Inputs'!$C$16,"Grey","Safe"))
+I24	=IF(I23<'Inputs'!$C$15,"Distress",IF(I23<'Inputs'!$C$16,"Grey","Safe"))
+J24	=IF(J23<'Inputs'!$C$15,"Distress",IF(J23<'Inputs'!$C$16,"Grey","Safe"))
+K24	=IF(K23<'Inputs'!$C$15,"Distress",IF(K23<'Inputs'!$C$16,"Grey","Safe"))
+L24	=IF(L23<'Inputs'!$C$15,"Distress",IF(L23<'Inputs'!$C$16,"Grey","Safe"))
+M24	=IF(M23<'Inputs'!$C$15,"Distress",IF(M23<'Inputs'!$C$16,"Grey","Safe"))
+N24	=IF(N23<'Inputs'!$C$15,"Distress",IF(N23<'Inputs'!$C$16,"Grey","Safe"))
+O24	=IF(O23<'Inputs'!$C$15,"Distress",IF(O23<'Inputs'!$C$16,"Grey","Safe"))
+A25	'Scorecard'
+A26	'  Leverage band'
+B26	'band'
+E26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<E16)*1)
+F26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<F16)*1)
+G26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<G16)*1)
+H26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<H16)*1)
+I26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<I16)*1)
+J26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<J16)*1)
+K26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<K16)*1)
+L26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<L16)*1)
+M26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<M16)*1)
+N26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<N16)*1)
+O26	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<O16)*1)
+A27	'  Coverage band'
+B27	'band'
+E27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>E18)*1)
+F27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>F18)*1)
+G27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>G18)*1)
+H27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>H18)*1)
+I27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>I18)*1)
+J27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>J18)*1)
+K27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>K18)*1)
+L27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>L18)*1)
+M27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>M18)*1)
+N27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>N18)*1)
+O27	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>O18)*1)
+A28	'  Rating band (weighted, rounded, distress notch)'
+B28	'band'
+E28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*E26+(1-'Inputs'!$C$45)*E27,0)+IF(E23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+F28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*F26+(1-'Inputs'!$C$45)*F27,0)+IF(F23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+G28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*G26+(1-'Inputs'!$C$45)*G27,0)+IF(G23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+H28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*H26+(1-'Inputs'!$C$45)*H27,0)+IF(H23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+I28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*I26+(1-'Inputs'!$C$45)*I27,0)+IF(I23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+J28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*J26+(1-'Inputs'!$C$45)*J27,0)+IF(J23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+K28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*K26+(1-'Inputs'!$C$45)*K27,0)+IF(K23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+L28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*L26+(1-'Inputs'!$C$45)*L27,0)+IF(L23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+M28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*M26+(1-'Inputs'!$C$45)*M27,0)+IF(M23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+N28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*N26+(1-'Inputs'!$C$45)*N27,0)+IF(N23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+O28	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*O26+(1-'Inputs'!$C$45)*O27,0)+IF(O23<'Inputs'!$C$15,'Inputs'!$C$46,0))
+A29	'  Rating'
+E29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,E28)
+F29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,F28)
+G29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,G28)
+H29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,H28)
+I29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,I28)
+J29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,J28)
+K29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,K28)
+L29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,L28)
+M29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,M28)
+N29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,N28)
+O29	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,O28)
+A30	'  One-year PD'
+B30	'%'
+E30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,E28)
+F30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,F28)
+G30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,G28)
+H30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,H28)
+I30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,I28)
+J30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,J28)
+K30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,K28)
+L30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,L28)
+M30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,M28)
+N30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,N28)
+O30	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,O28)
+A31	'Covenant headroom (EBITDA that can be lost before a breach)'
+A32	'  Leverage covenant'
+B32	'%'
+E32	=1-E12/('Inputs'!$C$50*E10)
+F32	=1-F12/('Inputs'!$C$50*F10)
+G32	=1-G12/('Inputs'!$C$50*G10)
+H32	=1-H12/('Inputs'!$C$50*H10)
+I32	=1-I12/('Inputs'!$C$50*I10)
+J32	=1-J12/('Inputs'!$C$50*J10)
+K32	=1-K12/('Inputs'!$C$50*K10)
+L32	=1-L12/('Inputs'!$C$50*L10)
+M32	=1-M12/('Inputs'!$C$50*M10)
+N32	=1-N12/('Inputs'!$C$50*N10)
+O32	=1-O12/('Inputs'!$C$50*O10)
+A33	'  Coverage covenant'
+B33	'%'
+E33	=1-'Inputs'!$C$51*E11/E10
+F33	=1-'Inputs'!$C$51*F11/F10
+G33	=1-'Inputs'!$C$51*G11/G10
+H33	=1-'Inputs'!$C$51*H11/H10
+I33	=1-'Inputs'!$C$51*I11/I10
+J33	=1-'Inputs'!$C$51*J11/J10
+K33	=1-'Inputs'!$C$51*K11/K10
+L33	=1-'Inputs'!$C$51*L11/L10
+M33	=1-'Inputs'!$C$51*M11/M10
+N33	=1-'Inputs'!$C$51*N11/N10
+O33	=1-'Inputs'!$C$51*O11/O10
+A34	'  Binding headroom'
+B34	'%'
+E34	=MIN(E32,E33)
+F34	=MIN(F32,F33)
+G34	=MIN(G32,G33)
+H34	=MIN(H32,H33)
+I34	=MIN(I32,I33)
+J34	=MIN(J32,J33)
+K34	=MIN(K32,K33)
+L34	=MIN(L32,L33)
+M34	=MIN(M32,M33)
+N34	=MIN(N32,N33)
+O34	=MIN(O32,O33)
+A35	'Debt capacity (additional lease-adjusted debt; negative = over capacity)'
+A36	'  At target leverage'
+B36	'$m'
+E36	='Inputs'!$C$52*E10-E12
+F36	='Inputs'!$C$52*F10-F12
+G36	='Inputs'!$C$52*G10-G12
+H36	='Inputs'!$C$52*H10-H12
+I36	='Inputs'!$C$52*I10-I12
+J36	='Inputs'!$C$52*J10-J12
+K36	='Inputs'!$C$52*K10-K12
+L36	='Inputs'!$C$52*L10-L12
+M36	='Inputs'!$C$52*M10-M12
+N36	='Inputs'!$C$52*N10-N12
+O36	='Inputs'!$C$52*O10-O12
+A37	'  At minimum coverage'
+B37	'$m'
+E37	=(E10/'Inputs'!$C$53-E11)/'Inputs'!$C$54
+F37	=(F10/'Inputs'!$C$53-F11)/'Inputs'!$C$54
+G37	=(G10/'Inputs'!$C$53-G11)/'Inputs'!$C$54
+H37	=(H10/'Inputs'!$C$53-H11)/'Inputs'!$C$54
+I37	=(I10/'Inputs'!$C$53-I11)/'Inputs'!$C$54
+J37	=(J10/'Inputs'!$C$53-J11)/'Inputs'!$C$54
+K37	=(K10/'Inputs'!$C$53-K11)/'Inputs'!$C$54
+L37	=(L10/'Inputs'!$C$53-L11)/'Inputs'!$C$54
+M37	=(M10/'Inputs'!$C$53-M11)/'Inputs'!$C$54
+N37	=(N10/'Inputs'!$C$53-N11)/'Inputs'!$C$54
+O37	=(O10/'Inputs'!$C$53-O11)/'Inputs'!$C$54
+A38	'  Capacity (lower of the two)'
+B38	'$m'
+E38	=MIN(E36,E37)
+F38	=MIN(F36,F37)
+G38	=MIN(G36,G37)
+H38	=MIN(H36,H37)
+I38	=MIN(I36,I37)
+J38	=MIN(J36,J37)
+K38	=MIN(K36,K37)
+L38	=MIN(L36,L37)
+M38	=MIN(M36,M37)
+N38	=MIN(N36,N37)
+O38	=MIN(O36,O37)
+=== Stress
+A1	'Stress: EBITDA down and rates up on floating debt; rating migration and covenant breaches'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-08-30'
+F4	'2026-01-31'
+G4	'2026-01-31'
+H4	'2026-01-31'
+I4	'2026-01-30'
+J4	'2026-01-31'
+K4	'2026-02-01'
+L4	'2026-01-30'
+M4	'2024-12-31'
+N4	'2025-02-01'
+O4	'2025-02-01'
+A5	'Borrower'
+E5	'COST'
+F5	'WMT'
+G5	'TGT'
+H5	'BJ'
+I5	'DG'
+J5	'KR'
+K5	'HD'
+L5	'LOW'
+M5	'SKX'
+N5	'DKS'
+O5	'FL'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	0
+O6	0
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	0
+O7	0
+A9	'Stressed EBITDA'
+B9	'$m'
+E9	='Credit'!E10*(1-'Inputs'!$C$55)
+F9	='Credit'!F10*(1-'Inputs'!$C$55)
+G9	='Credit'!G10*(1-'Inputs'!$C$55)
+H9	='Credit'!H10*(1-'Inputs'!$C$55)
+I9	='Credit'!I10*(1-'Inputs'!$C$55)
+J9	='Credit'!J10*(1-'Inputs'!$C$55)
+K9	='Credit'!K10*(1-'Inputs'!$C$55)
+L9	='Credit'!L10*(1-'Inputs'!$C$55)
+M9	='Credit'!M10*(1-'Inputs'!$C$55)
+N9	='Credit'!N10*(1-'Inputs'!$C$55)
+O9	='Credit'!O10*(1-'Inputs'!$C$55)
+A10	'Stressed interest'
+B10	'$m'
+E10	='Credit'!E11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!E14
+F10	='Credit'!F11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!F14
+G10	='Credit'!G11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!G14
+H10	='Credit'!H11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!H14
+I10	='Credit'!I11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!I14
+J10	='Credit'!J11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!J14
+K10	='Credit'!K11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!K14
+L10	='Credit'!L11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!L14
+M10	='Credit'!M11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!M14
+N10	='Credit'!N11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!N14
+O10	='Credit'!O11+'Inputs'!$C$56*'Inputs'!$C$57*'Spreads'!O14
+A11	'Stressed leverage'
+B11	'x'
+E11	='Credit'!E12/E9
+F11	='Credit'!F12/F9
+G11	='Credit'!G12/G9
+H11	='Credit'!H12/H9
+I11	='Credit'!I12/I9
+J11	='Credit'!J12/J9
+K11	='Credit'!K12/K9
+L11	='Credit'!L12/L9
+M11	='Credit'!M12/M9
+N11	='Credit'!N12/N9
+O11	='Credit'!O12/O9
+A12	'Stressed coverage'
+B12	'x'
+E12	=E9/E10
+F12	=F9/F10
+G12	=G9/G10
+H12	=H9/H10
+I12	=I9/I10
+J12	=J9/J10
+K12	=K9/K10
+L12	=L9/L10
+M12	=M9/M10
+N12	=N9/N10
+O12	=O9/O10
+A13	"Stressed Z' (EBIT reduced by the EBITDA loss)"
+B13	'x'
+E13	='Inputs'!$C$10*('Spreads'!E20-'Spreads'!E21)/'Spreads'!E18+'Inputs'!$C$11*'Spreads'!E22/'Spreads'!E18+'Inputs'!$C$12*('Spreads'!E10-'Inputs'!$C$55*'Credit'!E10)/'Spreads'!E18+'Inputs'!$C$13*'Spreads'!E23/'Spreads'!E19+'Inputs'!$C$14*'Spreads'!E9/'Spreads'!E18
+F13	='Inputs'!$C$10*('Spreads'!F20-'Spreads'!F21)/'Spreads'!F18+'Inputs'!$C$11*'Spreads'!F22/'Spreads'!F18+'Inputs'!$C$12*('Spreads'!F10-'Inputs'!$C$55*'Credit'!F10)/'Spreads'!F18+'Inputs'!$C$13*'Spreads'!F23/'Spreads'!F19+'Inputs'!$C$14*'Spreads'!F9/'Spreads'!F18
+G13	='Inputs'!$C$10*('Spreads'!G20-'Spreads'!G21)/'Spreads'!G18+'Inputs'!$C$11*'Spreads'!G22/'Spreads'!G18+'Inputs'!$C$12*('Spreads'!G10-'Inputs'!$C$55*'Credit'!G10)/'Spreads'!G18+'Inputs'!$C$13*'Spreads'!G23/'Spreads'!G19+'Inputs'!$C$14*'Spreads'!G9/'Spreads'!G18
+H13	='Inputs'!$C$10*('Spreads'!H20-'Spreads'!H21)/'Spreads'!H18+'Inputs'!$C$11*'Spreads'!H22/'Spreads'!H18+'Inputs'!$C$12*('Spreads'!H10-'Inputs'!$C$55*'Credit'!H10)/'Spreads'!H18+'Inputs'!$C$13*'Spreads'!H23/'Spreads'!H19+'Inputs'!$C$14*'Spreads'!H9/'Spreads'!H18
+I13	='Inputs'!$C$10*('Spreads'!I20-'Spreads'!I21)/'Spreads'!I18+'Inputs'!$C$11*'Spreads'!I22/'Spreads'!I18+'Inputs'!$C$12*('Spreads'!I10-'Inputs'!$C$55*'Credit'!I10)/'Spreads'!I18+'Inputs'!$C$13*'Spreads'!I23/'Spreads'!I19+'Inputs'!$C$14*'Spreads'!I9/'Spreads'!I18
+J13	='Inputs'!$C$10*('Spreads'!J20-'Spreads'!J21)/'Spreads'!J18+'Inputs'!$C$11*'Spreads'!J22/'Spreads'!J18+'Inputs'!$C$12*('Spreads'!J10-'Inputs'!$C$55*'Credit'!J10)/'Spreads'!J18+'Inputs'!$C$13*'Spreads'!J23/'Spreads'!J19+'Inputs'!$C$14*'Spreads'!J9/'Spreads'!J18
+K13	='Inputs'!$C$10*('Spreads'!K20-'Spreads'!K21)/'Spreads'!K18+'Inputs'!$C$11*'Spreads'!K22/'Spreads'!K18+'Inputs'!$C$12*('Spreads'!K10-'Inputs'!$C$55*'Credit'!K10)/'Spreads'!K18+'Inputs'!$C$13*'Spreads'!K23/'Spreads'!K19+'Inputs'!$C$14*'Spreads'!K9/'Spreads'!K18
+L13	='Inputs'!$C$10*('Spreads'!L20-'Spreads'!L21)/'Spreads'!L18+'Inputs'!$C$11*'Spreads'!L22/'Spreads'!L18+'Inputs'!$C$12*('Spreads'!L10-'Inputs'!$C$55*'Credit'!L10)/'Spreads'!L18+'Inputs'!$C$13*'Spreads'!L23/'Spreads'!L19+'Inputs'!$C$14*'Spreads'!L9/'Spreads'!L18
+M13	='Inputs'!$C$10*('Spreads'!M20-'Spreads'!M21)/'Spreads'!M18+'Inputs'!$C$11*'Spreads'!M22/'Spreads'!M18+'Inputs'!$C$12*('Spreads'!M10-'Inputs'!$C$55*'Credit'!M10)/'Spreads'!M18+'Inputs'!$C$13*'Spreads'!M23/'Spreads'!M19+'Inputs'!$C$14*'Spreads'!M9/'Spreads'!M18
+N13	='Inputs'!$C$10*('Spreads'!N20-'Spreads'!N21)/'Spreads'!N18+'Inputs'!$C$11*'Spreads'!N22/'Spreads'!N18+'Inputs'!$C$12*('Spreads'!N10-'Inputs'!$C$55*'Credit'!N10)/'Spreads'!N18+'Inputs'!$C$13*'Spreads'!N23/'Spreads'!N19+'Inputs'!$C$14*'Spreads'!N9/'Spreads'!N18
+O13	='Inputs'!$C$10*('Spreads'!O20-'Spreads'!O21)/'Spreads'!O18+'Inputs'!$C$11*'Spreads'!O22/'Spreads'!O18+'Inputs'!$C$12*('Spreads'!O10-'Inputs'!$C$55*'Credit'!O10)/'Spreads'!O18+'Inputs'!$C$13*'Spreads'!O23/'Spreads'!O19+'Inputs'!$C$14*'Spreads'!O9/'Spreads'!O18
+A14	'  Leverage band'
+B14	'band'
+E14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<E11)*1)
+F14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<F11)*1)
+G14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<G11)*1)
+H14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<H11)*1)
+I14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<I11)*1)
+J14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<J11)*1)
+K14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<K11)*1)
+L14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<L11)*1)
+M14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<M11)*1)
+N14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<N11)*1)
+O14	=1+SUMPRODUCT(('Inputs'!$C$26:'Inputs'!$C$31<O11)*1)
+A15	'  Coverage band'
+B15	'band'
+E15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>E12)*1)
+F15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>F12)*1)
+G15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>G12)*1)
+H15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>H12)*1)
+I15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>I12)*1)
+J15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>J12)*1)
+K15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>K12)*1)
+L15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>L12)*1)
+M15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>M12)*1)
+N15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>N12)*1)
+O15	=1+SUMPRODUCT(('Inputs'!$C$32:'Inputs'!$C$37>O12)*1)
+A16	'  Rating band'
+B16	'band'
+E16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*E14+(1-'Inputs'!$C$45)*E15,0)+IF(E13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+F16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*F14+(1-'Inputs'!$C$45)*F15,0)+IF(F13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+G16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*G14+(1-'Inputs'!$C$45)*G15,0)+IF(G13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+H16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*H14+(1-'Inputs'!$C$45)*H15,0)+IF(H13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+I16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*I14+(1-'Inputs'!$C$45)*I15,0)+IF(I13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+J16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*J14+(1-'Inputs'!$C$45)*J15,0)+IF(J13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+K16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*K14+(1-'Inputs'!$C$45)*K15,0)+IF(K13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+L16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*L14+(1-'Inputs'!$C$45)*L15,0)+IF(L13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+M16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*M14+(1-'Inputs'!$C$45)*M15,0)+IF(M13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+N16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*N14+(1-'Inputs'!$C$45)*N15,0)+IF(N13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+O16	=MIN('Inputs'!$C$47,ROUND('Inputs'!$C$45*O14+(1-'Inputs'!$C$45)*O15,0)+IF(O13<'Inputs'!$C$15,'Inputs'!$C$46,0))
+A17	'  Stressed rating'
+E17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,E16)
+F17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,F16)
+G17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,G16)
+H17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,H16)
+I17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,I16)
+J17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,J16)
+K17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,K16)
+L17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,L16)
+M17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,M16)
+N17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,N16)
+O17	=INDEX('Inputs'!$C$19:'Inputs'!$C$25,O16)
+A18	'  Stressed one-year PD'
+B18	'%'
+E18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,E16)
+F18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,F16)
+G18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,G16)
+H18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,H16)
+I18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,I16)
+J18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,J16)
+K18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,K16)
+L18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,L16)
+M18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,M16)
+N18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,N16)
+O18	=INDEX('Inputs'!$C$38:'Inputs'!$C$44,O16)
+A19	'Notches of downgrade'
+B19	'count'
+E19	=E16-'Credit'!E28
+F19	=F16-'Credit'!F28
+G19	=G16-'Credit'!G28
+H19	=H16-'Credit'!H28
+I19	=I16-'Credit'!I28
+J19	=J16-'Credit'!J28
+K19	=K16-'Credit'!K28
+L19	=L16-'Credit'!L28
+M19	=M16-'Credit'!M28
+N19	=N16-'Credit'!N28
+O19	=O16-'Credit'!O28
+A20	'Covenant breach under stress (1 = yes)'
+B20	'flag'
+E20	=IF(OR(E11>'Inputs'!$C$50,E12<'Inputs'!$C$51),1,0)
+F20	=IF(OR(F11>'Inputs'!$C$50,F12<'Inputs'!$C$51),1,0)
+G20	=IF(OR(G11>'Inputs'!$C$50,G12<'Inputs'!$C$51),1,0)
+H20	=IF(OR(H11>'Inputs'!$C$50,H12<'Inputs'!$C$51),1,0)
+I20	=IF(OR(I11>'Inputs'!$C$50,I12<'Inputs'!$C$51),1,0)
+J20	=IF(OR(J11>'Inputs'!$C$50,J12<'Inputs'!$C$51),1,0)
+K20	=IF(OR(K11>'Inputs'!$C$50,K12<'Inputs'!$C$51),1,0)
+L20	=IF(OR(L11>'Inputs'!$C$50,L12<'Inputs'!$C$51),1,0)
+M20	=IF(OR(M11>'Inputs'!$C$50,M12<'Inputs'!$C$51),1,0)
+N20	=IF(OR(N11>'Inputs'!$C$50,N12<'Inputs'!$C$51),1,0)
+O20	=IF(OR(O11>'Inputs'!$C$50,O12<'Inputs'!$C$51),1,0)
+A21	'Borrowers breaching under stress'
+B21	'count'
+C21	=SUM($E$20:$O$20)
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2026-08-30'
+F4	'2026-01-31'
+G4	'2026-01-31'
+H4	'2026-01-31'
+I4	'2026-01-30'
+J4	'2026-01-31'
+K4	'2026-02-01'
+L4	'2026-01-30'
+M4	'2024-12-31'
+N4	'2025-02-01'
+O4	'2025-02-01'
+A5	'Fiscal year'
+E5	'COST'
+F5	'WMT'
+G5	'TGT'
+H5	'BJ'
+I5	'DG'
+J5	'KR'
+K5	'HD'
+L5	'LOW'
+M5	'SKX'
+N5	'DKS'
+O5	'FL'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	0
+I6	0
+J6	0
+K6	0
+L6	0
+M6	0
+N6	0
+O6	0
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	0
+I7	0
+J7	0
+K7	0
+L7	0
+M7	0
+N7	0
+O7	0
+A9	"Each borrower's balance sheet balances"
+C9	=SUMPRODUCT(ABS('Spreads'!$E$28:$O$28))
+A10	'Every rating band within the grid'
+C10	=SUMPRODUCT(('Credit'!$E$28:$O$28<1)+('Credit'!$E$28:$O$28>'Inputs'!$C$47))
+A11	'PDs rise with every band'
+C11	=SUMPRODUCT(('Inputs'!$C$38:'Inputs'!$C$43>='Inputs'!$C$39:'Inputs'!$C$44)*1)
+A12	'Stress never improves a rating'
+C12	=SUMPRODUCT(('Stress'!$E$19:$O$19<0)*1)
+A14	'Tolerance'
+B14	'$m'
+C14	0.001
+A15	'MASTER CHECK (0 = all pass)'
+B15	'count'
+C15	=IF(SUMPRODUCT(ABS($C$9:$C$12))<$C$14,0,1)
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-20'
+B4	'Generated from spec/CREDIT.yaml and fixtures/<TICKER> (M9).'

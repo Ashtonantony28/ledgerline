@@ -40,6 +40,13 @@ income_statement:
     kind: flow
     tags: [InterestExpense, InterestExpenseNonoperating, InterestExpenseDebt, InterestExpenseNet]
     default: 0
+  interest_nonop_net:
+    kind: flow
+    # Memo item for credit coverage (workbook 09) where gross interest expense is not tagged: net non-operating
+    # interest, stored as a positive expense. Not part of any subtotal.
+    tags: [InterestIncomeExpenseNonoperatingNet]
+    sign: -1
+    default: 0
   other_nonop_income:
     kind: flow
     plug: pretax_income - operating_income + interest_expense
@@ -179,6 +186,10 @@ balance_sheet:
     kind: instant
     tags: [Liabilities]
     derive: total_le - total_equity - temp_equity
+  retained_earnings:
+    kind: instant
+    # Memo item for credit scoring (Altman Z, workbook 09); not part of any subtotal.
+    tags: [RetainedEarningsAccumulatedDeficit]
   parent_equity:
     kind: instant
     tags: [StockholdersEquity]

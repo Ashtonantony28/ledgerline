@@ -320,8 +320,50 @@ def build_07(stress: int = 0, manual: dict | None = None, trials: int | None = N
     return path, layout
 
 
+CREDIT_SHEETS = [
+    ("Inputs", "Altman Z' coefficients, scorecard grid, covenant package, capacity and stress assumptions"),
+    ("Spreads", "Borrower spreads from each company's latest 10-K (XBRL, sourced per cell)"),
+    ("Credit", "Leverage, coverage, cash-flow ratios, Altman Z', scorecard rating and PD, covenant headroom, debt capacity"),
+    ("Stress", "EBITDA and rate stress: rating migration and covenant breaches"),
+    ("Checks", "Integrity checks and master flag"),
+]
+
+
+def build_09(out: Path | None = None) -> tuple[Path, dict]:
+    from ..models.credit import add_credit, timeline
+    from ..ref.credit import borrowers, spec
+    sp = spec()
+    bs = borrowers(sp)
+    m = Model(timeline(bs), "Credit")
+    add_credit(m, bs, sp)
+    c = m.sheet("Cover", "Credit analysis: 11 US retailers, latest 10-K (spreads, Altman Z', scorecard, stress, capacity)", timeline=False)
+    c.col_widths = {"A": 34, "B": 80}
+    c.cell("A3", "Borrowers"); c.cell("B3", ", ".join(f"{b.ticker} (FY to {b.fy_end})" for b in bs), wrap=True)
+    c.cell("A4", "Units"); c.cell("B4", "$ millions; columns are borrowers, not periods")
+    c.cell("A5", "Data"); c.cell("B5", "10-K XBRL via SEC EDGAR (fixtures/<TICKER>); assumptions in spec/CREDIT.yaml")
+    c.cell("A6", "Feeds"); c.cell("B6", "exports/borrower_spreads.csv for the banking-risk project (docs/interfaces/borrower_spreads.md)")
+    c.cell("A9", "Model integrity")
+    c.cell("B9", "=IF(MasterCheck=0,\"ALL CHECKS PASS\",\"CHECK FAILURE - see Checks sheet\")", bold=True)
+    c.cell("A10", "Built"); c.cell("B10", f"{date.today().isoformat()} by the Ledgerline generator (see Log)")
+    c.cell("A12", "Colour code", bold=True)
+    c.cell("A13", "Blue on yellow", input=True); c.cell("B13", "Hard-coded input (every one carries a source note)")
+    c.cell("A14", "Black", color="000000"); c.cell("B14", "Formula")
+    c.cell("A15", "Green", color="008000"); c.cell("B15", "Direct link to another sheet")
+    c.cell("A18", "Sheets", bold=True)
+    for k, (name, desc) in enumerate(CREDIT_SHEETS):
+        c.cell(f"A{19 + k}", name, bold=True); c.cell(f"B{19 + k}", desc)
+    r = 20 + len(CREDIT_SHEETS)
+    c.cell(f"A{r}", "Disclaimer", bold=True); c.cell(f"B{r}", DISCLAIMER, wrap=True)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/CREDIT.yaml and fixtures/<TICKER> (M9).")])
+    _reorder(m, ["Cover"] + [n for n, _ in CREDIT_SHEETS])
+    path = Path(out or OUT / "09_Credit.xlsx")
+    layout = m.save(path)
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
 BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05, "06": build_06,
-            "07": build_07}
+            "07": build_07, "09": build_09}
 
 
 def main(argv: list[str]) -> int:
