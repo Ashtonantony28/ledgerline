@@ -181,7 +181,60 @@ def build_04(scenario: int = 1, structure: int = 3, out: Path | None = None) -> 
     return path, layout
 
 
-BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04}
+GROUP_SHEETS = [
+    ("Inputs", "Close calendar inputs: FX rates, ownership, prepaids, accruals, bank statement"),
+    ("CoA", "Chart of accounts with statement mapping"),
+    ("Opening", "Opening trial balances by entity (local currency)"),
+    ("TB_Unadj", "Unadjusted closing trial balances (local currency, seeded synthetic ledger)"),
+    ("Schedules", "Depreciation and tax provision"),
+    ("Journals", "Month-end close journals J1-J7"),
+    ("TB_Adj", "Adjusted trial balances = unadjusted + journals"),
+    ("Translation", "S2 GBP to USD at current rate, CTA plug and roll-forward"),
+    ("Elims", "Consolidation eliminations E1-E12 (intercompany, investment, NCI)"),
+    ("Consol", "Consolidation worksheet: entities, eliminations, group"),
+    ("Statements", "Group income statement, balance sheet and equity roll-forward"),
+    ("CashFlow", "Indirect cash flow statement from trial-balance movements"),
+    ("Recs", "Bank and intercompany reconciliations"),
+    ("Checks", "Integrity checks and master flag"),
+    ("Checklist", "Close checklist with owners and sign-off (VBA stamps sign-off in Excel)"),
+]
+
+
+def build_05(out: Path | None = None) -> tuple[Path, dict]:
+    from ..data.group import load
+    from ..models.group import add_group
+    from .grid import Timeline
+    g = load()
+    m = Model(Timeline([], [], 0), "Group close")
+    addr = add_group(m, g)
+    c = m.sheet("Cover", "Ledgerline Group: month-end close and consolidation (synthetic)", timeline=False)
+    c.col_widths = {"A": 34, "B": 80}
+    c.cell("A3", "Entities"); c.cell("B3", "P (US parent), S1 (US), S2 (UK, GBP), S3 (US, 80% owned)", bold=True)
+    c.cell("A4", "Units"); c.cell("B4", "$ millions; S2 ledgers in GBP millions until translated")
+    c.cell("A5", "Data"); c.cell("B5", "Seeded synthetic ledgers (python/ledgerline/data/group.py, seed fixed); no real company")
+    c.cell("A6", "Framework"); c.cell("B6", "US GAAP: ASC 810 consolidation, ASC 830 translation, full-goodwill NCI")
+    c.cell("A9", "Model integrity")
+    c.cell("B9", "=IF(MasterCheck=0,\"ALL CHECKS PASS\",\"CHECK FAILURE - see Checks sheet\")", bold=True)
+    c.cell("A10", "Built"); c.cell("B10", f"{date.today().isoformat()} by the Ledgerline generator (see Log)")
+    c.cell("A12", "Colour code", bold=True)
+    c.cell("A13", "Blue on yellow", input=True); c.cell("B13", "Hard-coded input (ledger data or close input)")
+    c.cell("A14", "Black", color="000000"); c.cell("B14", "Formula")
+    c.cell("A15", "Green", color="008000"); c.cell("B15", "Direct link to another sheet")
+    c.cell("A18", "Sheets", bold=True)
+    for k, (name, desc) in enumerate(GROUP_SHEETS):
+        c.cell(f"A{19 + k}", name, bold=True); c.cell(f"B{19 + k}", desc)
+    r = 20 + len(GROUP_SHEETS)
+    c.cell(f"A{r}", "Disclaimer", bold=True); c.cell(f"B{r}", DISCLAIMER, wrap=True)
+    add_log(m, [(date.today().isoformat(), "Generated from fixtures/group (seeded synthetic ledgers) (M6).")])
+    _reorder(m, ["Cover"] + [n for n, _ in GROUP_SHEETS])
+    path = Path(out or OUT / "05_Group_Close.xlsx")
+    layout = m.save(path)
+    layout["addr"] = {k: list(v) for k, v in addr.items()}
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05}
 
 
 def main(argv: list[str]) -> int:

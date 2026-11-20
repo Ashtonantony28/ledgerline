@@ -63,3 +63,46 @@ def compare(values, ref: dict[str, list[float]], outputs) -> list[Mismatch]:
             if not close(a, b, kind):
                 bad.append(Mismatch(sheet, key, t, a, b))
     return bad
+
+
+GROUP_ENT = ["P", "S1", "S2", "S3"]
+GROUP_TOL = 0.01  # ADR 0005: $0.01 on currency
+
+
+def group_expected(r: dict) -> dict[str, float]:
+    """Address-map key -> reference value."""
+    x = {}
+    for e in GROUP_ENT:
+        for code, v in r["adj"][e].items():
+            x[f"adj_{e}_{code}"] = v
+        x[f"tax_{e}"] = r["tax"][e]
+        x[f"ni_{e}"] = r["ni"][e]
+        x[f"TB_Adj_sum_{e}"] = r["tb_sum"][e]
+        x[f"bank_diff_{e}"] = r["bank_diff"][e]
+        x[f"cf_check_{e}"] = r["entity_cf_check"][e]
+        for k, v in r["cf"][e].items():
+            x[f"cf_{e}_{k}"] = v
+    for code, v in r["s2_usd"].items():
+        x[f"usd_{code}"] = v
+    x["cta_plug"], x["cta_analytic"] = r["cta_plug"], r["cta_analytic"]
+    x["goodwill"], x["urp"] = r["goodwill"], r["urp"]
+    for k, v in r["cons"].items():
+        x[f"cons_{k}"] = v
+    for k, v in r["st"].items():
+        if k != "nci_income":  # shown as st_ni_nci
+            x[f"st_{k}"] = v
+    for k, v in r["cons_cf"].items():
+        x[f"ccf_{k}"] = v
+    for k, v in r["ic_recs"].items():
+        x[{"trade_unadjusted": "ic_trade_unadj"}.get(k, f"ic_{k}")] = v
+    return x
+
+
+def group_compare(get, addr: dict, exp: dict) -> list[str]:
+    bad, missing = [], [k for k in exp if k not in addr]
+    for k, v in exp.items():
+        if k in addr:
+            a = get(*addr[k])
+            if a is None or abs(float(a) - v) > GROUP_TOL:
+                bad.append(f"{k} {addr[k]}: workbook {a} vs ref {v}")
+    return bad + [f"no cell for {k}" for k in missing]

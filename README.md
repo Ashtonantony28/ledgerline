@@ -16,7 +16,8 @@ and a mutation test proves the checks catch injected errors.
 | 02 | `02_COST_Valuation.xlsx`: WACC (FRED, Damodaran, regression beta), DCF both ways, reverse DCF, comps, sensitivity grids, football field | done (M3) |
 | 03 | `03_SKX_LBO.xlsx`: Skechers / 3G Capital LBO with the real financing package, sweep, PIK toggle, covenants, IRR bridge; back-test memo | done (M4) |
 | 04 | `04_DKS_FL_MnA.xlsx`: DICK'S / Foot Locker accretion-dilution: cash/stock election, PPA with bargain-purchase handling, synergies, breakeven lines, contribution, grids; back-test memo | done (M5) |
-| 05-09 | Close + consolidation, FP&A, scenario lab, dashboard, credit | M6-M10 |
+| 05 | `05_Group_Close.xlsx`: four-entity group (GBP subsidiary, 80% NCI) on seeded synthetic ledgers: close journals, current-rate translation with CTA roll-forward, 12 eliminations, statements, indirect cash flow, bank and intercompany recs, close checklist (VBA sign-off in `vba/`) | done (M6) |
+| 06-09 | FP&A, scenario lab, dashboard, credit | M7-M10 |
 
 ## Verify
 
@@ -25,7 +26,7 @@ pip install -e ".[dev]"            # plus LibreOffice for headless recalculation
 pytest -q                          # tie-outs; workbook vs reference on LibreOffice and `formulas`; audit
 python -m ledgerline.build.workbooks                       # rebuild every workbook into workbooks/
 python -m ledgerline.audit.audit workbooks/0*_*.xlsx --recalc   # writes .audit.md and .formulas.txt
-python -m ledgerline.audit.mutation 01 --n 40              # seeded error injection (also 04), target >= 95% caught
+python -m ledgerline.audit.mutation 01 --n 40              # seeded error injection (also 04, 05), target >= 95% caught
 ```
 
 Refreshing data (reviewed change): `python -m ledgerline.data.history` (set `LEDGERLINE_UA` to your own

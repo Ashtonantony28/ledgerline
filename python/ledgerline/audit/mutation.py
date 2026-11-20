@@ -2,6 +2,7 @@
 
     python -m ledgerline.audit.mutation 01 --n 40 --seed 7     # workbook 01 (three-statement)
     python -m ledgerline.audit.mutation 04 --n 40 --seed 7     # workbook 04 (M&A)
+    python -m ledgerline.audit.mutation 05 --n 40 --seed 7     # workbook 05 (group close, free-form sheets)
 
 Each mutant breaks one thing in a built workbook, the way people break spreadsheets:
   hardcode   overwrite one forecast formula with its current value (a "paste values")
@@ -152,6 +153,87 @@ def run(workbook: str = "01", n: int = 40, seed: int = 7) -> list[Result]:
     return results
 
 
+GROUP_CALC = ("Schedules", "Journals", "TB_Adj", "Translation", "Elims", "Consol", "Statements", "CashFlow", "Recs")
+GROUP_INPUTS = ("Inputs", "TB_Unadj", "Opening")
+GROUP_KINDS = ("hardcode", "wrongrow", "sign", "input")
+
+
+def _mutate_free(src: Path, dst: Path, kind: str, rng: random.Random, base_wb) -> str | None:
+    """One mutation on a workbook without a timeline (workbook 05): cells are picked anywhere on the sheets."""
+    wb = load_workbook(src)
+    if kind == "input":
+        ws = wb[rng.choice(GROUP_INPUTS)]
+        cells = [c for row in ws.iter_rows() for c in row
+                 if isinstance(c.value, (int, float)) and not isinstance(c.value, bool) and c.value != 0 and c.column > 2]
+        if not cells:
+            return None
+        c = rng.choice(cells)
+        c.value = c.value * 1.01
+        wb.save(dst)
+        return f"{ws.title}!{c.coordinate}"
+    ws = wb[rng.choice(GROUP_CALC)]
+    cells = [c for row in ws.iter_rows() for c in row if isinstance(c.value, str) and c.value.startswith("=")]
+    if kind == "sign":
+        cells = [c for c in cells if re.search(r"[A-Z]\$?\d+\s*[+-]", c.value)]
+    if kind == "wrongrow":
+        cells = [c for c in cells if REF_RE.search(c.value)]
+    if not cells:
+        return None
+    c = rng.choice(cells)
+    if kind == "hardcode":
+        v = base_wb[ws.title][c.coordinate].value
+        if not isinstance(v, (int, float)):
+            return None
+        c.value = v
+    elif kind == "sign":
+        m = re.search(r"([A-Z]\$?\d+\s*)([+-])", c.value)
+        c.value = c.value[:m.start(2)] + ("-" if m.group(2) == "+" else "+") + c.value[m.end(2):]
+    else:
+        refs = list(re.finditer(r"(\$?[A-Z]{1,3}\$?)(\d+)(?![\d(])", c.value))
+        if not refs:
+            return None
+        m = rng.choice(refs)
+        c.value = c.value[:m.start(2)] + str(int(m.group(2)) + 1) + c.value[m.end(2):]
+    wb.save(dst)
+    return f"{ws.title}!{c.coordinate}"
+
+
+def run_group(n: int = 40, seed: int = 7) -> list[Result]:
+    from ..build.workbooks import build_05
+    from ..data.group import load
+    from ..ref.group import run as ref_run
+    from ..verify import group_compare, group_expected
+    tmp = Path(tempfile.mkdtemp(prefix="ledgerline-mut05-"))
+    src, layout = build_05(out=tmp / "orig.xlsx")
+    addr = layout["addr"]
+    base_wb = load_workbook(recalc(src, tmp / "orig_rc"), data_only=True)
+    snap = lambda wb: {k: wb[s][c].value for k, (s, c) in addr.items()}
+    base = snap(base_wb)
+    exp = group_expected(ref_run(load()))
+    rng = random.Random(seed)
+    results = []
+    for i in range(n):
+        kind = GROUP_KINDS[i % len(GROUP_KINDS)]
+        dst = tmp / f"m{i}.xlsx"
+        where = None
+        while where is None:
+            where = _mutate_free(src, dst, kind, rng, base_wb)
+        rc = recalc(dst, tmp / f"m{i}_rc")
+        wb = load_workbook(rc, data_only=True)
+        out = snap(wb)
+        how = []
+        findings, _, _ = audit(dst, rc, layout)
+        if any(f.severity == "high" for f in findings):
+            how.append("audit")
+        if out["master"] != 0:
+            how.append("checks")
+        if group_compare(lambda s_, c_: wb[s_][c_].value, addr, exp):
+            how.append("reference")
+        equivalent = out == base and not how
+        results.append(Result(kind, where, bool(how), equivalent, "+".join(how)))
+    return results
+
+
 def summary(results: list[Result], workbook: str = "01") -> str:
     live = [r for r in results if not r.equivalent]
     caught = sum(r.caught for r in live)
@@ -168,7 +250,7 @@ def main(argv: list[str]) -> int:
     seed = int(argv[argv.index("--seed") + 1]) if "--seed" in argv else 7
     wbs = [a for a in argv if a.isdigit() and len(a) == 2 and (argv.index(a) == 0 or argv[argv.index(a) - 1] not in ("--n", "--seed"))]
     workbook = wbs[0] if wbs else "01"
-    res = run(workbook, n, seed)
+    res = run_group(n, seed) if workbook == "05" else run(workbook, n, seed)
     text = summary(res, workbook)
     out = Path(__file__).resolve().parents[3] / "docs" / f"mutation-{workbook}.md"
     out.write_text(text)

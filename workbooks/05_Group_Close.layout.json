@@ -1,0 +1,1724 @@
+{
+ "timeline": {
+  "labels": [],
+  "n_hist": 0,
+  "cols": []
+ },
+ "sheets": {
+  "Cover": {},
+  "Inputs": {},
+  "CoA": {},
+  "Opening": {},
+  "TB_Unadj": {},
+  "Schedules": {},
+  "Journals": {},
+  "TB_Adj": {},
+  "Translation": {},
+  "Elims": {},
+  "Consol": {},
+  "Statements": {},
+  "CashFlow": {},
+  "Recs": {},
+  "Checks": {},
+  "Checklist": {},
+  "Log": {}
+ },
+ "addr": {
+  "prepaid_amort_0": [
+   "Inputs",
+   "F34"
+  ],
+  "prepaid_amort_1": [
+   "Inputs",
+   "F35"
+  ],
+  "prepaid_amort_2": [
+   "Inputs",
+   "F36"
+  ],
+  "prepaid_amort_3": [
+   "Inputs",
+   "F37"
+  ],
+  "prepaid_amort_4": [
+   "Inputs",
+   "F38"
+  ],
+  "Opening_sum_P": [
+   "Opening",
+   "C42"
+  ],
+  "Opening_sum_S1": [
+   "Opening",
+   "D42"
+  ],
+  "Opening_sum_S2": [
+   "Opening",
+   "E42"
+  ],
+  "Opening_sum_S3": [
+   "Opening",
+   "F42"
+  ],
+  "TB_Unadj_sum_P": [
+   "TB_Unadj",
+   "C42"
+  ],
+  "TB_Unadj_sum_S1": [
+   "TB_Unadj",
+   "D42"
+  ],
+  "TB_Unadj_sum_S2": [
+   "TB_Unadj",
+   "E42"
+  ],
+  "TB_Unadj_sum_S3": [
+   "TB_Unadj",
+   "F42"
+  ],
+  "dep_P": [
+   "Schedules",
+   "C9"
+  ],
+  "tax_P": [
+   "Schedules",
+   "C18"
+  ],
+  "dep_S1": [
+   "Schedules",
+   "D9"
+  ],
+  "tax_S1": [
+   "Schedules",
+   "D18"
+  ],
+  "dep_S2": [
+   "Schedules",
+   "E9"
+  ],
+  "tax_S2": [
+   "Schedules",
+   "E18"
+  ],
+  "dep_S3": [
+   "Schedules",
+   "F9"
+  ],
+  "tax_S3": [
+   "Schedules",
+   "F18"
+  ],
+  "journals_sum": [
+   "Journals",
+   "D50"
+  ],
+  "TB_Adj_sum_P": [
+   "TB_Adj",
+   "C42"
+  ],
+  "TB_Adj_sum_S1": [
+   "TB_Adj",
+   "D42"
+  ],
+  "TB_Adj_sum_S2": [
+   "TB_Adj",
+   "E42"
+  ],
+  "TB_Adj_sum_S3": [
+   "TB_Adj",
+   "F42"
+  ],
+  "adj_P_1000": [
+   "TB_Adj",
+   "C6"
+  ],
+  "adj_S1_1000": [
+   "TB_Adj",
+   "D6"
+  ],
+  "adj_S2_1000": [
+   "TB_Adj",
+   "E6"
+  ],
+  "adj_S3_1000": [
+   "TB_Adj",
+   "F6"
+  ],
+  "adj_P_1100": [
+   "TB_Adj",
+   "C7"
+  ],
+  "adj_S1_1100": [
+   "TB_Adj",
+   "D7"
+  ],
+  "adj_S2_1100": [
+   "TB_Adj",
+   "E7"
+  ],
+  "adj_S3_1100": [
+   "TB_Adj",
+   "F7"
+  ],
+  "adj_P_1150": [
+   "TB_Adj",
+   "C8"
+  ],
+  "adj_S1_1150": [
+   "TB_Adj",
+   "D8"
+  ],
+  "adj_S2_1150": [
+   "TB_Adj",
+   "E8"
+  ],
+  "adj_S3_1150": [
+   "TB_Adj",
+   "F8"
+  ],
+  "adj_P_1200": [
+   "TB_Adj",
+   "C9"
+  ],
+  "adj_S1_1200": [
+   "TB_Adj",
+   "D9"
+  ],
+  "adj_S2_1200": [
+   "TB_Adj",
+   "E9"
+  ],
+  "adj_S3_1200": [
+   "TB_Adj",
+   "F9"
+  ],
+  "adj_P_1300": [
+   "TB_Adj",
+   "C10"
+  ],
+  "adj_S1_1300": [
+   "TB_Adj",
+   "D10"
+  ],
+  "adj_S2_1300": [
+   "TB_Adj",
+   "E10"
+  ],
+  "adj_S3_1300": [
+   "TB_Adj",
+   "F10"
+  ],
+  "adj_P_1500": [
+   "TB_Adj",
+   "C11"
+  ],
+  "adj_S1_1500": [
+   "TB_Adj",
+   "D11"
+  ],
+  "adj_S2_1500": [
+   "TB_Adj",
+   "E11"
+  ],
+  "adj_S3_1500": [
+   "TB_Adj",
+   "F11"
+  ],
+  "adj_P_1510": [
+   "TB_Adj",
+   "C12"
+  ],
+  "adj_S1_1510": [
+   "TB_Adj",
+   "D12"
+  ],
+  "adj_S2_1510": [
+   "TB_Adj",
+   "E12"
+  ],
+  "adj_S3_1510": [
+   "TB_Adj",
+   "F12"
+  ],
+  "adj_P_1600": [
+   "TB_Adj",
+   "C13"
+  ],
+  "adj_S1_1600": [
+   "TB_Adj",
+   "D13"
+  ],
+  "adj_S2_1600": [
+   "TB_Adj",
+   "E13"
+  ],
+  "adj_S3_1600": [
+   "TB_Adj",
+   "F13"
+  ],
+  "adj_P_1650": [
+   "TB_Adj",
+   "C14"
+  ],
+  "adj_S1_1650": [
+   "TB_Adj",
+   "D14"
+  ],
+  "adj_S2_1650": [
+   "TB_Adj",
+   "E14"
+  ],
+  "adj_S3_1650": [
+   "TB_Adj",
+   "F14"
+  ],
+  "adj_P_1700": [
+   "TB_Adj",
+   "C15"
+  ],
+  "adj_S1_1700": [
+   "TB_Adj",
+   "D15"
+  ],
+  "adj_S2_1700": [
+   "TB_Adj",
+   "E15"
+  ],
+  "adj_S3_1700": [
+   "TB_Adj",
+   "F15"
+  ],
+  "adj_P_1800": [
+   "TB_Adj",
+   "C16"
+  ],
+  "adj_S1_1800": [
+   "TB_Adj",
+   "D16"
+  ],
+  "adj_S2_1800": [
+   "TB_Adj",
+   "E16"
+  ],
+  "adj_S3_1800": [
+   "TB_Adj",
+   "F16"
+  ],
+  "adj_P_2000": [
+   "TB_Adj",
+   "C17"
+  ],
+  "adj_S1_2000": [
+   "TB_Adj",
+   "D17"
+  ],
+  "adj_S2_2000": [
+   "TB_Adj",
+   "E17"
+  ],
+  "adj_S3_2000": [
+   "TB_Adj",
+   "F17"
+  ],
+  "adj_P_2050": [
+   "TB_Adj",
+   "C18"
+  ],
+  "adj_S1_2050": [
+   "TB_Adj",
+   "D18"
+  ],
+  "adj_S2_2050": [
+   "TB_Adj",
+   "E18"
+  ],
+  "adj_S3_2050": [
+   "TB_Adj",
+   "F18"
+  ],
+  "adj_P_2100": [
+   "TB_Adj",
+   "C19"
+  ],
+  "adj_S1_2100": [
+   "TB_Adj",
+   "D19"
+  ],
+  "adj_S2_2100": [
+   "TB_Adj",
+   "E19"
+  ],
+  "adj_S3_2100": [
+   "TB_Adj",
+   "F19"
+  ],
+  "adj_P_2200": [
+   "TB_Adj",
+   "C20"
+  ],
+  "adj_S1_2200": [
+   "TB_Adj",
+   "D20"
+  ],
+  "adj_S2_2200": [
+   "TB_Adj",
+   "E20"
+  ],
+  "adj_S3_2200": [
+   "TB_Adj",
+   "F20"
+  ],
+  "adj_P_2500": [
+   "TB_Adj",
+   "C21"
+  ],
+  "adj_S1_2500": [
+   "TB_Adj",
+   "D21"
+  ],
+  "adj_S2_2500": [
+   "TB_Adj",
+   "E21"
+  ],
+  "adj_S3_2500": [
+   "TB_Adj",
+   "F21"
+  ],
+  "adj_P_2700": [
+   "TB_Adj",
+   "C22"
+  ],
+  "adj_S1_2700": [
+   "TB_Adj",
+   "D22"
+  ],
+  "adj_S2_2700": [
+   "TB_Adj",
+   "E22"
+  ],
+  "adj_S3_2700": [
+   "TB_Adj",
+   "F22"
+  ],
+  "adj_P_3000": [
+   "TB_Adj",
+   "C23"
+  ],
+  "adj_S1_3000": [
+   "TB_Adj",
+   "D23"
+  ],
+  "adj_S2_3000": [
+   "TB_Adj",
+   "E23"
+  ],
+  "adj_S3_3000": [
+   "TB_Adj",
+   "F23"
+  ],
+  "adj_P_3100": [
+   "TB_Adj",
+   "C24"
+  ],
+  "adj_S1_3100": [
+   "TB_Adj",
+   "D24"
+  ],
+  "adj_S2_3100": [
+   "TB_Adj",
+   "E24"
+  ],
+  "adj_S3_3100": [
+   "TB_Adj",
+   "F24"
+  ],
+  "adj_P_3200": [
+   "TB_Adj",
+   "C25"
+  ],
+  "adj_S1_3200": [
+   "TB_Adj",
+   "D25"
+  ],
+  "adj_S2_3200": [
+   "TB_Adj",
+   "E25"
+  ],
+  "adj_S3_3200": [
+   "TB_Adj",
+   "F25"
+  ],
+  "adj_P_3300": [
+   "TB_Adj",
+   "C26"
+  ],
+  "adj_S1_3300": [
+   "TB_Adj",
+   "D26"
+  ],
+  "adj_S2_3300": [
+   "TB_Adj",
+   "E26"
+  ],
+  "adj_S3_3300": [
+   "TB_Adj",
+   "F26"
+  ],
+  "adj_P_3400": [
+   "TB_Adj",
+   "C27"
+  ],
+  "adj_S1_3400": [
+   "TB_Adj",
+   "D27"
+  ],
+  "adj_S2_3400": [
+   "TB_Adj",
+   "E27"
+  ],
+  "adj_S3_3400": [
+   "TB_Adj",
+   "F27"
+  ],
+  "adj_P_4000": [
+   "TB_Adj",
+   "C28"
+  ],
+  "adj_S1_4000": [
+   "TB_Adj",
+   "D28"
+  ],
+  "adj_S2_4000": [
+   "TB_Adj",
+   "E28"
+  ],
+  "adj_S3_4000": [
+   "TB_Adj",
+   "F28"
+  ],
+  "adj_P_4100": [
+   "TB_Adj",
+   "C29"
+  ],
+  "adj_S1_4100": [
+   "TB_Adj",
+   "D29"
+  ],
+  "adj_S2_4100": [
+   "TB_Adj",
+   "E29"
+  ],
+  "adj_S3_4100": [
+   "TB_Adj",
+   "F29"
+  ],
+  "adj_P_4200": [
+   "TB_Adj",
+   "C30"
+  ],
+  "adj_S1_4200": [
+   "TB_Adj",
+   "D30"
+  ],
+  "adj_S2_4200": [
+   "TB_Adj",
+   "E30"
+  ],
+  "adj_S3_4200": [
+   "TB_Adj",
+   "F30"
+  ],
+  "adj_P_4300": [
+   "TB_Adj",
+   "C31"
+  ],
+  "adj_S1_4300": [
+   "TB_Adj",
+   "D31"
+  ],
+  "adj_S2_4300": [
+   "TB_Adj",
+   "E31"
+  ],
+  "adj_S3_4300": [
+   "TB_Adj",
+   "F31"
+  ],
+  "adj_P_4400": [
+   "TB_Adj",
+   "C32"
+  ],
+  "adj_S1_4400": [
+   "TB_Adj",
+   "D32"
+  ],
+  "adj_S2_4400": [
+   "TB_Adj",
+   "E32"
+  ],
+  "adj_S3_4400": [
+   "TB_Adj",
+   "F32"
+  ],
+  "adj_P_4500": [
+   "TB_Adj",
+   "C33"
+  ],
+  "adj_S1_4500": [
+   "TB_Adj",
+   "D33"
+  ],
+  "adj_S2_4500": [
+   "TB_Adj",
+   "E33"
+  ],
+  "adj_S3_4500": [
+   "TB_Adj",
+   "F33"
+  ],
+  "adj_P_5000": [
+   "TB_Adj",
+   "C34"
+  ],
+  "adj_S1_5000": [
+   "TB_Adj",
+   "D34"
+  ],
+  "adj_S2_5000": [
+   "TB_Adj",
+   "E34"
+  ],
+  "adj_S3_5000": [
+   "TB_Adj",
+   "F34"
+  ],
+  "adj_P_6000": [
+   "TB_Adj",
+   "C35"
+  ],
+  "adj_S1_6000": [
+   "TB_Adj",
+   "D35"
+  ],
+  "adj_S2_6000": [
+   "TB_Adj",
+   "E35"
+  ],
+  "adj_S3_6000": [
+   "TB_Adj",
+   "F35"
+  ],
+  "adj_P_6100": [
+   "TB_Adj",
+   "C36"
+  ],
+  "adj_S1_6100": [
+   "TB_Adj",
+   "D36"
+  ],
+  "adj_S2_6100": [
+   "TB_Adj",
+   "E36"
+  ],
+  "adj_S3_6100": [
+   "TB_Adj",
+   "F36"
+  ],
+  "adj_P_6200": [
+   "TB_Adj",
+   "C37"
+  ],
+  "adj_S1_6200": [
+   "TB_Adj",
+   "D37"
+  ],
+  "adj_S2_6200": [
+   "TB_Adj",
+   "E37"
+  ],
+  "adj_S3_6200": [
+   "TB_Adj",
+   "F37"
+  ],
+  "adj_P_7000": [
+   "TB_Adj",
+   "C38"
+  ],
+  "adj_S1_7000": [
+   "TB_Adj",
+   "D38"
+  ],
+  "adj_S2_7000": [
+   "TB_Adj",
+   "E38"
+  ],
+  "adj_S3_7000": [
+   "TB_Adj",
+   "F38"
+  ],
+  "adj_P_7100": [
+   "TB_Adj",
+   "C39"
+  ],
+  "adj_S1_7100": [
+   "TB_Adj",
+   "D39"
+  ],
+  "adj_S2_7100": [
+   "TB_Adj",
+   "E39"
+  ],
+  "adj_S3_7100": [
+   "TB_Adj",
+   "F39"
+  ],
+  "adj_P_8000": [
+   "TB_Adj",
+   "C40"
+  ],
+  "adj_S1_8000": [
+   "TB_Adj",
+   "D40"
+  ],
+  "adj_S2_8000": [
+   "TB_Adj",
+   "E40"
+  ],
+  "adj_S3_8000": [
+   "TB_Adj",
+   "F40"
+  ],
+  "adj_P_9000": [
+   "TB_Adj",
+   "C41"
+  ],
+  "adj_S1_9000": [
+   "TB_Adj",
+   "D41"
+  ],
+  "adj_S2_9000": [
+   "TB_Adj",
+   "E41"
+  ],
+  "adj_S3_9000": [
+   "TB_Adj",
+   "F41"
+  ],
+  "ni_P": [
+   "TB_Adj",
+   "C44"
+  ],
+  "ni_S1": [
+   "TB_Adj",
+   "D44"
+  ],
+  "ni_S2": [
+   "TB_Adj",
+   "E44"
+  ],
+  "ni_S3": [
+   "TB_Adj",
+   "F44"
+  ],
+  "usd_1000": [
+   "Translation",
+   "F6"
+  ],
+  "usd_1100": [
+   "Translation",
+   "F7"
+  ],
+  "usd_1150": [
+   "Translation",
+   "F8"
+  ],
+  "usd_1200": [
+   "Translation",
+   "F9"
+  ],
+  "usd_1300": [
+   "Translation",
+   "F10"
+  ],
+  "usd_1500": [
+   "Translation",
+   "F11"
+  ],
+  "usd_1510": [
+   "Translation",
+   "F12"
+  ],
+  "usd_1600": [
+   "Translation",
+   "F13"
+  ],
+  "usd_1650": [
+   "Translation",
+   "F14"
+  ],
+  "usd_1700": [
+   "Translation",
+   "F15"
+  ],
+  "usd_1800": [
+   "Translation",
+   "F16"
+  ],
+  "usd_2000": [
+   "Translation",
+   "F17"
+  ],
+  "usd_2050": [
+   "Translation",
+   "F18"
+  ],
+  "usd_2100": [
+   "Translation",
+   "F19"
+  ],
+  "usd_2200": [
+   "Translation",
+   "F20"
+  ],
+  "usd_2500": [
+   "Translation",
+   "F21"
+  ],
+  "usd_2700": [
+   "Translation",
+   "F22"
+  ],
+  "usd_3000": [
+   "Translation",
+   "F23"
+  ],
+  "usd_3100": [
+   "Translation",
+   "F24"
+  ],
+  "usd_3200": [
+   "Translation",
+   "F25"
+  ],
+  "usd_3300": [
+   "Translation",
+   "F26"
+  ],
+  "usd_3400": [
+   "Translation",
+   "F27"
+  ],
+  "usd_4000": [
+   "Translation",
+   "F28"
+  ],
+  "usd_4100": [
+   "Translation",
+   "F29"
+  ],
+  "usd_4200": [
+   "Translation",
+   "F30"
+  ],
+  "usd_4300": [
+   "Translation",
+   "F31"
+  ],
+  "usd_4400": [
+   "Translation",
+   "F32"
+  ],
+  "usd_4500": [
+   "Translation",
+   "F33"
+  ],
+  "usd_5000": [
+   "Translation",
+   "F34"
+  ],
+  "usd_6000": [
+   "Translation",
+   "F35"
+  ],
+  "usd_6100": [
+   "Translation",
+   "F36"
+  ],
+  "usd_6200": [
+   "Translation",
+   "F37"
+  ],
+  "usd_7000": [
+   "Translation",
+   "F38"
+  ],
+  "usd_7100": [
+   "Translation",
+   "F39"
+  ],
+  "usd_8000": [
+   "Translation",
+   "F40"
+  ],
+  "usd_9000": [
+   "Translation",
+   "F41"
+  ],
+  "tr_sum": [
+   "Translation",
+   "F42"
+  ],
+  "cta_analytic": [
+   "Translation",
+   "F48"
+  ],
+  "cta_plug": [
+   "Translation",
+   "F49"
+  ],
+  "elims_sum": [
+   "Elims",
+   "C34"
+  ],
+  "goodwill": [
+   "Elims",
+   "C36"
+  ],
+  "urp": [
+   "Elims",
+   "C37"
+  ],
+  "cons_cash": [
+   "Consol",
+   "I7"
+  ],
+  "cons_receivables": [
+   "Consol",
+   "I8"
+  ],
+  "cons_ic_receivables": [
+   "Consol",
+   "I9"
+  ],
+  "cons_inventory": [
+   "Consol",
+   "I10"
+  ],
+  "cons_prepaids": [
+   "Consol",
+   "I11"
+  ],
+  "cons_ppe": [
+   "Consol",
+   "I12"
+  ],
+  "cons_inv_subs": [
+   "Consol",
+   "I13"
+  ],
+  "cons_inv_assoc": [
+   "Consol",
+   "I14"
+  ],
+  "cons_ic_loan_rec": [
+   "Consol",
+   "I15"
+  ],
+  "cons_goodwill": [
+   "Consol",
+   "I16"
+  ],
+  "cons_payables": [
+   "Consol",
+   "I17"
+  ],
+  "cons_ic_payables": [
+   "Consol",
+   "I18"
+  ],
+  "cons_accrued": [
+   "Consol",
+   "I19"
+  ],
+  "cons_tax_payable": [
+   "Consol",
+   "I20"
+  ],
+  "cons_debt": [
+   "Consol",
+   "I21"
+  ],
+  "cons_ic_loan_pay": [
+   "Consol",
+   "I22"
+  ],
+  "cons_share_capital": [
+   "Consol",
+   "I23"
+  ],
+  "cons_re_open": [
+   "Consol",
+   "I24"
+  ],
+  "cons_dividends": [
+   "Consol",
+   "I25"
+  ],
+  "cons_cta": [
+   "Consol",
+   "I26"
+  ],
+  "cons_nci": [
+   "Consol",
+   "I27"
+  ],
+  "cons_revenue": [
+   "Consol",
+   "I29"
+  ],
+  "cons_ic_revenue": [
+   "Consol",
+   "I30"
+  ],
+  "cons_fee_income": [
+   "Consol",
+   "I31"
+  ],
+  "cons_ic_int_income": [
+   "Consol",
+   "I32"
+  ],
+  "cons_assoc_income": [
+   "Consol",
+   "I33"
+  ],
+  "cons_div_income": [
+   "Consol",
+   "I34"
+  ],
+  "cons_cogs": [
+   "Consol",
+   "I35"
+  ],
+  "cons_opex": [
+   "Consol",
+   "I36"
+  ],
+  "cons_fee_expense": [
+   "Consol",
+   "I37"
+  ],
+  "cons_depreciation": [
+   "Consol",
+   "I38"
+  ],
+  "cons_interest": [
+   "Consol",
+   "I39"
+  ],
+  "cons_ic_int_expense": [
+   "Consol",
+   "I40"
+  ],
+  "cons_tax": [
+   "Consol",
+   "I41"
+  ],
+  "cons_nci_income": [
+   "Consol",
+   "I42"
+  ],
+  "consol_sum_C": [
+   "Consol",
+   "C43"
+  ],
+  "consol_sum_D": [
+   "Consol",
+   "D43"
+  ],
+  "consol_sum_E": [
+   "Consol",
+   "E43"
+  ],
+  "consol_sum_F": [
+   "Consol",
+   "F43"
+  ],
+  "consol_sum_G": [
+   "Consol",
+   "G43"
+  ],
+  "consol_sum_H": [
+   "Consol",
+   "H43"
+  ],
+  "consol_sum_I": [
+   "Consol",
+   "I43"
+  ],
+  "st_revenue": [
+   "Statements",
+   "B5"
+  ],
+  "st_ic_revenue": [
+   "Statements",
+   "B6"
+  ],
+  "st_fee_income": [
+   "Statements",
+   "B7"
+  ],
+  "st_ic_int_income": [
+   "Statements",
+   "B8"
+  ],
+  "st_assoc_income": [
+   "Statements",
+   "B9"
+  ],
+  "st_div_income": [
+   "Statements",
+   "B10"
+  ],
+  "st_cogs": [
+   "Statements",
+   "B11"
+  ],
+  "st_opex": [
+   "Statements",
+   "B12"
+  ],
+  "st_fee_expense": [
+   "Statements",
+   "B13"
+  ],
+  "st_depreciation": [
+   "Statements",
+   "B14"
+  ],
+  "st_interest": [
+   "Statements",
+   "B15"
+  ],
+  "st_ic_int_expense": [
+   "Statements",
+   "B16"
+  ],
+  "st_tax": [
+   "Statements",
+   "B17"
+  ],
+  "st_ni_total": [
+   "Statements",
+   "B18"
+  ],
+  "st_ni_nci": [
+   "Statements",
+   "B19"
+  ],
+  "st_ni_parent": [
+   "Statements",
+   "B20"
+  ],
+  "st_cash": [
+   "Statements",
+   "B23"
+  ],
+  "st_receivables": [
+   "Statements",
+   "B24"
+  ],
+  "st_ic_receivables": [
+   "Statements",
+   "B25"
+  ],
+  "st_inventory": [
+   "Statements",
+   "B26"
+  ],
+  "st_prepaids": [
+   "Statements",
+   "B27"
+  ],
+  "st_ppe": [
+   "Statements",
+   "B28"
+  ],
+  "st_inv_subs": [
+   "Statements",
+   "B29"
+  ],
+  "st_inv_assoc": [
+   "Statements",
+   "B30"
+  ],
+  "st_ic_loan_rec": [
+   "Statements",
+   "B31"
+  ],
+  "st_goodwill": [
+   "Statements",
+   "B32"
+  ],
+  "st_total_assets": [
+   "Statements",
+   "B33"
+  ],
+  "st_payables": [
+   "Statements",
+   "B34"
+  ],
+  "st_ic_payables": [
+   "Statements",
+   "B35"
+  ],
+  "st_accrued": [
+   "Statements",
+   "B36"
+  ],
+  "st_tax_payable": [
+   "Statements",
+   "B37"
+  ],
+  "st_debt": [
+   "Statements",
+   "B38"
+  ],
+  "st_ic_loan_pay": [
+   "Statements",
+   "B39"
+  ],
+  "st_total_liabilities": [
+   "Statements",
+   "B40"
+  ],
+  "st_share_capital": [
+   "Statements",
+   "B41"
+  ],
+  "st_re_close": [
+   "Statements",
+   "B42"
+  ],
+  "st_cta": [
+   "Statements",
+   "B43"
+  ],
+  "st_nci": [
+   "Statements",
+   "B44"
+  ],
+  "st_total_equity": [
+   "Statements",
+   "B45"
+  ],
+  "st_re_open": [
+   "Statements",
+   "B48"
+  ],
+  "st_div_parent": [
+   "Statements",
+   "B50"
+  ],
+  "st_nci_check": [
+   "Statements",
+   "B53"
+  ],
+  "cf_P_ni": [
+   "CashFlow",
+   "C7"
+  ],
+  "cf_S1_ni": [
+   "CashFlow",
+   "D7"
+  ],
+  "cf_S2_ni": [
+   "CashFlow",
+   "E7"
+  ],
+  "cf_S3_ni": [
+   "CashFlow",
+   "F7"
+  ],
+  "ccf_ni": [
+   "CashFlow",
+   "I7"
+  ],
+  "cf_P_da": [
+   "CashFlow",
+   "C8"
+  ],
+  "cf_S1_da": [
+   "CashFlow",
+   "D8"
+  ],
+  "cf_S2_da": [
+   "CashFlow",
+   "E8"
+  ],
+  "cf_S3_da": [
+   "CashFlow",
+   "F8"
+  ],
+  "ccf_da": [
+   "CashFlow",
+   "I8"
+  ],
+  "cf_P_assoc": [
+   "CashFlow",
+   "C9"
+  ],
+  "cf_S1_assoc": [
+   "CashFlow",
+   "D9"
+  ],
+  "cf_S2_assoc": [
+   "CashFlow",
+   "E9"
+  ],
+  "cf_S3_assoc": [
+   "CashFlow",
+   "F9"
+  ],
+  "ccf_assoc": [
+   "CashFlow",
+   "I9"
+  ],
+  "cf_P_wc_receivables": [
+   "CashFlow",
+   "C10"
+  ],
+  "cf_S1_wc_receivables": [
+   "CashFlow",
+   "D10"
+  ],
+  "cf_S2_wc_receivables": [
+   "CashFlow",
+   "E10"
+  ],
+  "cf_S3_wc_receivables": [
+   "CashFlow",
+   "F10"
+  ],
+  "ccf_wc_receivables": [
+   "CashFlow",
+   "I10"
+  ],
+  "cf_P_wc_ic": [
+   "CashFlow",
+   "C11"
+  ],
+  "cf_S1_wc_ic": [
+   "CashFlow",
+   "D11"
+  ],
+  "cf_S2_wc_ic": [
+   "CashFlow",
+   "E11"
+  ],
+  "cf_S3_wc_ic": [
+   "CashFlow",
+   "F11"
+  ],
+  "ccf_wc_ic": [
+   "CashFlow",
+   "I11"
+  ],
+  "cf_P_wc_inventory": [
+   "CashFlow",
+   "C12"
+  ],
+  "cf_S1_wc_inventory": [
+   "CashFlow",
+   "D12"
+  ],
+  "cf_S2_wc_inventory": [
+   "CashFlow",
+   "E12"
+  ],
+  "cf_S3_wc_inventory": [
+   "CashFlow",
+   "F12"
+  ],
+  "ccf_wc_inventory": [
+   "CashFlow",
+   "I12"
+  ],
+  "cf_P_wc_payables": [
+   "CashFlow",
+   "C13"
+  ],
+  "cf_S1_wc_payables": [
+   "CashFlow",
+   "D13"
+  ],
+  "cf_S2_wc_payables": [
+   "CashFlow",
+   "E13"
+  ],
+  "cf_S3_wc_payables": [
+   "CashFlow",
+   "F13"
+  ],
+  "ccf_wc_payables": [
+   "CashFlow",
+   "I13"
+  ],
+  "cf_P_wc_other": [
+   "CashFlow",
+   "C14"
+  ],
+  "cf_S1_wc_other": [
+   "CashFlow",
+   "D14"
+  ],
+  "cf_S2_wc_other": [
+   "CashFlow",
+   "E14"
+  ],
+  "cf_S3_wc_other": [
+   "CashFlow",
+   "F14"
+  ],
+  "ccf_wc_other": [
+   "CashFlow",
+   "I14"
+  ],
+  "ccf_cfo": [
+   "CashFlow",
+   "I15"
+  ],
+  "cf_P_cfo": [
+   "CashFlow",
+   "C15"
+  ],
+  "cf_S1_cfo": [
+   "CashFlow",
+   "D15"
+  ],
+  "cf_S2_cfo": [
+   "CashFlow",
+   "E15"
+  ],
+  "cf_S3_cfo": [
+   "CashFlow",
+   "F15"
+  ],
+  "cf_P_capex": [
+   "CashFlow",
+   "C18"
+  ],
+  "cf_S1_capex": [
+   "CashFlow",
+   "D18"
+  ],
+  "cf_S2_capex": [
+   "CashFlow",
+   "E18"
+  ],
+  "cf_S3_capex": [
+   "CashFlow",
+   "F18"
+  ],
+  "ccf_capex": [
+   "CashFlow",
+   "I18"
+  ],
+  "cf_P_inv_subs": [
+   "CashFlow",
+   "C19"
+  ],
+  "cf_S1_inv_subs": [
+   "CashFlow",
+   "D19"
+  ],
+  "cf_S2_inv_subs": [
+   "CashFlow",
+   "E19"
+  ],
+  "cf_S3_inv_subs": [
+   "CashFlow",
+   "F19"
+  ],
+  "ccf_inv_subs": [
+   "CashFlow",
+   "I19"
+  ],
+  "cf_P_ic_loan_rec": [
+   "CashFlow",
+   "C20"
+  ],
+  "cf_S1_ic_loan_rec": [
+   "CashFlow",
+   "D20"
+  ],
+  "cf_S2_ic_loan_rec": [
+   "CashFlow",
+   "E20"
+  ],
+  "cf_S3_ic_loan_rec": [
+   "CashFlow",
+   "F20"
+  ],
+  "ccf_ic_loan_rec": [
+   "CashFlow",
+   "I20"
+  ],
+  "ccf_cfi": [
+   "CashFlow",
+   "I21"
+  ],
+  "cf_P_cfi": [
+   "CashFlow",
+   "C21"
+  ],
+  "cf_S1_cfi": [
+   "CashFlow",
+   "D21"
+  ],
+  "cf_S2_cfi": [
+   "CashFlow",
+   "E21"
+  ],
+  "cf_S3_cfi": [
+   "CashFlow",
+   "F21"
+  ],
+  "cf_P_debt": [
+   "CashFlow",
+   "C24"
+  ],
+  "cf_S1_debt": [
+   "CashFlow",
+   "D24"
+  ],
+  "cf_S2_debt": [
+   "CashFlow",
+   "E24"
+  ],
+  "cf_S3_debt": [
+   "CashFlow",
+   "F24"
+  ],
+  "ccf_debt": [
+   "CashFlow",
+   "I24"
+  ],
+  "cf_P_ic_loan_pay": [
+   "CashFlow",
+   "C25"
+  ],
+  "cf_S1_ic_loan_pay": [
+   "CashFlow",
+   "D25"
+  ],
+  "cf_S2_ic_loan_pay": [
+   "CashFlow",
+   "E25"
+  ],
+  "cf_S3_ic_loan_pay": [
+   "CashFlow",
+   "F25"
+  ],
+  "ccf_ic_loan_pay": [
+   "CashFlow",
+   "I25"
+  ],
+  "cf_P_equity": [
+   "CashFlow",
+   "C26"
+  ],
+  "cf_S1_equity": [
+   "CashFlow",
+   "D26"
+  ],
+  "cf_S2_equity": [
+   "CashFlow",
+   "E26"
+  ],
+  "cf_S3_equity": [
+   "CashFlow",
+   "F26"
+  ],
+  "ccf_equity": [
+   "CashFlow",
+   "I26"
+  ],
+  "cf_P_dividends": [
+   "CashFlow",
+   "C27"
+  ],
+  "cf_S1_dividends": [
+   "CashFlow",
+   "D27"
+  ],
+  "cf_S2_dividends": [
+   "CashFlow",
+   "E27"
+  ],
+  "cf_S3_dividends": [
+   "CashFlow",
+   "F27"
+  ],
+  "ccf_dividends": [
+   "CashFlow",
+   "I27"
+  ],
+  "ccf_cff": [
+   "CashFlow",
+   "I28"
+  ],
+  "cf_P_cff": [
+   "CashFlow",
+   "C28"
+  ],
+  "cf_S1_cff": [
+   "CashFlow",
+   "D28"
+  ],
+  "cf_S2_cff": [
+   "CashFlow",
+   "E28"
+  ],
+  "cf_S3_cff": [
+   "CashFlow",
+   "F28"
+  ],
+  "ccf_fx": [
+   "CashFlow",
+   "I30"
+  ],
+  "ccf_net": [
+   "CashFlow",
+   "I31"
+  ],
+  "ccf_cash_open": [
+   "CashFlow",
+   "I32"
+  ],
+  "ccf_cash_close": [
+   "CashFlow",
+   "I33"
+  ],
+  "cf_check_P": [
+   "CashFlow",
+   "C35"
+  ],
+  "cf_check_S1": [
+   "CashFlow",
+   "D35"
+  ],
+  "cf_check_S2": [
+   "CashFlow",
+   "E35"
+  ],
+  "cf_check_S3": [
+   "CashFlow",
+   "F35"
+  ],
+  "bank_diff_P": [
+   "Recs",
+   "F6"
+  ],
+  "bank_diff_S1": [
+   "Recs",
+   "F7"
+  ],
+  "bank_diff_S2": [
+   "Recs",
+   "F8"
+  ],
+  "bank_diff_S3": [
+   "Recs",
+   "F9"
+  ],
+  "ic_trade_unadj": [
+   "Recs",
+   "F14"
+  ],
+  "ic_trade": [
+   "Recs",
+   "F15"
+  ],
+  "ic_loan": [
+   "Recs",
+   "F16"
+  ],
+  "ic_sales": [
+   "Recs",
+   "F17"
+  ],
+  "ic_fee": [
+   "Recs",
+   "F18"
+  ],
+  "ic_interest": [
+   "Recs",
+   "F19"
+  ],
+  "ic_dividend": [
+   "Recs",
+   "F20"
+  ],
+  "check_0": [
+   "Checks",
+   "C4"
+  ],
+  "check_1": [
+   "Checks",
+   "C5"
+  ],
+  "check_2": [
+   "Checks",
+   "C6"
+  ],
+  "check_3": [
+   "Checks",
+   "C7"
+  ],
+  "check_4": [
+   "Checks",
+   "C8"
+  ],
+  "check_5": [
+   "Checks",
+   "C9"
+  ],
+  "check_6": [
+   "Checks",
+   "C10"
+  ],
+  "check_7": [
+   "Checks",
+   "C11"
+  ],
+  "check_8": [
+   "Checks",
+   "C12"
+  ],
+  "check_9": [
+   "Checks",
+   "C13"
+  ],
+  "check_10": [
+   "Checks",
+   "C14"
+  ],
+  "check_11": [
+   "Checks",
+   "C15"
+  ],
+  "check_12": [
+   "Checks",
+   "C16"
+  ],
+  "check_13": [
+   "Checks",
+   "C17"
+  ],
+  "master": [
+   "Checks",
+   "C33"
+  ]
+ }
+}

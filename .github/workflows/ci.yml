@@ -24,6 +24,7 @@ jobs:
         run: |
           python -m ledgerline.audit.mutation 01 --n 20 --seed 7
           python -m ledgerline.audit.mutation 04 --n 20 --seed 7
+          python -m ledgerline.audit.mutation 05 --n 20 --seed 7
       - uses: actions/upload-artifact@v4
         with:
           name: workbooks

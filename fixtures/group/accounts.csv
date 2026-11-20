@@ -1,0 +1,37 @@
+code,name,type,fs_line,cf_line,taxable,fx_basis
+1000,Cash,A,cash,cash,0,close
+1100,Trade receivables,A,receivables,wc_receivables,0,close
+1150,Intercompany receivables,A,ic_receivables,wc_ic,0,close
+1200,Inventory,A,inventory,wc_inventory,0,close
+1300,Prepaid expenses,A,prepaids,wc_other,0,close
+1500,PP&E at cost,A,ppe,capex,0,close
+1510,Accumulated depreciation,A,ppe,da,0,close
+1600,Investment in subsidiaries,A,inv_subs,inv_subs,0,close
+1650,Investment in associate,A,inv_assoc,assoc,0,close
+1700,Intercompany loan receivable,A,ic_loan_rec,ic_loan_rec,0,close
+1800,Goodwill,A,goodwill,none,0,close
+2000,Trade payables,L,payables,wc_payables,0,close
+2050,Intercompany payables,L,ic_payables,wc_ic,0,close
+2100,Accrued liabilities,L,accrued,wc_other,0,close
+2200,Income tax payable,L,tax_payable,wc_other,0,close
+2500,Long-term debt,L,debt,debt,0,close
+2700,Intercompany loan payable,L,ic_loan_pay,ic_loan_pay,0,close
+3000,Share capital,E,share_capital,equity,0,hist
+3100,Retained earnings (opening),E,re_open,none,0,re
+3200,Dividends declared,E,dividends,dividends,0,avg
+3300,Cumulative translation adjustment,E,cta,none,0,cta
+3400,Non-controlling interests,E,nci,none,0,avg
+4000,Revenue,R,revenue,,1,avg
+4100,Intercompany revenue,R,ic_revenue,,1,avg
+4200,Management fee income,R,fee_income,,1,avg
+4300,Intercompany interest income,R,ic_int_income,,1,avg
+4400,Share of associate income,R,assoc_income,,0,avg
+4500,Dividend income,R,div_income,,0,avg
+5000,Cost of sales,X,cogs,,1,avg
+6000,Operating expenses,X,opex,,1,avg
+6100,Management fees,X,fee_expense,,1,avg
+6200,Depreciation,X,depreciation,,1,avg
+7000,Interest expense,X,interest,,1,avg
+7100,Intercompany interest expense,X,ic_int_expense,,1,avg
+8000,Income tax expense,X,tax,,0,avg
+9000,Net income attributable to NCI,X,nci_income,,0,avg

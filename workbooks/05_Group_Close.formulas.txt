@@ -1,0 +1,2572 @@
+=== Cover
+A1	'Ledgerline Group: month-end close and consolidation (synthetic)'
+A3	'Entities'
+B3	'P (US parent), S1 (US), S2 (UK, GBP), S3 (US, 80% owned)'
+A4	'Units'
+B4	'$ millions; S2 ledgers in GBP millions until translated'
+A5	'Data'
+B5	'Seeded synthetic ledgers (python/ledgerline/data/group.py, seed fixed); no real company'
+A6	'Framework'
+B6	'US GAAP: ASC 810 consolidation, ASC 830 translation, full-goodwill NCI'
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-20 by the Ledgerline generator (see Log)'
+A12	'Colour code'
+A13	'Blue on yellow'
+B13	'Hard-coded input (ledger data or close input)'
+A14	'Black'
+B14	'Formula'
+A15	'Green'
+B15	'Direct link to another sheet'
+A18	'Sheets'
+A19	'Inputs'
+B19	'Close calendar inputs: FX rates, ownership, prepaids, accruals, bank statement'
+A20	'CoA'
+B20	'Chart of accounts with statement mapping'
+A21	'Opening'
+B21	'Opening trial balances by entity (local currency)'
+A22	'TB_Unadj'
+B22	'Unadjusted closing trial balances (local currency, seeded synthetic ledger)'
+A23	'Schedules'
+B23	'Depreciation and tax provision'
+A24	'Journals'
+B24	'Month-end close journals J1-J7'
+A25	'TB_Adj'
+B25	'Adjusted trial balances = unadjusted + journals'
+A26	'Translation'
+B26	'S2 GBP to USD at current rate, CTA plug and roll-forward'
+A27	'Elims'
+B27	'Consolidation eliminations E1-E12 (intercompany, investment, NCI)'
+A28	'Consol'
+B28	'Consolidation worksheet: entities, eliminations, group'
+A29	'Statements'
+B29	'Group income statement, balance sheet and equity roll-forward'
+A30	'CashFlow'
+B30	'Indirect cash flow statement from trial-balance movements'
+A31	'Recs'
+B31	'Bank and intercompany reconciliations'
+A32	'Checks'
+B32	'Integrity checks and master flag'
+A33	'Checklist'
+B33	'Close checklist with owners and sign-off (VBA stamps sign-off in Excel)'
+A35	'Disclaimer'
+B35	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Inputs
+A1	'Inputs: FX rates, ownership, close schedules (synthetic group)'
+A3	'Rates and ownership'
+A4	'GBP/USD, opening (USD per GBP)'
+B4	'rate'
+C4	1.265
+A5	'GBP/USD, average for the year'
+B5	'rate'
+C5	1.2875
+A6	'GBP/USD, closing'
+B6	'rate'
+C6	1.312
+A7	'GBP/USD, historical (S2 share capital)'
+B7	'rate'
+C7	1.48
+A8	'Ownership of S3'
+B8	'%'
+C8	0.8
+A9	'Ownership of associate A (equity method)'
+B9	'%'
+C9	0.3
+A10	'S3 acquisition: consideration paid'
+B10	'$m'
+C10	72
+A11	'S3 acquisition: NCI at fair value (full goodwill)'
+B11	'$m'
+C11	18
+A12	'S3 retained earnings at acquisition'
+B12	'$m'
+C12	12
+A13	'Associate A net income for the year'
+B13	'$m'
+C13	31.514
+A14	'P gross margin on sales to S1'
+B14	'%'
+C14	0.25
+A15	'S1 closing inventory bought from P (at transfer price)'
+B15	'$m'
+C15	25.092
+A16	'S1 purchases from P (S1 purchase ledger)'
+B16	'$m'
+C16	124.217
+A17	'S1 payment to P in transit at year end'
+B17	'$m'
+C17	7.267
+A18	'P cut-off: revenue on goods shipped after year end'
+B18	'$m'
+C18	4.248
+A19	'P cut-off: cost of those goods'
+B19	'$m'
+C19	2.634
+A20	'S2 opening retained earnings in USD (prior translations)'
+B20	'$m'
+C20	5.011
+A21	'S2 opening CTA (gain positive)'
+B21	'$m'
+C21	-8.983630000000002
+A22	'Depreciation convention on additions (share of a year)'
+B22	'x'
+C22	0.5
+A23	'Reconciliation tolerance'
+B23	'$m'
+C23	0.001
+A25	'Entities'
+A26	'Entity'
+C26	'Life (yrs)'
+D26	'Tax rate'
+A27	'P: Parent (US, USD)'
+C27	10
+D27	0.25
+A28	'S1: US distribution (USD, 100%)'
+C28	8
+D28	0.25
+A29	'S2: UK retail (GBP, 100%)'
+C29	10
+D29	0.25
+A30	'S3: US services (USD, 80%)'
+C30	5
+D30	0.25
+A32	'Prepayments made this year (J2)'
+A33	'Item'
+B33	'Entity'
+C33	'Paid'
+D33	'Months'
+E33	'Elapsed'
+F33	'Expense to date'
+A34	'Insurance renewal'
+B34	'P'
+C34	12
+D34	12
+E34	7
+F34	=C34*E34/D34
+A35	'Software licences'
+B35	'P'
+C35	8.4
+D35	24
+E35	9
+F35	=C35*E35/D35
+A36	'Warehouse rent in advance'
+B36	'S1'
+C36	4.8
+D36	6
+E36	2
+F36	=C36*E36/D36
+A37	'Business rates'
+B37	'S2'
+C37	2.4
+D37	12
+E37	10
+F37	=C37*E37/D37
+A38	'Maintenance contract'
+B38	'S3'
+C38	3.6
+D38	12
+E38	4
+F38	=C38*E38/D38
+A40	'Accruals for unbilled costs (J3, local currency)'
+A41	'Item'
+B41	'Entity'
+C41	'Amount'
+A42	'Unbilled freight'
+B42	'P'
+C42	3.1
+A43	'Audit fee'
+B43	'P'
+C43	1.2
+A44	'Utilities'
+B44	'S1'
+C44	0.9
+A45	'Agency staff'
+B45	'S2'
+C45	0.7
+A46	'Contractor hours'
+B46	'S3'
+C46	1.5
+A48	'Bank statements at year end (local currency)'
+A49	'Entity'
+C49	'Statement'
+D49	'O/s cheques'
+E49	'Deposits in transit'
+A50	'P'
+C50	144.609
+D50	2.974
+E50	7.267
+A51	'S1'
+C51	70.923
+D51	2.091
+E51	0
+A52	'S2'
+C52	24.931
+D52	0.636
+E52	0
+A53	'S3'
+C53	76.571
+D53	2.34
+E53	0
+=== CoA
+A1	'Group chart of accounts and mappings'
+A5	'Code'
+B5	'Account'
+C5	'Type'
+D5	'FS line'
+E5	'Cash-flow line'
+F5	'Taxable'
+G5	'FX basis'
+A6	1000
+B6	'Cash'
+C6	'A'
+D6	'cash'
+E6	'cash'
+F6	0
+G6	'close'
+A7	1100
+B7	'Trade receivables'
+C7	'A'
+D7	'receivables'
+E7	'wc_receivables'
+F7	0
+G7	'close'
+A8	1150
+B8	'Intercompany receivables'
+C8	'A'
+D8	'ic_receivables'
+E8	'wc_ic'
+F8	0
+G8	'close'
+A9	1200
+B9	'Inventory'
+C9	'A'
+D9	'inventory'
+E9	'wc_inventory'
+F9	0
+G9	'close'
+A10	1300
+B10	'Prepaid expenses'
+C10	'A'
+D10	'prepaids'
+E10	'wc_other'
+F10	0
+G10	'close'
+A11	1500
+B11	'PP&E at cost'
+C11	'A'
+D11	'ppe'
+E11	'capex'
+F11	0
+G11	'close'
+A12	1510
+B12	'Accumulated depreciation'
+C12	'A'
+D12	'ppe'
+E12	'da'
+F12	0
+G12	'close'
+A13	1600
+B13	'Investment in subsidiaries'
+C13	'A'
+D13	'inv_subs'
+E13	'inv_subs'
+F13	0
+G13	'close'
+A14	1650
+B14	'Investment in associate'
+C14	'A'
+D14	'inv_assoc'
+E14	'assoc'
+F14	0
+G14	'close'
+A15	1700
+B15	'Intercompany loan receivable'
+C15	'A'
+D15	'ic_loan_rec'
+E15	'ic_loan_rec'
+F15	0
+G15	'close'
+A16	1800
+B16	'Goodwill'
+C16	'A'
+D16	'goodwill'
+E16	'none'
+F16	0
+G16	'close'
+A17	2000
+B17	'Trade payables'
+C17	'L'
+D17	'payables'
+E17	'wc_payables'
+F17	0
+G17	'close'
+A18	2050
+B18	'Intercompany payables'
+C18	'L'
+D18	'ic_payables'
+E18	'wc_ic'
+F18	0
+G18	'close'
+A19	2100
+B19	'Accrued liabilities'
+C19	'L'
+D19	'accrued'
+E19	'wc_other'
+F19	0
+G19	'close'
+A20	2200
+B20	'Income tax payable'
+C20	'L'
+D20	'tax_payable'
+E20	'wc_other'
+F20	0
+G20	'close'
+A21	2500
+B21	'Long-term debt'
+C21	'L'
+D21	'debt'
+E21	'debt'
+F21	0
+G21	'close'
+A22	2700
+B22	'Intercompany loan payable'
+C22	'L'
+D22	'ic_loan_pay'
+E22	'ic_loan_pay'
+F22	0
+G22	'close'
+A23	3000
+B23	'Share capital'
+C23	'E'
+D23	'share_capital'
+E23	'equity'
+F23	0
+G23	'hist'
+A24	3100
+B24	'Retained earnings (opening)'
+C24	'E'
+D24	're_open'
+E24	'none'
+F24	0
+G24	're'
+A25	3200
+B25	'Dividends declared'
+C25	'E'
+D25	'dividends'
+E25	'dividends'
+F25	0
+G25	'avg'
+A26	3300
+B26	'Cumulative translation adjustment'
+C26	'E'
+D26	'cta'
+E26	'none'
+F26	0
+G26	'cta'
+A27	3400
+B27	'Non-controlling interests'
+C27	'E'
+D27	'nci'
+E27	'none'
+F27	0
+G27	'avg'
+A28	4000
+B28	'Revenue'
+C28	'R'
+D28	'revenue'
+F28	1
+G28	'avg'
+A29	4100
+B29	'Intercompany revenue'
+C29	'R'
+D29	'ic_revenue'
+F29	1
+G29	'avg'
+A30	4200
+B30	'Management fee income'
+C30	'R'
+D30	'fee_income'
+F30	1
+G30	'avg'
+A31	4300
+B31	'Intercompany interest income'
+C31	'R'
+D31	'ic_int_income'
+F31	1
+G31	'avg'
+A32	4400
+B32	'Share of associate income'
+C32	'R'
+D32	'assoc_income'
+F32	0
+G32	'avg'
+A33	4500
+B33	'Dividend income'
+C33	'R'
+D33	'div_income'
+F33	0
+G33	'avg'
+A34	5000
+B34	'Cost of sales'
+C34	'X'
+D34	'cogs'
+F34	1
+G34	'avg'
+A35	6000
+B35	'Operating expenses'
+C35	'X'
+D35	'opex'
+F35	1
+G35	'avg'
+A36	6100
+B36	'Management fees'
+C36	'X'
+D36	'fee_expense'
+F36	1
+G36	'avg'
+A37	6200
+B37	'Depreciation'
+C37	'X'
+D37	'depreciation'
+F37	1
+G37	'avg'
+A38	7000
+B38	'Interest expense'
+C38	'X'
+D38	'interest'
+F38	1
+G38	'avg'
+A39	7100
+B39	'Intercompany interest expense'
+C39	'X'
+D39	'ic_int_expense'
+F39	1
+G39	'avg'
+A40	8000
+B40	'Income tax expense'
+C40	'X'
+D40	'tax'
+F40	0
+G40	'avg'
+A41	9000
+B41	'Net income attributable to NCI'
+C41	'X'
+D41	'nci_income'
+F41	0
+G41	'avg'
+=== Opening
+A1	'Opening balance sheets (local currency, debit +)'
+C4	'P'
+D4	'S1'
+E4	'S2'
+F4	'S3'
+A5	'Code'
+B5	'Account'
+C5	'USD'
+D5	'USD'
+E5	'GBP'
+F5	'USD'
+A6	='CoA'!A6
+B6	='CoA'!B6
+C6	42.382
+D6	61.437
+E6	11.259
+F6	18.687
+A7	='CoA'!A7
+B7	='CoA'!B7
+C7	100.05
+D7	47.413
+E7	20.741
+F7	43.564
+A8	='CoA'!A8
+B8	='CoA'!B8
+C8	20
+D8	0
+E8	0
+F8	0
+A9	='CoA'!A9
+B9	='CoA'!B9
+C9	155.355
+D9	73.139
+E9	32.076
+F9	3.115
+A10	='CoA'!A10
+B10	='CoA'!B10
+C10	8.58
+D10	3.492
+E10	1.326
+F10	3.094
+A11	='CoA'!A11
+B11	='CoA'!B11
+C11	384.105
+D11	175.319
+E11	78.012
+F11	179.234
+A12	='CoA'!A12
+B12	='CoA'!B12
+C12	-154.466
+D12	-73.028
+E12	-33.92
+F12	-75.388
+A13	='CoA'!A13
+B13	='CoA'!B13
+C13	191.2
+D13	0
+E13	0
+F13	0
+A14	='CoA'!A14
+B14	='CoA'!B14
+C14	45
+D14	0
+E14	0
+F14	0
+A15	='CoA'!A15
+B15	='CoA'!B15
+C15	50
+D15	0
+E15	0
+F15	0
+A16	='CoA'!A16
+B16	='CoA'!B16
+C16	0
+D16	0
+E16	0
+F16	0
+A17	='CoA'!A17
+B17	='CoA'!B17
+C17	-82.021
+D17	-32.497
+E17	-17.717
+F17	-37.836
+A18	='CoA'!A18
+B18	='CoA'!B18
+C18	0
+D18	-20
+E18	0
+F18	0
+A19	='CoA'!A19
+B19	='CoA'!B19
+C19	-25.566
+D19	-12.676
+E19	-5.61
+F19	-11.598
+A20	='CoA'!A20
+B20	='CoA'!B20
+C20	-11.133
+D20	-4.41
+E20	-2.4
+F20	-3.645
+A21	='CoA'!A21
+B21	='CoA'!B21
+C21	-201.912
+D21	0
+E21	-40.109
+F21	0
+A22	='CoA'!A22
+B22	='CoA'!B22
+C22	0
+D22	0
+E22	0
+F22	-50
+A23	='CoA'!A23
+B23	='CoA'!B23
+C23	-300
+D23	-60
+E23	-40
+F23	-50
+A24	='CoA'!A24
+B24	='CoA'!B24
+C24	-221.574
+D24	-158.189
+E24	-3.658
+F24	-19.227
+A25	='CoA'!A25
+B25	='CoA'!B25
+C25	0
+D25	0
+E25	0
+F25	0
+A26	='CoA'!A26
+B26	='CoA'!B26
+C26	0
+D26	0
+E26	0
+F26	0
+A27	='CoA'!A27
+B27	='CoA'!B27
+C27	0
+D27	0
+E27	0
+F27	0
+A28	='CoA'!A28
+B28	='CoA'!B28
+C28	0
+D28	0
+E28	0
+F28	0
+A29	='CoA'!A29
+B29	='CoA'!B29
+C29	0
+D29	0
+E29	0
+F29	0
+A30	='CoA'!A30
+B30	='CoA'!B30
+C30	0
+D30	0
+E30	0
+F30	0
+A31	='CoA'!A31
+B31	='CoA'!B31
+C31	0
+D31	0
+E31	0
+F31	0
+A32	='CoA'!A32
+B32	='CoA'!B32
+C32	0
+D32	0
+E32	0
+F32	0
+A33	='CoA'!A33
+B33	='CoA'!B33
+C33	0
+D33	0
+E33	0
+F33	0
+A34	='CoA'!A34
+B34	='CoA'!B34
+C34	0
+D34	0
+E34	0
+F34	0
+A35	='CoA'!A35
+B35	='CoA'!B35
+C35	0
+D35	0
+E35	0
+F35	0
+A36	='CoA'!A36
+B36	='CoA'!B36
+C36	0
+D36	0
+E36	0
+F36	0
+A37	='CoA'!A37
+B37	='CoA'!B37
+C37	0
+D37	0
+E37	0
+F37	0
+A38	='CoA'!A38
+B38	='CoA'!B38
+C38	0
+D38	0
+E38	0
+F38	0
+A39	='CoA'!A39
+B39	='CoA'!B39
+C39	0
+D39	0
+E39	0
+F39	0
+A40	='CoA'!A40
+B40	='CoA'!B40
+C40	0
+D40	0
+E40	0
+F40	0
+A41	='CoA'!A41
+B41	='CoA'!B41
+C41	0
+D41	0
+E41	0
+F41	0
+B42	'Total (must be zero)'
+C42	=SUM(C6:C41)
+D42	=SUM(D6:D41)
+E42	=SUM(E6:E41)
+F42	=SUM(F6:F41)
+=== TB_Unadj
+A1	'Unadjusted closing trial balances (local currency, debit +)'
+C4	'P'
+D4	'S1'
+E4	'S2'
+F4	'S3'
+A5	'Code'
+B5	'Account'
+C5	'USD'
+D5	'USD'
+E5	'GBP'
+F5	'USD'
+A6	='CoA'!A6
+B6	='CoA'!B6
+C6	141.635
+D6	68.832
+E6	24.295
+F6	74.231
+A7	='CoA'!A7
+B7	='CoA'!B7
+C7	97.382
+D7	48.066
+E7	16.157
+F7	39.675
+A8	='CoA'!A8
+B8	='CoA'!B8
+C8	24.985
+D8	0
+E8	0
+F8	0
+A9	='CoA'!A9
+B9	='CoA'!B9
+C9	62.059
+D9	98.625
+E9	32.522
+F9	4.607
+A10	='CoA'!A10
+B10	='CoA'!B10
+C10	20.4
+D10	4.8
+E10	2.4
+F10	3.6
+A11	='CoA'!A11
+B11	='CoA'!B11
+C11	427.856
+D11	190.335
+E11	85.879
+F11	195.902
+A12	='CoA'!A12
+B12	='CoA'!B12
+C12	-154.466
+D12	-73.028
+E12	-33.92
+F12	-75.388
+A13	='CoA'!A13
+B13	='CoA'!B13
+C13	191.2
+D13	0
+E13	0
+F13	0
+A14	='CoA'!A14
+B14	='CoA'!B14
+C14	39
+D14	0
+E14	0
+F14	0
+A15	='CoA'!A15
+B15	='CoA'!B15
+C15	75
+D15	0
+E15	0
+F15	0
+A16	='CoA'!A16
+B16	='CoA'!B16
+C16	0
+D16	0
+E16	0
+F16	0
+A17	='CoA'!A17
+B17	='CoA'!B17
+C17	-50.594
+D17	-16.008
+E17	-9.57
+F17	-20.921
+A18	='CoA'!A18
+B18	='CoA'!B18
+C18	0
+D18	-17.718
+E18	0
+F18	0
+A19	='CoA'!A19
+B19	='CoA'!B19
+C19	0
+D19	0
+E19	0
+F19	0
+A20	='CoA'!A20
+B20	='CoA'!B20
+C20	0
+D20	0
+E20	0
+F20	0
+A21	='CoA'!A21
+B21	='CoA'!B21
+C21	-184.326
+D21	0
+E21	-36.169
+F21	0
+A22	='CoA'!A22
+B22	='CoA'!B22
+C22	0
+D22	0
+E22	0
+F22	-75
+A23	='CoA'!A23
+B23	='CoA'!B23
+C23	-300
+D23	-60
+E23	-40
+F23	-50
+A24	='CoA'!A24
+B24	='CoA'!B24
+C24	-221.574
+D24	-158.189
+E24	-3.657999999999998
+F24	-19.22699999999998
+A25	='CoA'!A25
+B25	='CoA'!B25
+C25	30
+D25	0
+E25	0
+F25	20
+A26	='CoA'!A26
+B26	='CoA'!B26
+C26	0
+D26	0
+E26	0
+F26	0
+A27	='CoA'!A27
+B27	='CoA'!B27
+C27	0
+D27	0
+E27	0
+F27	0
+A28	='CoA'!A28
+B28	='CoA'!B28
+C28	-891.235
+D28	-407.339
+E28	-177.548
+F28	-409.017
+A29	='CoA'!A29
+B29	='CoA'!B29
+C29	-124.217
+D29	0
+E29	0
+F29	0
+A30	='CoA'!A30
+B30	='CoA'!B30
+C30	-7.416
+D30	0
+E30	0
+F30	0
+A31	='CoA'!A31
+B31	='CoA'!B31
+C31	-2.5
+D31	0
+E31	0
+F31	0
+A32	='CoA'!A32
+B32	='CoA'!B32
+C32	0
+D32	0
+E32	0
+F32	0
+A33	='CoA'!A33
+B33	='CoA'!B33
+C33	-16
+D33	0
+E33	0
+F33	0
+A34	='CoA'!A34
+B34	='CoA'!B34
+C34	645.729
+D34	276.991
+E34	97.651
+F34	224.959
+A35	='CoA'!A35
+B35	='CoA'!B35
+C35	185.977
+D35	44.633
+E35	33.995
+F35	84.079
+A36	='CoA'!A36
+B36	='CoA'!B36
+C36	0
+D36	0
+E36	5.76
+F36	0
+A37	='CoA'!A37
+B37	='CoA'!B37
+C37	0
+D37	0
+E37	0
+F37	0
+A38	='CoA'!A38
+B38	='CoA'!B38
+C38	11.105
+D38	0
+E38	2.206
+F38	0
+A39	='CoA'!A39
+B39	='CoA'!B39
+C39	0
+D39	0
+E39	0
+F39	2.5
+A40	='CoA'!A40
+B40	='CoA'!B40
+C40	0
+D40	0
+E40	0
+F40	0
+A41	='CoA'!A41
+B41	='CoA'!B41
+C41	0
+D41	0
+E41	0
+F41	0
+B42	'Total (must be zero)'
+C42	=SUM(C6:C41)
+D42	=SUM(D6:D41)
+E42	=SUM(E6:E41)
+F42	=SUM(F6:F41)
+=== Schedules
+A1	'Close schedules: depreciation and income tax'
+C4	'P'
+D4	'S1'
+E4	'S2'
+F4	'S3'
+A5	'Depreciation'
+A6	'PP&E cost, opening'
+C6	='Opening'!C11
+D6	='Opening'!D11
+E6	='Opening'!E11
+F6	='Opening'!F11
+A7	'Additions (closing cost less opening)'
+C7	='TB_Unadj'!C11-'Opening'!C11
+D7	='TB_Unadj'!D11-'Opening'!D11
+E7	='TB_Unadj'!E11-'Opening'!E11
+F7	='TB_Unadj'!F11-'Opening'!F11
+A8	'Useful life (years)'
+C8	='Inputs'!$C$27
+D8	='Inputs'!$C$28
+E8	='Inputs'!$C$29
+F8	='Inputs'!$C$30
+A9	'Depreciation (J1)'
+C9	=(C6+'Inputs'!$C$22*C7)/C8
+D9	=(D6+'Inputs'!$C$22*D7)/D8
+E9	=(E6+'Inputs'!$C$22*E7)/E8
+F9	=(F6+'Inputs'!$C$22*F7)/F8
+A10	'Income tax'
+A11	'Pre-tax income before close journals (taxable accounts)'
+C11	=-SUMPRODUCT('TB_Unadj'!C$6:C$41,'CoA'!$F$6:$F$41)
+D11	=-SUMPRODUCT('TB_Unadj'!D$6:D$41,'CoA'!$F$6:$F$41)
+E11	=-SUMPRODUCT('TB_Unadj'!E$6:E$41,'CoA'!$F$6:$F$41)
+F11	=-SUMPRODUCT('TB_Unadj'!F$6:F$41,'CoA'!$F$6:$F$41)
+A12	'Less depreciation'
+C12	=-C9
+D12	=-D9
+E12	=-E9
+F12	=-F9
+A13	'Less prepaid amortisation'
+C13	=-SUMIF('Inputs'!$B$34:$B$38,C$4,'Inputs'!$F$34:$F$38)
+D13	=-SUMIF('Inputs'!$B$34:$B$38,D$4,'Inputs'!$F$34:$F$38)
+E13	=-SUMIF('Inputs'!$B$34:$B$38,E$4,'Inputs'!$F$34:$F$38)
+F13	=-SUMIF('Inputs'!$B$34:$B$38,F$4,'Inputs'!$F$34:$F$38)
+A14	'Less accruals'
+C14	=-SUMIF('Inputs'!$B$42:$B$46,C$4,'Inputs'!$C$42:$C$46)
+D14	=-SUMIF('Inputs'!$B$42:$B$46,D$4,'Inputs'!$C$42:$C$46)
+E14	=-SUMIF('Inputs'!$B$42:$B$46,E$4,'Inputs'!$C$42:$C$46)
+F14	=-SUMIF('Inputs'!$B$42:$B$46,F$4,'Inputs'!$C$42:$C$46)
+A15	'Less cut-off reversal (revenue less cost)'
+C15	=IF(C$4="P",'Inputs'!$C$19-'Inputs'!$C$18,0)
+D15	=IF(D$4="P",'Inputs'!$C$19-'Inputs'!$C$18,0)
+E15	=IF(E$4="P",'Inputs'!$C$19-'Inputs'!$C$18,0)
+F15	=IF(F$4="P",'Inputs'!$C$19-'Inputs'!$C$18,0)
+A16	'Taxable income'
+C16	=SUM(C11:C15)
+D16	=SUM(D11:D15)
+E16	=SUM(E11:E15)
+F16	=SUM(F11:F15)
+A17	'Tax rate'
+C17	='Inputs'!$D$27
+D17	='Inputs'!$D$28
+E17	='Inputs'!$D$29
+F17	='Inputs'!$D$30
+A18	'Income tax (J5)'
+C18	=MAX(0,C16)*C17
+D18	=MAX(0,D16)*D17
+E18	=MAX(0,E16)*E17
+F18	=MAX(0,F16)*F17
+=== Journals
+A1	'Close journals (local currency, debit +)'
+A5	'Journal'
+B5	'Entity'
+C5	'Account'
+D5	'Amount'
+E5	'Description'
+A6	'J1-P'
+B6	'P'
+C6	6200
+D6	='Schedules'!$C$9
+E6	'Depreciation for the year (Schedules)'
+A7	'J1-P'
+B7	'P'
+C7	1510
+D7	=-'Schedules'!$C$9
+E7	'Depreciation for the year (Schedules)'
+A8	'J1-S1'
+B8	'S1'
+C8	6200
+D8	='Schedules'!$D$9
+E8	'Depreciation for the year (Schedules)'
+A9	'J1-S1'
+B9	'S1'
+C9	1510
+D9	=-'Schedules'!$D$9
+E9	'Depreciation for the year (Schedules)'
+A10	'J1-S2'
+B10	'S2'
+C10	6200
+D10	='Schedules'!$E$9
+E10	'Depreciation for the year (Schedules)'
+A11	'J1-S2'
+B11	'S2'
+C11	1510
+D11	=-'Schedules'!$E$9
+E11	'Depreciation for the year (Schedules)'
+A12	'J1-S3'
+B12	'S3'
+C12	6200
+D12	='Schedules'!$F$9
+E12	'Depreciation for the year (Schedules)'
+A13	'J1-S3'
+B13	'S3'
+C13	1510
+D13	=-'Schedules'!$F$9
+E13	'Depreciation for the year (Schedules)'
+A14	'J2-1'
+B14	'P'
+C14	6000
+D14	='Inputs'!$F$34
+E14	'Prepaid amortisation: Insurance renewal'
+A15	'J2-1'
+B15	'P'
+C15	1300
+D15	=-'Inputs'!$F$34
+E15	'Prepaid amortisation: Insurance renewal'
+A16	'J2-2'
+B16	'P'
+C16	6000
+D16	='Inputs'!$F$35
+E16	'Prepaid amortisation: Software licences'
+A17	'J2-2'
+B17	'P'
+C17	1300
+D17	=-'Inputs'!$F$35
+E17	'Prepaid amortisation: Software licences'
+A18	'J2-3'
+B18	'S1'
+C18	6000
+D18	='Inputs'!$F$36
+E18	'Prepaid amortisation: Warehouse rent in advance'
+A19	'J2-3'
+B19	'S1'
+C19	1300
+D19	=-'Inputs'!$F$36
+E19	'Prepaid amortisation: Warehouse rent in advance'
+A20	'J2-4'
+B20	'S2'
+C20	6000
+D20	='Inputs'!$F$37
+E20	'Prepaid amortisation: Business rates'
+A21	'J2-4'
+B21	'S2'
+C21	1300
+D21	=-'Inputs'!$F$37
+E21	'Prepaid amortisation: Business rates'
+A22	'J2-5'
+B22	'S3'
+C22	6000
+D22	='Inputs'!$F$38
+E22	'Prepaid amortisation: Maintenance contract'
+A23	'J2-5'
+B23	'S3'
+C23	1300
+D23	=-'Inputs'!$F$38
+E23	'Prepaid amortisation: Maintenance contract'
+A24	'J3-1'
+B24	'P'
+C24	6000
+D24	='Inputs'!$C$42
+E24	'Accrual: Unbilled freight'
+A25	'J3-1'
+B25	'P'
+C25	2100
+D25	=-'Inputs'!$C$42
+E25	'Accrual: Unbilled freight'
+A26	'J3-2'
+B26	'P'
+C26	6000
+D26	='Inputs'!$C$43
+E26	'Accrual: Audit fee'
+A27	'J3-2'
+B27	'P'
+C27	2100
+D27	=-'Inputs'!$C$43
+E27	'Accrual: Audit fee'
+A28	'J3-3'
+B28	'S1'
+C28	6000
+D28	='Inputs'!$C$44
+E28	'Accrual: Utilities'
+A29	'J3-3'
+B29	'S1'
+C29	2100
+D29	=-'Inputs'!$C$44
+E29	'Accrual: Utilities'
+A30	'J3-4'
+B30	'S2'
+C30	6000
+D30	='Inputs'!$C$45
+E30	'Accrual: Agency staff'
+A31	'J3-4'
+B31	'S2'
+C31	2100
+D31	=-'Inputs'!$C$45
+E31	'Accrual: Agency staff'
+A32	'J3-5'
+B32	'S3'
+C32	6000
+D32	='Inputs'!$C$46
+E32	'Accrual: Contractor hours'
+A33	'J3-5'
+B33	'S3'
+C33	2100
+D33	=-'Inputs'!$C$46
+E33	'Accrual: Contractor hours'
+A34	'J4'
+B34	'P'
+C34	4000
+D34	='Inputs'!$C$18
+E34	'Revenue cut-off: goods shipped after year end'
+A35	'J4'
+B35	'P'
+C35	1100
+D35	=-'Inputs'!$C$18
+E35	'Revenue cut-off: goods shipped after year end'
+A36	'J4'
+B36	'P'
+C36	1200
+D36	='Inputs'!$C$19
+E36	'Revenue cut-off: goods shipped after year end'
+A37	'J4'
+B37	'P'
+C37	5000
+D37	=-'Inputs'!$C$19
+E37	'Revenue cut-off: goods shipped after year end'
+A38	'J5-P'
+B38	'P'
+C38	8000
+D38	='Schedules'!$C$18
+E38	'Income tax on adjusted pre-tax income'
+A39	'J5-P'
+B39	'P'
+C39	2200
+D39	=-'Schedules'!$C$18
+E39	'Income tax on adjusted pre-tax income'
+A40	'J5-S1'
+B40	'S1'
+C40	8000
+D40	='Schedules'!$D$18
+E40	'Income tax on adjusted pre-tax income'
+A41	'J5-S1'
+B41	'S1'
+C41	2200
+D41	=-'Schedules'!$D$18
+E41	'Income tax on adjusted pre-tax income'
+A42	'J5-S2'
+B42	'S2'
+C42	8000
+D42	='Schedules'!$E$18
+E42	'Income tax on adjusted pre-tax income'
+A43	'J5-S2'
+B43	'S2'
+C43	2200
+D43	=-'Schedules'!$E$18
+E43	'Income tax on adjusted pre-tax income'
+A44	'J5-S3'
+B44	'S3'
+C44	8000
+D44	='Schedules'!$F$18
+E44	'Income tax on adjusted pre-tax income'
+A45	'J5-S3'
+B45	'S3'
+C45	2200
+D45	=-'Schedules'!$F$18
+E45	'Income tax on adjusted pre-tax income'
+A46	'J6'
+B46	'P'
+C46	1000
+D46	='Inputs'!$C$17
+E46	'S1 payment in transit'
+A47	'J6'
+B47	'P'
+C47	1150
+D47	=-'Inputs'!$C$17
+E47	'S1 payment in transit'
+A48	'J7'
+B48	'P'
+C48	1650
+D48	='Inputs'!$C$9*'Inputs'!$C$13
+E48	'Equity method: share of associate A net income'
+A49	'J7'
+B49	'P'
+C49	4400
+D49	=-'Inputs'!$C$9*'Inputs'!$C$13
+E49	'Equity method: share of associate A net income'
+C50	'Total'
+D50	=SUM(D6:D49)
+=== TB_Adj
+A1	'Adjusted closing trial balances (local currency, debit +)'
+C4	'P'
+D4	'S1'
+E4	'S2'
+F4	'S3'
+A5	'Code'
+B5	'Account'
+C5	'USD'
+D5	'USD'
+E5	'GBP'
+F5	'USD'
+A6	='CoA'!A6
+B6	='CoA'!B6
+C6	='TB_Unadj'!C6+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A6)
+D6	='TB_Unadj'!D6+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A6)
+E6	='TB_Unadj'!E6+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A6)
+F6	='TB_Unadj'!F6+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A6)
+A7	='CoA'!A7
+B7	='CoA'!B7
+C7	='TB_Unadj'!C7+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A7)
+D7	='TB_Unadj'!D7+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A7)
+E7	='TB_Unadj'!E7+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A7)
+F7	='TB_Unadj'!F7+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A7)
+A8	='CoA'!A8
+B8	='CoA'!B8
+C8	='TB_Unadj'!C8+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A8)
+D8	='TB_Unadj'!D8+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A8)
+E8	='TB_Unadj'!E8+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A8)
+F8	='TB_Unadj'!F8+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A8)
+A9	='CoA'!A9
+B9	='CoA'!B9
+C9	='TB_Unadj'!C9+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A9)
+D9	='TB_Unadj'!D9+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A9)
+E9	='TB_Unadj'!E9+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A9)
+F9	='TB_Unadj'!F9+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A9)
+A10	='CoA'!A10
+B10	='CoA'!B10
+C10	='TB_Unadj'!C10+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A10)
+D10	='TB_Unadj'!D10+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A10)
+E10	='TB_Unadj'!E10+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A10)
+F10	='TB_Unadj'!F10+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A10)
+A11	='CoA'!A11
+B11	='CoA'!B11
+C11	='TB_Unadj'!C11+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A11)
+D11	='TB_Unadj'!D11+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A11)
+E11	='TB_Unadj'!E11+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A11)
+F11	='TB_Unadj'!F11+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A11)
+A12	='CoA'!A12
+B12	='CoA'!B12
+C12	='TB_Unadj'!C12+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A12)
+D12	='TB_Unadj'!D12+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A12)
+E12	='TB_Unadj'!E12+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A12)
+F12	='TB_Unadj'!F12+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A12)
+A13	='CoA'!A13
+B13	='CoA'!B13
+C13	='TB_Unadj'!C13+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A13)
+D13	='TB_Unadj'!D13+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A13)
+E13	='TB_Unadj'!E13+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A13)
+F13	='TB_Unadj'!F13+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A13)
+A14	='CoA'!A14
+B14	='CoA'!B14
+C14	='TB_Unadj'!C14+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A14)
+D14	='TB_Unadj'!D14+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A14)
+E14	='TB_Unadj'!E14+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A14)
+F14	='TB_Unadj'!F14+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A14)
+A15	='CoA'!A15
+B15	='CoA'!B15
+C15	='TB_Unadj'!C15+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A15)
+D15	='TB_Unadj'!D15+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A15)
+E15	='TB_Unadj'!E15+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A15)
+F15	='TB_Unadj'!F15+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A15)
+A16	='CoA'!A16
+B16	='CoA'!B16
+C16	='TB_Unadj'!C16+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A16)
+D16	='TB_Unadj'!D16+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A16)
+E16	='TB_Unadj'!E16+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A16)
+F16	='TB_Unadj'!F16+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A16)
+A17	='CoA'!A17
+B17	='CoA'!B17
+C17	='TB_Unadj'!C17+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A17)
+D17	='TB_Unadj'!D17+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A17)
+E17	='TB_Unadj'!E17+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A17)
+F17	='TB_Unadj'!F17+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A17)
+A18	='CoA'!A18
+B18	='CoA'!B18
+C18	='TB_Unadj'!C18+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A18)
+D18	='TB_Unadj'!D18+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A18)
+E18	='TB_Unadj'!E18+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A18)
+F18	='TB_Unadj'!F18+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A18)
+A19	='CoA'!A19
+B19	='CoA'!B19
+C19	='TB_Unadj'!C19+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A19)
+D19	='TB_Unadj'!D19+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A19)
+E19	='TB_Unadj'!E19+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A19)
+F19	='TB_Unadj'!F19+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A19)
+A20	='CoA'!A20
+B20	='CoA'!B20
+C20	='TB_Unadj'!C20+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A20)
+D20	='TB_Unadj'!D20+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A20)
+E20	='TB_Unadj'!E20+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A20)
+F20	='TB_Unadj'!F20+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A20)
+A21	='CoA'!A21
+B21	='CoA'!B21
+C21	='TB_Unadj'!C21+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A21)
+D21	='TB_Unadj'!D21+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A21)
+E21	='TB_Unadj'!E21+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A21)
+F21	='TB_Unadj'!F21+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A21)
+A22	='CoA'!A22
+B22	='CoA'!B22
+C22	='TB_Unadj'!C22+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A22)
+D22	='TB_Unadj'!D22+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A22)
+E22	='TB_Unadj'!E22+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A22)
+F22	='TB_Unadj'!F22+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A22)
+A23	='CoA'!A23
+B23	='CoA'!B23
+C23	='TB_Unadj'!C23+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A23)
+D23	='TB_Unadj'!D23+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A23)
+E23	='TB_Unadj'!E23+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A23)
+F23	='TB_Unadj'!F23+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A23)
+A24	='CoA'!A24
+B24	='CoA'!B24
+C24	='TB_Unadj'!C24+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A24)
+D24	='TB_Unadj'!D24+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A24)
+E24	='TB_Unadj'!E24+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A24)
+F24	='TB_Unadj'!F24+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A24)
+A25	='CoA'!A25
+B25	='CoA'!B25
+C25	='TB_Unadj'!C25+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A25)
+D25	='TB_Unadj'!D25+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A25)
+E25	='TB_Unadj'!E25+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A25)
+F25	='TB_Unadj'!F25+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A25)
+A26	='CoA'!A26
+B26	='CoA'!B26
+C26	='TB_Unadj'!C26+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A26)
+D26	='TB_Unadj'!D26+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A26)
+E26	='TB_Unadj'!E26+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A26)
+F26	='TB_Unadj'!F26+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A26)
+A27	='CoA'!A27
+B27	='CoA'!B27
+C27	='TB_Unadj'!C27+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A27)
+D27	='TB_Unadj'!D27+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A27)
+E27	='TB_Unadj'!E27+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A27)
+F27	='TB_Unadj'!F27+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A27)
+A28	='CoA'!A28
+B28	='CoA'!B28
+C28	='TB_Unadj'!C28+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A28)
+D28	='TB_Unadj'!D28+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A28)
+E28	='TB_Unadj'!E28+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A28)
+F28	='TB_Unadj'!F28+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A28)
+A29	='CoA'!A29
+B29	='CoA'!B29
+C29	='TB_Unadj'!C29+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A29)
+D29	='TB_Unadj'!D29+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A29)
+E29	='TB_Unadj'!E29+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A29)
+F29	='TB_Unadj'!F29+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A29)
+A30	='CoA'!A30
+B30	='CoA'!B30
+C30	='TB_Unadj'!C30+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A30)
+D30	='TB_Unadj'!D30+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A30)
+E30	='TB_Unadj'!E30+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A30)
+F30	='TB_Unadj'!F30+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A30)
+A31	='CoA'!A31
+B31	='CoA'!B31
+C31	='TB_Unadj'!C31+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A31)
+D31	='TB_Unadj'!D31+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A31)
+E31	='TB_Unadj'!E31+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A31)
+F31	='TB_Unadj'!F31+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A31)
+A32	='CoA'!A32
+B32	='CoA'!B32
+C32	='TB_Unadj'!C32+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A32)
+D32	='TB_Unadj'!D32+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A32)
+E32	='TB_Unadj'!E32+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A32)
+F32	='TB_Unadj'!F32+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A32)
+A33	='CoA'!A33
+B33	='CoA'!B33
+C33	='TB_Unadj'!C33+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A33)
+D33	='TB_Unadj'!D33+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A33)
+E33	='TB_Unadj'!E33+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A33)
+F33	='TB_Unadj'!F33+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A33)
+A34	='CoA'!A34
+B34	='CoA'!B34
+C34	='TB_Unadj'!C34+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A34)
+D34	='TB_Unadj'!D34+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A34)
+E34	='TB_Unadj'!E34+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A34)
+F34	='TB_Unadj'!F34+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A34)
+A35	='CoA'!A35
+B35	='CoA'!B35
+C35	='TB_Unadj'!C35+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A35)
+D35	='TB_Unadj'!D35+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A35)
+E35	='TB_Unadj'!E35+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A35)
+F35	='TB_Unadj'!F35+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A35)
+A36	='CoA'!A36
+B36	='CoA'!B36
+C36	='TB_Unadj'!C36+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A36)
+D36	='TB_Unadj'!D36+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A36)
+E36	='TB_Unadj'!E36+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A36)
+F36	='TB_Unadj'!F36+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A36)
+A37	='CoA'!A37
+B37	='CoA'!B37
+C37	='TB_Unadj'!C37+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A37)
+D37	='TB_Unadj'!D37+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A37)
+E37	='TB_Unadj'!E37+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A37)
+F37	='TB_Unadj'!F37+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A37)
+A38	='CoA'!A38
+B38	='CoA'!B38
+C38	='TB_Unadj'!C38+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A38)
+D38	='TB_Unadj'!D38+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A38)
+E38	='TB_Unadj'!E38+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A38)
+F38	='TB_Unadj'!F38+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A38)
+A39	='CoA'!A39
+B39	='CoA'!B39
+C39	='TB_Unadj'!C39+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A39)
+D39	='TB_Unadj'!D39+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A39)
+E39	='TB_Unadj'!E39+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A39)
+F39	='TB_Unadj'!F39+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A39)
+A40	='CoA'!A40
+B40	='CoA'!B40
+C40	='TB_Unadj'!C40+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A40)
+D40	='TB_Unadj'!D40+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A40)
+E40	='TB_Unadj'!E40+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A40)
+F40	='TB_Unadj'!F40+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A40)
+A41	='CoA'!A41
+B41	='CoA'!B41
+C41	='TB_Unadj'!C41+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,C$4,'Journals'!$C$6:$C$49,$A41)
+D41	='TB_Unadj'!D41+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,D$4,'Journals'!$C$6:$C$49,$A41)
+E41	='TB_Unadj'!E41+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,E$4,'Journals'!$C$6:$C$49,$A41)
+F41	='TB_Unadj'!F41+SUMIFS('Journals'!$D$6:$D$49,'Journals'!$B$6:$B$49,F$4,'Journals'!$C$6:$C$49,$A41)
+B42	'Total (must be zero)'
+C42	=SUM(C6:C41)
+D42	=SUM(D6:D41)
+E42	=SUM(E6:E41)
+F42	=SUM(F6:F41)
+B44	'Net income'
+C44	=-SUMIF('CoA'!$C$6:$C$41,"R",'TB_Adj'!C$6:C$41)-SUMIF('CoA'!$C$6:$C$41,"X",'TB_Adj'!C$6:C$41)
+D44	=-SUMIF('CoA'!$C$6:$C$41,"R",'TB_Adj'!D$6:D$41)-SUMIF('CoA'!$C$6:$C$41,"X",'TB_Adj'!D$6:D$41)
+E44	=-SUMIF('CoA'!$C$6:$C$41,"R",'TB_Adj'!E$6:E$41)-SUMIF('CoA'!$C$6:$C$41,"X",'TB_Adj'!E$6:E$41)
+F44	=-SUMIF('CoA'!$C$6:$C$41,"R",'TB_Adj'!F$6:F$41)-SUMIF('CoA'!$C$6:$C$41,"X",'TB_Adj'!F$6:F$41)
+=== Translation
+A1	'S2 translation to USD (current-rate method, ASC 830)'
+A5	'Code'
+B5	'Account'
+C5	'Basis'
+D5	'GBP'
+E5	'Rate'
+F5	'USD'
+A6	='CoA'!A6
+B6	='CoA'!B6
+C6	='CoA'!G6
+D6	='TB_Adj'!E6
+E6	=IF(C6="close",'Inputs'!$C$6,IF(C6="avg",'Inputs'!$C$5,IF(C6="hist",'Inputs'!$C$7,0)))
+F6	=IF(C6="re",-'Inputs'!$C$20,D6*E6)
+A7	='CoA'!A7
+B7	='CoA'!B7
+C7	='CoA'!G7
+D7	='TB_Adj'!E7
+E7	=IF(C7="close",'Inputs'!$C$6,IF(C7="avg",'Inputs'!$C$5,IF(C7="hist",'Inputs'!$C$7,0)))
+F7	=IF(C7="re",-'Inputs'!$C$20,D7*E7)
+A8	='CoA'!A8
+B8	='CoA'!B8
+C8	='CoA'!G8
+D8	='TB_Adj'!E8
+E8	=IF(C8="close",'Inputs'!$C$6,IF(C8="avg",'Inputs'!$C$5,IF(C8="hist",'Inputs'!$C$7,0)))
+F8	=IF(C8="re",-'Inputs'!$C$20,D8*E8)
+A9	='CoA'!A9
+B9	='CoA'!B9
+C9	='CoA'!G9
+D9	='TB_Adj'!E9
+E9	=IF(C9="close",'Inputs'!$C$6,IF(C9="avg",'Inputs'!$C$5,IF(C9="hist",'Inputs'!$C$7,0)))
+F9	=IF(C9="re",-'Inputs'!$C$20,D9*E9)
+A10	='CoA'!A10
+B10	='CoA'!B10
+C10	='CoA'!G10
+D10	='TB_Adj'!E10
+E10	=IF(C10="close",'Inputs'!$C$6,IF(C10="avg",'Inputs'!$C$5,IF(C10="hist",'Inputs'!$C$7,0)))
+F10	=IF(C10="re",-'Inputs'!$C$20,D10*E10)
+A11	='CoA'!A11
+B11	='CoA'!B11
+C11	='CoA'!G11
+D11	='TB_Adj'!E11
+E11	=IF(C11="close",'Inputs'!$C$6,IF(C11="avg",'Inputs'!$C$5,IF(C11="hist",'Inputs'!$C$7,0)))
+F11	=IF(C11="re",-'Inputs'!$C$20,D11*E11)
+A12	='CoA'!A12
+B12	='CoA'!B12
+C12	='CoA'!G12
+D12	='TB_Adj'!E12
+E12	=IF(C12="close",'Inputs'!$C$6,IF(C12="avg",'Inputs'!$C$5,IF(C12="hist",'Inputs'!$C$7,0)))
+F12	=IF(C12="re",-'Inputs'!$C$20,D12*E12)
+A13	='CoA'!A13
+B13	='CoA'!B13
+C13	='CoA'!G13
+D13	='TB_Adj'!E13
+E13	=IF(C13="close",'Inputs'!$C$6,IF(C13="avg",'Inputs'!$C$5,IF(C13="hist",'Inputs'!$C$7,0)))
+F13	=IF(C13="re",-'Inputs'!$C$20,D13*E13)
+A14	='CoA'!A14
+B14	='CoA'!B14
+C14	='CoA'!G14
+D14	='TB_Adj'!E14
+E14	=IF(C14="close",'Inputs'!$C$6,IF(C14="avg",'Inputs'!$C$5,IF(C14="hist",'Inputs'!$C$7,0)))
+F14	=IF(C14="re",-'Inputs'!$C$20,D14*E14)
+A15	='CoA'!A15
+B15	='CoA'!B15
+C15	='CoA'!G15
+D15	='TB_Adj'!E15
+E15	=IF(C15="close",'Inputs'!$C$6,IF(C15="avg",'Inputs'!$C$5,IF(C15="hist",'Inputs'!$C$7,0)))
+F15	=IF(C15="re",-'Inputs'!$C$20,D15*E15)
+A16	='CoA'!A16
+B16	='CoA'!B16
+C16	='CoA'!G16
+D16	='TB_Adj'!E16
+E16	=IF(C16="close",'Inputs'!$C$6,IF(C16="avg",'Inputs'!$C$5,IF(C16="hist",'Inputs'!$C$7,0)))
+F16	=IF(C16="re",-'Inputs'!$C$20,D16*E16)
+A17	='CoA'!A17
+B17	='CoA'!B17
+C17	='CoA'!G17
+D17	='TB_Adj'!E17
+E17	=IF(C17="close",'Inputs'!$C$6,IF(C17="avg",'Inputs'!$C$5,IF(C17="hist",'Inputs'!$C$7,0)))
+F17	=IF(C17="re",-'Inputs'!$C$20,D17*E17)
+A18	='CoA'!A18
+B18	='CoA'!B18
+C18	='CoA'!G18
+D18	='TB_Adj'!E18
+E18	=IF(C18="close",'Inputs'!$C$6,IF(C18="avg",'Inputs'!$C$5,IF(C18="hist",'Inputs'!$C$7,0)))
+F18	=IF(C18="re",-'Inputs'!$C$20,D18*E18)
+A19	='CoA'!A19
+B19	='CoA'!B19
+C19	='CoA'!G19
+D19	='TB_Adj'!E19
+E19	=IF(C19="close",'Inputs'!$C$6,IF(C19="avg",'Inputs'!$C$5,IF(C19="hist",'Inputs'!$C$7,0)))
+F19	=IF(C19="re",-'Inputs'!$C$20,D19*E19)
+A20	='CoA'!A20
+B20	='CoA'!B20
+C20	='CoA'!G20
+D20	='TB_Adj'!E20
+E20	=IF(C20="close",'Inputs'!$C$6,IF(C20="avg",'Inputs'!$C$5,IF(C20="hist",'Inputs'!$C$7,0)))
+F20	=IF(C20="re",-'Inputs'!$C$20,D20*E20)
+A21	='CoA'!A21
+B21	='CoA'!B21
+C21	='CoA'!G21
+D21	='TB_Adj'!E21
+E21	=IF(C21="close",'Inputs'!$C$6,IF(C21="avg",'Inputs'!$C$5,IF(C21="hist",'Inputs'!$C$7,0)))
+F21	=IF(C21="re",-'Inputs'!$C$20,D21*E21)
+A22	='CoA'!A22
+B22	='CoA'!B22
+C22	='CoA'!G22
+D22	='TB_Adj'!E22
+E22	=IF(C22="close",'Inputs'!$C$6,IF(C22="avg",'Inputs'!$C$5,IF(C22="hist",'Inputs'!$C$7,0)))
+F22	=IF(C22="re",-'Inputs'!$C$20,D22*E22)
+A23	='CoA'!A23
+B23	='CoA'!B23
+C23	='CoA'!G23
+D23	='TB_Adj'!E23
+E23	=IF(C23="close",'Inputs'!$C$6,IF(C23="avg",'Inputs'!$C$5,IF(C23="hist",'Inputs'!$C$7,0)))
+F23	=IF(C23="re",-'Inputs'!$C$20,D23*E23)
+A24	='CoA'!A24
+B24	='CoA'!B24
+C24	='CoA'!G24
+D24	='TB_Adj'!E24
+E24	=IF(C24="close",'Inputs'!$C$6,IF(C24="avg",'Inputs'!$C$5,IF(C24="hist",'Inputs'!$C$7,0)))
+F24	=IF(C24="re",-'Inputs'!$C$20,D24*E24)
+A25	='CoA'!A25
+B25	='CoA'!B25
+C25	='CoA'!G25
+D25	='TB_Adj'!E25
+E25	=IF(C25="close",'Inputs'!$C$6,IF(C25="avg",'Inputs'!$C$5,IF(C25="hist",'Inputs'!$C$7,0)))
+F25	=IF(C25="re",-'Inputs'!$C$20,D25*E25)
+A26	='CoA'!A26
+B26	='CoA'!B26
+C26	='CoA'!G26
+D26	='TB_Adj'!E26
+E26	=IF(C26="close",'Inputs'!$C$6,IF(C26="avg",'Inputs'!$C$5,IF(C26="hist",'Inputs'!$C$7,0)))
+F26	=-(SUM(F6:F25)+SUM(F27:F41))
+A27	='CoA'!A27
+B27	='CoA'!B27
+C27	='CoA'!G27
+D27	='TB_Adj'!E27
+E27	=IF(C27="close",'Inputs'!$C$6,IF(C27="avg",'Inputs'!$C$5,IF(C27="hist",'Inputs'!$C$7,0)))
+F27	=IF(C27="re",-'Inputs'!$C$20,D27*E27)
+A28	='CoA'!A28
+B28	='CoA'!B28
+C28	='CoA'!G28
+D28	='TB_Adj'!E28
+E28	=IF(C28="close",'Inputs'!$C$6,IF(C28="avg",'Inputs'!$C$5,IF(C28="hist",'Inputs'!$C$7,0)))
+F28	=IF(C28="re",-'Inputs'!$C$20,D28*E28)
+A29	='CoA'!A29
+B29	='CoA'!B29
+C29	='CoA'!G29
+D29	='TB_Adj'!E29
+E29	=IF(C29="close",'Inputs'!$C$6,IF(C29="avg",'Inputs'!$C$5,IF(C29="hist",'Inputs'!$C$7,0)))
+F29	=IF(C29="re",-'Inputs'!$C$20,D29*E29)
+A30	='CoA'!A30
+B30	='CoA'!B30
+C30	='CoA'!G30
+D30	='TB_Adj'!E30
+E30	=IF(C30="close",'Inputs'!$C$6,IF(C30="avg",'Inputs'!$C$5,IF(C30="hist",'Inputs'!$C$7,0)))
+F30	=IF(C30="re",-'Inputs'!$C$20,D30*E30)
+A31	='CoA'!A31
+B31	='CoA'!B31
+C31	='CoA'!G31
+D31	='TB_Adj'!E31
+E31	=IF(C31="close",'Inputs'!$C$6,IF(C31="avg",'Inputs'!$C$5,IF(C31="hist",'Inputs'!$C$7,0)))
+F31	=IF(C31="re",-'Inputs'!$C$20,D31*E31)
+A32	='CoA'!A32
+B32	='CoA'!B32
+C32	='CoA'!G32
+D32	='TB_Adj'!E32
+E32	=IF(C32="close",'Inputs'!$C$6,IF(C32="avg",'Inputs'!$C$5,IF(C32="hist",'Inputs'!$C$7,0)))
+F32	=IF(C32="re",-'Inputs'!$C$20,D32*E32)
+A33	='CoA'!A33
+B33	='CoA'!B33
+C33	='CoA'!G33
+D33	='TB_Adj'!E33
+E33	=IF(C33="close",'Inputs'!$C$6,IF(C33="avg",'Inputs'!$C$5,IF(C33="hist",'Inputs'!$C$7,0)))
+F33	=IF(C33="re",-'Inputs'!$C$20,D33*E33)
+A34	='CoA'!A34
+B34	='CoA'!B34
+C34	='CoA'!G34
+D34	='TB_Adj'!E34
+E34	=IF(C34="close",'Inputs'!$C$6,IF(C34="avg",'Inputs'!$C$5,IF(C34="hist",'Inputs'!$C$7,0)))
+F34	=IF(C34="re",-'Inputs'!$C$20,D34*E34)
+A35	='CoA'!A35
+B35	='CoA'!B35
+C35	='CoA'!G35
+D35	='TB_Adj'!E35
+E35	=IF(C35="close",'Inputs'!$C$6,IF(C35="avg",'Inputs'!$C$5,IF(C35="hist",'Inputs'!$C$7,0)))
+F35	=IF(C35="re",-'Inputs'!$C$20,D35*E35)
+A36	='CoA'!A36
+B36	='CoA'!B36
+C36	='CoA'!G36
+D36	='TB_Adj'!E36
+E36	=IF(C36="close",'Inputs'!$C$6,IF(C36="avg",'Inputs'!$C$5,IF(C36="hist",'Inputs'!$C$7,0)))
+F36	=IF(C36="re",-'Inputs'!$C$20,D36*E36)
+A37	='CoA'!A37
+B37	='CoA'!B37
+C37	='CoA'!G37
+D37	='TB_Adj'!E37
+E37	=IF(C37="close",'Inputs'!$C$6,IF(C37="avg",'Inputs'!$C$5,IF(C37="hist",'Inputs'!$C$7,0)))
+F37	=IF(C37="re",-'Inputs'!$C$20,D37*E37)
+A38	='CoA'!A38
+B38	='CoA'!B38
+C38	='CoA'!G38
+D38	='TB_Adj'!E38
+E38	=IF(C38="close",'Inputs'!$C$6,IF(C38="avg",'Inputs'!$C$5,IF(C38="hist",'Inputs'!$C$7,0)))
+F38	=IF(C38="re",-'Inputs'!$C$20,D38*E38)
+A39	='CoA'!A39
+B39	='CoA'!B39
+C39	='CoA'!G39
+D39	='TB_Adj'!E39
+E39	=IF(C39="close",'Inputs'!$C$6,IF(C39="avg",'Inputs'!$C$5,IF(C39="hist",'Inputs'!$C$7,0)))
+F39	=IF(C39="re",-'Inputs'!$C$20,D39*E39)
+A40	='CoA'!A40
+B40	='CoA'!B40
+C40	='CoA'!G40
+D40	='TB_Adj'!E40
+E40	=IF(C40="close",'Inputs'!$C$6,IF(C40="avg",'Inputs'!$C$5,IF(C40="hist",'Inputs'!$C$7,0)))
+F40	=IF(C40="re",-'Inputs'!$C$20,D40*E40)
+A41	='CoA'!A41
+B41	='CoA'!B41
+C41	='CoA'!G41
+D41	='TB_Adj'!E41
+E41	=IF(C41="close",'Inputs'!$C$6,IF(C41="avg",'Inputs'!$C$5,IF(C41="hist",'Inputs'!$C$7,0)))
+F41	=IF(C41="re",-'Inputs'!$C$20,D41*E41)
+B42	'Total (must be zero)'
+F42	=SUM(F6:F41)
+B44	'CTA roll-forward (gain positive)'
+B45	'Opening CTA'
+F45	='Inputs'!$C$21
+B46	'Opening net assets (GBP) x change in rate'
+F46	=-('Opening'!$E$23+'Opening'!$E$24)*('Inputs'!$C$6-'Inputs'!$C$4)
+B47	'Net income (GBP) x (closing - average)'
+F47	='TB_Adj'!$E$44*('Inputs'!$C$6-'Inputs'!$C$5)
+B48	'Closing CTA, analytical'
+F48	=SUM(F45:F47)
+B49	'Closing CTA, balancing figure above'
+F49	=-F26
+=== Elims
+A1	'Consolidation eliminations (USD, debit +)'
+A5	'Entry'
+B5	'FS line'
+C5	'Amount'
+D5	'Description'
+A6	'E1'
+B6	'share_capital'
+C6	=-'TB_Adj'!$D$23
+D6	'S1: investment vs share capital'
+A7	'E1'
+B7	'inv_subs'
+C7	=-(-'TB_Adj'!$D$23)
+A8	'E2'
+B8	'share_capital'
+C8	=-'Translation'!$F$23
+D8	'S2: investment vs share capital at historical rate'
+A9	'E2'
+B9	'inv_subs'
+C9	=-(-'Translation'!$F$23)
+A10	'E3'
+B10	'share_capital'
+C10	=-'TB_Adj'!$F$23
+D10	'S3: acquisition, full goodwill'
+A11	'E3'
+B11	're_open'
+C11	='Inputs'!$C$12
+A12	'E3'
+B12	'goodwill'
+C12	=('Inputs'!$C$10+'Inputs'!$C$11+'TB_Adj'!$F$23-'Inputs'!$C$12)
+A13	'E3'
+B13	'inv_subs'
+C13	=-'Inputs'!$C$10
+A14	'E3'
+B14	'nci'
+C14	=-'Inputs'!$C$11
+A15	'E4'
+B15	're_open'
+C15	=(1-'Inputs'!$C$8)*(-'TB_Adj'!$F$24-'Inputs'!$C$12)
+D15	'NCI share of S3 post-acquisition opening retained earnings'
+A16	'E4'
+B16	'nci'
+C16	=-(1-'Inputs'!$C$8)*(-'TB_Adj'!$F$24-'Inputs'!$C$12)
+A17	'E5'
+B17	'nci_income'
+C17	=(1-'Inputs'!$C$8)*'TB_Adj'!$F$44
+D17	'NCI share of S3 net income'
+A18	'E5'
+B18	'nci'
+C18	=-(1-'Inputs'!$C$8)*'TB_Adj'!$F$44
+A19	'E6'
+B19	'div_income'
+C19	='Inputs'!$C$8*'TB_Adj'!$F$25
+D19	"S3 dividends: parent's share and NCI's share"
+A20	'E6'
+B20	'nci'
+C20	=(1-'Inputs'!$C$8)*'TB_Adj'!$F$25
+A21	'E6'
+B21	'dividends'
+C21	=-'TB_Adj'!$F$25
+A22	'E7'
+B22	'ic_payables'
+C22	='TB_Adj'!$C$8
+D22	'Intercompany trade balances P / S1'
+A23	'E7'
+B23	'ic_receivables'
+C23	=-'TB_Adj'!$C$8
+A24	'E8'
+B24	'ic_loan_pay'
+C24	='TB_Adj'!$C$15
+D24	'Intercompany loan P / S3'
+A25	'E8'
+B25	'ic_loan_rec'
+C25	=-'TB_Adj'!$C$15
+A26	'E9'
+B26	'ic_revenue'
+C26	=-'TB_Adj'!$C$29
+D26	'Intercompany sales P to S1'
+A27	'E9'
+B27	'cogs'
+C27	='TB_Adj'!$C$29
+A28	'E10'
+B28	'cogs'
+C28	='Inputs'!$C$15*'Inputs'!$C$14
+D28	'Unrealised profit in S1 closing inventory'
+A29	'E10'
+B29	'inventory'
+C29	=-'Inputs'!$C$15*'Inputs'!$C$14
+A30	'E11'
+B30	'fee_income'
+C30	=-'TB_Adj'!$C$30
+D30	'Management fee S2 to P'
+A31	'E11'
+B31	'fee_expense'
+C31	='TB_Adj'!$C$30
+A32	'E12'
+B32	'ic_int_income'
+C32	=-'TB_Adj'!$C$31
+D32	'Intercompany interest S3 to P'
+A33	'E12'
+B33	'ic_int_expense'
+C33	='TB_Adj'!$C$31
+B34	'Total'
+C34	=SUM(C6:C33)
+A36	'Goodwill on S3 (consideration + NCI fair value - net assets at acquisition)'
+C36	=('Inputs'!$C$10+'Inputs'!$C$11+'TB_Adj'!$F$23-'Inputs'!$C$12)
+A37	'Unrealised profit in inventory'
+C37	='Inputs'!$C$15*'Inputs'!$C$14
+=== Consol
+A1	'Consolidation worksheet (USD, debit +)'
+A5	'FS line'
+C5	'P'
+D5	'S1'
+E5	'S2 (USD)'
+F5	'S3'
+G5	'Aggregate'
+H5	'Eliminations'
+I5	'Consolidated'
+B6	'Balance sheet'
+A7	'cash'
+B7	'Cash'
+C7	=SUMIF('CoA'!$D$6:$D$41,$A7,'TB_Adj'!$C$6:$C$41)
+D7	=SUMIF('CoA'!$D$6:$D$41,$A7,'TB_Adj'!$D$6:$D$41)
+E7	=SUMIF('CoA'!$D$6:$D$41,$A7,'Translation'!$F$6:$F$41)
+F7	=SUMIF('CoA'!$D$6:$D$41,$A7,'TB_Adj'!$F$6:$F$41)
+G7	=SUM(C7:F7)
+H7	=SUMIF('Elims'!$B$6:$B$33,$A7,'Elims'!$C$6:$C$33)
+I7	=G7+H7
+A8	'receivables'
+B8	'Trade receivables'
+C8	=SUMIF('CoA'!$D$6:$D$41,$A8,'TB_Adj'!$C$6:$C$41)
+D8	=SUMIF('CoA'!$D$6:$D$41,$A8,'TB_Adj'!$D$6:$D$41)
+E8	=SUMIF('CoA'!$D$6:$D$41,$A8,'Translation'!$F$6:$F$41)
+F8	=SUMIF('CoA'!$D$6:$D$41,$A8,'TB_Adj'!$F$6:$F$41)
+G8	=SUM(C8:F8)
+H8	=SUMIF('Elims'!$B$6:$B$33,$A8,'Elims'!$C$6:$C$33)
+I8	=G8+H8
+A9	'ic_receivables'
+B9	'Intercompany receivables'
+C9	=SUMIF('CoA'!$D$6:$D$41,$A9,'TB_Adj'!$C$6:$C$41)
+D9	=SUMIF('CoA'!$D$6:$D$41,$A9,'TB_Adj'!$D$6:$D$41)
+E9	=SUMIF('CoA'!$D$6:$D$41,$A9,'Translation'!$F$6:$F$41)
+F9	=SUMIF('CoA'!$D$6:$D$41,$A9,'TB_Adj'!$F$6:$F$41)
+G9	=SUM(C9:F9)
+H9	=SUMIF('Elims'!$B$6:$B$33,$A9,'Elims'!$C$6:$C$33)
+I9	=G9+H9
+A10	'inventory'
+B10	'Inventory'
+C10	=SUMIF('CoA'!$D$6:$D$41,$A10,'TB_Adj'!$C$6:$C$41)
+D10	=SUMIF('CoA'!$D$6:$D$41,$A10,'TB_Adj'!$D$6:$D$41)
+E10	=SUMIF('CoA'!$D$6:$D$41,$A10,'Translation'!$F$6:$F$41)
+F10	=SUMIF('CoA'!$D$6:$D$41,$A10,'TB_Adj'!$F$6:$F$41)
+G10	=SUM(C10:F10)
+H10	=SUMIF('Elims'!$B$6:$B$33,$A10,'Elims'!$C$6:$C$33)
+I10	=G10+H10
+A11	'prepaids'
+B11	'Prepaid expenses'
+C11	=SUMIF('CoA'!$D$6:$D$41,$A11,'TB_Adj'!$C$6:$C$41)
+D11	=SUMIF('CoA'!$D$6:$D$41,$A11,'TB_Adj'!$D$6:$D$41)
+E11	=SUMIF('CoA'!$D$6:$D$41,$A11,'Translation'!$F$6:$F$41)
+F11	=SUMIF('CoA'!$D$6:$D$41,$A11,'TB_Adj'!$F$6:$F$41)
+G11	=SUM(C11:F11)
+H11	=SUMIF('Elims'!$B$6:$B$33,$A11,'Elims'!$C$6:$C$33)
+I11	=G11+H11
+A12	'ppe'
+B12	'PP&E, net'
+C12	=SUMIF('CoA'!$D$6:$D$41,$A12,'TB_Adj'!$C$6:$C$41)
+D12	=SUMIF('CoA'!$D$6:$D$41,$A12,'TB_Adj'!$D$6:$D$41)
+E12	=SUMIF('CoA'!$D$6:$D$41,$A12,'Translation'!$F$6:$F$41)
+F12	=SUMIF('CoA'!$D$6:$D$41,$A12,'TB_Adj'!$F$6:$F$41)
+G12	=SUM(C12:F12)
+H12	=SUMIF('Elims'!$B$6:$B$33,$A12,'Elims'!$C$6:$C$33)
+I12	=G12+H12
+A13	'inv_subs'
+B13	'Investment in subsidiaries'
+C13	=SUMIF('CoA'!$D$6:$D$41,$A13,'TB_Adj'!$C$6:$C$41)
+D13	=SUMIF('CoA'!$D$6:$D$41,$A13,'TB_Adj'!$D$6:$D$41)
+E13	=SUMIF('CoA'!$D$6:$D$41,$A13,'Translation'!$F$6:$F$41)
+F13	=SUMIF('CoA'!$D$6:$D$41,$A13,'TB_Adj'!$F$6:$F$41)
+G13	=SUM(C13:F13)
+H13	=SUMIF('Elims'!$B$6:$B$33,$A13,'Elims'!$C$6:$C$33)
+I13	=G13+H13
+A14	'inv_assoc'
+B14	'Investment in associate'
+C14	=SUMIF('CoA'!$D$6:$D$41,$A14,'TB_Adj'!$C$6:$C$41)
+D14	=SUMIF('CoA'!$D$6:$D$41,$A14,'TB_Adj'!$D$6:$D$41)
+E14	=SUMIF('CoA'!$D$6:$D$41,$A14,'Translation'!$F$6:$F$41)
+F14	=SUMIF('CoA'!$D$6:$D$41,$A14,'TB_Adj'!$F$6:$F$41)
+G14	=SUM(C14:F14)
+H14	=SUMIF('Elims'!$B$6:$B$33,$A14,'Elims'!$C$6:$C$33)
+I14	=G14+H14
+A15	'ic_loan_rec'
+B15	'Intercompany loan receivable'
+C15	=SUMIF('CoA'!$D$6:$D$41,$A15,'TB_Adj'!$C$6:$C$41)
+D15	=SUMIF('CoA'!$D$6:$D$41,$A15,'TB_Adj'!$D$6:$D$41)
+E15	=SUMIF('CoA'!$D$6:$D$41,$A15,'Translation'!$F$6:$F$41)
+F15	=SUMIF('CoA'!$D$6:$D$41,$A15,'TB_Adj'!$F$6:$F$41)
+G15	=SUM(C15:F15)
+H15	=SUMIF('Elims'!$B$6:$B$33,$A15,'Elims'!$C$6:$C$33)
+I15	=G15+H15
+A16	'goodwill'
+B16	'Goodwill'
+C16	=SUMIF('CoA'!$D$6:$D$41,$A16,'TB_Adj'!$C$6:$C$41)
+D16	=SUMIF('CoA'!$D$6:$D$41,$A16,'TB_Adj'!$D$6:$D$41)
+E16	=SUMIF('CoA'!$D$6:$D$41,$A16,'Translation'!$F$6:$F$41)
+F16	=SUMIF('CoA'!$D$6:$D$41,$A16,'TB_Adj'!$F$6:$F$41)
+G16	=SUM(C16:F16)
+H16	=SUMIF('Elims'!$B$6:$B$33,$A16,'Elims'!$C$6:$C$33)
+I16	=G16+H16
+A17	'payables'
+B17	'Trade payables'
+C17	=SUMIF('CoA'!$D$6:$D$41,$A17,'TB_Adj'!$C$6:$C$41)
+D17	=SUMIF('CoA'!$D$6:$D$41,$A17,'TB_Adj'!$D$6:$D$41)
+E17	=SUMIF('CoA'!$D$6:$D$41,$A17,'Translation'!$F$6:$F$41)
+F17	=SUMIF('CoA'!$D$6:$D$41,$A17,'TB_Adj'!$F$6:$F$41)
+G17	=SUM(C17:F17)
+H17	=SUMIF('Elims'!$B$6:$B$33,$A17,'Elims'!$C$6:$C$33)
+I17	=G17+H17
+A18	'ic_payables'
+B18	'Intercompany payables'
+C18	=SUMIF('CoA'!$D$6:$D$41,$A18,'TB_Adj'!$C$6:$C$41)
+D18	=SUMIF('CoA'!$D$6:$D$41,$A18,'TB_Adj'!$D$6:$D$41)
+E18	=SUMIF('CoA'!$D$6:$D$41,$A18,'Translation'!$F$6:$F$41)
+F18	=SUMIF('CoA'!$D$6:$D$41,$A18,'TB_Adj'!$F$6:$F$41)
+G18	=SUM(C18:F18)
+H18	=SUMIF('Elims'!$B$6:$B$33,$A18,'Elims'!$C$6:$C$33)
+I18	=G18+H18
+A19	'accrued'
+B19	'Accrued liabilities'
+C19	=SUMIF('CoA'!$D$6:$D$41,$A19,'TB_Adj'!$C$6:$C$41)
+D19	=SUMIF('CoA'!$D$6:$D$41,$A19,'TB_Adj'!$D$6:$D$41)
+E19	=SUMIF('CoA'!$D$6:$D$41,$A19,'Translation'!$F$6:$F$41)
+F19	=SUMIF('CoA'!$D$6:$D$41,$A19,'TB_Adj'!$F$6:$F$41)
+G19	=SUM(C19:F19)
+H19	=SUMIF('Elims'!$B$6:$B$33,$A19,'Elims'!$C$6:$C$33)
+I19	=G19+H19
+A20	'tax_payable'
+B20	'Income tax payable'
+C20	=SUMIF('CoA'!$D$6:$D$41,$A20,'TB_Adj'!$C$6:$C$41)
+D20	=SUMIF('CoA'!$D$6:$D$41,$A20,'TB_Adj'!$D$6:$D$41)
+E20	=SUMIF('CoA'!$D$6:$D$41,$A20,'Translation'!$F$6:$F$41)
+F20	=SUMIF('CoA'!$D$6:$D$41,$A20,'TB_Adj'!$F$6:$F$41)
+G20	=SUM(C20:F20)
+H20	=SUMIF('Elims'!$B$6:$B$33,$A20,'Elims'!$C$6:$C$33)
+I20	=G20+H20
+A21	'debt'
+B21	'Long-term debt'
+C21	=SUMIF('CoA'!$D$6:$D$41,$A21,'TB_Adj'!$C$6:$C$41)
+D21	=SUMIF('CoA'!$D$6:$D$41,$A21,'TB_Adj'!$D$6:$D$41)
+E21	=SUMIF('CoA'!$D$6:$D$41,$A21,'Translation'!$F$6:$F$41)
+F21	=SUMIF('CoA'!$D$6:$D$41,$A21,'TB_Adj'!$F$6:$F$41)
+G21	=SUM(C21:F21)
+H21	=SUMIF('Elims'!$B$6:$B$33,$A21,'Elims'!$C$6:$C$33)
+I21	=G21+H21
+A22	'ic_loan_pay'
+B22	'Intercompany loan payable'
+C22	=SUMIF('CoA'!$D$6:$D$41,$A22,'TB_Adj'!$C$6:$C$41)
+D22	=SUMIF('CoA'!$D$6:$D$41,$A22,'TB_Adj'!$D$6:$D$41)
+E22	=SUMIF('CoA'!$D$6:$D$41,$A22,'Translation'!$F$6:$F$41)
+F22	=SUMIF('CoA'!$D$6:$D$41,$A22,'TB_Adj'!$F$6:$F$41)
+G22	=SUM(C22:F22)
+H22	=SUMIF('Elims'!$B$6:$B$33,$A22,'Elims'!$C$6:$C$33)
+I22	=G22+H22
+A23	'share_capital'
+B23	'Share capital'
+C23	=SUMIF('CoA'!$D$6:$D$41,$A23,'TB_Adj'!$C$6:$C$41)
+D23	=SUMIF('CoA'!$D$6:$D$41,$A23,'TB_Adj'!$D$6:$D$41)
+E23	=SUMIF('CoA'!$D$6:$D$41,$A23,'Translation'!$F$6:$F$41)
+F23	=SUMIF('CoA'!$D$6:$D$41,$A23,'TB_Adj'!$F$6:$F$41)
+G23	=SUM(C23:F23)
+H23	=SUMIF('Elims'!$B$6:$B$33,$A23,'Elims'!$C$6:$C$33)
+I23	=G23+H23
+A24	're_open'
+B24	'Retained earnings (opening)'
+C24	=SUMIF('CoA'!$D$6:$D$41,$A24,'TB_Adj'!$C$6:$C$41)
+D24	=SUMIF('CoA'!$D$6:$D$41,$A24,'TB_Adj'!$D$6:$D$41)
+E24	=SUMIF('CoA'!$D$6:$D$41,$A24,'Translation'!$F$6:$F$41)
+F24	=SUMIF('CoA'!$D$6:$D$41,$A24,'TB_Adj'!$F$6:$F$41)
+G24	=SUM(C24:F24)
+H24	=SUMIF('Elims'!$B$6:$B$33,$A24,'Elims'!$C$6:$C$33)
+I24	=G24+H24
+A25	'dividends'
+B25	'Dividends declared'
+C25	=SUMIF('CoA'!$D$6:$D$41,$A25,'TB_Adj'!$C$6:$C$41)
+D25	=SUMIF('CoA'!$D$6:$D$41,$A25,'TB_Adj'!$D$6:$D$41)
+E25	=SUMIF('CoA'!$D$6:$D$41,$A25,'Translation'!$F$6:$F$41)
+F25	=SUMIF('CoA'!$D$6:$D$41,$A25,'TB_Adj'!$F$6:$F$41)
+G25	=SUM(C25:F25)
+H25	=SUMIF('Elims'!$B$6:$B$33,$A25,'Elims'!$C$6:$C$33)
+I25	=G25+H25
+A26	'cta'
+B26	'Translation reserve (CTA)'
+C26	=SUMIF('CoA'!$D$6:$D$41,$A26,'TB_Adj'!$C$6:$C$41)
+D26	=SUMIF('CoA'!$D$6:$D$41,$A26,'TB_Adj'!$D$6:$D$41)
+E26	=SUMIF('CoA'!$D$6:$D$41,$A26,'Translation'!$F$6:$F$41)
+F26	=SUMIF('CoA'!$D$6:$D$41,$A26,'TB_Adj'!$F$6:$F$41)
+G26	=SUM(C26:F26)
+H26	=SUMIF('Elims'!$B$6:$B$33,$A26,'Elims'!$C$6:$C$33)
+I26	=G26+H26
+A27	'nci'
+B27	'Non-controlling interests'
+C27	=SUMIF('CoA'!$D$6:$D$41,$A27,'TB_Adj'!$C$6:$C$41)
+D27	=SUMIF('CoA'!$D$6:$D$41,$A27,'TB_Adj'!$D$6:$D$41)
+E27	=SUMIF('CoA'!$D$6:$D$41,$A27,'Translation'!$F$6:$F$41)
+F27	=SUMIF('CoA'!$D$6:$D$41,$A27,'TB_Adj'!$F$6:$F$41)
+G27	=SUM(C27:F27)
+H27	=SUMIF('Elims'!$B$6:$B$33,$A27,'Elims'!$C$6:$C$33)
+I27	=G27+H27
+B28	'Income statement'
+A29	'revenue'
+B29	'Revenue'
+C29	=SUMIF('CoA'!$D$6:$D$41,$A29,'TB_Adj'!$C$6:$C$41)
+D29	=SUMIF('CoA'!$D$6:$D$41,$A29,'TB_Adj'!$D$6:$D$41)
+E29	=SUMIF('CoA'!$D$6:$D$41,$A29,'Translation'!$F$6:$F$41)
+F29	=SUMIF('CoA'!$D$6:$D$41,$A29,'TB_Adj'!$F$6:$F$41)
+G29	=SUM(C29:F29)
+H29	=SUMIF('Elims'!$B$6:$B$33,$A29,'Elims'!$C$6:$C$33)
+I29	=G29+H29
+A30	'ic_revenue'
+B30	'Intercompany revenue'
+C30	=SUMIF('CoA'!$D$6:$D$41,$A30,'TB_Adj'!$C$6:$C$41)
+D30	=SUMIF('CoA'!$D$6:$D$41,$A30,'TB_Adj'!$D$6:$D$41)
+E30	=SUMIF('CoA'!$D$6:$D$41,$A30,'Translation'!$F$6:$F$41)
+F30	=SUMIF('CoA'!$D$6:$D$41,$A30,'TB_Adj'!$F$6:$F$41)
+G30	=SUM(C30:F30)
+H30	=SUMIF('Elims'!$B$6:$B$33,$A30,'Elims'!$C$6:$C$33)
+I30	=G30+H30
+A31	'fee_income'
+B31	'Management fee income'
+C31	=SUMIF('CoA'!$D$6:$D$41,$A31,'TB_Adj'!$C$6:$C$41)
+D31	=SUMIF('CoA'!$D$6:$D$41,$A31,'TB_Adj'!$D$6:$D$41)
+E31	=SUMIF('CoA'!$D$6:$D$41,$A31,'Translation'!$F$6:$F$41)
+F31	=SUMIF('CoA'!$D$6:$D$41,$A31,'TB_Adj'!$F$6:$F$41)
+G31	=SUM(C31:F31)
+H31	=SUMIF('Elims'!$B$6:$B$33,$A31,'Elims'!$C$6:$C$33)
+I31	=G31+H31
+A32	'ic_int_income'
+B32	'Intercompany interest income'
+C32	=SUMIF('CoA'!$D$6:$D$41,$A32,'TB_Adj'!$C$6:$C$41)
+D32	=SUMIF('CoA'!$D$6:$D$41,$A32,'TB_Adj'!$D$6:$D$41)
+E32	=SUMIF('CoA'!$D$6:$D$41,$A32,'Translation'!$F$6:$F$41)
+F32	=SUMIF('CoA'!$D$6:$D$41,$A32,'TB_Adj'!$F$6:$F$41)
+G32	=SUM(C32:F32)
+H32	=SUMIF('Elims'!$B$6:$B$33,$A32,'Elims'!$C$6:$C$33)
+I32	=G32+H32
+A33	'assoc_income'
+B33	'Share of associate income'
+C33	=SUMIF('CoA'!$D$6:$D$41,$A33,'TB_Adj'!$C$6:$C$41)
+D33	=SUMIF('CoA'!$D$6:$D$41,$A33,'TB_Adj'!$D$6:$D$41)
+E33	=SUMIF('CoA'!$D$6:$D$41,$A33,'Translation'!$F$6:$F$41)
+F33	=SUMIF('CoA'!$D$6:$D$41,$A33,'TB_Adj'!$F$6:$F$41)
+G33	=SUM(C33:F33)
+H33	=SUMIF('Elims'!$B$6:$B$33,$A33,'Elims'!$C$6:$C$33)
+I33	=G33+H33
+A34	'div_income'
+B34	'Dividend income'
+C34	=SUMIF('CoA'!$D$6:$D$41,$A34,'TB_Adj'!$C$6:$C$41)
+D34	=SUMIF('CoA'!$D$6:$D$41,$A34,'TB_Adj'!$D$6:$D$41)
+E34	=SUMIF('CoA'!$D$6:$D$41,$A34,'Translation'!$F$6:$F$41)
+F34	=SUMIF('CoA'!$D$6:$D$41,$A34,'TB_Adj'!$F$6:$F$41)
+G34	=SUM(C34:F34)
+H34	=SUMIF('Elims'!$B$6:$B$33,$A34,'Elims'!$C$6:$C$33)
+I34	=G34+H34
+A35	'cogs'
+B35	'Cost of sales'
+C35	=SUMIF('CoA'!$D$6:$D$41,$A35,'TB_Adj'!$C$6:$C$41)
+D35	=SUMIF('CoA'!$D$6:$D$41,$A35,'TB_Adj'!$D$6:$D$41)
+E35	=SUMIF('CoA'!$D$6:$D$41,$A35,'Translation'!$F$6:$F$41)
+F35	=SUMIF('CoA'!$D$6:$D$41,$A35,'TB_Adj'!$F$6:$F$41)
+G35	=SUM(C35:F35)
+H35	=SUMIF('Elims'!$B$6:$B$33,$A35,'Elims'!$C$6:$C$33)
+I35	=G35+H35
+A36	'opex'
+B36	'Operating expenses'
+C36	=SUMIF('CoA'!$D$6:$D$41,$A36,'TB_Adj'!$C$6:$C$41)
+D36	=SUMIF('CoA'!$D$6:$D$41,$A36,'TB_Adj'!$D$6:$D$41)
+E36	=SUMIF('CoA'!$D$6:$D$41,$A36,'Translation'!$F$6:$F$41)
+F36	=SUMIF('CoA'!$D$6:$D$41,$A36,'TB_Adj'!$F$6:$F$41)
+G36	=SUM(C36:F36)
+H36	=SUMIF('Elims'!$B$6:$B$33,$A36,'Elims'!$C$6:$C$33)
+I36	=G36+H36
+A37	'fee_expense'
+B37	'Management fees'
+C37	=SUMIF('CoA'!$D$6:$D$41,$A37,'TB_Adj'!$C$6:$C$41)
+D37	=SUMIF('CoA'!$D$6:$D$41,$A37,'TB_Adj'!$D$6:$D$41)
+E37	=SUMIF('CoA'!$D$6:$D$41,$A37,'Translation'!$F$6:$F$41)
+F37	=SUMIF('CoA'!$D$6:$D$41,$A37,'TB_Adj'!$F$6:$F$41)
+G37	=SUM(C37:F37)
+H37	=SUMIF('Elims'!$B$6:$B$33,$A37,'Elims'!$C$6:$C$33)
+I37	=G37+H37
+A38	'depreciation'
+B38	'Depreciation'
+C38	=SUMIF('CoA'!$D$6:$D$41,$A38,'TB_Adj'!$C$6:$C$41)
+D38	=SUMIF('CoA'!$D$6:$D$41,$A38,'TB_Adj'!$D$6:$D$41)
+E38	=SUMIF('CoA'!$D$6:$D$41,$A38,'Translation'!$F$6:$F$41)
+F38	=SUMIF('CoA'!$D$6:$D$41,$A38,'TB_Adj'!$F$6:$F$41)
+G38	=SUM(C38:F38)
+H38	=SUMIF('Elims'!$B$6:$B$33,$A38,'Elims'!$C$6:$C$33)
+I38	=G38+H38
+A39	'interest'
+B39	'Interest expense'
+C39	=SUMIF('CoA'!$D$6:$D$41,$A39,'TB_Adj'!$C$6:$C$41)
+D39	=SUMIF('CoA'!$D$6:$D$41,$A39,'TB_Adj'!$D$6:$D$41)
+E39	=SUMIF('CoA'!$D$6:$D$41,$A39,'Translation'!$F$6:$F$41)
+F39	=SUMIF('CoA'!$D$6:$D$41,$A39,'TB_Adj'!$F$6:$F$41)
+G39	=SUM(C39:F39)
+H39	=SUMIF('Elims'!$B$6:$B$33,$A39,'Elims'!$C$6:$C$33)
+I39	=G39+H39
+A40	'ic_int_expense'
+B40	'Intercompany interest expense'
+C40	=SUMIF('CoA'!$D$6:$D$41,$A40,'TB_Adj'!$C$6:$C$41)
+D40	=SUMIF('CoA'!$D$6:$D$41,$A40,'TB_Adj'!$D$6:$D$41)
+E40	=SUMIF('CoA'!$D$6:$D$41,$A40,'Translation'!$F$6:$F$41)
+F40	=SUMIF('CoA'!$D$6:$D$41,$A40,'TB_Adj'!$F$6:$F$41)
+G40	=SUM(C40:F40)
+H40	=SUMIF('Elims'!$B$6:$B$33,$A40,'Elims'!$C$6:$C$33)
+I40	=G40+H40
+A41	'tax'
+B41	'Income tax expense'
+C41	=SUMIF('CoA'!$D$6:$D$41,$A41,'TB_Adj'!$C$6:$C$41)
+D41	=SUMIF('CoA'!$D$6:$D$41,$A41,'TB_Adj'!$D$6:$D$41)
+E41	=SUMIF('CoA'!$D$6:$D$41,$A41,'Translation'!$F$6:$F$41)
+F41	=SUMIF('CoA'!$D$6:$D$41,$A41,'TB_Adj'!$F$6:$F$41)
+G41	=SUM(C41:F41)
+H41	=SUMIF('Elims'!$B$6:$B$33,$A41,'Elims'!$C$6:$C$33)
+I41	=G41+H41
+A42	'nci_income'
+B42	'Net income attributable to NCI'
+C42	=SUMIF('CoA'!$D$6:$D$41,$A42,'TB_Adj'!$C$6:$C$41)
+D42	=SUMIF('CoA'!$D$6:$D$41,$A42,'TB_Adj'!$D$6:$D$41)
+E42	=SUMIF('CoA'!$D$6:$D$41,$A42,'Translation'!$F$6:$F$41)
+F42	=SUMIF('CoA'!$D$6:$D$41,$A42,'TB_Adj'!$F$6:$F$41)
+G42	=SUM(C42:F42)
+H42	=SUMIF('Elims'!$B$6:$B$33,$A42,'Elims'!$C$6:$C$33)
+I42	=G42+H42
+B43	'Total (must be zero)'
+C43	=SUM(C7:C42)
+D43	=SUM(D7:D42)
+E43	=SUM(E7:E42)
+F43	=SUM(F7:F42)
+G43	=SUM(G7:G42)
+H43	=SUM(H7:H42)
+I43	=SUM(I7:I42)
+=== Statements
+A1	'Consolidated financial statements (USD m)'
+A4	'Consolidated income statement'
+A5	'Revenue'
+B5	=-'Consol'!$I$29
+A6	'Intercompany revenue'
+B6	=-'Consol'!$I$30
+A7	'Management fee income'
+B7	=-'Consol'!$I$31
+A8	'Intercompany interest income'
+B8	=-'Consol'!$I$32
+A9	'Share of associate income'
+B9	=-'Consol'!$I$33
+A10	'Dividend income'
+B10	=-'Consol'!$I$34
+A11	'Cost of sales'
+B11	='Consol'!$I$35
+A12	'Operating expenses'
+B12	='Consol'!$I$36
+A13	'Management fees'
+B13	='Consol'!$I$37
+A14	'Depreciation'
+B14	='Consol'!$I$38
+A15	'Interest expense'
+B15	='Consol'!$I$39
+A16	'Intercompany interest expense'
+B16	='Consol'!$I$40
+A17	'Income tax expense'
+B17	='Consol'!$I$41
+A18	'Net income'
+B18	=-('Consol'!$I$29+'Consol'!$I$30+'Consol'!$I$31+'Consol'!$I$32+'Consol'!$I$33+'Consol'!$I$34+'Consol'!$I$35+'Consol'!$I$36+'Consol'!$I$37+'Consol'!$I$38+'Consol'!$I$39+'Consol'!$I$40+'Consol'!$I$41)
+A19	'  attributable to non-controlling interests'
+B19	='Consol'!$I$42
+A20	'  attributable to the parent'
+B20	=B18-B19
+A22	'Consolidated balance sheet'
+A23	'Cash'
+B23	='Consol'!$I$7
+A24	'Trade receivables'
+B24	='Consol'!$I$8
+A25	'Intercompany receivables'
+B25	='Consol'!$I$9
+A26	'Inventory'
+B26	='Consol'!$I$10
+A27	'Prepaid expenses'
+B27	='Consol'!$I$11
+A28	'PP&E, net'
+B28	='Consol'!$I$12
+A29	'Investment in subsidiaries'
+B29	='Consol'!$I$13
+A30	'Investment in associate'
+B30	='Consol'!$I$14
+A31	'Intercompany loan receivable'
+B31	='Consol'!$I$15
+A32	'Goodwill'
+B32	='Consol'!$I$16
+A33	'Total assets'
+B33	=SUM(B23:B32)
+A34	'Trade payables'
+B34	=-'Consol'!$I$17
+A35	'Intercompany payables'
+B35	=-'Consol'!$I$18
+A36	'Accrued liabilities'
+B36	=-'Consol'!$I$19
+A37	'Income tax payable'
+B37	=-'Consol'!$I$20
+A38	'Long-term debt'
+B38	=-'Consol'!$I$21
+A39	'Intercompany loan payable'
+B39	=-'Consol'!$I$22
+A40	'Total liabilities'
+B40	=SUM(B34:B39)
+A41	'Share capital'
+B41	=-'Consol'!$I$23
+A42	'Retained earnings'
+B42	=B51
+A43	'Translation reserve (CTA)'
+B43	=-'Consol'!$I$26
+A44	'Non-controlling interests'
+B44	=-'Consol'!$I$27
+A45	'Total equity'
+B45	=SUM(B41:B44)
+A46	'Total liabilities and equity'
+B46	=B40+B45
+A47	'Retained earnings roll-forward'
+A48	"Opening (parent's share)"
+B48	=-'Consol'!$I$24
+A49	'Net income attributable to the parent'
+B49	=B20
+A50	'Dividends declared by the parent'
+B50	=-'Consol'!$I$25
+A51	'Closing'
+B51	=SUM(B48:B50)
+A53	'NCI check: 20% of S3 net assets + NCI share of goodwill'
+B53	=(1-'Inputs'!$C$8)*(SUMIF('CoA'!$C$6:$C$41,"A",'TB_Adj'!$F$6:$F$41)+SUMIF('CoA'!$C$6:$C$41,"L",'TB_Adj'!$F$6:$F$41))+('Inputs'!$C$11-(1-'Inputs'!$C$8)*(-'TB_Adj'!$F$23+'Inputs'!$C$12))
+=== CashFlow
+A1	'Consolidated cash flow statement (indirect, built from the trial balances)'
+A5	'Line'
+C5	'P'
+D5	'S1'
+E5	'S2 (GBP)'
+F5	'S3'
+G5	'S2 (USD, avg)'
+H5	'Eliminations'
+I5	'Consolidated'
+B6	'Operating activities'
+A7	'ni'
+B7	'Net income (entity)'
+C7	='TB_Adj'!$C$44
+D7	='TB_Adj'!$D$44
+E7	='TB_Adj'!$E$44
+F7	='TB_Adj'!$F$44
+G7	=E7*'Inputs'!$C$5
+H7	=-('Inputs'!$C$8*'TB_Adj'!$F$25+'Inputs'!$C$15*'Inputs'!$C$14)
+I7	=C7+D7+F7+G7+H7
+A8	'da'
+B8	'Depreciation'
+C8	=-(SUMIF('CoA'!$E$6:$E$41,$A8,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A8,'Opening'!$C$6:$C$41))
+D8	=-(SUMIF('CoA'!$E$6:$E$41,$A8,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A8,'Opening'!$D$6:$D$41))
+E8	=-(SUMIF('CoA'!$E$6:$E$41,$A8,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A8,'Opening'!$E$6:$E$41))
+F8	=-(SUMIF('CoA'!$E$6:$E$41,$A8,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A8,'Opening'!$F$6:$F$41))
+G8	=E8*'Inputs'!$C$5
+I8	=C8+D8+F8+G8
+A9	'assoc'
+B9	'Associate: share of income less dividends received'
+C9	=-(SUMIF('CoA'!$E$6:$E$41,$A9,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A9,'Opening'!$C$6:$C$41))
+D9	=-(SUMIF('CoA'!$E$6:$E$41,$A9,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A9,'Opening'!$D$6:$D$41))
+E9	=-(SUMIF('CoA'!$E$6:$E$41,$A9,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A9,'Opening'!$E$6:$E$41))
+F9	=-(SUMIF('CoA'!$E$6:$E$41,$A9,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A9,'Opening'!$F$6:$F$41))
+G9	=E9*'Inputs'!$C$5
+I9	=C9+D9+F9+G9
+A10	'wc_receivables'
+B10	'Trade receivables'
+C10	=-(SUMIF('CoA'!$E$6:$E$41,$A10,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A10,'Opening'!$C$6:$C$41))
+D10	=-(SUMIF('CoA'!$E$6:$E$41,$A10,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A10,'Opening'!$D$6:$D$41))
+E10	=-(SUMIF('CoA'!$E$6:$E$41,$A10,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A10,'Opening'!$E$6:$E$41))
+F10	=-(SUMIF('CoA'!$E$6:$E$41,$A10,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A10,'Opening'!$F$6:$F$41))
+G10	=E10*'Inputs'!$C$5
+I10	=C10+D10+F10+G10
+A11	'wc_ic'
+B11	'Intercompany balances'
+C11	=-(SUMIF('CoA'!$E$6:$E$41,$A11,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A11,'Opening'!$C$6:$C$41))
+D11	=-(SUMIF('CoA'!$E$6:$E$41,$A11,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A11,'Opening'!$D$6:$D$41))
+E11	=-(SUMIF('CoA'!$E$6:$E$41,$A11,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A11,'Opening'!$E$6:$E$41))
+F11	=-(SUMIF('CoA'!$E$6:$E$41,$A11,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A11,'Opening'!$F$6:$F$41))
+G11	=E11*'Inputs'!$C$5
+I11	=C11+D11+F11+G11
+A12	'wc_inventory'
+B12	'Inventory'
+C12	=-(SUMIF('CoA'!$E$6:$E$41,$A12,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A12,'Opening'!$C$6:$C$41))
+D12	=-(SUMIF('CoA'!$E$6:$E$41,$A12,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A12,'Opening'!$D$6:$D$41))
+E12	=-(SUMIF('CoA'!$E$6:$E$41,$A12,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A12,'Opening'!$E$6:$E$41))
+F12	=-(SUMIF('CoA'!$E$6:$E$41,$A12,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A12,'Opening'!$F$6:$F$41))
+G12	=E12*'Inputs'!$C$5
+H12	='Inputs'!$C$15*'Inputs'!$C$14
+I12	=C12+D12+F12+G12+H12
+A13	'wc_payables'
+B13	'Trade payables'
+C13	=-(SUMIF('CoA'!$E$6:$E$41,$A13,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A13,'Opening'!$C$6:$C$41))
+D13	=-(SUMIF('CoA'!$E$6:$E$41,$A13,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A13,'Opening'!$D$6:$D$41))
+E13	=-(SUMIF('CoA'!$E$6:$E$41,$A13,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A13,'Opening'!$E$6:$E$41))
+F13	=-(SUMIF('CoA'!$E$6:$E$41,$A13,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A13,'Opening'!$F$6:$F$41))
+G13	=E13*'Inputs'!$C$5
+I13	=C13+D13+F13+G13
+A14	'wc_other'
+B14	'Prepaids, accruals and tax payable'
+C14	=-(SUMIF('CoA'!$E$6:$E$41,$A14,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A14,'Opening'!$C$6:$C$41))
+D14	=-(SUMIF('CoA'!$E$6:$E$41,$A14,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A14,'Opening'!$D$6:$D$41))
+E14	=-(SUMIF('CoA'!$E$6:$E$41,$A14,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A14,'Opening'!$E$6:$E$41))
+F14	=-(SUMIF('CoA'!$E$6:$E$41,$A14,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A14,'Opening'!$F$6:$F$41))
+G14	=E14*'Inputs'!$C$5
+I14	=C14+D14+F14+G14
+B15	'Net cash from operating activities'
+C15	=SUM(C7:C14)
+D15	=SUM(D7:D14)
+E15	=SUM(E7:E14)
+F15	=SUM(F7:F14)
+G15	=SUM(G7:G14)
+H15	=SUM(H7:H14)
+I15	=SUM(I7:I14)
+B17	'Investing activities'
+A18	'capex'
+B18	'Capital expenditure'
+C18	=-(SUMIF('CoA'!$E$6:$E$41,$A18,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A18,'Opening'!$C$6:$C$41))
+D18	=-(SUMIF('CoA'!$E$6:$E$41,$A18,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A18,'Opening'!$D$6:$D$41))
+E18	=-(SUMIF('CoA'!$E$6:$E$41,$A18,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A18,'Opening'!$E$6:$E$41))
+F18	=-(SUMIF('CoA'!$E$6:$E$41,$A18,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A18,'Opening'!$F$6:$F$41))
+G18	=E18*'Inputs'!$C$5
+I18	=C18+D18+F18+G18
+A19	'inv_subs'
+B19	'Investment in subsidiaries'
+C19	=-(SUMIF('CoA'!$E$6:$E$41,$A19,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A19,'Opening'!$C$6:$C$41))
+D19	=-(SUMIF('CoA'!$E$6:$E$41,$A19,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A19,'Opening'!$D$6:$D$41))
+E19	=-(SUMIF('CoA'!$E$6:$E$41,$A19,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A19,'Opening'!$E$6:$E$41))
+F19	=-(SUMIF('CoA'!$E$6:$E$41,$A19,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A19,'Opening'!$F$6:$F$41))
+G19	=E19*'Inputs'!$C$5
+I19	=C19+D19+F19+G19
+A20	'ic_loan_rec'
+B20	'Intercompany loan advanced'
+C20	=-(SUMIF('CoA'!$E$6:$E$41,$A20,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A20,'Opening'!$C$6:$C$41))
+D20	=-(SUMIF('CoA'!$E$6:$E$41,$A20,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A20,'Opening'!$D$6:$D$41))
+E20	=-(SUMIF('CoA'!$E$6:$E$41,$A20,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A20,'Opening'!$E$6:$E$41))
+F20	=-(SUMIF('CoA'!$E$6:$E$41,$A20,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A20,'Opening'!$F$6:$F$41))
+G20	=E20*'Inputs'!$C$5
+H20	=('TB_Adj'!$C$15-'Opening'!$C$15)
+I20	=C20+D20+F20+G20+H20
+B21	'Net cash from investing activities'
+C21	=SUM(C18:C20)
+D21	=SUM(D18:D20)
+E21	=SUM(E18:E20)
+F21	=SUM(F18:F20)
+G21	=SUM(G18:G20)
+H21	=SUM(H18:H20)
+I21	=SUM(I18:I20)
+B23	'Financing activities'
+A24	'debt'
+B24	'Long-term debt'
+C24	=-(SUMIF('CoA'!$E$6:$E$41,$A24,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A24,'Opening'!$C$6:$C$41))
+D24	=-(SUMIF('CoA'!$E$6:$E$41,$A24,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A24,'Opening'!$D$6:$D$41))
+E24	=-(SUMIF('CoA'!$E$6:$E$41,$A24,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A24,'Opening'!$E$6:$E$41))
+F24	=-(SUMIF('CoA'!$E$6:$E$41,$A24,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A24,'Opening'!$F$6:$F$41))
+G24	=E24*'Inputs'!$C$5
+I24	=C24+D24+F24+G24
+A25	'ic_loan_pay'
+B25	'Intercompany loan received'
+C25	=-(SUMIF('CoA'!$E$6:$E$41,$A25,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A25,'Opening'!$C$6:$C$41))
+D25	=-(SUMIF('CoA'!$E$6:$E$41,$A25,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A25,'Opening'!$D$6:$D$41))
+E25	=-(SUMIF('CoA'!$E$6:$E$41,$A25,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A25,'Opening'!$E$6:$E$41))
+F25	=-(SUMIF('CoA'!$E$6:$E$41,$A25,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A25,'Opening'!$F$6:$F$41))
+G25	=E25*'Inputs'!$C$5
+H25	=-('TB_Adj'!$C$15-'Opening'!$C$15)
+I25	=C25+D25+F25+G25+H25
+A26	'equity'
+B26	'Share capital'
+C26	=-(SUMIF('CoA'!$E$6:$E$41,$A26,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A26,'Opening'!$C$6:$C$41))
+D26	=-(SUMIF('CoA'!$E$6:$E$41,$A26,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A26,'Opening'!$D$6:$D$41))
+E26	=-(SUMIF('CoA'!$E$6:$E$41,$A26,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A26,'Opening'!$E$6:$E$41))
+F26	=-(SUMIF('CoA'!$E$6:$E$41,$A26,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A26,'Opening'!$F$6:$F$41))
+G26	=E26*'Inputs'!$C$5
+I26	=C26+D26+F26+G26
+A27	'dividends'
+B27	'Dividends paid'
+C27	=-(SUMIF('CoA'!$E$6:$E$41,$A27,'TB_Adj'!$C$6:$C$41)-SUMIF('CoA'!$E$6:$E$41,$A27,'Opening'!$C$6:$C$41))
+D27	=-(SUMIF('CoA'!$E$6:$E$41,$A27,'TB_Adj'!$D$6:$D$41)-SUMIF('CoA'!$E$6:$E$41,$A27,'Opening'!$D$6:$D$41))
+E27	=-(SUMIF('CoA'!$E$6:$E$41,$A27,'TB_Adj'!$E$6:$E$41)-SUMIF('CoA'!$E$6:$E$41,$A27,'Opening'!$E$6:$E$41))
+F27	=-(SUMIF('CoA'!$E$6:$E$41,$A27,'TB_Adj'!$F$6:$F$41)-SUMIF('CoA'!$E$6:$E$41,$A27,'Opening'!$F$6:$F$41))
+G27	=E27*'Inputs'!$C$5
+H27	='Inputs'!$C$8*'TB_Adj'!$F$25
+I27	=C27+D27+F27+G27+H27
+B28	'Net cash from financing activities'
+C28	=SUM(C24:C27)
+D28	=SUM(D24:D27)
+E28	=SUM(E24:E27)
+F28	=SUM(F24:F27)
+G28	=SUM(G24:G27)
+H28	=SUM(H24:H27)
+I28	=SUM(I24:I27)
+B30	'Effect of exchange rates on cash'
+I30	='TB_Adj'!$E$6*'Inputs'!$C$6-'Opening'!$E$6*'Inputs'!$C$4-('TB_Adj'!$E$6-'Opening'!$E$6)*'Inputs'!$C$5
+B31	'Net change in cash'
+I31	=I15+I21+I28+I30
+B32	'Cash at beginning of year'
+I32	='Opening'!$C$6+'Opening'!$D$6+'Opening'!$E$6*'Inputs'!$C$4+'Opening'!$F$6
+B33	'Cash at end of year (balance sheet)'
+I33	='TB_Adj'!$C$6+'TB_Adj'!$D$6+'TB_Adj'!$E$6*'Inputs'!$C$6+'TB_Adj'!$F$6
+B35	'Entity check: cash flows = change in cash (local currency)'
+C35	=ROUND(C15+C21+C28-('TB_Adj'!$C$6-'Opening'!$C$6),'Checks'!$C$30)
+D35	=ROUND(D15+D21+D28-('TB_Adj'!$D$6-'Opening'!$D$6),'Checks'!$C$30)
+E35	=ROUND(E15+E21+E28-('TB_Adj'!$E$6-'Opening'!$E$6),'Checks'!$C$30)
+F35	=ROUND(F15+F21+F28-('TB_Adj'!$F$6-'Opening'!$F$6),'Checks'!$C$30)
+=== Recs
+A1	'Account reconciliations'
+A4	'Bank reconciliations (local currency)'
+A5	'Entity'
+B5	'Statement'
+C5	'O/s cheques'
+D5	'In transit'
+E5	'GL (adjusted)'
+F5	'Difference'
+G5	'Status'
+A6	'P'
+B6	='Inputs'!$C$50
+C6	='Inputs'!$D$50
+D6	='Inputs'!$E$50
+E6	='TB_Adj'!$C$6
+F6	=B6-C6+D6-E6
+G6	=IF(ABS(F6)<='Inputs'!$C$23,"Reconciled","OPEN")
+A7	'S1'
+B7	='Inputs'!$C$51
+C7	='Inputs'!$D$51
+D7	='Inputs'!$E$51
+E7	='TB_Adj'!$D$6
+F7	=B7-C7+D7-E7
+G7	=IF(ABS(F7)<='Inputs'!$C$23,"Reconciled","OPEN")
+A8	'S2'
+B8	='Inputs'!$C$52
+C8	='Inputs'!$D$52
+D8	='Inputs'!$E$52
+E8	='TB_Adj'!$E$6
+F8	=B8-C8+D8-E8
+G8	=IF(ABS(F8)<='Inputs'!$C$23,"Reconciled","OPEN")
+A9	'S3'
+B9	='Inputs'!$C$53
+C9	='Inputs'!$D$53
+D9	='Inputs'!$E$53
+E9	='TB_Adj'!$F$6
+F9	=B9-C9+D9-E9
+G9	=IF(ABS(F9)<='Inputs'!$C$23,"Reconciled","OPEN")
+A12	'Intercompany reconciliations (USD)'
+A13	'Pair'
+B13	'Side A'
+C13	'Side B'
+F13	'Difference'
+G13	'Status'
+A14	'P / S1 trade balance, before close journals'
+B14	='TB_Unadj'!C8
+C14	='TB_Unadj'!D18
+F14	=B14+C14
+G14	=IF(ABS(F14-'Inputs'!$C$17)<='Inputs'!$C$23,"Explained (J6)","OPEN")
+A15	'P / S1 trade balance, after cash in transit'
+B15	='TB_Adj'!$C$8
+C15	='TB_Adj'!$D$18
+F15	=B15+C15
+G15	=IF(ABS(F15)<='Inputs'!$C$23,"Reconciled","OPEN")
+A16	'P / S3 loan'
+B16	='TB_Adj'!$C$15
+C16	='TB_Adj'!$F$22
+F16	=B16+C16
+G16	=IF(ABS(F16)<='Inputs'!$C$23,"Reconciled","OPEN")
+A17	'P sales to S1 / S1 purchases from P'
+B17	=-'TB_Adj'!$C$29
+C17	=-'Inputs'!$C$16
+F17	=B17+C17
+G17	=IF(ABS(F17)<='Inputs'!$C$23,"Reconciled","OPEN")
+A18	'P fee income / S2 fee expense at average rate'
+B18	=-'TB_Adj'!$C$30
+C18	=-'TB_Adj'!$E$36*'Inputs'!$C$5
+F18	=B18+C18
+G18	=IF(ABS(F18)<='Inputs'!$C$23,"Reconciled","OPEN")
+A19	'P interest income / S3 interest expense'
+B19	=-'TB_Adj'!$C$31
+C19	=-'TB_Adj'!$F$39
+F19	=B19+C19
+G19	=IF(ABS(F19)<='Inputs'!$C$23,"Reconciled","OPEN")
+A20	"P dividend income / parent's share of S3 dividends"
+B20	=-'TB_Adj'!$C$33
+C20	=-'Inputs'!$C$8*'TB_Adj'!$F$25
+F20	=B20+C20
+G20	=IF(ABS(F20)<='Inputs'!$C$23,"Reconciled","OPEN")
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A4	'Unadjusted trial balances sum to zero'
+C4	=SUMPRODUCT(ABS('TB_Unadj'!C42:F42))
+A5	'Opening balance sheets sum to zero'
+C5	=SUMPRODUCT(ABS('Opening'!C42:F42))
+A6	'Close journals balance, by entity'
+C6	=ABS(SUMIF('Journals'!$B$6:$B$49,"P",'Journals'!$D$6:$D$49))+ABS(SUMIF('Journals'!$B$6:$B$49,"S1",'Journals'!$D$6:$D$49))+ABS(SUMIF('Journals'!$B$6:$B$49,"S2",'Journals'!$D$6:$D$49))+ABS(SUMIF('Journals'!$B$6:$B$49,"S3",'Journals'!$D$6:$D$49))
+A7	'Adjusted trial balances sum to zero'
+C7	=SUMPRODUCT(ABS('TB_Adj'!C42:F42))
+A8	'S2 translated trial balance sums to zero'
+C8	=ABS('Translation'!F42)
+A9	'CTA balancing figure = analytical roll-forward'
+C9	=ABS('Translation'!$F$48-'Translation'!$F$49)
+A10	'Eliminations net to zero'
+C10	=ABS('Elims'!$C$34)
+A11	'Consolidation worksheet columns sum to zero'
+C11	=SUMPRODUCT(ABS('Consol'!C43:I43))
+A12	'Consolidated balance sheet balances'
+C12	=ABS('Statements'!$B$33-'Statements'!$B$46)
+A13	'NCI = 20% of S3 net assets + NCI goodwill'
+C13	=ABS('Statements'!$B$53-'Statements'!$B$44)
+A14	'Cash flow ties to the balance sheet'
+C14	=ABS('CashFlow'!$I$32+'CashFlow'!$I$31-'CashFlow'!$I$33)
+A15	'Entity cash flows = change in cash'
+C15	=SUMPRODUCT(ABS('CashFlow'!C35:F35))
+A16	'Bank reconciliations clear'
+C16	=SUMPRODUCT(ABS('Recs'!F6:F9))
+A17	'Intercompany reconciliations clear (after J6)'
+C17	=SUMPRODUCT(ABS('Recs'!F15:F20))
+A30	'Rounding precision for entity cash-flow checks (decimal places)'
+C30	9
+A31	'Tolerance'
+C31	0.001
+A33	'MASTER CHECK (0 = all pass)'
+C33	=IF(SUM(C4:C17)<C31,0,1)
+=== Checklist
+A1	'Year-end close checklist (status driven by the checks; sign-off by the VBA macro)'
+A4	'#'
+B4	'Task'
+C4	'Status'
+D4	'Signed off by'
+E4	'Signed off at'
+A5	1
+B5	'Load unadjusted trial balances; confirm they balance'
+C5	=IF(ABS('Checks'!$C$4)<'Checks'!$C$31,"Complete","Open")
+A6	2
+B6	'Post depreciation (J1)'
+C6	=IF(ABS('Checks'!$C$7)<'Checks'!$C$31,"Complete","Open")
+A7	3
+B7	'Amortise prepayments (J2) and accrue unbilled costs (J3)'
+C7	=IF(ABS('Checks'!$C$7)<'Checks'!$C$31,"Complete","Open")
+A8	4
+B8	'Correct revenue cut-off (J4)'
+C8	=IF(ABS('Checks'!$C$7)<'Checks'!$C$31,"Complete","Open")
+A9	5
+B9	'Record cash in transit (J6) and equity-method income (J7)'
+C9	=IF(ABS('Checks'!$C$17)<'Checks'!$C$31,"Complete","Open")
+A10	6
+B10	'Provide for income tax (J5)'
+C10	=IF(ABS('Checks'!$C$7)<'Checks'!$C$31,"Complete","Open")
+A11	7
+B11	'Reconcile bank accounts'
+C11	=IF(ABS('Checks'!$C$16)<'Checks'!$C$31,"Complete","Open")
+A12	8
+B12	'Reconcile intercompany balances and flows'
+C12	=IF(ABS('Checks'!$C$17)<'Checks'!$C$31,"Complete","Open")
+A13	9
+B13	'Translate S2 and roll forward the CTA'
+C13	=IF(ABS('Checks'!$C$9)<'Checks'!$C$31,"Complete","Open")
+A14	10
+B14	'Post consolidation eliminations'
+C14	=IF(ABS('Checks'!$C$10)<'Checks'!$C$31,"Complete","Open")
+A15	11
+B15	'Review consolidated statements: balance sheet balances, NCI agrees'
+C15	=IF(ABS('Checks'!$C$13)<'Checks'!$C$31,"Complete","Open")
+A16	12
+B16	'Prepare the cash flow statement and tie it to cash'
+C16	=IF(ABS('Checks'!$C$14)<'Checks'!$C$31,"Complete","Open")
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-20'
+B4	'Generated from fixtures/group (seeded synthetic ledgers) (M6).'
