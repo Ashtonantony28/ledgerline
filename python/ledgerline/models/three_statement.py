@@ -81,6 +81,8 @@ CONST_FMT = {"days_in_year": "n", "min_cash": "m", "max_cash": "m", "revolver_ca
              "refinance_pct": "pct"}
 
 
+LAB_DRIVERS = ("sales_per_store_growth", "store_openings", "gross_margin", "sga_pct", "capex_pct")  # flexed in workbook 07
+
 def timeline(inp: Inputs) -> Timeline:
     return Timeline(inp.period_ends(), inp.labels(), inp.n_hist)
 
@@ -139,6 +141,8 @@ def add_three_statement(m: Model, inp: Inputs, extra_checks: list | None = None)
         first, tmpl = DRIVER_HIST[d]
         hist = _hist_only(tmpl, first) if tmpl else None
         fcst = "=CHOOSE({Inputs.$scenario}," + ",".join("{Scenarios.%s_%s}" % (d, c) for c in CASES) + ")"
+        if inp.lab and d in LAB_DRIVERS:  # workbook 07: additive shift from the Lab sheet
+            fcst += "+{Lab.$live_%s}" % d
         dv.add(d, DRIVER_LABEL[d], inp.spec["drivers"][d]["unit"], hist=hist, fcst=fcst,
                fmt=inp.spec["drivers"][d]["fmt"])
 

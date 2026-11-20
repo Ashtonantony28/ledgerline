@@ -1,0 +1,31 @@
+# Workbook 07: scenario and sensitivity lab on the Costco valuation (workbooks 01-02). All judgement.
+# Shifts are additive to every forecast year of the live case: percentage points as decimals, warehouses as counts.
+drivers:   # key: label, unit, one-step shift (tornado = +/- one step; Monte Carlo standard deviation = one step)
+  sales_per_store_growth: {label: "Sales per warehouse growth", unit: "pp", step: 0.02,
+                           why: "Two points is roughly the gap between Costco's slowest and fastest comparable-sales years in the history."}
+  store_openings:         {label: "Net new warehouses per year", unit: "count", step: 10,
+                           why: "About a third of the recent opening pace, the swing seen between FY2020 and FY2024."}
+  gross_margin:           {label: "Gross margin", unit: "pp", step: 0.005,
+                           why: "Costco's gross margin has moved within about half a point a year; membership pricing caps it."}
+  sga_pct:                {label: "SG&A % of revenue", unit: "pp", step: 0.005,
+                           why: "Wage rounds and leverage on sales move SG&A by up to half a point."}
+  capex_pct:              {label: "Capex % of revenue", unit: "pp", step: 0.005,
+                           why: "Capex intensity has ranged about one point over the decade."}
+  wacc:                   {label: "WACC", unit: "pp", step: 0.01,
+                           why: "One point covers a plausible range of equity risk premium and beta estimates."}
+  terminal_growth:        {label: "Terminal growth", unit: "pp", step: 0.005,
+                           why: "Half a point either side of the base perpetual growth assumption."}
+spider_steps: [-2, -1, 0, 1, 2]
+stress:    # named combinations of shifts
+  - {name: "Consumer slowdown", shifts: {sales_per_store_growth: -0.03, store_openings: -10}}
+  - {name: "Margin squeeze", shifts: {gross_margin: -0.01, sga_pct: 0.005}}
+  - {name: "Rate shock", shifts: {wacc: 0.015}}
+  - {name: "Combined downturn", shifts: {sales_per_store_growth: -0.03, store_openings: -10, gross_margin: -0.01,
+                                         sga_pct: 0.005, wacc: 0.015, terminal_growth: -0.005}}
+monte_carlo:
+  trials: 10000
+  seed: 7
+  min_spread: 0.01        # resample a draw whose WACC is less than 1 point above terminal growth (Gordon undefined)
+  bins: 20
+  correlation:            # pairs drawn jointly (judgement: strong sales years also bring more openings)
+    - [sales_per_store_growth, store_openings, 0.5]

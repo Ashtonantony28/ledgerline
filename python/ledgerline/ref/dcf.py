@@ -48,7 +48,7 @@ def run(inp: Inputs, v: ValInputs) -> dict:
     mcap = v.price * v.shares_out
     debt0 = o["debt"]
     wd = debt0 / (debt0 + mcap)
-    wacc = ke * (1 - wd) + kd * wd
+    wacc = ke * (1 - wd) + kd * wd + v.wacc_shift
     r.update(beta_adj=beta_adj, ke=ke, kd_after_tax=kd, mcap=mcap, wd=wd, wacc=wacc)
 
     ebit, da, capex, dnwc = ts["operating_income"], ts["da"], ts["capex"], ts["change_nwc"]
@@ -62,7 +62,7 @@ def run(inp: Inputs, v: ValInputs) -> dict:
     cs = comps(v)
     r["comps"] = cs
     exit_mult = cs["ev_ebitda"]["median"]
-    g = v.terminal_growth
+    g = v.terminal_growth + v.growth_shift
     net_debt = debt0 - o["cash"] - o["st_investments"] + o["nci_equity"]
     roll = (1 + ke) ** v.years_since_fye
 

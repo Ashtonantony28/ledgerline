@@ -78,6 +78,8 @@ class Inputs:
     scenario: int = 1                     # 1 base, 2 upside, 3 downside
     circ: int = 0                         # 1 = interest on average balances (circular)
     notes: dict[str, str] = field(default_factory=dict)
+    lab: bool = False                     # workbook 07: live drivers carry an additive shift from the Lab sheet
+    flex: dict[str, float] = field(default_factory=dict)   # driver -> additive shift (reference model)
 
     @property
     def hist_slice(self) -> range:
@@ -94,7 +96,8 @@ class Inputs:
         return hist + [(last + timedelta(days=364 * k)).isoformat() for k in range(1, self.n_fcst + 1)]
 
     def live(self, driver: str) -> list[float]:
-        return self.drivers[driver][CASES[self.scenario - 1]]
+        s = self.flex.get(driver, 0.0)
+        return [x + s for x in self.drivers[driver][CASES[self.scenario - 1]]]
 
     def h(self, key: str) -> list[float]:
         """History for the model's history columns, in model units."""

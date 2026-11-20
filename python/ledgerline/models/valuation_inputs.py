@@ -51,6 +51,8 @@ class ValInputs:
     lo_52w: float
     comps: list[Comp]
     notes: dict
+    wacc_shift: float = 0.0               # workbook 07 flex (additive)
+    growth_shift: float = 0.0
 
 
 def comp_from_fixture(ticker: str, prices: dict) -> Comp:

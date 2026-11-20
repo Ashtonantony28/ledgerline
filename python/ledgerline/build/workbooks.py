@@ -284,7 +284,44 @@ def build_06(scenario: int = 1, out: Path | None = None) -> tuple[Path, dict]:
     return path, layout
 
 
-BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05, "06": build_06}
+LAB_SHEETS = THREE_STATEMENT_SHEETS[:2] + [("Scenarios", THREE_STATEMENT_SHEETS[2][1]),
+              ("Lab", "Scenario manager: stress-case selector and manual driver shifts feeding the whole model")] + \
+    [x for x in VALUATION_SHEETS[3:-1]] + [
+    ("Tornado", "One-step-down / one-step-up price for each driver, ranked by swing"),
+    ("Spider", "Price as each driver moves -2 to +2 steps"),
+    ("MonteCarlo", "10,000 seeded simultaneous-shift trials: percentiles, probability above market, histogram"),
+    ("Checks", "Integrity checks (including live-vs-reference ties) and master flag"),
+]
+
+
+def build_07(stress: int = 0, manual: dict | None = None, trials: int | None = None, out: Path | None = None) -> tuple[Path, dict]:
+    from dataclasses import replace
+    from ..models.lab import add_lab
+    from ..models.three_statement import add_three_statement, timeline
+    from ..models.valuation import add_valuation, valuation_checks
+    from ..models.valuation_inputs import build_val_inputs
+    from ..ref.lab import run as lab_run
+    inp = build_inputs("COST", scenario=1, circ=0)
+    v = build_val_inputs(inp)
+    lab = lab_run(inp, v, trials=trials)  # results at zero shift: the lab describes the base case
+    inp = replace(inp, lab=True)
+    m = Model(timeline(inp), "COST scenario lab")
+    add_lab(m, lab, stress, manual)
+    add_three_statement(m, inp, extra_checks=valuation_checks() + m.lab_checks)
+    add_valuation(m, inp, v)
+    add_cover(m, f"{inp.history.entity}: scenario and sensitivity lab (tornado, spider, stress, Monte Carlo)", inp, LAB_SHEETS)
+    m.sheets["Cover"].cell("A11", "Live stress case")
+    m.sheets["Cover"].cell("B11", "='Lab'!C%d" % m.sheets["Lab"].row("stress_name"), bold=True)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/COST.yaml, spec/LAB_COST.yaml, fixtures/COST, fixtures/market.json (M8).")])
+    _reorder(m, ["Cover"] + [n for n, _ in LAB_SHEETS])
+    path = Path(out or OUT / "07_COST_ScenarioLab.xlsx")
+    layout = m.save(path)
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05, "06": build_06,
+            "07": build_07}
 
 
 def main(argv: list[str]) -> int:

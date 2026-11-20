@@ -56,10 +56,15 @@ def add_valuation(m: Model, inp: Inputs, v: ValInputs) -> None:
     w.add("mcap", "Market capitalisation", "$m", const="={$price}*{$shares_out}")
     w.add("debt", "Debt (book, last balance sheet)", "$m", const="={BS.debt#%d}+{BS.revolver#%d}" % (lh, lh))
     w.add("wd", "Debt / (debt + equity)", "%", const="={$debt}/({$debt}+{$mcap})", fmt="pct")
-    w.add("wacc", "WACC", "%", const="={$ke}*(1-{$wd})+{$kd}*{$wd}", fmt="pct", style="total")
+    w.add("wacc", "WACC", "%", const="={$ke}*(1-{$wd})+{$kd}*{$wd}" + ("+{Lab.$live_wacc}" if inp.lab else ""), fmt="pct", style="total")
     w.blank()
     w.section("DCF settings")
-    w.add("terminal_growth", "Terminal growth (Gordon)", "%", const=v.terminal_growth, fmt="pct", const_note=v.notes["terminal_growth"])
+    if inp.lab:  # workbook 07: base input plus the Lab sheet's live shift
+        w.add("terminal_growth_base", "Terminal growth before Lab shift", "%", const=v.terminal_growth, fmt="pct",
+              const_note=v.notes["terminal_growth"])
+        w.add("terminal_growth", "Terminal growth (Gordon)", "%", const="={$terminal_growth_base}+{Lab.$live_terminal_growth}", fmt="pct")
+    else:
+        w.add("terminal_growth", "Terminal growth (Gordon)", "%", const=v.terminal_growth, fmt="pct", const_note=v.notes["terminal_growth"])
     w.add("midyear_adj", "Mid-year adjustment", "years", const=v.midyear_adj, fmt="0.0", const_note=v.notes["midyear_adj"])
     w.add("years_since_fye", "Years from fiscal year end to price date", "years", const=v.years_since_fye, fmt="0.000",
           const_note=v.notes["years_since_fye"])

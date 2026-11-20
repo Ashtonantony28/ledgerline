@@ -18,7 +18,8 @@ and a mutation test proves the checks catch injected errors.
 | 04 | `04_DKS_FL_MnA.xlsx`: DICK'S / Foot Locker accretion-dilution: cash/stock election, PPA with bargain-purchase handling, synergies, breakeven lines, contribution, grids; back-test memo | done (M5) |
 | 05 | `05_Group_Close.xlsx`: four-entity group (GBP subsidiary, 80% NCI) on seeded synthetic ledgers: close journals, current-rate translation with CTA roll-forward, 12 eliminations, statements, indirect cash flow, bank and intercompany recs, close checklist (VBA sign-off in `vba/`) | done (M6) |
 | 06 | `06_FPA_Forecast.xlsx`: FY2026 driver-based budget, 9+3 rolling forecast with three cases, price / volume / mix / cost / headcount bridges (YTD and full year), June-forecast accuracy, cash headroom, dashboard charts; Power Query ingestion script in `powerquery/` | done (M7) |
-| 07-09 | Scenario lab, dashboard, credit | M8-M10 |
+| 07 | `07_COST_ScenarioLab.xlsx`: scenario manager (stress cases + manual shifts flowing through the whole Costco model), tornado, spider, seeded 10,000-trial Monte Carlo with histogram; memo; xlwings Excel-side runner | done (M8) |
+| 08-09 | Dashboard and model book, credit | M9-M10 |
 
 ## Verify
 
