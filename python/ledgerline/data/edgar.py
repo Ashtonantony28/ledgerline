@@ -34,6 +34,8 @@ CIKS: dict[str, int] = {
     "HD": 354950,
     "LOW": 60667,
     "SKX": 1065837,
+    "DKS": 1089063,
+    "FL": 850209,
 }
 
 _last_request = 0.0

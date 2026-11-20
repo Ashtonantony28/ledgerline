@@ -15,7 +15,7 @@ B8	=IF(CircSwitch=1,"ON (iterative)","OFF (opening balances)")
 A9	'Model integrity'
 B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
 A10	'Built'
-B10	'2026-11-19 by the Ledgerline generator (see Log)'
+B10	'2026-11-20 by the Ledgerline generator (see Log)'
 A12	'Colour code'
 A13	'Blue on yellow'
 B13	'Hard-coded input (every one carries a source note)'
@@ -4761,5 +4761,5 @@ C23	=IF(SUM($C$9:$C$20)<$C$22,0,1)
 A1	'Change log'
 A3	'Date'
 B3	'Change'
-A4	'2026-11-19'
+A4	'2026-11-20'
 B4	'Generated from spec/COST.yaml, fixtures/COST, fixtures/market.json (M3).'

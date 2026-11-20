@@ -1,0 +1,10 @@
+# DICK'S tags its senior notes as us-gaap:UnsecuredDebt and its 2025 convertible notes as
+# ConvertibleDebtNoncurrent, neither of which the general tag map reads (UnsecuredDebt is a
+# disclosure-level total for other filers). Long-term debt = senior notes + convertible notes, net
+# of discount and issuance costs, as on the face of the balance sheet. Without this the notes fall
+# into the other-liabilities plug.
+lt_debt:
+  FY2022: {value: 1930730000, citation: "UnsecuredDebt 1,481,443k + ConvertibleDebtNoncurrent 449,287k @0001089063-22-000031 (FY2021 10-K balance sheet)"}
+  FY2023: {value: 1540607000, citation: "UnsecuredDebt 1,482,336k + ConvertibleDebtNoncurrent 58,271k @0001089063-23-000023 (FY2022 10-K balance sheet)"}
+  FY2024: {value: 1483260000, citation: "UnsecuredDebt@0001089063-24-000037 (FY2023 10-K balance sheet, Senior notes)"}
+  FY2025: {value: 1484217000, citation: "UnsecuredDebt@0001089063-25-000012 (FY2024 10-K balance sheet, Senior notes)"}

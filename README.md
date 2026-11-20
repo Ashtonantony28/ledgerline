@@ -15,7 +15,8 @@ and a mutation test proves the checks catch injected errors.
 | 01 | `01_COST_ThreeStatement.xlsx`: Costco three-statement model, 3 scenarios, revolver, circuit breaker | done (M2) |
 | 02 | `02_COST_Valuation.xlsx`: WACC (FRED, Damodaran, regression beta), DCF both ways, reverse DCF, comps, sensitivity grids, football field | done (M3) |
 | 03 | `03_SKX_LBO.xlsx`: Skechers / 3G Capital LBO with the real financing package, sweep, PIK toggle, covenants, IRR bridge; back-test memo | done (M4) |
-| 04-09 | M&A, close + consolidation, FP&A, scenario lab, dashboard, credit | M5-M10 |
+| 04 | `04_DKS_FL_MnA.xlsx`: DICK'S / Foot Locker accretion-dilution: cash/stock election, PPA with bargain-purchase handling, synergies, breakeven lines, contribution, grids; back-test memo | done (M5) |
+| 05-09 | Close + consolidation, FP&A, scenario lab, dashboard, credit | M6-M10 |
 
 ## Verify
 
@@ -24,7 +25,7 @@ pip install -e ".[dev]"            # plus LibreOffice for headless recalculation
 pytest -q                          # tie-outs; workbook vs reference on LibreOffice and `formulas`; audit
 python -m ledgerline.build.workbooks                       # rebuild every workbook into workbooks/
 python -m ledgerline.audit.audit workbooks/0*_*.xlsx --recalc   # writes .audit.md and .formulas.txt
-python -m ledgerline.audit.mutation --n 40                 # seeded error injection, target >= 95% caught
+python -m ledgerline.audit.mutation 01 --n 40              # seeded error injection (also 04), target >= 95% caught
 ```
 
 Refreshing data (reviewed change): `python -m ledgerline.data.history` (set `LEDGERLINE_UA` to your own

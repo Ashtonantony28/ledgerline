@@ -1,0 +1,100 @@
+# M&A back-test spec: DICK'S Sporting Goods (DKS) acquires Foot Locker (FL). Signed 15 May 2025, closed
+# 8 Sep 2025. Cash ($24.00) or stock (0.1168 DKS shares) election per Foot Locker share, no proration.
+#
+# Transaction terms and purchase-price-allocation inputs are SOURCED from the proxy statement/prospectus
+# (424B3 filed 2025-07-11, accession 0001140361-25-025528), "Unaudited Pro Forma Condensed Combined
+# Financial Information" notes 3-5. Synergy range from the joint announcement (Foot Locker 8-K, 15 May
+# 2025, accession 0001104659-25-048852, Ex. 99.2). Foot Locker forecasts are the management projections in
+# the same prospectus (pp. 64-66). DICK'S standalone drivers, phasing and costs to achieve are JUDGEMENT.
+#
+# Modelled like the pro forma statements: as if the deal closed at the start of fiscal 2025 (2 Feb 2025),
+# on the 1 Feb 2025 balance sheets. Fiscal years use the companies' own naming: "FY2024" ends 1 Feb 2025.
+
+acquirer: DKS
+target: FL
+accession: "0001140361-25-025528"
+history_years: 3
+forecast_years: 5
+fy_naming: start_year   # retail 52/53-week years named by the calendar year they start in
+
+transaction:
+  offer_price: {value: 24.00, unit: "$", src: "Cash consideration $24.00 per Foot Locker share; 424B3 p.115"}
+  exchange_ratio: {value: 0.1168, unit: "x", src: "Stock consideration 0.1168 DKS shares per Foot Locker share; 424B3 p.115"}
+  fl_shares: {value: 95.278, unit: "m", src: "Foot Locker shares outstanding at 31 May 2025; 424B3 note 3A1"}
+  dks_held_fl: {value: 4.270, unit: "m", src: "Foot Locker shares already owned by DICK'S (bought Q1 2025); 424B3 note 3A1"}
+  stake_carrying: {value: 55.6, unit: "$m", src: "Carrying value of DICK'S investment in Foot Locker; 424B3 note 4K1"}
+  awards_cash: {value: 16.776, unit: "$m", src: "Equity awards settled in cash at close; 424B3 note 3A1"}
+  replaced_awards: {value: 14.663, unit: "$m", src: "Pre-combination value of replaced equity awards; 424B3 note 3A1"}
+  txn_costs: {value: 56.4, unit: "$m", src: "DICK'S transaction costs incl. bridge fees (48.5 SG&A + 7.9 interest); 424B3 notes 3D, 4C"}
+  severance: {value: 22.6, unit: "$m", src: "Foot Locker executive severance paid at close; 424B3 note 3G"}
+  retention: {value: 7.5, unit: "$m", src: "Retention bonuses; 424B3 note 3H"}
+  seller_costs: {value: 55.3, unit: "$m", src: "Foot Locker's own transaction costs, assumed and paid at close; 424B3 note 3I"}
+  notes_rate: {value: 0.064, unit: "%", src: "Assumed new unsecured senior notes at 6.4% fixed; 424B3 p.115"}
+  issuance_fee: {value: 0.0073863, unit: "%", src: "Issuance costs 12,793k on 1,732,000k notes; 424B3 note 3N"}
+  pf_tax_rate: {value: 0.26, unit: "%", src: "Blended statutory rate applied to pro forma adjustments; 424B3 note 4I1"}
+  synergy_low: {value: 100.0, unit: "$m", src: "Cost synergies $100-125m in the medium term; announcement, FL 8-K Ex. 99.2 (0001104659-25-048852)"}
+  synergy_high: {value: 125.0, unit: "$m", src: "Cost synergies $100-125m in the medium term; announcement, FL 8-K Ex. 99.2 (0001104659-25-048852)"}
+  ppe_stepup: {value: 105.0, unit: "$m", src: "Property and equipment step-up to fair value; 424B3 note 3B"}
+  intangibles_fv: {value: 220.0, unit: "$m", src: "Identified intangibles at fair value (trade names 210 indefinite, technology and customer 10); 424B3 note 3C1"}
+  finite_intangibles: {value: 10.0, unit: "$m", src: "Finite-lived intangibles (developed technology 5, customer relationships 5); 424B3 note 3C1"}
+  lease_favourable: {value: 72.0, unit: "$m", src: "Favourable lease terms versus market; 424B3 note 3K"}
+  notes_fv_adj: {value: 20.0, unit: "$m", src: "Fair-value discount on Foot Locker 4.00% notes assumed; 424B3 note 3J"}
+  fl_hist_amort: {value: 5.0, unit: "$m", src: "Foot Locker historical intangible amortisation eliminated; 424B3 note 4B1"}
+
+judgement:
+  min_cash: {value: 1500.0, unit: "$m", src: "Judgement: combined cash floor at close; the S-4 all-cash case ($1.73bn notes) implies about $1.47bn."}
+  cash_yield: {value: 0.035, unit: "%", src: "Judgement: yield forgone on cash used (DICK'S earned about 3.5% on cash in FY2024)."}
+  ppe_life: {value: 7.0, unit: "years", src: "Judgement: remaining life of the PP&E step-up (most is store alterations, 7 years in 424B3 note 4A)."}
+  finite_life: {value: 11.3, unit: "years", src: "Judgement: blended 10- and 13-year lives of the finite intangibles (424B3 note 4B1)."}
+  lease_life: {value: 4.0, unit: "years", src: "Favourable leases amortised 18.0 a year on 72.0 (424B3 note 4J), so 4 years."}
+  notes_life: {value: 4.7, unit: "years", src: "Foot Locker 4.00% notes mature October 2029: about 4.7 years from February 2025."}
+  issuance_term: {value: 10.0, unit: "years", src: "Judgement: issuance costs amortised over a 10-year note."}
+  dks_tax_rate: {value: 0.24, unit: "%", src: "Judgement: DICK'S effective tax rate (23.3% in FY2024, 24.6% in FY2023)."}
+  acc_year: {value: 2, unit: "year #", src: "FY2026 is the first full fiscal year after the 8 Sep 2025 close, the year DICK'S said the deal would be accretive (announcement, FL 8-K Ex. 99.2)."}
+  fl_tax_rate: {value: 0.26, unit: "%", src: "Judgement: Foot Locker statutory-blend rate (same as the 424B3 pro forma rate)."}
+
+structures:   # consideration mix; each Foot Locker holder elects, no proration
+  pct_stock: {values: [0.0, 1.0, 0.89792], src: "1: all cash (424B3 Scenario A). 2: all stock (Scenario B). 3: actual election, derived from the FY2025 10-K: 1 - (cash paid 222,962k / $24.00) / 91,008k shares."}
+  dks_price: {values: [176.74, 176.74, 224.65], src: "DKS share price: 1-2 at 13 June 2025 (424B3 note 3A3). 3: implied at close, 10-K stock consideration 2,144,211k / 9.545m shares issued."}
+  names: ["All cash (S-4 A)", "All stock (S-4 B)", "Actual election"]
+
+synergies:   # run-rate by operating case, then phasing and costs to achieve (all forecast years)
+  runrate: {base: 112.5, upside: 125.0, downside: 50.0, src: "Judgement: base = midpoint of the $100-125m target, upside = top of range, downside = half the low end."}
+  phase: {values: [0.25, 0.60, 1.0, 1.0, 1.0], src: "Judgement: phasing to the 'medium-term' run-rate (procurement and sourcing take two to three years)."}
+  costs: {values: [70.0, 45.0, 0.0, 0.0, 0.0], src: "Judgement: costs to achieve about 1x run-rate synergies over two years; excluded from adjusted EPS, as DICK'S presented it."}
+
+fl_projections:   # Foot Locker revenue and adjusted EBITDA, $m, fiscal 2025-2029
+  base:
+    revenue: [8000, 8246, 8523, 8828, 8986]
+    ebitda: [453, 591, 702, 776, 830]
+    src: "Foot Locker management financial projections; 424B3 p.65."
+  downside:
+    revenue: [7951, 8023, 8103, 8184, 8225]
+    ebitda: [432, 534, 619, 685, 731]
+    src: "Additional scenario considered by the Foot Locker board (tariffs, slower brand-partner recovery); 424B3 p.66."
+  upside:
+    revenue: [8040, 8370, 8735, 9140, 9395]
+    ebitda: [490, 650, 775, 860, 925]
+    src: "Judgement: management case with about 1-2% more revenue and ~0.5pt more margin (faster turnaround)."
+
+drivers:
+  dks_revenue_growth:
+    base: {start: 0.040, end: 0.035}
+    upside: {start: 0.010, end: 0.010}
+    downside: {start: -0.040, end: -0.010}
+    rationale: "DICK'S standalone revenue growth. FY2022-24 CAGR 4.6%; comparable sales +5.2% in FY2024. Judgement."
+  dks_ebitda_margin:
+    base: {start: 0.135, end: 0.135}
+    upside: {start: 0.005, end: 0.005}
+    downside: {start: -0.015, end: -0.010}
+    rationale: "DICK'S EBITDA margin (EBIT + D&A). FY2024 13.9%; investment in House of Sport stores holds it near 13.5%. Judgement."
+  dks_da_pct:
+    base: {start: 0.032, end: 0.035}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: "DICK'S D&A % revenue. FY2024 3.0%, rising with the store build-out (capex 6% of revenue). Judgement."
+  fl_da_pct:
+    base: {start: 0.025, end: 0.025}
+    upside: {start: 0.0, end: 0.0}
+    downside: {start: 0.0, end: 0.0}
+    rationale: "Foot Locker D&A % revenue, FY2024 2.5%. Judgement."

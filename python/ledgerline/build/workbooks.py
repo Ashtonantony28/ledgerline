@@ -152,7 +152,36 @@ def build_03(scenario: int = 1, out: Path | None = None) -> tuple[Path, dict]:
     return path, layout
 
 
-BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03}
+MNA_SHEETS = [
+    ("Inputs", "Switches, merger terms and PPA inputs from the proxy statement/prospectus (sourced), judgement"),
+    ("Hist_DKS", "DICK'S 10-K history (blue, sourced per cell)"), ("Hist_FL", "Foot Locker 10-K history (blue, sourced per cell)"),
+    ("Scenarios", "Operating cases, Foot Locker management projections, consideration structures"),
+    ("Drivers", "Live drivers"), ("Transaction", "Consideration, sources and uses, purchase price allocation, valuation"),
+    ("Standalone", "Standalone forecasts for both companies"),
+    ("ProForma", "Adjustments, pro forma EPS, accretion / dilution, breakeven synergies, credit, contribution"),
+    ("Sensitivity", "Accretion grids: offer price x stock mix, year x synergy realisation"),
+    ("Checks", "Integrity checks and master flag"),
+]
+
+
+def build_04(scenario: int = 1, structure: int = 3, out: Path | None = None) -> tuple[Path, dict]:
+    from ..models.mna import add_mna, timeline
+    from ..models.mna_inputs import build_mna_inputs
+    inp = build_mna_inputs(scenario, structure)
+    m = Model(timeline(inp), "DKS FL M&A")
+    add_mna(m, inp)
+    add_cover(m, "DICK'S Sporting Goods / Foot Locker: accretion-dilution back-test (2025)", inp, MNA_SHEETS)
+    m.sheets["Cover"].cell("A11", "Consideration mix")
+    m.sheets["Cover"].cell("B11", "='Inputs'!C%d" % m.sheets["Inputs"].row("structure_name"), bold=True)
+    add_log(m, [(date.today().isoformat(), "Generated from spec/DKS_FL_MA.yaml and fixtures/DKS, fixtures/FL (M5).")])
+    _reorder(m, ["Cover"] + [n for n, _ in MNA_SHEETS])
+    path = Path(out or OUT / "04_DKS_FL_MnA.xlsx")
+    layout = m.save(path)
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
+BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04}
 
 
 def main(argv: list[str]) -> int:

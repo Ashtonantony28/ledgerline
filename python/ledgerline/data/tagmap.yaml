@@ -182,6 +182,8 @@ balance_sheet:
   parent_equity:
     kind: instant
     tags: [StockholdersEquity]
+    # Foot Locker tags only the total (it has no NCI).
+    derive: total_equity - minority_interest_tag
   minority_interest_tag:
     kind: instant
     tags: [MinorityInterest]

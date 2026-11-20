@@ -1,0 +1,1513 @@
+=== Cover
+A1	"DICK'S Sporting Goods / Foot Locker: accretion-dilution back-test (2025)"
+A3	'Company'
+B3	"DICK'S Sporting Goods, Inc. (DKS / FL)"
+A4	'Units'
+B4	'$ millions unless stated; shares in millions'
+A5	'History'
+B5	'FY2022 to FY2024 from 10-K XBRL (SEC EDGAR)'
+A6	'Forecast'
+B6	'FY2025 to FY2029'
+A7	'Live scenario'
+B7	='Inputs'!C11
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-20 by the Ledgerline generator (see Log)'
+A11	'Consideration mix'
+B11	='Inputs'!C13
+A12	'Colour code'
+A13	'Blue on yellow'
+B13	'Hard-coded input (every one carries a source note)'
+A14	'Black'
+B14	'Formula'
+A15	'Green'
+B15	'Direct link to another sheet'
+A16	'Grey shading'
+B16	'Forecast columns'
+A18	'Sheets'
+A19	'Inputs'
+B19	'Switches, merger terms and PPA inputs from the proxy statement/prospectus (sourced), judgement'
+A20	'Hist_DKS'
+B20	"DICK'S 10-K history (blue, sourced per cell)"
+A21	'Hist_FL'
+B21	'Foot Locker 10-K history (blue, sourced per cell)'
+A22	'Scenarios'
+B22	'Operating cases, Foot Locker management projections, consideration structures'
+A23	'Drivers'
+B23	'Live drivers'
+A24	'Transaction'
+B24	'Consideration, sources and uses, purchase price allocation, valuation'
+A25	'Standalone'
+B25	'Standalone forecasts for both companies'
+A26	'ProForma'
+B26	'Adjustments, pro forma EPS, accretion / dilution, breakeven synergies, credit, contribution'
+A27	'Sensitivity'
+B27	'Accretion grids: offer price x stock mix, year x synergy realisation'
+A28	'Checks'
+B28	'Integrity checks and master flag'
+A30	'Disclaimer'
+B30	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Inputs
+A1	'Inputs: transaction terms (sourced), judgement, switches'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Switches'
+A10	'Operating case (1 Base, 2 Upside, 3 Downside)'
+B10	'count'
+C10	1
+A11	'Operating case name'
+C11	=CHOOSE($C$10,"Base","Upside","Downside")
+A12	'Consideration mix (1 All cash, 2 All stock, 3 Actual election)'
+B12	'count'
+C12	3
+A13	'Consideration mix name'
+C13	=CHOOSE($C$12,"All cash (S-4 A)","All stock (S-4 B)","Actual election")
+A14	'Live: share of Foot Locker holders taking stock'
+B14	'%'
+C14	=CHOOSE($C$12,'Scenarios'!$C$38,'Scenarios'!$C$40,'Scenarios'!$C$42)
+A15	'Live: DKS share price for the stock consideration'
+B15	'$'
+C15	=CHOOSE($C$12,'Scenarios'!$C$39,'Scenarios'!$C$41,'Scenarios'!$C$43)
+A16	'Live: run-rate cost synergies'
+B16	'$m'
+C16	=CHOOSE($C$10,'Scenarios'!$C$34,'Scenarios'!$C$35,'Scenarios'!$C$36)
+A18	'Transaction terms (proxy statement/prospectus, 424B3 2025-07-11)'
+A19	'Cash consideration per Foot Locker share'
+B19	'$'
+C19	24
+A20	'Stock consideration: DKS shares per Foot Locker share'
+B20	'x'
+C20	0.1168
+A21	'Foot Locker shares outstanding'
+B21	'm'
+C21	95.278
+A22	"Foot Locker shares already held by DICK'S"
+B22	'm'
+C22	4.27
+A23	"Carrying value of DICK'S Foot Locker stake"
+B23	'$m'
+C23	55.6
+A24	'Equity awards settled in cash'
+B24	'$m'
+C24	16.776
+A25	'Replaced awards (pre-combination value)'
+B25	'$m'
+C25	14.663
+A26	"DICK'S transaction costs"
+B26	'$m'
+C26	56.4
+A27	'Executive severance (post-combination expense)'
+B27	'$m'
+C27	22.6
+A28	'Retention bonuses (post-combination expense)'
+B28	'$m'
+C28	7.5
+A29	'Foot Locker transaction costs assumed'
+B29	'$m'
+C29	55.3
+A30	'New senior notes coupon'
+B30	'%'
+C30	0.064
+A31	'Note issuance costs (% of principal)'
+B31	'%'
+C31	0.0073863
+A32	'Tax rate on pro forma adjustments'
+B32	'%'
+C32	0.26
+A33	'Cost synergy target, low'
+B33	'$m'
+C33	100
+A34	'Cost synergy target, high'
+B34	'$m'
+C34	125
+A35	'PP&E step-up to fair value'
+B35	'$m'
+C35	105
+A36	'Identified intangibles at fair value'
+B36	'$m'
+C36	220
+A37	'of which finite-lived'
+B37	'$m'
+C37	10
+A38	'Favourable lease terms'
+B38	'$m'
+C38	72
+A39	'Fair-value discount on Foot Locker notes'
+B39	'$m'
+C39	20
+A40	'Foot Locker historical amortisation eliminated'
+B40	'$m'
+C40	5
+A42	'Judgement'
+A43	'Minimum combined cash at close'
+B43	'$m'
+C43	1500
+A44	'Yield on cash'
+B44	'%'
+C44	0.035
+A45	'PP&E step-up life'
+B45	'years'
+C45	7
+A46	'Finite intangibles life'
+B46	'years'
+C46	11.3
+A47	'Favourable lease amortisation period'
+B47	'years'
+C47	4
+A48	'Foot Locker notes remaining life'
+B48	'years'
+C48	4.7
+A49	'Issuance cost amortisation term'
+B49	'years'
+C49	10
+A50	"DICK'S tax rate"
+B50	'%'
+C50	0.24
+A51	'Accretion test year (forecast year #)'
+B51	'year #'
+C51	2
+A52	'Foot Locker tax rate'
+B52	'%'
+C52	0.26
+A53	'Sensitivity step: offer price'
+B53	'$'
+C53	2
+A54	'Sensitivity step: share taking stock'
+B54	'%'
+C54	0.25
+A55	'Sensitivity step: synergy realisation'
+B55	'%'
+C55	0.5
+A57	'Synergy phasing and costs to achieve (judgement)'
+A58	'Share of run-rate achieved'
+B58	'%'
+H58	0.25
+I58	0.6
+J58	1
+K58	1
+L58	1
+A59	'Integration costs (one-time, pre-tax)'
+B59	'$m'
+H59	70
+I59	45
+J59	0
+K59	0
+L59	0
+=== Hist_DKS
+A1	"Historical financials: DICK'S Sporting Goods, Inc. (10-K XBRL)"
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Revenue'
+B9	'$m'
+E9	12368.198
+F9	12984.399
+G9	13442.849
+A10	'Operating income (EBIT)'
+B10	'$m'
+E10	1463.019
+F10	1282.365
+G10	1473.932
+A11	'Depreciation and amortisation'
+B11	'$m'
+E11	365.475
+F11	393.933
+G11	400.409
+A12	'Interest expense'
+B12	'$m'
+E12	95.22
+F12	58.023
+G12	52.987
+A13	'Net income'
+B13	'$m'
+E13	1043.138
+F13	1046.519
+G13	1165.308
+A14	'Diluted shares'
+B14	'm'
+E14	99.274
+F14	85.925
+G14	82.929
+A15	'Diluted EPS'
+B15	'$'
+E15	10.78
+F15	12.18
+G15	14.05
+A16	'Cash and equivalents'
+B16	'$m'
+E16	1924.386
+F16	1801.22
+G16	1689.94
+A17	'Current portion of long-term debt'
+B17	'$m'
+E17	0
+F17	0
+G17	0
+A18	'Long-term debt'
+B18	'$m'
+E18	1540.607
+F18	1483.26
+G18	1484.217
+A19	'Goodwill'
+B19	'$m'
+E19	245.857
+F19	245.857
+G19	245.857
+A20	'Intangible assets'
+B20	'$m'
+E20	60.364
+F20	56.663
+G20	58.598
+A21	"Shareholders' equity"
+B21	'$m'
+E21	2524.623
+F21	2617.281
+G21	3198.264
+=== Hist_FL
+A1	'Historical financials: Foot Locker, Inc. (10-K XBRL)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Revenue'
+B9	'$m'
+E9	8759
+F9	8168
+G9	7988
+A10	'Operating income (EBIT)'
+B10	'$m'
+E10	581
+F10	142
+G10	103
+A11	'Depreciation and amortisation'
+B11	'$m'
+E11	208
+F11	199
+G11	202
+A12	'Interest expense'
+B12	'$m'
+E12	17
+F12	17
+G12	17
+A13	'Net income'
+B13	'$m'
+E13	342
+F13	-330
+G13	12
+A14	'Diluted shares'
+B14	'm'
+E14	95.5
+F14	94.2
+G14	95.5
+A15	'Diluted EPS'
+B15	'$'
+E15	3.58
+F15	-3.51
+G15	0.13
+A16	'Cash and equivalents'
+B16	'$m'
+E16	536
+F16	297
+G16	401
+A17	'Current portion of long-term debt'
+B17	'$m'
+E17	6
+F17	5
+G17	5
+A18	'Long-term debt'
+B18	'$m'
+E18	395
+F18	395
+G18	396
+A19	'Goodwill'
+B19	'$m'
+E19	785
+F19	768
+G19	759
+A20	'Intangible assets'
+B20	'$m'
+E20	426
+F20	399
+G20	365
+A21	"Shareholders' equity"
+B21	'$m'
+E21	3293
+F21	2890
+G21	2909
+=== Scenarios
+A1	'Operating cases, Foot Locker projections, consideration structures'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	"DICK'S revenue growth"
+A10	'  Base'
+B10	'%'
+H10	0.04
+I10	0.03875
+J10	0.03750000000000001
+K10	0.03625
+L10	0.035
+A11	'  Upside'
+B11	'%'
+H11	0.05
+I11	0.04875
+J11	0.0475
+K11	0.04625000000000001
+L11	0.04500000000000001
+A12	'  Downside'
+B12	'%'
+H12	0
+I12	0.00625
+J12	0.0125
+K12	0.01875
+L12	0.025
+A13	"DICK'S EBITDA margin"
+A14	'  Base'
+B14	'%'
+H14	0.135
+I14	0.135
+J14	0.135
+K14	0.135
+L14	0.135
+A15	'  Upside'
+B15	'%'
+H15	0.14
+I15	0.14
+J15	0.14
+K15	0.14
+L15	0.14
+A16	'  Downside'
+B16	'%'
+H16	0.12
+I16	0.12125
+J16	0.1225
+K16	0.12375
+L16	0.125
+A17	"DICK'S D&A % revenue"
+A18	'  Base'
+B18	'%'
+H18	0.032
+I18	0.03275
+J18	0.0335
+K18	0.03425
+L18	0.035
+A19	'  Upside'
+B19	'%'
+H19	0.032
+I19	0.03275
+J19	0.0335
+K19	0.03425
+L19	0.035
+A20	'  Downside'
+B20	'%'
+H20	0.032
+I20	0.03275
+J20	0.0335
+K20	0.03425
+L20	0.035
+A21	'Foot Locker D&A % revenue'
+A22	'  Base'
+B22	'%'
+H22	0.025
+I22	0.025
+J22	0.025
+K22	0.025
+L22	0.025
+A23	'  Upside'
+B23	'%'
+H23	0.025
+I23	0.025
+J23	0.025
+K23	0.025
+L23	0.025
+A24	'  Downside'
+B24	'%'
+H24	0.025
+I24	0.025
+J24	0.025
+K24	0.025
+L24	0.025
+A25	'Foot Locker revenue'
+A26	'  Base'
+B26	'$m'
+H26	8000
+I26	8246
+J26	8523
+K26	8828
+L26	8986
+A27	'  Upside'
+B27	'$m'
+H27	8040
+I27	8370
+J27	8735
+K27	9140
+L27	9395
+A28	'  Downside'
+B28	'$m'
+H28	7951
+I28	8023
+J28	8103
+K28	8184
+L28	8225
+A29	'Foot Locker adjusted EBITDA'
+A30	'  Base'
+B30	'$m'
+H30	453
+I30	591
+J30	702
+K30	776
+L30	830
+A31	'  Upside'
+B31	'$m'
+H31	490
+I31	650
+J31	775
+K31	860
+L31	925
+A32	'  Downside'
+B32	'$m'
+H32	432
+I32	534
+J32	619
+K32	685
+L32	731
+A33	'Run-rate cost synergies by case'
+A34	'  Base'
+B34	'$m'
+C34	112.5
+A35	'  Upside'
+B35	'$m'
+C35	125
+A36	'  Downside'
+B36	'$m'
+C36	50
+A37	'Consideration structures'
+A38	'  All cash (S-4 A): share taking stock'
+B38	'%'
+C38	0
+A39	'  All cash (S-4 A): DKS share price'
+B39	'$'
+C39	176.74
+A40	'  All stock (S-4 B): share taking stock'
+B40	'%'
+C40	1
+A41	'  All stock (S-4 B): DKS share price'
+B41	'$'
+C41	176.74
+A42	'  Actual election: share taking stock'
+B42	'%'
+C42	0.89792
+A43	'  Actual election: DKS share price'
+B43	'$'
+C43	224.65
+=== Drivers
+A1	'Live drivers (implied history, selected case forecast)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	"DICK'S revenue growth"
+B9	'%'
+F9	='Hist_DKS'!F9/'Hist_DKS'!E9-1
+G9	='Hist_DKS'!G9/'Hist_DKS'!F9-1
+H9	=CHOOSE('Inputs'!$C$10,'Scenarios'!H10,'Scenarios'!H11,'Scenarios'!H12)
+I9	=CHOOSE('Inputs'!$C$10,'Scenarios'!I10,'Scenarios'!I11,'Scenarios'!I12)
+J9	=CHOOSE('Inputs'!$C$10,'Scenarios'!J10,'Scenarios'!J11,'Scenarios'!J12)
+K9	=CHOOSE('Inputs'!$C$10,'Scenarios'!K10,'Scenarios'!K11,'Scenarios'!K12)
+L9	=CHOOSE('Inputs'!$C$10,'Scenarios'!L10,'Scenarios'!L11,'Scenarios'!L12)
+A10	"DICK'S EBITDA margin"
+B10	'%'
+E10	=('Hist_DKS'!E10+'Hist_DKS'!E11)/'Hist_DKS'!E9
+F10	=('Hist_DKS'!F10+'Hist_DKS'!F11)/'Hist_DKS'!F9
+G10	=('Hist_DKS'!G10+'Hist_DKS'!G11)/'Hist_DKS'!G9
+H10	=CHOOSE('Inputs'!$C$10,'Scenarios'!H14,'Scenarios'!H15,'Scenarios'!H16)
+I10	=CHOOSE('Inputs'!$C$10,'Scenarios'!I14,'Scenarios'!I15,'Scenarios'!I16)
+J10	=CHOOSE('Inputs'!$C$10,'Scenarios'!J14,'Scenarios'!J15,'Scenarios'!J16)
+K10	=CHOOSE('Inputs'!$C$10,'Scenarios'!K14,'Scenarios'!K15,'Scenarios'!K16)
+L10	=CHOOSE('Inputs'!$C$10,'Scenarios'!L14,'Scenarios'!L15,'Scenarios'!L16)
+A11	"DICK'S D&A % revenue"
+B11	'%'
+E11	='Hist_DKS'!E11/'Hist_DKS'!E9
+F11	='Hist_DKS'!F11/'Hist_DKS'!F9
+G11	='Hist_DKS'!G11/'Hist_DKS'!G9
+H11	=CHOOSE('Inputs'!$C$10,'Scenarios'!H18,'Scenarios'!H19,'Scenarios'!H20)
+I11	=CHOOSE('Inputs'!$C$10,'Scenarios'!I18,'Scenarios'!I19,'Scenarios'!I20)
+J11	=CHOOSE('Inputs'!$C$10,'Scenarios'!J18,'Scenarios'!J19,'Scenarios'!J20)
+K11	=CHOOSE('Inputs'!$C$10,'Scenarios'!K18,'Scenarios'!K19,'Scenarios'!K20)
+L11	=CHOOSE('Inputs'!$C$10,'Scenarios'!L18,'Scenarios'!L19,'Scenarios'!L20)
+A12	'Foot Locker D&A % revenue'
+B12	'%'
+E12	='Hist_FL'!E11/'Hist_FL'!E9
+F12	='Hist_FL'!F11/'Hist_FL'!F9
+G12	='Hist_FL'!G11/'Hist_FL'!G9
+H12	=CHOOSE('Inputs'!$C$10,'Scenarios'!H22,'Scenarios'!H23,'Scenarios'!H24)
+I12	=CHOOSE('Inputs'!$C$10,'Scenarios'!I22,'Scenarios'!I23,'Scenarios'!I24)
+J12	=CHOOSE('Inputs'!$C$10,'Scenarios'!J22,'Scenarios'!J23,'Scenarios'!J24)
+K12	=CHOOSE('Inputs'!$C$10,'Scenarios'!K22,'Scenarios'!K23,'Scenarios'!K24)
+L12	=CHOOSE('Inputs'!$C$10,'Scenarios'!L22,'Scenarios'!L23,'Scenarios'!L24)
+A13	'Foot Locker revenue'
+B13	'$m'
+E13	='Hist_FL'!E9
+F13	='Hist_FL'!F9
+G13	='Hist_FL'!G9
+H13	=CHOOSE('Inputs'!$C$10,'Scenarios'!H26,'Scenarios'!H27,'Scenarios'!H28)
+I13	=CHOOSE('Inputs'!$C$10,'Scenarios'!I26,'Scenarios'!I27,'Scenarios'!I28)
+J13	=CHOOSE('Inputs'!$C$10,'Scenarios'!J26,'Scenarios'!J27,'Scenarios'!J28)
+K13	=CHOOSE('Inputs'!$C$10,'Scenarios'!K26,'Scenarios'!K27,'Scenarios'!K28)
+L13	=CHOOSE('Inputs'!$C$10,'Scenarios'!L26,'Scenarios'!L27,'Scenarios'!L28)
+A14	'Foot Locker EBITDA (history: EBIT + D&A; forecast: adjusted)'
+B14	'$m'
+E14	='Hist_FL'!E10+'Hist_FL'!E11
+F14	='Hist_FL'!F10+'Hist_FL'!F11
+G14	='Hist_FL'!G10+'Hist_FL'!G11
+H14	=CHOOSE('Inputs'!$C$10,'Scenarios'!H30,'Scenarios'!H31,'Scenarios'!H32)
+I14	=CHOOSE('Inputs'!$C$10,'Scenarios'!I30,'Scenarios'!I31,'Scenarios'!I32)
+J14	=CHOOSE('Inputs'!$C$10,'Scenarios'!J30,'Scenarios'!J31,'Scenarios'!J32)
+K14	=CHOOSE('Inputs'!$C$10,'Scenarios'!K30,'Scenarios'!K31,'Scenarios'!K32)
+L14	=CHOOSE('Inputs'!$C$10,'Scenarios'!L30,'Scenarios'!L31,'Scenarios'!L32)
+=== Transaction
+A1	'Consideration, sources and uses, purchase price allocation'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Consideration'
+A10	"Foot Locker shares acquired (excluding DICK'S stake)"
+B10	'm'
+C10	='Inputs'!$C$21-'Inputs'!$C$22
+A11	'New DKS shares issued'
+B11	'm'
+C11	=$C$10*'Inputs'!$C$14*'Inputs'!$C$20
+A12	'Cash to Foot Locker shareholders'
+B12	'$m'
+C12	=$C$10*(1-'Inputs'!$C$14)*'Inputs'!$C$19
+A13	'Equity awards settled in cash'
+B13	'$m'
+C13	='Inputs'!$C$24
+A14	'Stock consideration (at DKS price)'
+B14	'$m'
+C14	=$C$11*'Inputs'!$C$15
+A15	'Blended value per Foot Locker share'
+B15	'$'
+C15	='Inputs'!$C$14*'Inputs'!$C$20*'Inputs'!$C$15+(1-'Inputs'!$C$14)*'Inputs'!$C$19
+A16	"Fair value of DICK'S existing stake"
+B16	'$m'
+C16	='Inputs'!$C$22*$C$15
+A17	'Replaced awards (pre-combination value)'
+B17	'$m'
+C17	='Inputs'!$C$25
+A18	'Fair value of consideration transferred'
+B18	'$m'
+C18	=$C$12+$C$13+$C$14+$C$16+$C$17
+A19	'Gain on remeasuring the existing stake'
+B19	'$m'
+C19	=$C$16-'Inputs'!$C$23
+A21	'Uses of cash at close'
+A22	'Cash consideration and awards'
+B22	'$m'
+C22	=$C$12+$C$13
+A23	'Transaction costs, severance, retention, seller costs'
+B23	'$m'
+C23	='Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28+'Inputs'!$C$29
+A24	'Cash uses before financing costs'
+B24	'$m'
+C24	=$C$22+$C$23
+A25	'Note issuance costs'
+B25	'$m'
+C25	=$C$29*'Inputs'!$C$31
+A26	'Total uses'
+B26	'$m'
+C26	=$C$24+$C$25
+A27	'Sources'
+A28	'Cash available above the minimum'
+B28	'$m'
+C28	='Hist_DKS'!$G$16+'Hist_FL'!$G$16-'Inputs'!$C$43
+A29	'New senior notes'
+B29	'$m'
+C29	=MAX(0,($C$24-$C$28)/(1-'Inputs'!$C$31))
+A30	'Balance-sheet cash used'
+B30	'$m'
+C30	=$C$24+$C$25-$C$29
+A31	'Total sources'
+B31	'$m'
+C31	=$C$29+$C$30
+A32	'Combined cash after close'
+B32	'$m'
+C32	='Hist_DKS'!$G$16+'Hist_FL'!$G$16-$C$30
+A34	'Purchase price allocation (ASC 805, Foot Locker balance sheet at 1 Feb 2025)'
+A35	"Foot Locker shareholders' equity"
+B35	'$m'
+C35	='Hist_FL'!$G$21
+A36	'Less existing goodwill'
+B36	'$m'
+C36	=-'Hist_FL'!$G$19
+A37	'Less existing intangibles'
+B37	'$m'
+C37	=-'Hist_FL'!$G$20
+A38	'Tangible book value'
+B38	'$m'
+C38	=$C$35+$C$36+$C$37
+A39	'Identified intangibles at fair value'
+B39	'$m'
+C39	='Inputs'!$C$36
+A40	'PP&E step-up'
+B40	'$m'
+C40	='Inputs'!$C$35
+A41	'Favourable leases'
+B41	'$m'
+C41	='Inputs'!$C$38
+A42	'Notes fair-value discount (lower liability)'
+B42	'$m'
+C42	='Inputs'!$C$39
+A43	'Deferred tax on the step-ups'
+B43	'$m'
+C43	='Inputs'!$C$32*($C$40+$C$39+$C$37+$C$41+$C$42)
+A44	'Foot Locker transaction costs assumed'
+B44	'$m'
+C44	='Inputs'!$C$29
+A45	'Fair value of net identifiable assets'
+B45	'$m'
+C45	=$C$38+$C$39+$C$40+$C$41+$C$42-$C$43-$C$44
+A46	'Consideration less net assets'
+B46	'$m'
+C46	=$C$18-$C$45
+A47	'Goodwill'
+B47	'$m'
+C47	=MAX(0,$C$46)
+A48	'Bargain purchase gain (if net assets exceed consideration)'
+B48	'$m'
+C48	=MAX(0,-$C$46)
+A50	'Valuation and credit at close'
+A51	'Offer equity value (all Foot Locker shares at $24.00)'
+B51	'$m'
+C51	='Inputs'!$C$21*'Inputs'!$C$19
+A52	'Foot Locker debt'
+B52	'$m'
+C52	='Hist_FL'!$G$17+'Hist_FL'!$G$18
+A53	'Offer enterprise value'
+B53	'$m'
+C53	=$C$51+$C$52-'Hist_FL'!$G$16
+A54	'Offer EV / FY2024 EBITDA (GAAP EBIT + D&A)'
+B54	'x'
+C54	=$C$53/('Hist_FL'!$G$10+'Hist_FL'!$G$11)
+A55	'Offer EV / FY2025 projected adjusted EBITDA'
+B55	'x'
+C55	=$C$53/'Drivers'!$H$14
+A56	"DICK'S debt"
+B56	'$m'
+C56	='Hist_DKS'!$G$17+'Hist_DKS'!$G$18
+A57	'Pro forma debt (Foot Locker notes at fair value)'
+B57	'$m'
+C57	=$C$56+$C$52-$C$42+$C$29
+A58	'Pro forma net debt'
+B58	'$m'
+C58	=$C$57-$C$32
+=== Standalone
+A1	'Standalone forecasts (no deal)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	"DICK'S Sporting Goods"
+A10	'Revenue'
+B10	'$m'
+E10	='Hist_DKS'!E9
+F10	='Hist_DKS'!F9
+G10	='Hist_DKS'!G9
+H10	=G10*(1+'Drivers'!H9)
+I10	=H10*(1+'Drivers'!I9)
+J10	=I10*(1+'Drivers'!J9)
+K10	=J10*(1+'Drivers'!K9)
+L10	=K10*(1+'Drivers'!L9)
+A11	'EBITDA'
+B11	'$m'
+E11	='Hist_DKS'!E10+'Hist_DKS'!E11
+F11	='Hist_DKS'!F10+'Hist_DKS'!F11
+G11	='Hist_DKS'!G10+'Hist_DKS'!G11
+H11	=H10*'Drivers'!H10
+I11	=I10*'Drivers'!I10
+J11	=J10*'Drivers'!J10
+K11	=K10*'Drivers'!K10
+L11	=L10*'Drivers'!L10
+A12	'D&A'
+B12	'$m'
+E12	='Hist_DKS'!E11
+F12	='Hist_DKS'!F11
+G12	='Hist_DKS'!G11
+H12	=H10*'Drivers'!H11
+I12	=I10*'Drivers'!I11
+J12	=J10*'Drivers'!J11
+K12	=K10*'Drivers'!K11
+L12	=L10*'Drivers'!L11
+A13	'EBIT'
+B13	'$m'
+E13	=E11-E12
+F13	=F11-F12
+G13	=G11-G12
+H13	=H11-H12
+I13	=I11-I12
+J13	=J11-J12
+K13	=K11-K12
+L13	=L11-L12
+A14	'Interest expense (notes held flat)'
+B14	'$m'
+E14	='Hist_DKS'!E12
+F14	='Hist_DKS'!F12
+G14	='Hist_DKS'!G12
+H14	='Hist_DKS'!$G$12
+I14	='Hist_DKS'!$G$12
+J14	='Hist_DKS'!$G$12
+K14	='Hist_DKS'!$G$12
+L14	='Hist_DKS'!$G$12
+A15	'Interest income on cash (cash held flat)'
+B15	'$m'
+H15	='Hist_DKS'!$G$16*'Inputs'!$C$44
+I15	='Hist_DKS'!$G$16*'Inputs'!$C$44
+J15	='Hist_DKS'!$G$16*'Inputs'!$C$44
+K15	='Hist_DKS'!$G$16*'Inputs'!$C$44
+L15	='Hist_DKS'!$G$16*'Inputs'!$C$44
+A16	'Pre-tax income'
+B16	'$m'
+H16	=H13-H14+H15
+I16	=I13-I14+I15
+J16	=J13-J14+J15
+K16	=K13-K14+K15
+L16	=L13-L14+L15
+A17	'Income tax'
+B17	'$m'
+H17	=H16*'Inputs'!$C$50
+I17	=I16*'Inputs'!$C$50
+J17	=J16*'Inputs'!$C$50
+K17	=K16*'Inputs'!$C$50
+L17	=L16*'Inputs'!$C$50
+A18	'Net income'
+B18	'$m'
+E18	='Hist_DKS'!E13
+F18	='Hist_DKS'!F13
+G18	='Hist_DKS'!G13
+H18	=H16-H17
+I18	=I16-I17
+J18	=J16-J17
+K18	=K16-K17
+L18	=L16-L17
+A19	'Diluted shares (held flat)'
+B19	'm'
+E19	='Hist_DKS'!E14
+F19	='Hist_DKS'!F14
+G19	='Hist_DKS'!G14
+H19	='Hist_DKS'!$G$14
+I19	='Hist_DKS'!$G$14
+J19	='Hist_DKS'!$G$14
+K19	='Hist_DKS'!$G$14
+L19	='Hist_DKS'!$G$14
+A20	'Standalone diluted EPS'
+B20	'$'
+E20	='Hist_DKS'!E15
+F20	='Hist_DKS'!F15
+G20	='Hist_DKS'!G15
+H20	=H18/H19
+I20	=I18/I19
+J20	=J18/J19
+K20	=K18/K19
+L20	=L18/L19
+A22	'Foot Locker'
+A23	'Revenue'
+B23	'$m'
+E23	='Drivers'!E13
+F23	='Drivers'!F13
+G23	='Drivers'!G13
+H23	='Drivers'!H13
+I23	='Drivers'!I13
+J23	='Drivers'!J13
+K23	='Drivers'!K13
+L23	='Drivers'!L13
+A24	'EBITDA'
+B24	'$m'
+E24	='Drivers'!E14
+F24	='Drivers'!F14
+G24	='Drivers'!G14
+H24	='Drivers'!H14
+I24	='Drivers'!I14
+J24	='Drivers'!J14
+K24	='Drivers'!K14
+L24	='Drivers'!L14
+A25	'D&A'
+B25	'$m'
+E25	='Hist_FL'!E11
+F25	='Hist_FL'!F11
+G25	='Hist_FL'!G11
+H25	=H23*'Drivers'!H12
+I25	=I23*'Drivers'!I12
+J25	=J23*'Drivers'!J12
+K25	=K23*'Drivers'!K12
+L25	=L23*'Drivers'!L12
+A26	'Interest expense (notes held flat)'
+B26	'$m'
+E26	='Hist_FL'!E12
+F26	='Hist_FL'!F12
+G26	='Hist_FL'!G12
+H26	='Hist_FL'!$G$12
+I26	='Hist_FL'!$G$12
+J26	='Hist_FL'!$G$12
+K26	='Hist_FL'!$G$12
+L26	='Hist_FL'!$G$12
+A27	'Pre-tax income'
+B27	'$m'
+H27	=H24-H25-H26
+I27	=I24-I25-I26
+J27	=J24-J25-J26
+K27	=K24-K25-K26
+L27	=L24-L25-L26
+A28	'Income tax'
+B28	'$m'
+H28	=H27*'Inputs'!$C$52
+I28	=I27*'Inputs'!$C$52
+J28	=J27*'Inputs'!$C$52
+K28	=K27*'Inputs'!$C$52
+L28	=L27*'Inputs'!$C$52
+A29	'Net income'
+B29	'$m'
+E29	='Hist_FL'!E13
+F29	='Hist_FL'!F13
+G29	='Hist_FL'!G13
+H29	=H27-H28
+I29	=I27-I28
+J29	=J27-J28
+K29	=K27-K28
+L29	=L27-L28
+=== ProForma
+A1	'Pro forma combined earnings, accretion / dilution, credit'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Pre-tax pro forma adjustments (+ adds to earnings)'
+A10	'Cost synergies'
+B10	'$m'
+H10	='Inputs'!$C$16*'Inputs'!H58
+I10	='Inputs'!$C$16*'Inputs'!I58
+J10	='Inputs'!$C$16*'Inputs'!J58
+K10	='Inputs'!$C$16*'Inputs'!K58
+L10	='Inputs'!$C$16*'Inputs'!L58
+A11	'Depreciation of PP&E step-up'
+B11	'$m'
+H11	=MAX(0,MIN('Inputs'!$C$35/'Inputs'!$C$45,'Inputs'!$C$35-'Inputs'!$C$35/'Inputs'!$C$45*(H7-1)))
+I11	=MAX(0,MIN('Inputs'!$C$35/'Inputs'!$C$45,'Inputs'!$C$35-'Inputs'!$C$35/'Inputs'!$C$45*(I7-1)))
+J11	=MAX(0,MIN('Inputs'!$C$35/'Inputs'!$C$45,'Inputs'!$C$35-'Inputs'!$C$35/'Inputs'!$C$45*(J7-1)))
+K11	=MAX(0,MIN('Inputs'!$C$35/'Inputs'!$C$45,'Inputs'!$C$35-'Inputs'!$C$35/'Inputs'!$C$45*(K7-1)))
+L11	=MAX(0,MIN('Inputs'!$C$35/'Inputs'!$C$45,'Inputs'!$C$35-'Inputs'!$C$35/'Inputs'!$C$45*(L7-1)))
+A12	'Amortisation of finite intangibles'
+B12	'$m'
+H12	=MAX(0,MIN('Inputs'!$C$37/'Inputs'!$C$46,'Inputs'!$C$37-'Inputs'!$C$37/'Inputs'!$C$46*(H7-1)))
+I12	=MAX(0,MIN('Inputs'!$C$37/'Inputs'!$C$46,'Inputs'!$C$37-'Inputs'!$C$37/'Inputs'!$C$46*(I7-1)))
+J12	=MAX(0,MIN('Inputs'!$C$37/'Inputs'!$C$46,'Inputs'!$C$37-'Inputs'!$C$37/'Inputs'!$C$46*(J7-1)))
+K12	=MAX(0,MIN('Inputs'!$C$37/'Inputs'!$C$46,'Inputs'!$C$37-'Inputs'!$C$37/'Inputs'!$C$46*(K7-1)))
+L12	=MAX(0,MIN('Inputs'!$C$37/'Inputs'!$C$46,'Inputs'!$C$37-'Inputs'!$C$37/'Inputs'!$C$46*(L7-1)))
+A13	'Amortisation of favourable leases'
+B13	'$m'
+H13	=MAX(0,MIN('Inputs'!$C$38/'Inputs'!$C$47,'Inputs'!$C$38-'Inputs'!$C$38/'Inputs'!$C$47*(H7-1)))
+I13	=MAX(0,MIN('Inputs'!$C$38/'Inputs'!$C$47,'Inputs'!$C$38-'Inputs'!$C$38/'Inputs'!$C$47*(I7-1)))
+J13	=MAX(0,MIN('Inputs'!$C$38/'Inputs'!$C$47,'Inputs'!$C$38-'Inputs'!$C$38/'Inputs'!$C$47*(J7-1)))
+K13	=MAX(0,MIN('Inputs'!$C$38/'Inputs'!$C$47,'Inputs'!$C$38-'Inputs'!$C$38/'Inputs'!$C$47*(K7-1)))
+L13	=MAX(0,MIN('Inputs'!$C$38/'Inputs'!$C$47,'Inputs'!$C$38-'Inputs'!$C$38/'Inputs'!$C$47*(L7-1)))
+A14	'Accretion of Foot Locker notes discount'
+B14	'$m'
+H14	=MAX(0,MIN('Inputs'!$C$39/'Inputs'!$C$48,'Inputs'!$C$39-'Inputs'!$C$39/'Inputs'!$C$48*(H7-1)))
+I14	=MAX(0,MIN('Inputs'!$C$39/'Inputs'!$C$48,'Inputs'!$C$39-'Inputs'!$C$39/'Inputs'!$C$48*(I7-1)))
+J14	=MAX(0,MIN('Inputs'!$C$39/'Inputs'!$C$48,'Inputs'!$C$39-'Inputs'!$C$39/'Inputs'!$C$48*(J7-1)))
+K14	=MAX(0,MIN('Inputs'!$C$39/'Inputs'!$C$48,'Inputs'!$C$39-'Inputs'!$C$39/'Inputs'!$C$48*(K7-1)))
+L14	=MAX(0,MIN('Inputs'!$C$39/'Inputs'!$C$48,'Inputs'!$C$39-'Inputs'!$C$39/'Inputs'!$C$48*(L7-1)))
+A15	'Foot Locker historical amortisation eliminated'
+B15	'$m'
+H15	='Inputs'!$C$40
+I15	='Inputs'!$C$40
+J15	='Inputs'!$C$40
+K15	='Inputs'!$C$40
+L15	='Inputs'!$C$40
+A16	'Interest on new senior notes'
+B16	'$m'
+H16	='Transaction'!$C$29*'Inputs'!$C$30
+I16	='Transaction'!$C$29*'Inputs'!$C$30
+J16	='Transaction'!$C$29*'Inputs'!$C$30
+K16	='Transaction'!$C$29*'Inputs'!$C$30
+L16	='Transaction'!$C$29*'Inputs'!$C$30
+A17	'Amortisation of issuance costs'
+B17	'$m'
+H17	=MAX(0,MIN('Transaction'!$C$25/'Inputs'!$C$49,'Transaction'!$C$25-'Transaction'!$C$25/'Inputs'!$C$49*(H7-1)))
+I17	=MAX(0,MIN('Transaction'!$C$25/'Inputs'!$C$49,'Transaction'!$C$25-'Transaction'!$C$25/'Inputs'!$C$49*(I7-1)))
+J17	=MAX(0,MIN('Transaction'!$C$25/'Inputs'!$C$49,'Transaction'!$C$25-'Transaction'!$C$25/'Inputs'!$C$49*(J7-1)))
+K17	=MAX(0,MIN('Transaction'!$C$25/'Inputs'!$C$49,'Transaction'!$C$25-'Transaction'!$C$25/'Inputs'!$C$49*(K7-1)))
+L17	=MAX(0,MIN('Transaction'!$C$25/'Inputs'!$C$49,'Transaction'!$C$25-'Transaction'!$C$25/'Inputs'!$C$49*(L7-1)))
+A18	'Interest income forgone on cash used'
+B18	'$m'
+H18	='Transaction'!$C$30*'Inputs'!$C$44
+I18	='Transaction'!$C$30*'Inputs'!$C$44
+J18	='Transaction'!$C$30*'Inputs'!$C$44
+K18	='Transaction'!$C$30*'Inputs'!$C$44
+L18	='Transaction'!$C$30*'Inputs'!$C$44
+A19	'Net pre-tax adjustment'
+B19	'$m'
+H19	=H10-H11-H12-H13-H14+H15-H16-H17-H18
+I19	=I10-I11-I12-I13-I14+I15-I16-I17-I18
+J19	=J10-J11-J12-J13-J14+J15-J16-J17-J18
+K19	=K10-K11-K12-K13-K14+K15-K16-K17-K18
+L19	=L10-L11-L12-L13-L14+L15-L16-L17-L18
+A21	'Pro forma earnings per share'
+A22	'Pro forma net income, adjusted (excl. one-time items)'
+B22	'$m'
+H22	='Standalone'!H18+'Standalone'!H29+H19*(1-'Inputs'!$C$32)
+I22	='Standalone'!I18+'Standalone'!I29+I19*(1-'Inputs'!$C$32)
+J22	='Standalone'!J18+'Standalone'!J29+J19*(1-'Inputs'!$C$32)
+K22	='Standalone'!K18+'Standalone'!K29+K19*(1-'Inputs'!$C$32)
+L22	='Standalone'!L18+'Standalone'!L29+L19*(1-'Inputs'!$C$32)
+A23	'One-time at close: costs less stake and bargain gains (pre-tax)'
+B23	'$m'
+H23	=IF(H7=1,'Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28-'Transaction'!$C$19-'Transaction'!$C$48,0)
+I23	=IF(I7=1,'Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28-'Transaction'!$C$19-'Transaction'!$C$48,0)
+J23	=IF(J7=1,'Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28-'Transaction'!$C$19-'Transaction'!$C$48,0)
+K23	=IF(K7=1,'Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28-'Transaction'!$C$19-'Transaction'!$C$48,0)
+L23	=IF(L7=1,'Inputs'!$C$26+'Inputs'!$C$27+'Inputs'!$C$28-'Transaction'!$C$19-'Transaction'!$C$48,0)
+A24	'Integration costs (pre-tax)'
+B24	'$m'
+H24	='Inputs'!H59
+I24	='Inputs'!I59
+J24	='Inputs'!J59
+K24	='Inputs'!K59
+L24	='Inputs'!L59
+A25	'Pro forma net income, GAAP'
+B25	'$m'
+H25	=H22-(H23+H24)*(1-'Inputs'!$C$32)
+I25	=I22-(I23+I24)*(1-'Inputs'!$C$32)
+J25	=J22-(J23+J24)*(1-'Inputs'!$C$32)
+K25	=K22-(K23+K24)*(1-'Inputs'!$C$32)
+L25	=L22-(L23+L24)*(1-'Inputs'!$C$32)
+A26	'Pro forma diluted shares'
+B26	'm'
+H26	='Standalone'!H19+'Transaction'!$C$11
+I26	='Standalone'!I19+'Transaction'!$C$11
+J26	='Standalone'!J19+'Transaction'!$C$11
+K26	='Standalone'!K19+'Transaction'!$C$11
+L26	='Standalone'!L19+'Transaction'!$C$11
+A27	'Standalone EPS'
+B27	'$'
+H27	='Standalone'!H20
+I27	='Standalone'!I20
+J27	='Standalone'!J20
+K27	='Standalone'!K20
+L27	='Standalone'!L20
+A28	'Pro forma EPS, adjusted'
+B28	'$'
+H28	=H22/H26
+I28	=I22/I26
+J28	=J22/J26
+K28	=K22/K26
+L28	=L22/L26
+A29	'Pro forma EPS, GAAP'
+B29	'$'
+H29	=H25/H26
+I29	=I25/I26
+J29	=J25/J26
+K29	=K25/K26
+L29	=L25/L26
+A30	'Accretion / (dilution), adjusted'
+B30	'%'
+H30	=H28/H27-1
+I30	=I28/I27-1
+J30	=J28/J27-1
+K30	=K28/K27-1
+L30	=L28/L27-1
+A31	'Accretion / (dilution), GAAP'
+B31	'%'
+H31	=H29/H27-1
+I31	=I29/I27-1
+J31	=J29/J27-1
+K31	=K29/K27-1
+L31	=L29/L27-1
+A32	'Pre-tax synergies needed to break even (adjusted)'
+B32	'$m'
+H32	=H10-(H22-H27*H26)/(1-'Inputs'!$C$32)
+I32	=I10-(I22-I27*I26)/(1-'Inputs'!$C$32)
+J32	=J10-(J22-J27*J26)/(1-'Inputs'!$C$32)
+K32	=K10-(K22-K27*K26)/(1-'Inputs'!$C$32)
+L32	=L10-(L22-L27*L26)/(1-'Inputs'!$C$32)
+A33	'Foot Locker net income needed to break even (adjusted)'
+B33	'$m'
+H33	='Standalone'!H29-(H22-H27*H26)
+I33	='Standalone'!I29-(I22-I27*I26)
+J33	='Standalone'!J29-(J22-J27*J26)
+K33	='Standalone'!K29-(K22-K27*K26)
+L33	='Standalone'!L29-(L22-L27*L26)
+A34	'Adjusted net income before deal financing (sensitivity helper)'
+B34	'$m'
+H34	=H22+(H16+H17+H18)*(1-'Inputs'!$C$32)
+I34	=I22+(I16+I17+I18)*(1-'Inputs'!$C$32)
+J34	=J22+(J16+J17+J18)*(1-'Inputs'!$C$32)
+K34	=K22+(K16+K17+K18)*(1-'Inputs'!$C$32)
+L34	=L22+(L16+L17+L18)*(1-'Inputs'!$C$32)
+A36	'Credit (net debt held at the closing level)'
+A37	'Pro forma EBITDA (incl. synergies)'
+B37	'$m'
+H37	='Standalone'!H11+'Standalone'!H24+H10
+I37	='Standalone'!I11+'Standalone'!I24+I10
+J37	='Standalone'!J11+'Standalone'!J24+J10
+K37	='Standalone'!K11+'Standalone'!K24+K10
+L37	='Standalone'!L11+'Standalone'!L24+L10
+A38	'Pro forma net debt / EBITDA'
+B38	'x'
+H38	='Transaction'!$C$58/H37
+I38	='Transaction'!$C$58/I37
+J38	='Transaction'!$C$58/J37
+K38	='Transaction'!$C$58/K37
+L38	='Transaction'!$C$58/L37
+A39	"DICK'S standalone net debt / EBITDA, first forecast year"
+B39	'x'
+C39	=('Transaction'!$C$56-'Hist_DKS'!$G$16)/'Standalone'!$H$11
+A41	"Contribution analysis (first forecast year): DICK'S share"
+A42	'Revenue'
+B42	'%'
+C42	='Standalone'!$H$10/('Standalone'!$H$10+'Standalone'!$H$23)
+A43	'EBITDA'
+B43	'%'
+C43	='Standalone'!$H$11/('Standalone'!$H$11+'Standalone'!$H$24)
+A44	'Net income'
+B44	'%'
+C44	='Standalone'!$H$18/('Standalone'!$H$18+'Standalone'!$H$29)
+A45	"Pro forma ownership: DICK'S holders"
+B45	'%'
+C45	='Standalone'!$H$19/$H$26
+A46	'Pro forma ownership: former Foot Locker holders'
+B46	'%'
+C46	='Transaction'!$C$11/$H$26
+A48	'Accretion test year (sensitivity anchor)'
+A49	'Adjusted net income before financing'
+B49	'$m'
+C49	=INDEX($H$34:$L$34,'Inputs'!$C$51)
+A50	'Standalone EPS'
+B50	'$'
+C50	=INDEX($H$27:$L$27,'Inputs'!$C$51)
+A51	'Accretion / (dilution), adjusted'
+B51	'%'
+C51	=INDEX($H$30:$L$30,'Inputs'!$C$51)
+=== Sensitivity
+A1	'Accretion sensitivities (adjusted EPS)'
+B3	'Accretion in the test year: offer price (down) x share of holders taking stock (across)'
+C5	0
+D5	=C5+'Inputs'!$C$54
+E5	=D5+'Inputs'!$C$54
+F5	=E5+'Inputs'!$C$54
+G5	=F5+'Inputs'!$C$54
+B6	=B7-'Inputs'!$C$53
+C6	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-C$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-C$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-C$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*C$5*'Inputs'!$C$20*$B6/'Inputs'!$C$19)/'ProForma'!$C$50-1
+D6	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-D$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-D$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-D$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*D$5*'Inputs'!$C$20*$B6/'Inputs'!$C$19)/'ProForma'!$C$50-1
+E6	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-E$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-E$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-E$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*E$5*'Inputs'!$C$20*$B6/'Inputs'!$C$19)/'ProForma'!$C$50-1
+F6	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-F$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-F$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-F$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*F$5*'Inputs'!$C$20*$B6/'Inputs'!$C$19)/'ProForma'!$C$50-1
+G6	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-G$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-G$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-G$5)*$B6+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*G$5*'Inputs'!$C$20*$B6/'Inputs'!$C$19)/'ProForma'!$C$50-1
+B7	=B8-'Inputs'!$C$53
+C7	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-C$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-C$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-C$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*C$5*'Inputs'!$C$20*$B7/'Inputs'!$C$19)/'ProForma'!$C$50-1
+D7	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-D$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-D$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-D$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*D$5*'Inputs'!$C$20*$B7/'Inputs'!$C$19)/'ProForma'!$C$50-1
+E7	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-E$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-E$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-E$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*E$5*'Inputs'!$C$20*$B7/'Inputs'!$C$19)/'ProForma'!$C$50-1
+F7	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-F$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-F$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-F$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*F$5*'Inputs'!$C$20*$B7/'Inputs'!$C$19)/'ProForma'!$C$50-1
+G7	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-G$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-G$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-G$5)*$B7+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*G$5*'Inputs'!$C$20*$B7/'Inputs'!$C$19)/'ProForma'!$C$50-1
+B8	='Inputs'!$C$19
+C8	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-C$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-C$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-C$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*C$5*'Inputs'!$C$20*$B8/'Inputs'!$C$19)/'ProForma'!$C$50-1
+D8	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-D$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-D$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-D$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*D$5*'Inputs'!$C$20*$B8/'Inputs'!$C$19)/'ProForma'!$C$50-1
+E8	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-E$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-E$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-E$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*E$5*'Inputs'!$C$20*$B8/'Inputs'!$C$19)/'ProForma'!$C$50-1
+F8	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-F$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-F$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-F$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*F$5*'Inputs'!$C$20*$B8/'Inputs'!$C$19)/'ProForma'!$C$50-1
+G8	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-G$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-G$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-G$5)*$B8+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*G$5*'Inputs'!$C$20*$B8/'Inputs'!$C$19)/'ProForma'!$C$50-1
+B9	=B8+'Inputs'!$C$53
+C9	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-C$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-C$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-C$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*C$5*'Inputs'!$C$20*$B9/'Inputs'!$C$19)/'ProForma'!$C$50-1
+D9	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-D$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-D$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-D$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*D$5*'Inputs'!$C$20*$B9/'Inputs'!$C$19)/'ProForma'!$C$50-1
+E9	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-E$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-E$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-E$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*E$5*'Inputs'!$C$20*$B9/'Inputs'!$C$19)/'ProForma'!$C$50-1
+F9	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-F$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-F$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-F$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*F$5*'Inputs'!$C$20*$B9/'Inputs'!$C$19)/'ProForma'!$C$50-1
+G9	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-G$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-G$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-G$5)*$B9+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*G$5*'Inputs'!$C$20*$B9/'Inputs'!$C$19)/'ProForma'!$C$50-1
+B10	=B9+'Inputs'!$C$53
+C10	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-C$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-C$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-C$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-C$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*C$5*'Inputs'!$C$20*$B10/'Inputs'!$C$19)/'ProForma'!$C$50-1
+D10	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-D$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-D$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-D$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-D$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*D$5*'Inputs'!$C$20*$B10/'Inputs'!$C$19)/'ProForma'!$C$50-1
+E10	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-E$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-E$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-E$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-E$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*E$5*'Inputs'!$C$20*$B10/'Inputs'!$C$19)/'ProForma'!$C$50-1
+F10	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-F$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-F$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-F$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-F$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*F$5*'Inputs'!$C$20*$B10/'Inputs'!$C$19)/'ProForma'!$C$50-1
+G10	=('ProForma'!$C$49-(MAX(0,(('Transaction'!$C$10*(1-G$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$30+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31/'Inputs'!$C$49+(('Transaction'!$C$10*(1-G$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)+MAX(0,(('Transaction'!$C$10*(1-G$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31))*'Inputs'!$C$31-MAX(0,(('Transaction'!$C$10*(1-G$5)*$B10+'Inputs'!$C$24+'Transaction'!$C$23)-'Transaction'!$C$28)/(1-'Inputs'!$C$31)))*'Inputs'!$C$44)*(1-'Inputs'!$C$32))/('Standalone'!$H$19+'Transaction'!$C$10*G$5*'Inputs'!$C$20*$B10/'Inputs'!$C$19)/'ProForma'!$C$50-1
+B13	'Accretion by forecast year (down) x synergy realisation (across)'
+C15	0
+D15	=C15+'Inputs'!$C$55
+E15	=D15+'Inputs'!$C$55
+F15	=E15+'Inputs'!$C$55
+B16	1
+C16	=(INDEX('ProForma'!$H$22:$L$22,$B16)+(C$15-1)*INDEX('ProForma'!$H$10:$L$10,$B16)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B16)/INDEX('ProForma'!$H$27:$L$27,$B16)-1
+D16	=(INDEX('ProForma'!$H$22:$L$22,$B16)+(D$15-1)*INDEX('ProForma'!$H$10:$L$10,$B16)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B16)/INDEX('ProForma'!$H$27:$L$27,$B16)-1
+E16	=(INDEX('ProForma'!$H$22:$L$22,$B16)+(E$15-1)*INDEX('ProForma'!$H$10:$L$10,$B16)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B16)/INDEX('ProForma'!$H$27:$L$27,$B16)-1
+F16	=(INDEX('ProForma'!$H$22:$L$22,$B16)+(F$15-1)*INDEX('ProForma'!$H$10:$L$10,$B16)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B16)/INDEX('ProForma'!$H$27:$L$27,$B16)-1
+B17	2
+C17	=(INDEX('ProForma'!$H$22:$L$22,$B17)+(C$15-1)*INDEX('ProForma'!$H$10:$L$10,$B17)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B17)/INDEX('ProForma'!$H$27:$L$27,$B17)-1
+D17	=(INDEX('ProForma'!$H$22:$L$22,$B17)+(D$15-1)*INDEX('ProForma'!$H$10:$L$10,$B17)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B17)/INDEX('ProForma'!$H$27:$L$27,$B17)-1
+E17	=(INDEX('ProForma'!$H$22:$L$22,$B17)+(E$15-1)*INDEX('ProForma'!$H$10:$L$10,$B17)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B17)/INDEX('ProForma'!$H$27:$L$27,$B17)-1
+F17	=(INDEX('ProForma'!$H$22:$L$22,$B17)+(F$15-1)*INDEX('ProForma'!$H$10:$L$10,$B17)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B17)/INDEX('ProForma'!$H$27:$L$27,$B17)-1
+B18	3
+C18	=(INDEX('ProForma'!$H$22:$L$22,$B18)+(C$15-1)*INDEX('ProForma'!$H$10:$L$10,$B18)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B18)/INDEX('ProForma'!$H$27:$L$27,$B18)-1
+D18	=(INDEX('ProForma'!$H$22:$L$22,$B18)+(D$15-1)*INDEX('ProForma'!$H$10:$L$10,$B18)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B18)/INDEX('ProForma'!$H$27:$L$27,$B18)-1
+E18	=(INDEX('ProForma'!$H$22:$L$22,$B18)+(E$15-1)*INDEX('ProForma'!$H$10:$L$10,$B18)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B18)/INDEX('ProForma'!$H$27:$L$27,$B18)-1
+F18	=(INDEX('ProForma'!$H$22:$L$22,$B18)+(F$15-1)*INDEX('ProForma'!$H$10:$L$10,$B18)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B18)/INDEX('ProForma'!$H$27:$L$27,$B18)-1
+B19	4
+C19	=(INDEX('ProForma'!$H$22:$L$22,$B19)+(C$15-1)*INDEX('ProForma'!$H$10:$L$10,$B19)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B19)/INDEX('ProForma'!$H$27:$L$27,$B19)-1
+D19	=(INDEX('ProForma'!$H$22:$L$22,$B19)+(D$15-1)*INDEX('ProForma'!$H$10:$L$10,$B19)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B19)/INDEX('ProForma'!$H$27:$L$27,$B19)-1
+E19	=(INDEX('ProForma'!$H$22:$L$22,$B19)+(E$15-1)*INDEX('ProForma'!$H$10:$L$10,$B19)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B19)/INDEX('ProForma'!$H$27:$L$27,$B19)-1
+F19	=(INDEX('ProForma'!$H$22:$L$22,$B19)+(F$15-1)*INDEX('ProForma'!$H$10:$L$10,$B19)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B19)/INDEX('ProForma'!$H$27:$L$27,$B19)-1
+B20	5
+C20	=(INDEX('ProForma'!$H$22:$L$22,$B20)+(C$15-1)*INDEX('ProForma'!$H$10:$L$10,$B20)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B20)/INDEX('ProForma'!$H$27:$L$27,$B20)-1
+D20	=(INDEX('ProForma'!$H$22:$L$22,$B20)+(D$15-1)*INDEX('ProForma'!$H$10:$L$10,$B20)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B20)/INDEX('ProForma'!$H$27:$L$27,$B20)-1
+E20	=(INDEX('ProForma'!$H$22:$L$22,$B20)+(E$15-1)*INDEX('ProForma'!$H$10:$L$10,$B20)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B20)/INDEX('ProForma'!$H$27:$L$27,$B20)-1
+F20	=(INDEX('ProForma'!$H$22:$L$22,$B20)+(F$15-1)*INDEX('ProForma'!$H$10:$L$10,$B20)*(1-'Inputs'!$C$32))/INDEX('ProForma'!$H$26:$L$26,$B20)/INDEX('ProForma'!$H$27:$L$27,$B20)-1
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A2	'$m unless stated'
+A4	'Period end'
+E4	'2023-01-28'
+F4	'2024-02-03'
+G4	'2025-02-01'
+H4	'2026-01-31'
+I4	'2027-01-30'
+J4	'2028-01-29'
+K4	'2029-01-27'
+L4	'2030-01-26'
+A5	'Fiscal year'
+E5	'FY2022'
+F5	'FY2023'
+G5	'FY2024'
+H5	'FY2025'
+I5	'FY2026'
+J5	'FY2027'
+K5	'FY2028'
+L5	'FY2029'
+A6	'Forecast flag (1 = forecast)'
+E6	0
+F6	0
+G6	0
+H6	1
+I6	1
+J6	1
+K6	1
+L6	1
+A7	'Forecast year #'
+E7	0
+F7	0
+G7	0
+H7	1
+I7	2
+J7	3
+K7	4
+L7	5
+A9	'Sources = uses'
+C9	='Transaction'!$C$31-'Transaction'!$C$26
+A10	'Goodwill less bargain gain = consideration less net assets'
+C10	='Transaction'!$C$47-'Transaction'!$C$48-'Transaction'!$C$18+'Transaction'!$C$45
+A11	'Cash after close not below the minimum'
+C11	=MIN(0,ROUND('Transaction'!$C$32-'Inputs'!$C$43,$C$17))
+A12	'Ownership sums to 100%'
+C12	=ROUND('ProForma'!$C$45+'ProForma'!$C$46-1,$C$17)
+A13	'Adjusted NI = combined pre-tax less combined tax'
+B13	'$m'
+C13	=SUMPRODUCT(ABS($E$13:$L$13))
+H13	='ProForma'!H22-(('Standalone'!H16+'Standalone'!H27+'ProForma'!H19)-('Standalone'!H17+'Standalone'!H28+'ProForma'!H19*'Inputs'!$C$32))
+I13	='ProForma'!I22-(('Standalone'!I16+'Standalone'!I27+'ProForma'!I19)-('Standalone'!I17+'Standalone'!I28+'ProForma'!I19*'Inputs'!$C$32))
+J13	='ProForma'!J22-(('Standalone'!J16+'Standalone'!J27+'ProForma'!J19)-('Standalone'!J17+'Standalone'!J28+'ProForma'!J19*'Inputs'!$C$32))
+K13	='ProForma'!K22-(('Standalone'!K16+'Standalone'!K27+'ProForma'!K19)-('Standalone'!K17+'Standalone'!K28+'ProForma'!K19*'Inputs'!$C$32))
+L13	='ProForma'!L22-(('Standalone'!L16+'Standalone'!L27+'ProForma'!L19)-('Standalone'!L17+'Standalone'!L28+'ProForma'!L19*'Inputs'!$C$32))
+A14	'EPS at breakeven synergies = standalone EPS'
+B14	'$m'
+C14	=SUMPRODUCT(ABS($E$14:$L$14))
+H14	=ROUND(('ProForma'!H22+('ProForma'!H32-'ProForma'!H10)*(1-'Inputs'!$C$32))/'ProForma'!H26-'ProForma'!H27,$C$17)
+I14	=ROUND(('ProForma'!I22+('ProForma'!I32-'ProForma'!I10)*(1-'Inputs'!$C$32))/'ProForma'!I26-'ProForma'!I27,$C$17)
+J14	=ROUND(('ProForma'!J22+('ProForma'!J32-'ProForma'!J10)*(1-'Inputs'!$C$32))/'ProForma'!J26-'ProForma'!J27,$C$17)
+K14	=ROUND(('ProForma'!K22+('ProForma'!K32-'ProForma'!K10)*(1-'Inputs'!$C$32))/'ProForma'!K26-'ProForma'!K27,$C$17)
+L14	=ROUND(('ProForma'!L22+('ProForma'!L32-'ProForma'!L10)*(1-'Inputs'!$C$32))/'ProForma'!L26-'ProForma'!L27,$C$17)
+A15	'Synergy grid at 100% = accretion row'
+B15	'$m'
+C15	=SUMPRODUCT(ABS($E$15:$L$15))
+H15	=ROUND(INDEX('Sensitivity'!$E$16:$E$20,H7)-'ProForma'!H30,$C$17)
+I15	=ROUND(INDEX('Sensitivity'!$E$16:$E$20,I7)-'ProForma'!I30,$C$17)
+J15	=ROUND(INDEX('Sensitivity'!$E$16:$E$20,J7)-'ProForma'!J30,$C$17)
+K15	=ROUND(INDEX('Sensitivity'!$E$16:$E$20,K7)-'ProForma'!K30,$C$17)
+L15	=ROUND(INDEX('Sensitivity'!$E$16:$E$20,L7)-'ProForma'!L30,$C$17)
+A17	'Rounding precision for ratio checks (decimal places)'
+B17	'count'
+C17	9
+A18	'Tolerance'
+B18	'$m'
+C18	0.001
+A19	'MASTER CHECK (0 = all pass)'
+B19	'count'
+C19	=IF(SUMPRODUCT(ABS($C$9:$C$15))<$C$18,0,1)
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-20'
+B4	'Generated from spec/DKS_FL_MA.yaml and fixtures/DKS, fixtures/FL (M5).'

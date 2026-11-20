@@ -1,0 +1,13 @@
+{
+  "ticker": "DKS",
+  "entity": "DICK'S Sporting Goods, Inc.",
+  "period_ends": [
+    "2022-01-29",
+    "2023-01-28",
+    "2024-02-03",
+    "2025-02-01"
+  ],
+  "raw_sha256": "d06dc821ee0a5dfbf7df08a275bffddf0dfc53e1571f8c371641ab19501f4b43",
+  "hard_checks_pass": true,
+  "warnings": 1
+}

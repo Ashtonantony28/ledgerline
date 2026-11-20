@@ -1,0 +1,13 @@
+{
+  "ticker": "FL",
+  "entity": "Foot Locker, Inc.",
+  "period_ends": [
+    "2022-01-29",
+    "2023-01-28",
+    "2024-02-03",
+    "2025-02-01"
+  ],
+  "raw_sha256": "8bb989eb6ae8588a4762492e32b7e7bc1e7ba2fcbdd434ecb36212f52bbc0a61",
+  "hard_checks_pass": true,
+  "warnings": 2
+}

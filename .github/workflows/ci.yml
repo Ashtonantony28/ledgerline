@@ -21,7 +21,9 @@ jobs:
           python -m ledgerline.build.workbooks
           python -m ledgerline.audit.audit workbooks/0*_*.xlsx --recalc
       - name: Mutation test (seeded error injection)
-        run: python -m ledgerline.audit.mutation --n 20 --seed 7
+        run: |
+          python -m ledgerline.audit.mutation 01 --n 20 --seed 7
+          python -m ledgerline.audit.mutation 04 --n 20 --seed 7
       - uses: actions/upload-artifact@v4
         with:
           name: workbooks

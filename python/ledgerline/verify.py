@@ -27,6 +27,13 @@ THREE_STATEMENT_OUTPUTS = [  # (sheet, row key, reference key, kind)
     ("CF", "buybacks", "buybacks", "usd"), ("CF", "net_change_cash", "net_change_cash", "usd"),
 ]
 
+MNA_OUTPUTS = [("Standalone", k, k, "usd") for k in ("dks_revenue", "dks_ebitda", "dks_pretax", "dks_ni", "fl_revenue", "fl_ni")] + \
+    [("Standalone", "eps_sa", "eps_sa", "ratio")] + \
+    [("ProForma", k, k, "usd") for k in ("syn", "dep_step", "amort_int", "lease_amort", "notes_accr", "new_int", "iss_amort",
+                                        "lost_int", "adj_pretax", "pf_ni_adj", "close_items", "pf_ni_gaap", "breakeven_syn", "breakeven_fl_ni",
+                                        "pf_ebitda", "pf_ni_pre_fin")] + \
+    [("ProForma", k, k, "ratio") for k in ("pf_shares", "eps_adj", "eps_gaap", "acc_adj", "acc_gaap", "pf_leverage")]
+
 
 @dataclass
 class Mismatch:

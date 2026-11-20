@@ -23,8 +23,10 @@ from .normalise import History, normalise
 from .tieout import report, tieout
 
 FIXTURES = edgar.REPO / "fixtures"
-YEARS = {"COST": 10, "SKX": 4}  # the modelled company keeps 10 years; comps keep 5
+YEARS = {"COST": 10, "SKX": 4, "DKS": 4, "FL": 4}  # the modelled company keeps 10 years; comps keep 5
 DEFAULT_YEARS = 5
+# Snapshot cut-off: the M&A model (workbook 04) needs the acquirer as it stood before the deal closed.
+MAX_END = {"DKS": date(2025, 3, 1)}
 
 
 def build(ticker: str, refresh: bool = False) -> History:
@@ -32,7 +34,8 @@ def build(ticker: str, refresh: bool = False) -> History:
     facts = edgar.fetch_companyfacts(ticker, refresh=refresh)
     ov_path = FIXTURES / ticker / "overrides.yaml"
     overrides = yaml.safe_load(ov_path.read_text()) if ov_path.exists() else None
-    return normalise(ticker, facts, years=YEARS.get(ticker, DEFAULT_YEARS), overrides=overrides)
+    return normalise(ticker, facts, years=YEARS.get(ticker, DEFAULT_YEARS), overrides=overrides,
+                     max_end=MAX_END.get(ticker))
 
 
 def save(h: History) -> Path:

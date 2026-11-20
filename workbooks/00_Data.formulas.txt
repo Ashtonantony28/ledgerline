@@ -1,6 +1,6 @@
 === Summary
 A1	'Ledgerline Data workbook: normalised SEC 10-K history'
-A2	"Built 2026-11-19 from fixtures/<TICKER>/ (SEC EDGAR XBRL companyfacts). Each blue cell's comment names the US-GAAP tag and filing accession it came from."
+A2	"Built 2026-11-20 from fixtures/<TICKER>/ (SEC EDGAR XBRL companyfacts). Each blue cell's comment names the US-GAAP tag and filing accession it came from."
 A4	'Ticker'
 B4	'Years'
 C4	'Tie-out (max abs, $m)'
@@ -43,6 +43,14 @@ A13	'SKX'
 B13	4
 C13	=MAX(ABS(MAX('SKX'!$C$75:$F$80)),ABS(MIN('SKX'!$C$75:$F$80)))
 D13	=IF(C13<=$G$4,"TIES","CHECK")
+A14	'DKS'
+B14	4
+C14	=MAX(ABS(MAX('DKS'!$C$75:$F$80)),ABS(MIN('DKS'!$C$75:$F$80)))
+D14	=IF(C14<=$G$4,"TIES","CHECK")
+A15	'FL'
+B15	4
+C15	=MAX(ABS(MAX('FL'!$C$75:$F$80)),ABS(MIN('FL'!$C$75:$F$80)))
+D15	=IF(C15<=$G$4,"TIES","CHECK")
 === COST
 A1	'COSTCO WHOLESALE CORP /NEW (COST): normalised 10-K history'
 A2	'$m unless stated (shares in millions; EPS in $; warehouses/stores as counts)'
@@ -4568,6 +4576,802 @@ C72	0
 D72	0
 E72	0
 F72	0
+A74	'Tie-out (every cell must be zero)'
+A75	'Assets - (liabilities + equity)'
+C75	=C39-C53-C56
+D75	=D39-D53-D56
+E75	=E39-E53-E56
+F75	=F39-F53-F56
+A76	'Reported L&E - assets'
+C76	=C58-C39
+D76	=D58-D39
+E76	=E58-E39
+F76	=F58-F39
+A77	'Net income - (total - NCI)'
+C77	=C22-(C20-C21)
+D77	=D22-(D20-D21)
+E77	=E22-(E20-E21)
+F77	=F22-(F20-F21)
+A78	'CFO + CFI + CFF + FX - change in cash'
+C78	=C60+C63+C67+C68-C69
+D78	=D60+D63+D67+D68-D69
+E78	=E60+E63+E67+E68-E69
+F78	=F60+F63+F67+F68-F69
+A79	'Revenue - COGS - SG&A - other - EBIT'
+C79	=C8-C9-C12-C13-C14
+D79	=D8-D9-D12-D13-D14
+E79	=E8-E9-E12-E13-E14
+F79	=F8-F9-F12-F13-F14
+A80	'Current assets build - reported'
+C80	=C28+C29+C30+C31+C32-C33
+D80	=D28+D29+D30+D31+D32-D33
+E80	=E28+E29+E30+E31+E32-E33
+F80	=F28+F29+F30+F31+F32-F33
+A82	'Ratios'
+A83	'Revenue growth'
+D83	=D8/C8-1
+E83	=E8/D8-1
+F83	=F8/E8-1
+A84	'Gross margin'
+C84	=1-C9/C8
+D84	=1-D9/D8
+E84	=1-E9/E8
+F84	=1-F9/F8
+A85	'EBIT margin'
+C85	=C14/C8
+D85	=D14/D8
+E85	=E14/E8
+F85	=F14/F8
+A86	'Net margin'
+C86	=C22/C8
+D86	=D22/D8
+E86	=E22/E8
+F86	=F22/F8
+A87	'EBITDA ($m)'
+C87	=C14+C25
+D87	=D14+D25
+E87	=E14+E25
+F87	=F14+F25
+A88	'Net debt ($m)'
+C88	=C41+C42+C49-C28-C29
+D88	=D41+D42+D49-D28-D29
+E88	=E41+E42+E49-E28-E29
+F88	=F41+F42+F49-F28-F29
+A89	'Capex % revenue'
+C89	=-C61/C8
+D89	=-D61/D8
+E89	=-E61/E8
+F89	=-F61/F8
+A90	'Effective tax rate'
+C90	=C18/C17
+D90	=D18/D17
+E90	=E18/E17
+F90	=F18/F17
+=== DKS
+A1	"DICK'S Sporting Goods, Inc. (DKS): normalised 10-K history"
+A2	'$m unless stated (shares in millions; EPS in $; warehouses/stores as counts)'
+A4	'Period end'
+C4	'2022-01-29'
+D4	'2023-01-28'
+E4	'2024-02-03'
+F4	'2025-02-01'
+A5	'Fiscal year'
+C5	'FY2022'
+D5	'FY2023'
+E5	'FY2024'
+F5	'FY2025'
+A7	'Income statement'
+A8	'revenue'
+C8	12293.368
+D8	12368.198
+E8	12984.399
+F8	13442.849
+A9	'cogs'
+C9	7581.482
+D9	8083.64
+E9	8450.664
+F9	8617.153
+A10	'selling expense'
+C10	0
+D10	0
+E10	0
+F10	0
+A11	'ga expense'
+C11	0
+D11	0
+E11	0
+F11	0
+A12	'sga'
+C12	2664.083
+D12	2799.853
+E12	3183.53
+F12	3294.272
+A13	'other opex'
+C13	13.3
+D13	21.686
+E13	67.84
+F13	57.492
+A14	'operating income'
+C14	2034.503
+D14	1463.019
+E14	1282.365
+F14	1473.932
+A15	'interest expense'
+C15	57.839
+D15	95.22
+E15	58.023
+F15	52.987
+A16	'other nonop income'
+C16	17.774
+D16	15.949
+E16	93.809
+F16	98.088
+A17	'pretax income'
+C17	1994.438
+D17	1383.748
+E17	1318.151
+F17	1519.033
+A18	'income tax'
+C18	474.567
+D18	340.61
+E18	271.632
+F18	353.725
+A19	'other below tax'
+C19	0
+D19	0
+E19	0
+F19	0
+A20	'net income total'
+C20	1519.871
+D20	1043.138
+E20	1046.519
+F20	1165.308
+A21	'nci income'
+C21	0
+D21	0
+E21	0
+F21	0
+A22	'net income'
+C22	1519.871
+D22	1043.138
+E22	1046.519
+F22	1165.308
+A23	'shares diluted'
+C23	109.578
+D23	99.274
+E23	85.925
+F23	82.929
+A24	'eps diluted'
+C24	13.87
+D24	10.78
+E24	12.18
+F24	14.05
+A25	'da'
+C25	322.551
+D25	365.475
+E25	393.933
+F25	400.409
+A26	'sbc'
+C26	52.8
+D26	50.603
+E26	57.285
+F26	71.001
+A27	'Balance sheet'
+A28	'cash'
+C28	2643.205
+D28	1924.386
+E28	1801.22
+F28	1689.94
+A29	'st investments'
+C29	0
+D29	0
+E29	0
+F29	0
+A30	'receivables'
+C30	0
+D30	0
+E30	0
+F30	0
+A31	'inventory'
+C31	2297.609
+D31	2830.917
+E31	2848.797
+F31	3349.83
+A32	'other current assets'
+C32	165.842
+D32	207.883
+E32	240.032
+F32	377.937
+A33	'total current assets'
+C33	5106.656
+D33	4963.186
+E33	4890.049
+F33	5417.707
+A34	'ppe net'
+C34	1319.681
+D34	1312.988
+E34	1638.161
+F34	2069.914
+A35	'op lease rou'
+C35	2044.819
+D35	2138.366
+E35	2257.482
+F35	2367.317
+A36	'goodwill'
+C36	245.857
+D36	245.857
+E36	245.857
+F36	245.857
+A37	'intangibles'
+C37	86.767
+D37	60.364
+E37	56.663
+F37	58.598
+A38	'other nc assets'
+C38	237.896
+D38	271.435
+E38	223.54
+F38	299.301
+A39	'total assets'
+C39	9041.676
+D39	8992.196
+E39	9311.752
+F39	10458.694
+A40	'accounts payable'
+C40	1281.322
+D40	1206.066
+E40	1288.728
+F40	1497.743
+A41	'short term debt'
+C41	0
+D41	0
+E41	0
+F41	0
+A42	'current debt'
+C42	0
+D42	0
+E42	0
+F42	0
+A43	'op lease liab current'
+C43	480.318
+D43	546.755
+E43	492.856
+F43	503.236
+A44	'accrued liabilities'
+C44	620.143
+D44	508.573
+E44	551.369
+F44	653.324
+A45	'employee liabilities'
+C45	297.409
+D45	218.802
+E45	212.95
+F45	256.881
+A46	'deferred revenue'
+C46	0
+D46	0
+E46	0
+F46	0
+A47	'other current liabilities'
+C47	33.488
+D47	161.25
+E47	206.491
+F47	168.878
+A48	'total current liabilities'
+C48	2712.68
+D48	2641.446
+E48	2752.394
+F48	3080.062
+A49	'lt debt'
+C49	1930.73
+D49	1540.607
+E49	1483.26
+F49	1484.217
+A50	'op lease liab noncurrent'
+C50	2099.146
+D50	2117.773
+E50	2287.714
+F50	2500.307
+A51	'other nc liabilities'
+C51	197.534
+D51	167.747
+E51	171.103
+F51	195.844
+A52	'temp equity'
+C52	0
+D52	0
+E52	0
+F52	0
+A53	'total liabilities'
+C53	6940.09
+D53	6467.573
+E53	6694.471
+F53	7260.43
+A54	'parent equity'
+C54	2101.586
+D54	2524.623
+E54	2617.281
+F54	3198.264
+A55	'minority interest tag'
+C55	0
+D55	0
+E55	0
+F55	0
+A56	'total equity'
+C56	2101.586
+D56	2524.623
+E56	2617.281
+F56	3198.264
+A57	'nci equity'
+C57	0
+D57	0
+E57	0
+F57	0
+A58	'total le'
+C58	9041.676
+D58	8992.196
+E58	9311.752
+F58	10458.694
+A59	'Cash flow'
+A60	'cfo'
+C60	1616.872
+D60	921.881
+E60	1527.335
+F60	1311.835
+A61	'capex'
+C61	-308.261
+D61	-364.075
+E61	-587.426
+F61	-802.565
+A62	'other cfi'
+C62	-35.718
+D62	-28.819
+E62	-27.25
+F62	6.007
+A63	'cfi'
+C63	-343.979
+D63	-392.894
+E63	-614.676
+F63	-796.558
+A64	'dividends'
+C64	-602.964
+D64	-163.081
+E64	-351.201
+F64	-361.727
+A65	'buybacks'
+C65	-1144.633
+D65	-458.456
+E65	-648.554
+F65	-263.021
+A66	'other cff'
+C66	1459.875
+D66	-626.099
+E66	-35.993
+F66	-1.383
+A67	'cff'
+C67	-287.722
+D67	-1247.636
+E67	-1035.748
+F67	-626.131
+A68	'fx effect'
+C68	-0.033
+D68	-0.17
+E68	-0.077
+F68	-0.426
+A69	'net change cash'
+C69	985.138
+D69	-718.819
+E69	-123.166
+F69	-111.28
+A70	'cash cf basis'
+C70	2643.205
+D70	1924.386
+E70	1801.22
+F70	1689.94
+A71	'Operating KPIs'
+A72	'stores'
+C72	0
+D72	0
+E72	0
+F72	0
+A74	'Tie-out (every cell must be zero)'
+A75	'Assets - (liabilities + equity)'
+C75	=C39-C53-C56
+D75	=D39-D53-D56
+E75	=E39-E53-E56
+F75	=F39-F53-F56
+A76	'Reported L&E - assets'
+C76	=C58-C39
+D76	=D58-D39
+E76	=E58-E39
+F76	=F58-F39
+A77	'Net income - (total - NCI)'
+C77	=C22-(C20-C21)
+D77	=D22-(D20-D21)
+E77	=E22-(E20-E21)
+F77	=F22-(F20-F21)
+A78	'CFO + CFI + CFF + FX - change in cash'
+C78	=C60+C63+C67+C68-C69
+D78	=D60+D63+D67+D68-D69
+E78	=E60+E63+E67+E68-E69
+F78	=F60+F63+F67+F68-F69
+A79	'Revenue - COGS - SG&A - other - EBIT'
+C79	=C8-C9-C12-C13-C14
+D79	=D8-D9-D12-D13-D14
+E79	=E8-E9-E12-E13-E14
+F79	=F8-F9-F12-F13-F14
+A80	'Current assets build - reported'
+C80	=C28+C29+C30+C31+C32-C33
+D80	=D28+D29+D30+D31+D32-D33
+E80	=E28+E29+E30+E31+E32-E33
+F80	=F28+F29+F30+F31+F32-F33
+A82	'Ratios'
+A83	'Revenue growth'
+D83	=D8/C8-1
+E83	=E8/D8-1
+F83	=F8/E8-1
+A84	'Gross margin'
+C84	=1-C9/C8
+D84	=1-D9/D8
+E84	=1-E9/E8
+F84	=1-F9/F8
+A85	'EBIT margin'
+C85	=C14/C8
+D85	=D14/D8
+E85	=E14/E8
+F85	=F14/F8
+A86	'Net margin'
+C86	=C22/C8
+D86	=D22/D8
+E86	=E22/E8
+F86	=F22/F8
+A87	'EBITDA ($m)'
+C87	=C14+C25
+D87	=D14+D25
+E87	=E14+E25
+F87	=F14+F25
+A88	'Net debt ($m)'
+C88	=C41+C42+C49-C28-C29
+D88	=D41+D42+D49-D28-D29
+E88	=E41+E42+E49-E28-E29
+F88	=F41+F42+F49-F28-F29
+A89	'Capex % revenue'
+C89	=-C61/C8
+D89	=-D61/D8
+E89	=-E61/E8
+F89	=-F61/F8
+A90	'Effective tax rate'
+C90	=C18/C17
+D90	=D18/D17
+E90	=E18/E17
+F90	=F18/F17
+=== FL
+A1	'Foot Locker, Inc. (FL): normalised 10-K history'
+A2	'$m unless stated (shares in millions; EPS in $; warehouses/stores as counts)'
+A4	'Period end'
+C4	'2022-01-29'
+D4	'2023-01-28'
+E4	'2024-02-03'
+F4	'2025-02-01'
+A5	'Fiscal year'
+C5	'FY2022'
+D5	'FY2023'
+E5	'FY2024'
+F5	'FY2025'
+A7	'Income statement'
+A8	'revenue'
+C8	8968
+D8	8759
+E8	8168
+F8	7988
+A9	'cogs'
+C9	5878
+D9	5955
+E9	5895
+F9	5666
+A10	'selling expense'
+C10	0
+D10	0
+E10	0
+F10	0
+A11	'ga expense'
+C11	0
+D11	0
+E11	0
+F11	0
+A12	'sga'
+C12	1851
+D12	1903
+E12	1852
+F12	1920
+A13	'other opex'
+C13	369
+D13	320
+E13	279
+F13	299
+A14	'operating income'
+C14	870
+D14	581
+E14	142
+F14	103
+A15	'interest expense'
+C15	12
+D15	17
+E15	17
+F15	17
+A16	'other nonop income'
+C16	382
+D16	-40
+E16	-548
+F16	-35
+A17	'pretax income'
+C17	1240
+D17	524
+E17	-423
+F17	51
+A18	'income tax'
+C18	348
+D18	180
+E18	-93
+F18	33
+A19	'other below tax'
+C19	0
+D19	-3
+E19	0
+F19	-6
+A20	'net income total'
+C20	892
+D20	341
+E20	-330
+F20	12
+A21	'nci income'
+C21	-1
+D21	-1
+E21	0
+F21	0
+A22	'net income'
+C22	893
+D22	342
+E22	-330
+F22	12
+A23	'shares diluted'
+C23	103.8
+D23	95.5
+E23	94.2
+F23	95.5
+A24	'eps diluted'
+C24	8.61
+D24	3.58
+E24	-3.51
+F24	0.13
+A25	'da'
+C25	197
+D25	208
+E25	199
+F25	202
+A26	'sbc'
+C26	29
+D26	31
+E26	13
+F26	21
+A27	'Balance sheet'
+A28	'cash'
+C28	804
+D28	536
+E28	297
+F28	401
+A29	'st investments'
+C29	0
+D29	0
+E29	0
+F29	0
+A30	'receivables'
+C30	134
+D30	160
+E30	160
+F30	156
+A31	'inventory'
+C31	1266
+D31	1643
+E31	1509
+F31	1525
+A32	'other current assets'
+C32	159
+D32	182
+E32	259
+F32	177
+A33	'total current assets'
+C33	2363
+D33	2521
+E33	2225
+F33	2259
+A34	'ppe net'
+C34	917
+D34	920
+E34	930
+F34	910
+A35	'op lease rou'
+C35	2616
+D35	2443
+E35	2188
+F35	2061
+A36	'goodwill'
+C36	797
+D36	785
+E36	768
+F36	759
+A37	'intangibles'
+C37	454
+D37	426
+E37	399
+F37	365
+A38	'other nc assets'
+C38	988
+D38	812
+E38	358
+F38	394
+A39	'total assets'
+C39	8135
+D39	7907
+E39	6868
+F39	6748
+A40	'accounts payable'
+C40	596
+D40	492
+E40	366
+F40	378
+A41	'short term debt'
+C41	0
+D41	0
+E41	0
+F41	0
+A42	'current debt'
+C42	6
+D42	6
+E42	5
+F42	5
+A43	'op lease liab current'
+C43	572
+D43	544
+E43	492
+F43	507
+A44	'accrued liabilities'
+C44	0
+D44	0
+E44	0
+F44	0
+A45	'employee liabilities'
+C45	78
+D45	99
+E45	72
+F45	65
+A46	'deferred revenue'
+C46	50
+D46	39
+E46	0
+F46	0
+A47	'other current liabilities'
+C47	433
+D47	430
+E47	356
+F47	375
+A48	'total current liabilities'
+C48	1735
+D48	1610
+E48	1291
+F48	1330
+A49	'lt debt'
+C49	394
+D49	395
+E49	395
+F49	396
+A50	'op lease liab noncurrent'
+C50	2363
+D50	2230
+E50	2004
+F50	1831
+A51	'other nc liabilities'
+C51	400
+D51	379
+E51	288
+F51	282
+A52	'temp equity'
+C52	0
+D52	0
+E52	0
+F52	0
+A53	'total liabilities'
+C53	4892
+D53	4614
+E53	3978
+F53	3839
+A54	'parent equity'
+C54	3239
+D54	3293
+E54	2890
+F54	2909
+A55	'minority interest tag'
+C55	4
+D55	0
+E55	0
+F55	0
+A56	'total equity'
+C56	3243
+D56	3293
+E56	2890
+F56	2909
+A57	'nci equity'
+C57	4
+D57	0
+E57	0
+F57	0
+A58	'total le'
+C58	8135
+D58	7907
+E58	6868
+F58	6748
+A59	'Cash flow'
+A60	'cfo'
+C60	666
+D60	173
+E60	91
+F60	345
+A61	'capex'
+C61	-209
+D61	-285
+E61	-242
+F61	-240
+A62	'other cfi'
+C62	-1167
+D62	123
+E62	20
+F62	0
+A63	'cfi'
+C63	-1376
+D63	-162
+E63	-222
+F63	-240
+A64	'dividends'
+C64	-101
+D64	-150
+E64	-113
+F64	0
+A65	'buybacks'
+C65	-348
+D65	-129
+E65	0
+F65	0
+A66	'other cff'
+C66	297
+D66	0
+E66	-7
+F66	-7
+A67	'cff'
+C67	-152
+D67	-279
+E67	-120
+F67	-7
+A68	'fx effect'
+C68	-6
+D68	0
+E68	3
+F68	-2
+A69	'net change cash'
+C69	-868
+D69	-268
+E69	-248
+F69	96
+A70	'cash cf basis'
+C70	850
+D70	582
+E70	334
+F70	430
+A71	'Operating KPIs'
+A72	'stores'
+C72	0
+D72	16
+E72	13
+F72	7
 A74	'Tie-out (every cell must be zero)'
 A75	'Assets - (liabilities + equity)'
 C75	=C39-C53-C56

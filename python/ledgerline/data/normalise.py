@@ -106,7 +106,8 @@ def fiscal_year_ends(facts: dict, tagmap: dict) -> list[date]:
     return sorted(ends)
 
 
-def normalise(ticker: str, facts: dict, years: int = 10, overrides: dict | None = None) -> History:
+def normalise(ticker: str, facts: dict, years: int = 10, overrides: dict | None = None,
+              max_end: date | None = None) -> History:
     entity = facts.get("entityName", ticker)
     facts = facts.get("facts", facts)  # accept the full companyfacts document
     tagmap = load_tagmap()
@@ -114,7 +115,7 @@ def normalise(ticker: str, facts: dict, years: int = 10, overrides: dict | None 
     ends_all = fiscal_year_ends(facts, tagmap)
     # Require a balance sheet at the year end so every period is a complete set.
     bs_ends = set(_facts_by_period(facts, "Assets", "USD", "instant"))
-    ends = [e for e in ends_all if e in bs_ends][-years:]
+    ends = [e for e in ends_all if e in bs_ends and (max_end is None or e <= max_end)][-years:]
     overrides = overrides or {}
 
     values: dict[str, list[float | None]] = {}
