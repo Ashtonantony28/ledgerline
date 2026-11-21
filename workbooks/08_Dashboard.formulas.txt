@@ -1,0 +1,124 @@
+=== Cover
+A1	'Ledgerline: dashboard of the suite'
+A3	'Contents'
+B3	"Headline numbers from workbooks 01-07 and 09, and every workbook's integrity check"
+A4	'Source'
+B4	'Each value is read from a LibreOffice recalculation of the delivered workbook; its note names the cell'
+A9	'Model integrity'
+B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
+A10	'Built'
+B10	'2026-11-21 by the Ledgerline generator (see Log)'
+A12	'Disclaimer'
+B12	'Educational portfolio model built from public SEC filings. Not investment advice. Figures may contain errors; verify against the filings before relying on them.'
+=== Dashboard
+A1	'Ledgerline: the suite on one page'
+A4	'Costco three-statement (01)'
+D4	'Integrity: master check per workbook'
+A5	'FY2027 revenue, base case ($m)'
+B5	327244.35429034
+D5	'01_COST_ThreeStatement'
+E5	0
+A6	'FY2027 diluted EPS ($)'
+B6	22.4684268911906
+D6	'02_COST_Valuation'
+E6	0
+D7	'03_SKX_LBO'
+E7	0
+A8	'Costco valuation (02)'
+D8	'04_DKS_FL_MnA'
+E8	0
+A9	'WACC'
+B9	0.0896995690489307
+D9	'05_Group_Close'
+E9	0
+A10	'DCF price, perpetuity growth ($)'
+B10	383.341879436798
+D10	'06_FPA_Forecast'
+E10	0
+A11	'DCF price, exit multiple ($)'
+B11	516.113169270612
+D11	'07_COST_ScenarioLab'
+E11	0
+A12	'Market price ($)'
+B12	1093.83
+D12	'09_Credit'
+E12	0
+A13	'Perpetual growth implied by the market price'
+B13	0.0754152381479034
+D13	'Workbooks failing'
+E13	=SUM(E5:E12)
+A15	'Skechers LBO (03)'
+A16	'Entry EV / EBITDA'
+B16	9.34745499912168
+D16	'Costco value per share ($)'
+A17	'Leverage at close'
+B17	6.02400614471264
+D17	'Market'
+E17	=B12
+A18	'Sponsor IRR'
+B18	0.132609832038669
+D18	'DCF, perpetuity growth'
+E18	=B10
+A19	'Sponsor MOIC'
+B19	1.86380999681002
+D19	'DCF, exit multiple'
+E19	=B11
+D20	'Monte Carlo median'
+E20	=B42
+A21	"DICK'S / Foot Locker (04)"
+D21	'Monte Carlo 95th pct'
+E21	=B43
+A22	'Consideration ($m)'
+B22	2509.67224296325
+A23	'Goodwill ($m)'
+B23	376.492242963252
+A24	'Adjusted EPS accretion, FY2025'
+B24	0.0281899322418846
+A25	'Adjusted EPS accretion, FY2026'
+B25	0.124503540450174
+A26	'Foot Locker net income needed to break even, FY2026 ($m)'
+B26	114.881714081497
+A28	'Group close (05)'
+A29	'Net income attributable to the parent ($m)'
+B29	203.34477140625
+A30	'Total assets ($m)'
+B30	1290.7278214
+A31	'Translation adjustment, S2 ($m)'
+B31	-6.43481735624999
+A33	'FP&A (06)'
+A34	'FY2026 revenue: budget ($m)'
+B34	2119.05366128
+A35	'FY2026 revenue: outlook ($m)'
+B35	2109.62782139574
+A36	'FY2026 EBITDA: budget ($m)'
+B36	466.9064143008
+A37	'FY2026 EBITDA: outlook ($m)'
+B37	447.709757918963
+A38	'June forecast MAPE'
+B38	0.0156263171218618
+A39	'Cash headroom over policy minimum ($m)'
+B39	261.206951094851
+A41	'Scenario lab (07)'
+A42	'Monte Carlo median price, perpetuity growth ($)'
+B42	379.060020771058
+A43	'Monte Carlo 95th percentile ($)'
+B43	696.53577453383
+A44	'Share of trials above the market price'
+B44	0.0017
+A46	'Credit (09)'
+A47	'Costco scorecard rating'
+B47	'AAA'
+A48	'Borrowers breaching covenants under stress (of 11)'
+B48	6
+=== Checks
+A1	'Integrity checks (every line must be zero)'
+A4	'Every delivered workbook passes its own master check'
+B4	='Dashboard'!E13
+A6	'MASTER CHECK (0 = all pass)'
+B6	=IF(B4=0,0,1)
+=== Log
+A1	'Change log'
+A3	'Date'
+B3	'Change'
+A4	'2026-11-21'
+B4	'Generated from the delivered workbooks 01-07 and 09 (M10).'

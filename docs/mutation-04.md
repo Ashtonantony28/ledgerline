@@ -1,21 +1,16 @@
 # Mutation test (workbook 04)
 
-Mutants: 40, equivalent (no observable change): 6, caught: 34/34 = 100.0%
+Mutants: 40, equivalent (no observable change): 5, caught: 35/35 = 100.0%
 
 | kind | where | caught by |
 |---|---|---|
-| hardcode | ProForma!L13 | audit |
-| wrongrow | ProForma!K28 | audit+checks+reference |
-| wholesign | ProForma!row 26 | checks+reference |
-| wholelag | Standalone!row 10 | reference |
+| hardcode | ProForma!I38 | audit |
+| wrongrow | Standalone!H20 | audit+reference |
+| wholesign | ProForma!row 22 | checks+reference |
+| wholelag | Standalone!row 16 | reference |
 | input | Scenarios!J10 | reference |
-| hardcode | ProForma!K22 | audit |
-| wrongrow | Standalone!H16 | audit+reference |
-| wholesign | ProForma!row 11 | equivalent |
-| wholelag | Standalone!row 28 | reference |
-| input | Scenarios!H26 | reference |
-| hardcode | Drivers!I9 | audit |
-| wrongrow | Drivers!K12 | audit+checks+reference |
+| hardcode | Drivers!K11 | audit |
+| wrongrow | Standalone!J26 | audit+reference |
 | wholesign | ProForma!row 11 | equivalent |
 | wholelag | Standalone!row 11 | reference |
 | input | Scenarios!J22 | reference |
@@ -44,3 +39,8 @@ Mutants: 40, equivalent (no observable change): 6, caught: 34/34 = 100.0%
 | wholesign | ProForma!row 17 | equivalent |
 | wholelag | ProForma!row 14 | reference |
 | input | Scenarios!L22 | reference |
+| hardcode | Standalone!K24 | audit |
+| wrongrow | Standalone!J15 | audit+reference |
+| wholesign | ProForma!row 13 | reference |
+| wholelag | ProForma!row 22 | checks+reference |
+| input | Scenarios!L30 | reference |

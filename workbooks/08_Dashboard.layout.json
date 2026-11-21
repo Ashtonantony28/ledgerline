@@ -1,0 +1,225 @@
+{
+ "timeline": {
+  "labels": [],
+  "n_hist": 0,
+  "cols": []
+ },
+ "sheets": {
+  "Cover": {},
+  "Dashboard": {},
+  "Checks": {},
+  "Log": {}
+ },
+ "values": [
+  [
+   "Costco three-statement (01)",
+   "FY2027 revenue, base case ($m)",
+   327244.35429034,
+   "m",
+   "01_COST_ThreeStatement.xlsx, IS!J9 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco three-statement (01)",
+   "FY2027 diluted EPS ($)",
+   22.4684268911906,
+   "ps",
+   "01_COST_ThreeStatement.xlsx, IS!J25 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco valuation (02)",
+   "WACC",
+   0.0896995690489307,
+   "pct",
+   "02_COST_Valuation.xlsx, WACC!C29 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco valuation (02)",
+   "DCF price, perpetuity growth ($)",
+   383.341879436798,
+   "ps",
+   "02_COST_Valuation.xlsx, DCF!C32 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco valuation (02)",
+   "DCF price, exit multiple ($)",
+   516.113169270612,
+   "ps",
+   "02_COST_Valuation.xlsx, DCF!C42 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco valuation (02)",
+   "Market price ($)",
+   1093.83,
+   "ps",
+   "02_COST_Valuation.xlsx, WACC!C24 (LibreOffice recalculation)"
+  ],
+  [
+   "Costco valuation (02)",
+   "Perpetual growth implied by the market price",
+   0.0754152381479034,
+   "pct",
+   "02_COST_Valuation.xlsx, DCF!C49 (LibreOffice recalculation)"
+  ],
+  [
+   "Skechers LBO (03)",
+   "Entry EV / EBITDA",
+   9.34745499912168,
+   "x",
+   "03_SKX_LBO.xlsx, Transaction!C38 (LibreOffice recalculation)"
+  ],
+  [
+   "Skechers LBO (03)",
+   "Leverage at close",
+   6.02400614471264,
+   "x",
+   "03_SKX_LBO.xlsx, Transaction!C39 (LibreOffice recalculation)"
+  ],
+  [
+   "Skechers LBO (03)",
+   "Sponsor IRR",
+   0.132609832038669,
+   "pct",
+   "03_SKX_LBO.xlsx, Returns!C18 (LibreOffice recalculation)"
+  ],
+  [
+   "Skechers LBO (03)",
+   "Sponsor MOIC",
+   1.86380999681002,
+   "x",
+   "03_SKX_LBO.xlsx, Returns!C17 (LibreOffice recalculation)"
+  ],
+  [
+   "DICK'S / Foot Locker (04)",
+   "Consideration ($m)",
+   2509.67224296325,
+   "m",
+   "04_DKS_FL_MnA.xlsx, Transaction!C18 (LibreOffice recalculation)"
+  ],
+  [
+   "DICK'S / Foot Locker (04)",
+   "Goodwill ($m)",
+   376.492242963252,
+   "m",
+   "04_DKS_FL_MnA.xlsx, Transaction!C47 (LibreOffice recalculation)"
+  ],
+  [
+   "DICK'S / Foot Locker (04)",
+   "Adjusted EPS accretion, FY2025",
+   0.0281899322418846,
+   "pct",
+   "04_DKS_FL_MnA.xlsx, ProForma!H30 (LibreOffice recalculation)"
+  ],
+  [
+   "DICK'S / Foot Locker (04)",
+   "Adjusted EPS accretion, FY2026",
+   0.124503540450174,
+   "pct",
+   "04_DKS_FL_MnA.xlsx, ProForma!I30 (LibreOffice recalculation)"
+  ],
+  [
+   "DICK'S / Foot Locker (04)",
+   "Foot Locker net income needed to break even, FY2026 ($m)",
+   114.881714081497,
+   "m",
+   "04_DKS_FL_MnA.xlsx, ProForma!I33 (LibreOffice recalculation)"
+  ],
+  [
+   "Group close (05)",
+   "Net income attributable to the parent ($m)",
+   203.34477140625,
+   "m1",
+   "05_Group_Close.xlsx, Statements!B20 (LibreOffice recalculation)"
+  ],
+  [
+   "Group close (05)",
+   "Total assets ($m)",
+   1290.7278214,
+   "m1",
+   "05_Group_Close.xlsx, Statements!B33 (LibreOffice recalculation)"
+  ],
+  [
+   "Group close (05)",
+   "Translation adjustment, S2 ($m)",
+   -6.43481735624999,
+   "m1",
+   "05_Group_Close.xlsx, Translation!F49 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "FY2026 revenue: budget ($m)",
+   2119.05366128,
+   "m1",
+   "06_FPA_Forecast.xlsx, Variance!C92 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "FY2026 revenue: outlook ($m)",
+   2109.62782139574,
+   "m1",
+   "06_FPA_Forecast.xlsx, Variance!C91 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "FY2026 EBITDA: budget ($m)",
+   466.9064143008,
+   "m1",
+   "06_FPA_Forecast.xlsx, Variance!C122 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "FY2026 EBITDA: outlook ($m)",
+   447.709757918963,
+   "m1",
+   "06_FPA_Forecast.xlsx, Variance!C124 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "June forecast MAPE",
+   0.0156263171218618,
+   "pct",
+   "06_FPA_Forecast.xlsx, Accuracy!C13 (LibreOffice recalculation)"
+  ],
+  [
+   "FP&A (06)",
+   "Cash headroom over policy minimum ($m)",
+   261.206951094851,
+   "m1",
+   "06_FPA_Forecast.xlsx, PnL!C43 (LibreOffice recalculation)"
+  ],
+  [
+   "Scenario lab (07)",
+   "Monte Carlo median price, perpetuity growth ($)",
+   379.060020771058,
+   "ps",
+   "07_COST_ScenarioLab.xlsx, MonteCarlo!B12 (LibreOffice recalculation)"
+  ],
+  [
+   "Scenario lab (07)",
+   "Monte Carlo 95th percentile ($)",
+   696.53577453383,
+   "ps",
+   "07_COST_ScenarioLab.xlsx, MonteCarlo!B15 (LibreOffice recalculation)"
+  ],
+  [
+   "Scenario lab (07)",
+   "Share of trials above the market price",
+   0.0017,
+   "0.00%",
+   "07_COST_ScenarioLab.xlsx, MonteCarlo!B16 (LibreOffice recalculation)"
+  ],
+  [
+   "Credit (09)",
+   "Costco scorecard rating",
+   "AAA",
+   "text",
+   "09_Credit.xlsx, Credit!E29 (LibreOffice recalculation)"
+  ],
+  [
+   "Credit (09)",
+   "Borrowers breaching covenants under stress (of 11)",
+   6,
+   "n",
+   "09_Credit.xlsx, Stress!C21 (LibreOffice recalculation)"
+  ]
+ ]
+}

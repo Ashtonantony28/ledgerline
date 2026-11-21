@@ -401,6 +401,9 @@ def add_charts(path, m: Model, budget_months: int = 12) -> None:
     from openpyxl.chart import BarChart, LineChart, Reference
     wb = load_workbook(path)
     ws = wb["Dashboard"]
+    ws.page_setup.orientation = "landscape"  # one printed page for the model book
+    ws.page_setup.fitToWidth, ws.page_setup.fitToHeight = 1, 1
+    ws.sheet_properties.pageSetUpPr.fitToPage = True
     tl = m.timeline
     first, last = 5, 4 + tl.n
     from openpyxl.chart.series import SeriesLabel

@@ -11,7 +11,7 @@ B6	'exports/borrower_spreads.csv for the banking-risk project (docs/interfaces/b
 A9	'Model integrity'
 B9	=IF(MasterCheck=0,"ALL CHECKS PASS","CHECK FAILURE - see Checks sheet")
 A10	'Built'
-B10	'2026-11-20 by the Ledgerline generator (see Log)'
+B10	'2026-11-21 by the Ledgerline generator (see Log)'
 A12	'Colour code'
 A13	'Blue on yellow'
 B13	'Hard-coded input (every one carries a source note)'
@@ -1167,5 +1167,5 @@ C15	=IF(SUMPRODUCT(ABS($C$9:$C$12))<$C$14,0,1)
 A1	'Change log'
 A3	'Date'
 B3	'Change'
-A4	'2026-11-20'
+A4	'2026-11-21'
 B4	'Generated from spec/CREDIT.yaml and fixtures/<TICKER> (M9).'

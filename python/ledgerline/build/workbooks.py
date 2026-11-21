@@ -362,8 +362,40 @@ def build_09(out: Path | None = None) -> tuple[Path, dict]:
     return path, layout
 
 
+def build_08(src: Path | None = None, out: Path | None = None) -> tuple[Path, dict]:
+    """Dashboard from the delivered workbooks in `src` (default workbooks/), recalculated by LibreOffice."""
+    import tempfile
+    from .grid import Timeline
+    from .recalc import recalc
+    from ..models.dashboard import WORKBOOKS, add_dashboard, read_values
+    src = Path(src or OUT)
+    tmp = Path(tempfile.mkdtemp(prefix="ledgerline-08-"))
+    for stem in WORKBOOKS:
+        recalc(src / f"{stem}.xlsx", tmp)
+    layouts = {stem: json.loads((src / f"{stem}.layout.json").read_text()) for stem in WORKBOOKS
+               if (src / f"{stem}.layout.json").exists()}
+    vals = read_values(src, tmp, layouts)
+    m = Model(Timeline([], [], 0), "Dashboard")
+    add_dashboard(m, vals)
+    c = m.sheet("Cover", "Ledgerline: dashboard of the suite", timeline=False)
+    c.col_widths = {"A": 34, "B": 80}
+    c.cell("A3", "Contents"); c.cell("B3", "Headline numbers from workbooks 01-07 and 09, and every workbook's integrity check")
+    c.cell("A4", "Source"); c.cell("B4", "Each value is read from a LibreOffice recalculation of the delivered workbook; its note names the cell")
+    c.cell("A9", "Model integrity")
+    c.cell("B9", "=IF(MasterCheck=0,\"ALL CHECKS PASS\",\"CHECK FAILURE - see Checks sheet\")", bold=True)
+    c.cell("A10", "Built"); c.cell("B10", f"{date.today().isoformat()} by the Ledgerline generator (see Log)")
+    c.cell("A12", "Disclaimer", bold=True); c.cell("B12", DISCLAIMER, wrap=True)
+    add_log(m, [(date.today().isoformat(), "Generated from the delivered workbooks 01-07 and 09 (M10).")])
+    _reorder(m, ["Cover", "Dashboard", "Checks"])
+    path = Path(out or OUT / "08_Dashboard.xlsx")
+    layout = m.save(path)
+    layout["values"] = [[sec, lab, v, fmt, note] for sec, lab, v, fmt, note in vals["headlines"]]
+    path.with_suffix(".layout.json").write_text(json.dumps(layout, indent=1) + "\n")
+    return path, layout
+
+
 BUILDERS = {"00": build_00, "01": build_01, "02": build_02, "03": build_03, "04": build_04, "05": build_05, "06": build_06,
-            "07": build_07, "09": build_09}
+            "07": build_07, "09": build_09, "08": build_08}
 
 
 def main(argv: list[str]) -> int:

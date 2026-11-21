@@ -20,7 +20,18 @@ and a mutation test proves the checks catch injected errors.
 | 06 | `06_FPA_Forecast.xlsx`: FY2026 driver-based budget, 9+3 rolling forecast with three cases, price / volume / mix / cost / headcount bridges (YTD and full year), June-forecast accuracy, cash headroom, dashboard charts; Power Query ingestion script in `powerquery/` | done (M7) |
 | 07 | `07_COST_ScenarioLab.xlsx`: scenario manager (stress cases + manual shifts flowing through the whole Costco model), tornado, spider, seeded 10,000-trial Monte Carlo with histogram; memo; xlwings Excel-side runner | done (M8) |
 | 09 | `09_Credit.xlsx`: spreads for 11 retailers, lease-adjusted leverage and coverage, Altman Z', scorecard rating and PD, covenant headroom, debt capacity, stress migration; exports for banking-risk and Tickforge (`exports/`, schemas in `docs/interfaces/`) | done (M9) |
-| 08 | Dashboard and model book | M10 |
+| 08 | `08_Dashboard.xlsx`: the suite on one page, every number read from the recalculated workbooks with its source cell, plus every workbook's master check; `Ledgerline_Model_Book.pdf`: the printable book of all workbooks (bookmarked) | done (M10) |
+
+## What it looks like
+
+All images are pages of [`workbooks/Ledgerline_Model_Book.pdf`](workbooks/Ledgerline_Model_Book.pdf),
+rendered by LibreOffice from the delivered workbooks (`python -m ledgerline.book`).
+
+| | |
+|---|---|
+| ![Dashboard](docs/img/dashboard.png) Dashboard (08) | ![Football field](docs/img/football.png) Costco football field (02) |
+| ![Group statements](docs/img/group_statements.png) Consolidated statements (05) | ![FP&A dashboard](docs/img/fpa_dashboard.png) FP&A outlook vs budget (06) |
+| ![Tornado](docs/img/tornado.png) Tornado (07) | ![Monte Carlo](docs/img/montecarlo.png) Monte Carlo (07) |
 
 ## Verify
 
@@ -30,6 +41,7 @@ pytest -q                          # tie-outs; workbook vs reference on LibreOff
 python -m ledgerline.build.workbooks                       # rebuild every workbook into workbooks/
 python -m ledgerline.audit.audit workbooks/0*_*.xlsx --recalc   # writes .audit.md and .formulas.txt
 python -m ledgerline.audit.mutation 01 --n 40              # seeded error injection (also 04, 05, 06), target >= 95% caught
+python -m ledgerline.book                                  # model book PDF + bookmarks (LibreOffice UNO)
 ```
 
 Refreshing data (reviewed change): `python -m ledgerline.data.history` (set `LEDGERLINE_UA` to your own

@@ -64,7 +64,7 @@ def add_lab(m: Model, lab: dict, stress: int = 0, manual: dict[str, float] | Non
 
     # ---------------------------------------------------------------- Tornado
     t = m.sheet("Tornado", "Tornado: implied price (perpetuity growth) with each driver moved one step down and up", timeline=False)
-    t.col_widths = {"A": 30, "B": 10, "C": 12, "D": 12, "E": 12, "F": 12, "G": 12, "H": 12}
+    t.col_widths = {"A": 30, "B": 10, "C": 15, "D": 15, "E": 15, "F": 15, "G": 12, "H": 12}
     t.cell("A3", "Base price ($/share)"); t.cell("C3", "='Lab'!$C$%d" % s.row("py_base_g"), fmt="ps")
     heads = ["Driver", "Step", "Price, step down", "Price, step up", "Change, down", "Change, up", "Swing"]
     for c, h in zip("ABCDEFG", heads):
@@ -85,8 +85,8 @@ def add_lab(m: Model, lab: dict, stress: int = 0, manual: dict[str, float] | Non
         ch.title = "Change in implied price from one step down / up ($/share)"
         ch.add_data(Reference(ws, min_col=5, max_col=6, min_row=5, max_row=t_last), titles_from_data=True)
         ch.set_categories(Reference(ws, min_col=1, min_row=6, max_row=t_last))
-        ch.y_axis.scaling.orientation = "maxMin"
-        ch.x_axis.scaling.orientation = "maxMin"
+        ch.x_axis.scaling.orientation = "maxMin"  # largest swing on top; value axis keeps down-left, up-right
+        ch.x_axis.tickLblPos = "low"  # driver names beside the axis, not over the bars
         ch.height, ch.width = 9, 18
         ws.add_chart(ch, f"A{t_last + 3}")
 
@@ -116,7 +116,7 @@ def add_lab(m: Model, lab: dict, stress: int = 0, manual: dict[str, float] | Non
 
     # ---------------------------------------------------------------- Monte Carlo
     mc = m.sheet("MonteCarlo", "Monte Carlo: distribution of implied price from simultaneous driver shifts (seeded)", timeline=False)
-    mc.col_widths = {"A": 40, "B": 14, "C": 14, "D": 14, "E": 14}
+    mc.col_widths = {"A": 40, "B": 18, "C": 18, "D": 14, "E": 14}
     res = lab["mc"]
     mc.cell("A3", "Trials"); mc.cell("B3", res["trials"], input=True, fmt="n", note=SRC)
     mc.cell("A4", "Seed"); mc.cell("B4", res["seed"], input=True, fmt="n", note=SRC + " Same seed, same numbers.")

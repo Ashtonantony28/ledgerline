@@ -238,7 +238,12 @@ class Model:
                 ws.column_dimensions[col].width = w
             layout["sheets"][sheet.name] = dict(sheet.row_of)
         for name, fn in getattr(self, "charts", []):
-            fn(wb[name])
+            ws = wb[name]
+            # a chart sheet prints landscape, one page wide (model book, ADR 0001 house style); a hook may override
+            ws.page_setup.orientation = "landscape"
+            ws.page_setup.fitToWidth, ws.page_setup.fitToHeight = 1, 0
+            ws.sheet_properties.pageSetUpPr.fitToPage = True
+            fn(ws)
         for name, ref in self.names.items():
             from openpyxl.workbook.defined_name import DefinedName
             wb.defined_names[name] = DefinedName(name, attr_text=ref)
