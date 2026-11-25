@@ -61,7 +61,9 @@ def dump() -> None:
                     if isinstance(c.value, str) and c.value.startswith("="):
                         cells[f"{ws.title}!{c.coordinate}"] = _norm(v[ws.title][c.coordinate].value)
         dn = f.defined_names.get("MasterCheck")
-        data[stem] = {"cells": cells, "master": next(dn.destinations) if dn else None}
+        cs = f.defined_names.get("CircSwitch")
+        data[stem] = {"cells": cells, "master": next(dn.destinations) if dn else None,
+                      "circ_cell": next(cs.destinations) if cs else None}
         print(f"{stem}: {len(cells)} formula cells")
     with gzip.open(LO_JSON, "wt") as fh:
         json.dump(data, fh, sort_keys=True)
@@ -73,6 +75,15 @@ def _close(a, b) -> bool:
     if a in (None, "") and b in (None, ""):
         return True
     return a == b
+
+
+def _breaker_reset(book, circ_cell) -> None:
+    """ADR 0006 circuit breaker: calculate once with the switch off, then on, so the loop starts from numbers."""
+    sheet, cell = circ_cell
+    rng = book.sheets[sheet].range(cell.replace("$", ""))
+    rng.value = 0
+    book.app.api.CalculateFull()
+    rng.value = 1
 
 
 def excel() -> int:
@@ -90,26 +101,34 @@ def excel() -> int:
              "Master check (Excel) |", "|---|---|---|---|---|---|"]
     failed, details = 0, []
     try:
-        for stem in STEMS + [CIRC]:
+        for stem in ([CIRC] if "--circ-only" in sys.argv else STEMS + [CIRC]):
             path = (OUT if stem == CIRC else WB) / f"{stem}.xlsx"
-            if stem == CIRC:
-                app.api.Iteration, app.api.MaxIterations, app.api.MaxChange = True, 200, 1e-9
             book = app.books.open(str(path), read_only=True, update_links=False)
+            if stem == CIRC:  # Excel only accepts Iteration while a workbook is open
+                app.api.Iteration, app.api.MaxIterations, app.api.MaxChange = True, 200, 1e-9
+                if "--no-reset" not in sys.argv:
+                    _breaker_reset(book, lo["01_COST_ThreeStatement"].get("circ_cell"))
             app.api.CalculateFull()
             ref = lo.get(stem, {"cells": {}, "master": None})
-            n = cmp = bad = 0
+            n = cmp = bad = errs = 0
             worst = 0.0
             for ws in book.sheets:
                 rng = ws.used_range
                 r0, c0 = rng.row, rng.column
                 forms = rng.options(ndim=2).formula
-                vals = rng.options(ndim=2).value
+                vals = rng.options(ndim=2, err_to_str=True).value  # an Excel error must fail, not read as empty
                 for i, frow in enumerate(forms):
                     for j, fm in enumerate(frow):
                         if not (isinstance(fm, str) and fm.startswith("=")):
                             continue
                         n += 1
                         key = f"{ws.name}!{get_column_letter(c0 + j)}{r0 + i}"
+                        if stem == CIRC:  # no LibreOffice reference: list Excel errors instead
+                            if isinstance(vals[i][j], str) and vals[i][j].startswith("#"):
+                                errs += 1
+                                if len(details) < 60:
+                                    details.append(f"- {stem} {key}: Excel {vals[i][j]} (`{fm}`)")
+                            continue
                         if key not in ref["cells"] or ref["cells"][key] is None and stem != CIRC:
                             continue
                         a, b = _norm(vals[i][j]), ref["cells"][key]
@@ -125,12 +144,12 @@ def excel() -> int:
             master = None
             if ref["master"] or stem == CIRC:
                 sheet, cell = ref["master"] or lo["01_COST_ThreeStatement"]["master"]
-                master = book.sheets[sheet].range(cell.replace("$", "")).value
-            book.close()
+                master = book.sheets[sheet].range(cell.replace("$", "")).options(err_to_str=True).value
             if stem == CIRC:
                 app.api.Iteration = False
-                cmp, bad, worst = 0, 0, 0.0  # LibreOffice cannot iterate: master check only
-            failed += bad + (1 if master not in (0, 0.0, None) else 0)
+                cmp, bad, worst = 0, errs, 0.0  # no LibreOffice reference: Excel error cells count as differences
+            book.close()
+            failed += bad + (1 if (ref["master"] or stem == CIRC) and master not in (0, 0.0) else 0)
             lines.append(f"| {stem} | {n} | {cmp} | {bad} | {worst:.2e} | {master} |")
             print(lines[-1])
     finally:
