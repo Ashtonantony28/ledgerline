@@ -27,6 +27,13 @@ cash impact = NWC(t-1) - NWC(t). SBC = revenue x SBC%.
 Repayment = min(scheduled maturity, opening debt); issuance = maturity x refinance%; debt(t) = debt(t-1) -
 repayment + issuance. Interest on debt = rate x (circ ? average : opening) debt; revolver likewise at the
 revolver rate; interest income = cash rate x (circ ? average : opening) cash.
+
+Using the circuit breaker in Excel (ADR 0006; checked in Microsoft 365, docs/excel-check.md): the delivered
+workbook ships with the switch at 0. To use average balances, turn on iterative calculation (File > Options >
+Formulas, 200 iterations, max change 0.000000001) and set Inputs!C12 to 1. If `#VALUE!` appears, set C12 to 0,
+recalculate, and set it back to 1. An error caught in the loop cannot clear by iterating, and that reset breaks
+the loop for one pass. Do not distribute a file built by the generator with the switch at 1: it carries no cached
+values, so Excel opens it straight into the error state.
 Pre-tax = EBIT - interest expense + interest income; tax = pre-tax x tax rate; NCI and other below tax = 0.
 Regular dividends = -max(NI, 0) x payout; buybacks = -max(NI, 0) x buyback%.
 CFO = NI + D&A + SBC + NWC cash impact; CFI = -capex.

@@ -38,3 +38,20 @@ Afterwards the workbook was closed without saving, and its MD5 hash was unchange
 ## VBA
 
 Skipped. Programmatic access to the VBA project is blocked on this machine ("Programmatic access to Visual Basic Project is not trusted"), and the Trust Center setting was left unchanged. `CloseChecklist` and `ReconPack` were not imported or run. The Power Query step is manual and was not attempted.
+
+## Resolution of the circ = 1 failure (2026-11-25)
+
+Follow-up runs (`docs/excel-check-circ-cold.md`) showed there is no faulty formula. A generated workbook stores no
+cached values, so when it is opened with the switch already at 1, Excel's first pass over the interest/cash loop
+produces `#VALUE!`. The error then circulates through all 21 loop cells, and iteration cannot clear it. Cycling the
+ADR 0006 circuit breaker (switch to 0, calculate, back to 1) clears it. After the reset, the check passes with 0
+error cells and master check 0, and the results converge: cash $20,000m at the ceiling, FY2027 NI $9,982.3m
+against $9,985.6m with opening-balance interest.
+
+The fixes:
+- `tools/excel_check.py` now reads Excel errors as text, so any error fails the check.
+- The checker sets iteration only once a workbook is open.
+- The checker cycles the breaker by default. `--no-reset` reproduces the cold open.
+- The delivered workbook ships with the switch at 0, and the generator keeps it that way. To use iterative
+  interest, set Inputs!C12 to 1 in Excel. If errors ever appear, set it to 0, recalculate, and set it back to 1.
+  That procedure is documented in `docs/models/three-statement.md`.
